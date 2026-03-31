@@ -180,10 +180,6 @@ p {
   grid-column: span 6;
 }
 
-.col-12 {
-  grid-column: span 12;
-}
-
 ul {
   margin: 0 0 var(--space-3) 1.25rem;
   padding: 0;
