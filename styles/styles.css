@@ -140,7 +140,6 @@ a:focus-visible {
 
 main {
   padding: var(--space-6) 0 var(--space-5);
-  animation: fade-in 360ms ease-in-out;
 }
 
 section {
@@ -166,8 +165,9 @@ h1 {
 }
 
 h2 {
-  font-size: clamp(1.25rem, 2.6vw, 1.65rem);
+  font-size: clamp(1.2rem, 2.4vw, 1.55rem);
   margin-top: var(--space-5);
+  font-weight: 600;
 }
 
 h2:first-child {
@@ -240,8 +240,7 @@ p {
   background: rgba(16, 35, 56, 0.45);
   border: 1px solid var(--line);
   padding: var(--space-4);
-  min-height: 8rem;
-  transition: border-color 200ms ease;
+  min-height: 7.5rem;
 }
 
 .card:hover,
@@ -255,9 +254,10 @@ p {
 }
 
 .card .meta {
-  font-size: 0.85rem;
+  font-size: 0.88rem;
   color: var(--muted);
   margin: 0;
+  line-height: 1.55;
 }
 
 .grid {
@@ -405,10 +405,24 @@ li {
 }
 
 .footer-inner {
-  padding: var(--space-4) 0;
+  padding: var(--space-5) 0 var(--space-4);
+}
+
+.footer-mission {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1.25rem;
+}
+
+.footer-mission li {
+  margin: 0;
+  max-width: none;
   color: var(--muted);
-  font-size: 0.9rem;
-  max-width: 48ch;
+  font-size: 0.88rem;
+  letter-spacing: 0.03em;
 }
 
 @media (max-width: 820px) {
@@ -430,13 +444,3 @@ li {
   }
 }
 
-@keyframes fade-in {
-  from {
-    opacity: 0;
-    transform: translateY(4px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
