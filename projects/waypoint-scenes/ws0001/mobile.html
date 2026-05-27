@@ -1,0 +1,550 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<title>Waypoint Scenes — WS_0001 Mobile</title>
+<style>
+html,body{margin:0;overflow:hidden;height:100%;background:black;cursor:none;-webkit-user-select:none;user-select:none;touch-action:none}
+:root{
+  --a1: rgba(120,255,180,.50);
+  --a2: rgba(180,120,255,.42);
+  --a3: rgba(255,80,80,.32);
+}
+.layer{
+  position:fixed;
+  left:-15%;
+  top:-15%;
+  width:130%;
+  height:130%;
+  background-image:url("assets/ws0001.jpg");
+  background-size:cover;
+  background-position:center;
+  will-change:transform;
+}
+#back{opacity:.32;filter:blur(18px) brightness(.72)}
+#mid{opacity:.72;filter:blur(3px)}
+#front{opacity:1}
+#trees{
+  position:fixed;
+  left:-18%;
+  top:-18%;
+  width:136%;
+  height:136%;
+  background-image:url("assets/ws0001.jpg");
+  background-size:cover;
+  background-position:center;
+  mix-blend-mode:overlay;
+  opacity:.24;
+  filter:contrast(1.35) brightness(.86) saturate(.88) blur(.8px);
+  pointer-events:none;
+  will-change:transform;
+}
+#aurora{
+  position:fixed;
+  inset:-40%;
+  background:
+    radial-gradient(ellipse at 30% 20%,var(--a1),transparent 25%),
+    radial-gradient(ellipse at 55% 18%,var(--a2),transparent 30%),
+    radial-gradient(ellipse at 75% 15%,var(--a3),transparent 28%);
+  mix-blend-mode:screen;
+  filter:blur(60px);
+  opacity:.95;
+  pointer-events:none;
+  will-change:transform;
+}
+#fog{
+  position:fixed;
+  inset:-20%;
+  background:
+    radial-gradient(circle at 40% 60%,rgba(255,255,255,.06),transparent 35%),
+    radial-gradient(circle at 70% 70%,rgba(255,255,255,.04),transparent 40%);
+  mix-blend-mode:screen;
+  pointer-events:none;
+  filter:blur(20px);
+  will-change:transform;
+}
+#dawnGlow{
+  position:fixed;
+  inset:-25%;
+  background:
+    radial-gradient(ellipse at 50% 88%,rgba(255,165,90,.42),transparent 45%),
+    radial-gradient(ellipse at 50% 80%,rgba(255,210,160,.26),transparent 54%);
+  mix-blend-mode:screen;
+  opacity:0;
+  filter:blur(28px);
+  pointer-events:none;
+  will-change:transform,opacity;
+}
+#skyTint{
+  position:fixed;
+  inset:-15%;
+  background:radial-gradient(ellipse at 50% 15%,rgba(120,160,255,.18),transparent 60%);
+  mix-blend-mode:screen;
+  opacity:0;
+  filter:blur(26px);
+  pointer-events:none;
+  will-change:opacity,transform;
+}
+#vignette{
+  position:fixed;
+  inset:0;
+  background:radial-gradient(circle,transparent 55%,rgba(0,0,0,.38));
+  pointer-events:none;
+}
+.snow{
+  position:fixed;
+  top:-10px;
+  background:white;
+  border-radius:50%;
+  animation-name:fall;
+  animation-timing-function:linear;
+  animation-iteration-count:infinite;
+  pointer-events:none;
+}
+@keyframes fall{
+  from{transform:translateY(-10vh)}
+  to{transform:translateY(110vh)}
+}
+#title{
+  position:fixed;
+  left:calc(18px + env(safe-area-inset-left));
+  bottom:calc(18px + env(safe-area-inset-bottom));
+  color:white;
+  font-family:sans-serif;
+  letter-spacing:4px;
+  font-size:12px;
+  line-height:1.5;
+  opacity:.46;
+}
+#controls{
+  position:fixed;
+  right:calc(14px + env(safe-area-inset-right));
+  top:calc(14px + env(safe-area-inset-top));
+  display:flex;
+  gap:8px;
+  color:white;
+  font-family:sans-serif;
+  opacity:.62;
+}
+button{
+  background:rgba(0,0,0,.35);
+  color:white;
+  border:1px solid rgba(255,255,255,.35);
+  padding:11px 14px;
+  letter-spacing:2px;
+  font-size:11px;
+}
+#motionBtn{display:none}
+#motionBtn.show{display:inline-block}
+@media (orientation:portrait){
+  #title{letter-spacing:5px;font-size:13px}
+  button{padding:12px 16px}
+}
+</style>
+</head>
+<body>
+<div id="back" class="layer"></div>
+<div id="mid" class="layer"></div>
+<div id="front" class="layer"></div>
+<div id="trees"></div>
+<div id="aurora"></div>
+<div id="fog"></div>
+<div id="dawnGlow"></div>
+<div id="skyTint"></div>
+<div id="vignette"></div>
+
+<div id="title">WAYPOINT SCENES<br>WS_0001 — NORTHERN TAIGA</div>
+<div id="controls">
+  <button id="soundBtn" onclick="toggleSound()">SOUND</button>
+  <button onclick="captureScene()">CAPTURE SCENE</button>
+  <button id="motionBtn" type="button">ENABLE MOTION</button>
+</div>
+
+<audio id="windSound" loop preload="none">
+  <source src="assets/wind.mp3" type="audio/mpeg">
+</audio>
+<audio id="forestSound" loop preload="none">
+  <source src="assets/forest.mp3" type="audio/mpeg">
+</audio>
+<audio id="owlSound" preload="none">
+  <source src="assets/owl.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const back = document.getElementById("back")
+const mid = document.getElementById("mid")
+const front = document.getElementById("front")
+const trees = document.getElementById("trees")
+const fog = document.getElementById("fog")
+const aurora = document.getElementById("aurora")
+const dawnGlow = document.getElementById("dawnGlow")
+const skyTint = document.getElementById("skyTint")
+const vignette = document.getElementById("vignette")
+const windSound = document.getElementById("windSound")
+const forestSound = document.getElementById("forestSound")
+const owlSound = document.getElementById("owlSound")
+const motionBtn = document.getElementById("motionBtn")
+
+const AURORA_COLORS = [
+  "rgba(120,255,180,.50)",
+  "rgba(180,120,255,.42)",
+  "rgba(255,80,80,.32)",
+  "rgba(255,255,255,.28)"
+]
+const INPUT_LERP = 0.045
+const MOTION_RANGE = 32
+const SNOW_COUNT = 95
+const snowflakes = []
+
+let x = 0, y = 0, tx = 0, ty = 0
+let useTouchFallback = true
+let didSetupMotion = false
+let didFirstTap = false
+let ambientEnabled = false
+let ambientTimer = 0
+let idleMix = 1
+let iceAudioCtx = null
+
+function clamp(v, min, max){ return Math.max(min, Math.min(max, v)) }
+function smoothstep(e0, e1, v){
+  const t = clamp((v - e0) / (e1 - e0), 0, 1)
+  return t * t * (3 - 2 * t)
+}
+function lerp(a, b, t){
+  return a + (b - a) * t
+}
+function mixMood(a, b, t){
+  return {
+    sceneBrightness: lerp(a.sceneBrightness, b.sceneBrightness, t),
+    desaturation: lerp(a.desaturation, b.desaturation, t),
+    auroraBoost: lerp(a.auroraBoost, b.auroraBoost, t),
+    snowOpacityMul: lerp(a.snowOpacityMul, b.snowOpacityMul, t),
+    fogOpacityMul: lerp(a.fogOpacityMul, b.fogOpacityMul, t),
+    vignetteDarkness: lerp(a.vignetteDarkness, b.vignetteDarkness, t),
+    dawnGlow: lerp(a.dawnGlow, b.dawnGlow, t),
+    warmTint: lerp(a.warmTint, b.warmTint, t),
+    coolTint: lerp(a.coolTint, b.coolTint, t)
+  }
+}
+const TIME_STOPS = [
+  { hour: 0, mood: { sceneBrightness: .60, desaturation: .16, auroraBoost: 1.18, snowOpacityMul: .36, fogOpacityMul: .74, vignetteDarkness: .52, dawnGlow: .00, warmTint: .00, coolTint: .14 } },
+  { hour: 5, mood: { sceneBrightness: .60, desaturation: .16, auroraBoost: 1.18, snowOpacityMul: .36, fogOpacityMul: .74, vignetteDarkness: .52, dawnGlow: .00, warmTint: .00, coolTint: .14 } },
+  { hour: 7, mood: { sceneBrightness: .79, desaturation: .09, auroraBoost: .86, snowOpacityMul: .52, fogOpacityMul: .84, vignetteDarkness: .36, dawnGlow: .82, warmTint: .28, coolTint: .22 } },
+  { hour: 16, mood: { sceneBrightness: .95, desaturation: .26, auroraBoost: .52, snowOpacityMul: .48, fogOpacityMul: .58, vignetteDarkness: .28, dawnGlow: .00, warmTint: .00, coolTint: .00 } },
+  { hour: 18, mood: { sceneBrightness: .83, desaturation: .16, auroraBoost: .66, snowOpacityMul: .50, fogOpacityMul: .66, vignetteDarkness: .33, dawnGlow: .24, warmTint: .36, coolTint: .08 } },
+  { hour: 21, mood: { sceneBrightness: .70, desaturation: .08, auroraBoost: .96, snowOpacityMul: .58, fogOpacityMul: .80, vignetteDarkness: .44, dawnGlow: .12, warmTint: .04, coolTint: .34 } },
+  { hour: 24, mood: { sceneBrightness: .60, desaturation: .16, auroraBoost: 1.18, snowOpacityMul: .36, fogOpacityMul: .74, vignetteDarkness: .52, dawnGlow: .00, warmTint: .00, coolTint: .14 } }
+]
+function getHourDecimal(now){
+  return now.getHours() + now.getMinutes() / 60 + now.getSeconds() / 3600
+}
+
+function getAmbientBaseByHour(hour){
+  if (hour < 5) return 0.42
+  if (hour < 7) return 0.24
+  if (hour < 16) return 0.16
+  if (hour < 18) return 0.24
+  if (hour < 21) return 0.36
+  return 0.4
+}
+
+function ensureIceAudioContext(){
+  if (!iceAudioCtx) {
+    const Ctx = window.AudioContext || window.webkitAudioContext
+    if (Ctx) iceAudioCtx = new Ctx()
+  }
+  if (iceAudioCtx?.state === "suspended") iceAudioCtx.resume()
+  return iceAudioCtx
+}
+
+function playIceCreak(){
+  const ctx = ensureIceAudioContext()
+  if (!ctx) return
+  const now = ctx.currentTime
+  const oscillator = ctx.createOscillator()
+  const filter = ctx.createBiquadFilter()
+  const gain = ctx.createGain()
+  oscillator.type = "sawtooth"
+  oscillator.frequency.setValueAtTime(220, now)
+  oscillator.frequency.exponentialRampToValueAtTime(82, now + 0.85)
+  filter.type = "bandpass"
+  filter.frequency.setValueAtTime(980, now)
+  filter.frequency.exponentialRampToValueAtTime(320, now + 0.85)
+  gain.gain.setValueAtTime(0.0001, now)
+  gain.gain.exponentialRampToValueAtTime(0.012 + idleMix * 0.025, now + 0.08)
+  gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.95)
+  oscillator.connect(filter)
+  filter.connect(gain)
+  gain.connect(ctx.destination)
+  oscillator.start(now)
+  oscillator.stop(now + 1)
+}
+
+function playOwl(){
+  owlSound.currentTime = 0
+  owlSound.volume = 0.04 + idleMix * 0.1
+  owlSound.play().catch(() => {})
+}
+
+function scheduleAmbientEvent(){
+  clearTimeout(ambientTimer)
+  if (!ambientEnabled) return
+  const delayMs = 18000 + Math.random() * 26000
+  ambientTimer = setTimeout(() => {
+    if (!ambientEnabled) return
+    const hour = getHourDecimal(new Date())
+    const night = hour >= 18 || hour < 6
+    if (Math.random() < 0.62) playIceCreak()
+    if (night && Math.random() < 0.44) playOwl()
+    scheduleAmbientEvent()
+  }, delayMs)
+}
+
+function startAmbient(){
+  ambientEnabled = true
+  windSound.play().catch(() => {})
+  forestSound.play().catch(() => {})
+  scheduleAmbientEvent()
+}
+
+function stopAmbient(){
+  ambientEnabled = false
+  clearTimeout(ambientTimer)
+  windSound.pause()
+  forestSound.pause()
+  owlSound.pause()
+}
+function getTimeMood(now){
+  const hour = getHourDecimal(now)
+  for (let i = 0; i < TIME_STOPS.length - 1; i++) {
+    const a = TIME_STOPS[i]
+    const b = TIME_STOPS[i + 1]
+    if (hour >= a.hour && hour <= b.hour) {
+      const tRaw = (hour - a.hour) / (b.hour - a.hour || 1)
+      return mixMood(a.mood, b.mood, smoothstep(0, 1, tRaw))
+    }
+  }
+  return TIME_STOPS[0].mood
+}
+
+function updateTouchTarget(event){
+  if (!useTouchFallback) return
+  const touch = event.touches[0]
+  if (!touch) return
+  tx = ((touch.clientX / window.innerWidth) - 0.5) * 2
+  ty = ((touch.clientY / window.innerHeight) - 0.5) * 2
+}
+
+function handleOrientation(event){
+  if (event.gamma == null || event.beta == null) return
+  tx = clamp(event.gamma / MOTION_RANGE, -1, 1)
+  ty = clamp(event.beta / MOTION_RANGE, -1, 1)
+}
+
+function setupOrientationListener(){
+  if (didSetupMotion) return
+  window.addEventListener("deviceorientation", handleOrientation, { passive: true })
+  didSetupMotion = true
+  useTouchFallback = false
+  motionBtn.classList.remove("show")
+}
+
+async function requestMotionPermissionIfNeeded(){
+  if (!window.DeviceOrientationEvent) {
+    useTouchFallback = true
+    return
+  }
+  try {
+    if (typeof DeviceOrientationEvent.requestPermission === "function") {
+      const permission = await DeviceOrientationEvent.requestPermission()
+      if (permission === "granted") setupOrientationListener()
+      else useTouchFallback = true
+      return
+    }
+    setupOrientationListener()
+  } catch (_error) {
+    useTouchFallback = true
+  }
+}
+
+function setupMotionUI(){
+  if (typeof DeviceOrientationEvent !== "undefined" && typeof DeviceOrientationEvent.requestPermission === "function") {
+    motionBtn.classList.add("show")
+  } else {
+    requestMotionPermissionIfNeeded()
+  }
+}
+
+function makeSnow(){
+  for (let i = 0; i < SNOW_COUNT; i++) {
+    const s = document.createElement("div")
+    const baseOpacity = .18 + Math.random() * .55
+    s.className = "snow"
+    s.style.left = `${Math.random() * 100}vw`
+    s.style.animationDuration = `${7 + Math.random() * 13}s`
+    s.style.animationDelay = `${-Math.random() * 20}s`
+    s.style.opacity = baseOpacity
+    s.style.width = s.style.height = `${1 + Math.random() * 3}px`
+    s.dataset.baseOpacity = baseOpacity
+    snowflakes.push(s)
+    document.body.appendChild(s)
+  }
+}
+
+function updateTimeMood(now, t){
+  const mood = getTimeMood(now)
+  const saturation = 1 - mood.desaturation
+  const backBrightness = .58 + mood.sceneBrightness * .28
+  const midBrightness = .66 + mood.sceneBrightness * .33
+  const frontBrightness = .74 + mood.sceneBrightness * .36
+  const treeBrightness = .68 + mood.sceneBrightness * .28
+
+  back.style.filter = `blur(18px) brightness(${backBrightness}) saturate(${saturation * .92})`
+  mid.style.filter = `blur(3px) brightness(${midBrightness}) saturate(${saturation * .96})`
+  front.style.filter = `brightness(${frontBrightness}) saturate(${saturation})`
+  trees.style.filter = `contrast(1.35) brightness(${treeBrightness}) saturate(${saturation * .92}) blur(.8px)`
+  fog.style.opacity = mood.fogOpacityMul
+  aurora.style.opacity = clamp(mood.auroraBoost * .72, .58, 1)
+  dawnGlow.style.opacity = clamp(mood.dawnGlow, 0, .9)
+  dawnGlow.style.transform = `translate(${Math.sin(t * .35) * 24}px,${Math.cos(t * .42) * 12}px)`
+  skyTint.style.opacity = clamp(mood.warmTint + mood.coolTint, 0, .7)
+  skyTint.style.background = `radial-gradient(ellipse at 50% 14%,rgba(255,160,130,${mood.warmTint}),rgba(120,165,255,${mood.coolTint}) 45%,transparent 70%)`
+  skyTint.style.transform = `translate(${Math.sin(t * .24) * 14}px,${Math.cos(t * .2) * 10}px)`
+  vignette.style.background = `radial-gradient(circle,transparent 55%,rgba(0,0,0,${clamp(mood.vignetteDarkness, 0.22, 0.58)}))`
+  for (let i = 0; i < snowflakes.length; i++) {
+    const flake = snowflakes[i]
+    const baseOpacity = Number(flake.dataset.baseOpacity || .35)
+    flake.style.opacity = clamp(baseOpacity * mood.snowOpacityMul, .03, .95)
+  }
+}
+
+function toggleSound(){
+  if (ambientEnabled) stopAmbient()
+  else startAmbient()
+}
+
+function updateAmbient(motionAmount){
+  const hour = getHourDecimal(new Date())
+  const base = getAmbientBaseByHour(hour)
+  const targetIdle = 1 - motionAmount
+  idleMix += (targetIdle - idleMix) * 0.035
+  const idleBoost = 0.45 + idleMix * 0.55
+
+  const windTarget = ambientEnabled ? base * (0.72 + idleBoost * 0.35) : 0
+  const forestTarget = ambientEnabled ? base * (0.52 + idleBoost * 0.28) : 0
+  windSound.volume += (windTarget - windSound.volume) * 0.05
+  forestSound.volume += (forestTarget - forestSound.volume) * 0.05
+}
+
+function getSceneCode(){
+  const now = new Date()
+  const hh = String(now.getHours()).padStart(2, "0")
+  const mm = String(now.getMinutes()).padStart(2, "0")
+  return `WS0001-AURORA-${hh}${mm}`
+}
+
+function createCaptureTag(){
+  const now = new Date()
+  const tag = document.createElement("div")
+  tag.id = "captureTag"
+  tag.textContent = `${getSceneCode()}  LOCAL ${now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}`
+  tag.style.position = "fixed"
+  tag.style.left = "12px"
+  tag.style.top = "12px"
+  tag.style.padding = "7px 10px"
+  tag.style.background = "rgba(0,0,0,.45)"
+  tag.style.border = "1px solid rgba(255,255,255,.35)"
+  tag.style.color = "white"
+  tag.style.fontFamily = "monospace"
+  tag.style.fontSize = "10px"
+  tag.style.letterSpacing = "1px"
+  tag.style.zIndex = "9999"
+  tag.style.pointerEvents = "none"
+  return tag
+}
+
+async function captureScene(){
+  const captureTag = createCaptureTag()
+  document.body.appendChild(captureTag)
+
+  try {
+    await new Promise(resolve => requestAnimationFrame(resolve))
+    const clone = document.documentElement.cloneNode(true)
+    clone.querySelectorAll("script").forEach(node => node.remove())
+    clone.setAttribute("xmlns", "http://www.w3.org/1999/xhtml")
+
+    const serializer = new XMLSerializer()
+    const serialized = serializer.serializeToString(clone)
+    const width = window.innerWidth
+    const height = window.innerHeight
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}"><foreignObject width="100%" height="100%">${serialized}</foreignObject></svg>`
+    const blob = new Blob([svg], { type: "image/svg+xml;charset=utf-8" })
+    const url = URL.createObjectURL(blob)
+    const image = new Image()
+
+    await new Promise((resolve, reject) => {
+      image.onload = resolve
+      image.onerror = reject
+      image.src = url
+    })
+
+    const canvas = document.createElement("canvas")
+    canvas.width = width
+    canvas.height = height
+    const ctx = canvas.getContext("2d")
+    ctx.drawImage(image, 0, 0)
+    URL.revokeObjectURL(url)
+
+    const link = document.createElement("a")
+    link.download = `${getSceneCode()}.png`
+    link.href = canvas.toDataURL("image/png")
+    link.click()
+  } catch (_error) {
+    // Fail silently to avoid disrupting scene runtime.
+  } finally {
+    captureTag.remove()
+  }
+}
+
+function onFirstTap(){
+  if (didFirstTap) return
+  didFirstTap = true
+  document.documentElement.requestFullscreen?.()
+  setupMotionUI()
+}
+
+function animate(){
+  x += (tx - x) * INPUT_LERP
+  y += (ty - y) * INPUT_LERP
+  const motionAmount = clamp((Math.abs(tx - x) + Math.abs(ty - y)) * 1.7, 0, 1)
+  const nowMs = Date.now()
+  const t = nowMs * .0002
+  const c = Math.floor((nowMs / 6000) % 4)
+
+  document.documentElement.style.setProperty("--a1", AURORA_COLORS[c])
+  document.documentElement.style.setProperty("--a2", AURORA_COLORS[(c + 1) % 4])
+  document.documentElement.style.setProperty("--a3", AURORA_COLORS[(c + 2) % 4])
+
+  back.style.transform = `translate(${-x*45}px,${-y*15}px) scale(1.18)`
+  mid.style.transform = `translate(${-x*110}px,${-y*45}px) scale(1.08)`
+  front.style.transform = `translate(${-x*190}px,${-y*80}px) scale(1.03)`
+  trees.style.transform = `translate(${-x*360}px,${-y*135}px) scale(1.05)`
+  fog.style.transform = `translate(${Math.sin(t) * 60}px,${Math.cos(t) * 25}px)`
+  aurora.style.transform = `translate(${Math.sin(t * .6) * 250}px,${Math.cos(t * .3) * 40}px) rotate(${Math.sin(t * .2) * 3}deg) scale(${1.08 + Math.sin(t * .4) * .05})`
+
+  updateTimeMood(new Date(nowMs), t)
+  updateAmbient(motionAmount)
+  requestAnimationFrame(animate)
+}
+
+motionBtn.addEventListener("click", requestMotionPermissionIfNeeded)
+window.addEventListener("touchstart", onFirstTap, { passive: true })
+window.addEventListener("click", onFirstTap, { passive: true })
+window.addEventListener("touchmove", updateTouchTarget, { passive: true })
+
+makeSnow()
+animate()
+</script>
+</body>
+</html>

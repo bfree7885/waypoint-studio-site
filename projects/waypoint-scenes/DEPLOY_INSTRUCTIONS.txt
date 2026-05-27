@@ -1,0 +1,91 @@
+Waypoint Scenes - Deployment Instructions (GitHub Pages)
+
+Target URL base:
+/projects/waypoint-scenes/
+
+Expected published structure:
+projects/
+  waypoint-scenes/
+    index.html
+    DEPLOY_INSTRUCTIONS.txt
+    ws0001/
+      index.html
+      camera.html
+      mobile.html
+      assets/
+
+--------------------------------------------------
+1) Local verification before publishing
+--------------------------------------------------
+
+From your repository root, confirm files exist:
+
+- projects/waypoint-scenes/index.html
+- projects/waypoint-scenes/ws0001/index.html
+- projects/waypoint-scenes/ws0001/camera.html
+- projects/waypoint-scenes/ws0001/mobile.html
+- projects/waypoint-scenes/ws0001/assets/
+
+Open local files in browser and test:
+
+- Gallery page:
+  projects/waypoint-scenes/index.html
+- Scene links:
+  - Enter Scene -> ws0001/index.html
+  - Camera Mode -> ws0001/camera.html
+  - Mobile Mode -> ws0001/mobile.html
+
+--------------------------------------------------
+2) GitHub Pages setup options
+--------------------------------------------------
+
+Option A (recommended): Publish from root branch
+
+Use when this repository already contains the
+"projects/waypoint-scenes/" folder.
+
+In GitHub:
+1. Go to Settings -> Pages
+2. Build and deployment -> Source:
+   Deploy from a branch
+3. Branch:
+   - Branch: main (or your default branch)
+   - Folder: / (root)
+4. Save
+
+Your page will publish with this path:
+https://<username>.github.io/<repo>/projects/waypoint-scenes/
+
+Option B: Use a dedicated Pages branch/folder
+
+1. Create/update branch used for Pages.
+2. Ensure "projects/waypoint-scenes/" exists in that branch.
+3. In Settings -> Pages, point to that branch and folder.
+
+--------------------------------------------------
+3) If using a custom domain
+--------------------------------------------------
+
+If you map a custom domain, keep the same folder path
+unless you intentionally move files.
+
+Example:
+https://example.com/projects/waypoint-scenes/
+
+--------------------------------------------------
+4) Post-deploy checks
+--------------------------------------------------
+
+After GitHub Pages finishes deployment, verify:
+
+1. Gallery loads:
+   /projects/waypoint-scenes/
+2. Buttons open:
+   - /projects/waypoint-scenes/ws0001/index.html
+   - /projects/waypoint-scenes/ws0001/camera.html
+   - /projects/waypoint-scenes/ws0001/mobile.html
+3. Assets render (background image visible).
+
+If a page is blank or missing assets, check browser devtools
+for 404 paths and confirm the folder names/case exactly match.
+

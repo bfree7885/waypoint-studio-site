@@ -1,79 +1,231 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Waypoint Scenes | Waypoint Studio</title>
-    <meta
-      name="description"
-      content="Waypoint Scenes is a tool for building layered environmental scenes from real-world landscapes."
-    />
-    <link rel="stylesheet" href="../../styles/styles.css" />
-  </head>
-  <body>
-    <header class="site-header">
-      <div class="wrap header-inner">
-        <a class="brand" href="../../">Waypoint Studio</a>
-        <nav class="site-nav" aria-label="Global">
-          <a href="../../">Home</a>
-          <a href="../../education/">Education</a>
-          <a href="./" aria-current="page">Projects</a>
-          <a href="../../gallery/">Gallery</a>
-          <a href="../../workshop/">Workshop</a>
-          <a href="../../about/">About</a>
-        </nav>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Waypoint Scenes</title>
+<style>
+:root{
+  --bg:#05070c;
+  --fg:#eaf0ff;
+  --muted:#9ea8c6;
+  --card:#0d1220cc;
+  --line:#9fb6ff33;
+  --btn:#111a30cc;
+  --btn-hover:#1a2749d9;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  color:var(--fg);
+  background:var(--bg);
+  overflow-x:hidden;
+}
+
+.aurora,
+.fog{
+  position:fixed;
+  inset:-35%;
+  pointer-events:none;
+  will-change:transform,opacity;
+}
+.aurora{
+  background:
+    radial-gradient(ellipse at 20% 20%,rgba(120,255,190,.22),transparent 28%),
+    radial-gradient(ellipse at 52% 18%,rgba(165,125,255,.2),transparent 32%),
+    radial-gradient(ellipse at 80% 24%,rgba(255,105,120,.14),transparent 28%);
+  filter:blur(56px);
+  mix-blend-mode:screen;
+  opacity:.9;
+}
+.fog{
+  inset:-20%;
+  background:
+    radial-gradient(circle at 30% 60%,rgba(230,240,255,.06),transparent 36%),
+    radial-gradient(circle at 72% 70%,rgba(210,228,255,.05),transparent 42%);
+  filter:blur(24px);
+  mix-blend-mode:screen;
+  opacity:.85;
+}
+
+.wrap{
+  position:relative;
+  min-height:100%;
+  padding:56px 20px 28px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:space-between;
+}
+
+header{
+  text-align:center;
+  margin-top:10px;
+}
+h1{
+  margin:0;
+  letter-spacing:.28em;
+  font-weight:650;
+  font-size:clamp(24px,4vw,42px);
+}
+.tag{
+  margin-top:12px;
+  color:var(--muted);
+  letter-spacing:.08em;
+  font-size:clamp(12px,1.9vw,15px);
+}
+
+.grid{
+  width:min(980px,100%);
+  margin:42px auto;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:24px;
+}
+
+.scene-card{
+  position:relative;
+  border:1px solid var(--line);
+  border-radius:20px;
+  background:linear-gradient(150deg,rgba(20,28,50,.78),rgba(10,13,24,.76));
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  overflow:hidden;
+  transform-style:preserve-3d;
+  transition:transform .35s ease, border-color .35s ease, box-shadow .35s ease;
+  box-shadow:0 14px 40px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.07);
+}
+.scene-card::before{
+  content:"";
+  position:absolute;
+  inset:-1px;
+  background:radial-gradient(circle at var(--mx,50%) var(--my,40%),rgba(190,220,255,.15),transparent 35%);
+  pointer-events:none;
+}
+.scene-card:hover{
+  border-color:#c7d7ff55;
+  box-shadow:0 24px 56px rgba(0,0,0,.48), inset 0 1px 0 rgba(255,255,255,.09);
+}
+
+.card-inner{
+  padding:24px 22px 22px;
+}
+.scene-id{
+  color:#d9e6ff;
+  letter-spacing:.18em;
+  font-size:12px;
+  opacity:.88;
+}
+.scene-name{
+  margin:10px 0 20px;
+  font-size:clamp(18px,2.4vw,24px);
+  font-weight:500;
+  line-height:1.3;
+  color:#f2f6ff;
+}
+
+.btn-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+.btn{
+  appearance:none;
+  border:1px solid #c6d9ff3b;
+  background:var(--btn);
+  color:#e8f0ff;
+  text-decoration:none;
+  letter-spacing:.06em;
+  font-size:12px;
+  padding:10px 12px;
+  border-radius:10px;
+  transition:background .25s ease, border-color .25s ease, transform .25s ease;
+}
+.btn:hover{
+  background:var(--btn-hover);
+  border-color:#d6e3ff66;
+  transform:translateY(-1px);
+}
+
+footer{
+  text-align:center;
+  color:#aeb8d3;
+  font-size:12px;
+  letter-spacing:.08em;
+  opacity:.78;
+  padding:10px 0 2px;
+}
+
+@media (max-width:620px){
+  .wrap{padding-top:40px}
+  .grid{margin-top:30px}
+}
+</style>
+</head>
+<body>
+<div class="aurora" id="aurora"></div>
+<div class="fog" id="fog"></div>
+
+<main class="wrap">
+  <header>
+    <h1>WAYPOINT SCENES</h1>
+    <div class="tag">Observe • Understand • Create • Share</div>
+  </header>
+
+  <section class="grid">
+    <article class="scene-card" id="scene-card">
+      <div class="card-inner">
+        <div class="scene-id">WS_0001</div>
+        <h2 class="scene-name">Northern Taiga — Blue Hour</h2>
+        <div class="btn-row">
+          <a class="btn" href="ws0001/index.html">Enter Scene</a>
+          <a class="btn" href="ws0001/camera.html">Camera Mode</a>
+          <a class="btn" href="ws0001/mobile.html">Mobile Mode</a>
+        </div>
       </div>
-    </header>
+    </article>
+  </section>
 
-    <main>
-      <div class="wrap">
-        <section>
-          <h1>Waypoint Scenes</h1>
-          <p class="lead">
-            A tool for building layered, parallax environmental scenes from
-            real-world landscapes.
-          </p>
-        </section>
+  <footer>A Waypoint Studio project</footer>
+</main>
 
-        <section class="panel">
-          <h2>What It Is</h2>
-          <p>
-            Waypoint Scenes is a tool for building layered, parallax
-            environmental scenes from real-world landscapes.
-          </p>
-        </section>
+<script>
+const aurora = document.getElementById("aurora")
+const fog = document.getElementById("fog")
+const card = document.getElementById("scene-card")
 
-        <section class="panel">
-          <h2>Purpose</h2>
-          <ul>
-            <li>Encourage attention to place</li>
-            <li>Help users reconnect with landscape</li>
-            <li>
-              Provide a quiet, creative outlet grounded in real environments
-            </li>
-          </ul>
-        </section>
+let mx = 0
+let my = 0
+let tx = 0
+let ty = 0
 
-        <section class="panel">
-          <h2>Features</h2>
-          <ul>
-            <li>Upload landscape photos</li>
-            <li>Separate into foreground, midground, background</li>
-            <li>Create subtle depth and motion</li>
-          </ul>
-        </section>
-      </div>
-    </main>
+function updatePointer(event){
+  tx = (event.clientX / window.innerWidth - 0.5) * 2
+  ty = (event.clientY / window.innerHeight - 0.5) * 2
 
-        <footer class="site-footer">
-      <div class="wrap footer-inner">
-        <ul class="footer-mission" aria-label="Mission">
-          <li>Observe.</li>
-          <li>Understand.</li>
-          <li>Create.</li>
-          <li>Share.</li>
-        </ul>
-      </div>
-    </footer>
-  </body>
+  const rect = card.getBoundingClientRect()
+  const cx = ((event.clientX - rect.left) / rect.width) * 100
+  const cy = ((event.clientY - rect.top) / rect.height) * 100
+  card.style.setProperty("--mx", `${Math.max(0, Math.min(100, cx))}%`)
+  card.style.setProperty("--my", `${Math.max(0, Math.min(100, cy))}%`)
+}
+
+function animate(){
+  mx += (tx - mx) * 0.045
+  my += (ty - my) * 0.045
+  const t = Date.now() * 0.00016
+
+  aurora.style.transform = `translate(${Math.sin(t*0.7)*120 + mx*14}px,${Math.cos(t*0.3)*26 + my*8}px) rotate(${Math.sin(t*0.2)*2}deg) scale(${1.05 + Math.sin(t*0.35)*0.03})`
+  fog.style.transform = `translate(${Math.sin(t)*44 + mx*6}px,${Math.cos(t*0.8)*22 + my*5}px)`
+  card.style.transform = `perspective(900px) rotateX(${-my*2.5}deg) rotateY(${mx*3.5}deg) translateZ(0)`
+
+  requestAnimationFrame(animate)
+}
+
+window.addEventListener("pointermove", updatePointer, { passive:true })
+animate()
+</script>
+</body>
 </html>
