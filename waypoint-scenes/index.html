@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Source+Sans+3:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/site.css">
   <style>
     :root {
       --bg: #0c0b0a;
@@ -30,8 +31,12 @@
     }
 
     html, body {
-      height: 100%;
-      overflow: hidden;
+      min-height: 100%;
+      overflow-x: hidden;
+    }
+
+    body {
+      overflow-y: auto;
     }
 
     body {
@@ -49,8 +54,9 @@
 
     /* —— Experience shell —— */
     .experience {
-      position: fixed;
-      inset: 0;
+      position: relative;
+      min-height: 100vh;
+      min-height: 100dvh;
       height: 100vh;
       height: 100dvh;
       overflow: hidden;
@@ -470,6 +476,7 @@
         <section class="feature" aria-labelledby="feature-title">
           <h1 class="feature-title display" id="feature-title">Waypoint Scenes</h1>
           <p class="feature-tagline">Living Landscape Studies</p>
+          <p style="font-size:0.62rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin-bottom:0.75rem;">Active Prototype · Live demo</p>
           <p class="feature-desc">
             Interactive landscape photography transformed into quiet digital places for observation, reflection, and presence.
           </p>
@@ -491,9 +498,7 @@
           </div>
         </section>
 
-        <button type="button" class="motion-hint is-needed" id="motion-hint" hidden>
-          Tap to enable gentle motion
-        </button>
+        <a class="scroll-hint" href="#product-details">Product details ↓</a>
 
         <footer class="site-footer">
           <p>Photography © Anthony Muccari · Scene Development by Waypoint Studio</p>
@@ -501,6 +506,72 @@
       </div>
     </div>
   </main>
+
+  <div class="product-landing" id="product-details">
+    <div class="wrap">
+      <section>
+        <span class="badge badge-active">Active Prototype</span>
+        <h2>Waypoint Scenes</h2>
+        <p class="tagline">Living landscape studies.</p>
+        <p>
+          Interactive landscape photography transformed into quiet digital places
+          for observation, reflection, and presence. Two scenes are live now —
+          Boardwalk and Fog Forest.
+        </p>
+        <p class="subscription-note">Subscription model coming soon.</p>
+      </section>
+
+      <section>
+        <h2>Features</h2>
+        <div class="feature-grid">
+          <article class="feature-card">
+            <h3>Living landscape photography</h3>
+            <p>Real-world photographs presented as immersive, place-based scenes.</p>
+          </article>
+          <article class="feature-card">
+            <h3>Subtle interaction</h3>
+            <p>Mouse parallax on desktop. Gentle motion on mobile — no gaming UI.</p>
+          </article>
+          <article class="feature-card">
+            <h3>Ambient visual motion</h3>
+            <p>Layered atmospheric effects that breathe slowly with each scene.</p>
+          </article>
+          <article class="feature-card">
+            <h3>Future photographer collections</h3>
+            <p>Curated series from field photographers, presented with permission and care.</p>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>Pricing preview</h2>
+        <p class="muted">No payment processing yet. Subscriptions planned for future release.</p>
+        <div class="pricing-grid">
+          <article class="price-card">
+            <h3>Free demo</h3>
+            <p class="price-label">Two live scenes — Boardwalk &amp; Fog Forest</p>
+            <span class="price-badge price-live">Live now</span>
+          </article>
+          <article class="price-card">
+            <h3>Personal scene collection</h3>
+            <p class="price-label">Expanded library of landscape studies</p>
+            <span class="price-badge price-soon">Planned</span>
+          </article>
+          <article class="price-card">
+            <h3>Custom commissioned scene</h3>
+            <p class="price-label">Collaborative landscape work</p>
+            <span class="price-badge price-soon">Planned</span>
+          </article>
+        </div>
+      </section>
+
+      <section class="waitlist-cta">
+        <h2>Join the Waypoint Scenes waitlist</h2>
+        <p>Be notified when expanded collections and subscriptions open.</p>
+        <a class="btn-primary" href="mailto:hello@waypointstudio.org?subject=Waitlist%20-%20Waypoint%20Scenes">Join the Waypoint Scenes waitlist</a>
+      </section>
+    </div>
+  </div>
 
   <script>
     (function () {
@@ -520,8 +591,9 @@
       ];
 
       var fadeMs = 2200;
-      var maxShift = 16;
-      var ease = 0.035;
+      var isMobile = window.matchMedia("(max-width: 767px), (pointer: coarse)").matches;
+      var maxShift = isMobile ? 26 : 16;
+      var ease = isMobile ? 0.058 : 0.035;
 
       var stage = document.getElementById("stage");
       var layers = [
@@ -538,20 +610,17 @@
       var sceneIndex = document.getElementById("scene-index");
       var btnPrev = document.getElementById("btn-prev");
       var btnNext = document.getElementById("btn-next");
-      var motionHint = document.getElementById("motion-hint");
 
       var current = 0;
       var fading = false;
-      var targetX = 0;
-      var targetY = 0;
       var currentX = 0;
       var currentY = 0;
       var autoPhase = 0;
-
-      var isMobile = window.matchMedia("(max-width: 767px), (pointer: coarse)").matches;
-      var motionMode = "mouse";
-      var tiltEnabled = false;
-      var orientationHandler = null;
+      var mouseX = 0;
+      var mouseY = 0;
+      var tiltX = 0;
+      var tiltY = 0;
+      var tiltActive = false;
 
       if (isMobile) {
         document.body.classList.add("is-mobile");
@@ -592,97 +661,74 @@
         goTo((current - 1 + SCENES.length) % SCENES.length);
       }
 
-      function setTarget(x, y) {
-        targetX = Math.max(-maxShift, Math.min(maxShift, x));
-        targetY = Math.max(-maxShift, Math.min(maxShift, y));
-      }
-
       function onMouseMove(e) {
-        if (motionMode !== "mouse") return;
+        if (isMobile) return;
         var x = (e.clientX / window.innerWidth - 0.5) * 2;
         var y = (e.clientY / window.innerHeight - 0.5) * 2;
-        setTarget(x * maxShift, y * maxShift);
+        mouseX = x * maxShift;
+        mouseY = y * maxShift;
       }
 
       function onOrientation(e) {
-        if (motionMode !== "tilt" || e.beta == null || e.gamma == null) return;
-        var x = Math.max(-1, Math.min(1, e.gamma / 35));
-        var y = Math.max(-1, Math.min(1, (e.beta - 45) / 35));
-        setTarget(x * maxShift * 0.85, y * maxShift * 0.85);
+        if (e.gamma == null || e.beta == null) return;
+        tiltActive = true;
+        var x = Math.max(-1, Math.min(1, e.gamma / 28));
+        var y = Math.max(-1, Math.min(1, (e.beta - 45) / 28));
+        tiltX = x * maxShift * 0.92;
+        tiltY = y * maxShift * 0.78;
       }
 
-      function startAutoMotion() {
-        motionMode = "auto";
-        motionHint.hidden = true;
-      }
-
-      function startTilt() {
-        motionMode = "tilt";
-        tiltEnabled = true;
-        motionHint.hidden = true;
+      function bindTiltListener() {
         window.addEventListener("deviceorientation", onOrientation, { passive: true });
       }
 
-      function enableMotion() {
-        if (typeof DeviceOrientationEvent !== "undefined" &&
-            typeof DeviceOrientationEvent.requestPermission === "function") {
-          DeviceOrientationEvent.requestPermission()
-            .then(function (state) {
-              if (state === "granted") startTilt();
-              else startAutoMotion();
-            })
-            .catch(startAutoMotion);
-        } else if (window.DeviceOrientationEvent) {
-          orientationHandler = function (e) {
-            if (e.gamma != null) {
-              startTilt();
-              window.removeEventListener("deviceorientation", orientationHandler);
-            }
-          };
-          window.addEventListener("deviceorientation", orientationHandler, { passive: true });
-          window.setTimeout(function () {
-            if (!tiltEnabled) startAutoMotion();
-          }, 1200);
-        } else {
-          startAutoMotion();
+      function requestTiltPermission() {
+        if (typeof DeviceOrientationEvent === "undefined") return;
+        if (typeof DeviceOrientationEvent.requestPermission !== "function") {
+          bindTiltListener();
+          return;
         }
+        DeviceOrientationEvent.requestPermission()
+          .then(function (state) {
+            if (state === "granted") bindTiltListener();
+          })
+          .catch(function () {});
       }
 
       function initMotion() {
-        if (!isMobile) {
-          motionMode = "mouse";
-          return;
-        }
-
-        startAutoMotion();
+        if (!isMobile) return;
 
         if (typeof DeviceOrientationEvent !== "undefined" &&
             typeof DeviceOrientationEvent.requestPermission === "function") {
-          motionHint.hidden = false;
-          return;
-        }
-
-        if (window.DeviceOrientationEvent) {
-          window.addEventListener("deviceorientation", function tryTilt(e) {
-            if (e.gamma != null && motionMode === "auto") {
-              startTilt();
-            }
-          }, { passive: true });
+          document.addEventListener("touchstart", requestTiltPermission, { once: true, passive: true });
+        } else if (window.DeviceOrientationEvent) {
+          bindTiltListener();
         }
       }
 
-      motionHint.addEventListener("click", enableMotion);
-
       function tick() {
-        if (motionMode === "auto") {
-          autoPhase += 0.004;
-          setTarget(
-            Math.sin(autoPhase) * maxShift * 0.55,
-            Math.cos(autoPhase * 0.75) * maxShift * 0.4
-          );
+        var dx;
+        var dy;
+
+        if (isMobile) {
+          autoPhase += 0.012;
+          var driftX = Math.sin(autoPhase) * maxShift * 0.85;
+          var driftY = Math.cos(autoPhase * 0.67) * maxShift * 0.65;
+
+          if (tiltActive) {
+            dx = driftX * 0.32 + tiltX * 0.88;
+            dy = driftY * 0.32 + tiltY * 0.88;
+          } else {
+            dx = driftX;
+            dy = driftY;
+          }
+        } else {
+          dx = mouseX;
+          dy = mouseY;
         }
-        currentX += (targetX - currentX) * ease;
-        currentY += (targetY - currentY) * ease;
+
+        currentX += (dx - currentX) * ease;
+        currentY += (dy - currentY) * ease;
         stage.style.transform =
           "translate3d(" + currentX.toFixed(2) + "px," + currentY.toFixed(2) + "px,0)";
         requestAnimationFrame(tick);
