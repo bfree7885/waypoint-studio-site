@@ -2,666 +2,98 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="description" content="Waypoint Studio — Waypoint Scenes: living landscape studies. Interactive photography for observation, reflection, and presence.">
-  <title>Waypoint Studio — Waypoint Scenes</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Waypoint Studio — nature-focused digital tools, landscape experiences, field datasets, and quiet creative projects.">
+  <title>Waypoint Studio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Source+Sans+3:wght@300;400&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg: #0c0b0a;
-      --text: #ebe7df;
-      --muted: #9a948a;
-      --line: rgba(235, 231, 223, 0.14);
-      --fade: 2.2s;
-      --font-display: "Cormorant Garamond", Georgia, serif;
-      --font-body: "Source Sans 3", system-ui, sans-serif;
-      --safe-top: env(safe-area-inset-top, 0px);
-      --safe-bottom: env(safe-area-inset-bottom, 0px);
-      --safe-left: env(safe-area-inset-left, 0px);
-      --safe-right: env(safe-area-inset-right, 0px);
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html, body {
-      height: 100%;
-      overflow: hidden;
-    }
-
-    body {
-      font-family: var(--font-body);
-      font-weight: 300;
-      background: var(--bg);
-      color: var(--text);
-      -webkit-font-smoothing: antialiased;
-    }
-
-    h1, h2, .display {
-      font-family: var(--font-display);
-      font-weight: 400;
-    }
-
-    /* —— Experience shell —— */
-    .experience {
-      position: fixed;
-      inset: 0;
-      height: 100vh;
-      height: 100dvh;
-      overflow: hidden;
-    }
-
-    .stage {
-      position: absolute;
-      inset: -4%;
-      width: 108%;
-      height: 108%;
-      will-change: transform;
-    }
-
-    .layer {
-      position: absolute;
-      inset: 0;
-      background-size: cover;
-      background-position: center center;
-      background-repeat: no-repeat;
-      opacity: 0;
-      transition: opacity var(--fade) ease-in-out;
-    }
-
-    .layer.is-active {
-      opacity: 1;
-    }
-
-    .effects {
-      position: absolute;
-      inset: 0;
-      opacity: 0;
-      transition: opacity var(--fade) ease-in-out;
-      pointer-events: none;
-    }
-
-    .effects.is-active {
-      opacity: 1;
-    }
-
-    .fx {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-    }
-
-    .fx-depth {
-      background: radial-gradient(
-        ellipse 90% 85% at 50% 50%,
-        transparent 50%,
-        rgba(6, 8, 6, 0.07) 100%
-      );
-      animation: depthShift 44s ease-in-out infinite alternate;
-    }
-
-    @keyframes depthShift {
-      0%   { transform: scale(1); }
-      100% { transform: scale(1.012) translate(0.25%, 0.15%); }
-    }
-
-    .fx-light {
-      background: radial-gradient(
-        ellipse 60% 42% at 36% 26%,
-        rgba(255, 240, 215, 0.07) 0%,
-        transparent 68%
-      );
-      animation: lightMove 40s ease-in-out infinite alternate;
-    }
-
-    .fx-clouds {
-      background:
-        radial-gradient(ellipse 42% 16% at 24% 16%, rgba(255, 255, 252, 0.05) 0%, transparent 72%),
-        radial-gradient(ellipse 36% 14% at 70% 20%, rgba(248, 250, 252, 0.04) 0%, transparent 74%);
-      animation: cloudDrift 56s ease-in-out infinite;
-    }
-
-    .fx-air {
-      background: linear-gradient(95deg, transparent, rgba(50, 66, 46, 0.03) 50%, transparent);
-      background-size: 220% 100%;
-      animation: airDrift 50s linear infinite;
-    }
-
-    .fx-fog-a {
-      background: linear-gradient(88deg, transparent, rgba(206, 216, 224, 0.09) 45%, transparent);
-      filter: blur(38px);
-      animation: fogA 52s ease-in-out infinite;
-    }
-
-    .fx-fog-b {
-      background: linear-gradient(118deg, transparent 18%, rgba(192, 206, 216, 0.06) 50%, transparent 82%);
-      filter: blur(50px);
-      animation: fogB 60s ease-in-out infinite reverse;
-    }
-
-    .fx-glow {
-      background: radial-gradient(circle at 50% 38%, rgba(255, 252, 242, 0.06) 0%, transparent 55%);
-      animation: glowMove 36s ease-in-out infinite alternate;
-    }
-
-    @keyframes lightMove {
-      0%   { transform: translate(0, 0); }
-      100% { transform: translate(1.5%, 0.8%); }
-    }
-
-    @keyframes cloudDrift {
-      0%, 100% { transform: translateX(0); }
-      50%      { transform: translateX(2.5%); }
-    }
-
-    @keyframes airDrift {
-      0%   { background-position: 0% 0; }
-      100% { background-position: 100% 0; }
-    }
-
-    @keyframes fogA {
-      0%, 100% { transform: translate(-2.5%, 0); }
-      50%      { transform: translate(3.5%, -0.3%); }
-    }
-
-    @keyframes fogB {
-      0%, 100% { transform: translate(2%, 0.2%); }
-      50%      { transform: translate(-3.5%, 0); }
-    }
-
-    @keyframes glowMove {
-      0%   { opacity: 0.8; }
-      100% { opacity: 1; }
-    }
-
-    /* —— Overlay —— */
-    .overlay {
-      position: absolute;
-      inset: 0;
-      z-index: 10;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding:
-        calc(1.25rem + var(--safe-top))
-        calc(1.25rem + var(--safe-right))
-        calc(1.25rem + var(--safe-bottom))
-        calc(1.25rem + var(--safe-left));
-      background: linear-gradient(
-        180deg,
-        rgba(12, 11, 10, 0.72) 0%,
-        rgba(12, 11, 10, 0.18) 32%,
-        rgba(12, 11, 10, 0.28) 58%,
-        rgba(12, 11, 10, 0.92) 100%
-      );
-      pointer-events: none;
-    }
-
-    .overlay > * {
-      pointer-events: auto;
-    }
-
-    .studio {
-      text-align: center;
-    }
-
-    .studio-name {
-      font-family: var(--font-display);
-      font-size: clamp(1.5rem, 4.5vw, 2.1rem);
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      margin-bottom: 0.45rem;
-      text-shadow: 0 1px 24px rgba(0, 0, 0, 0.5);
-    }
-
-    .studio-motto {
-      font-size: clamp(0.68rem, 2.8vw, 0.78rem);
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: rgba(235, 231, 223, 0.82);
-      text-shadow: 0 1px 16px rgba(0, 0, 0, 0.45);
-    }
-
-    .content {
-      max-width: 26rem;
-      width: 100%;
-      margin: 0 auto;
-    }
-
-    .feature-title {
-      font-size: clamp(2rem, 7vw, 2.75rem);
-      letter-spacing: 0.03em;
-      margin-bottom: 0.35rem;
-      text-shadow: 0 2px 28px rgba(0, 0, 0, 0.55);
-    }
-
-    .feature-tagline {
-      font-size: 0.68rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 1rem;
-    }
-
-    .feature-desc {
-      font-size: clamp(0.88rem, 3.6vw, 0.95rem);
-      line-height: 1.7;
-      color: rgba(235, 231, 223, 0.88);
-      margin-bottom: 1.35rem;
-      text-shadow: 0 1px 20px rgba(0, 0, 0, 0.5);
-    }
-
-    .scene-info {
-      margin-bottom: 1.25rem;
-      transition: opacity 0.85s ease;
-    }
-
-    .scene-info.is-fading {
-      opacity: 0.35;
-    }
-
-    .scene-info h2 {
-      font-size: clamp(1.25rem, 4.5vw, 1.5rem);
-      letter-spacing: 0.02em;
-      margin-bottom: 0.35rem;
-      text-shadow: 0 1px 20px rgba(0, 0, 0, 0.5);
-    }
-
-    .scene-info .scene-desc {
-      font-size: 0.86rem;
-      line-height: 1.65;
-      color: var(--muted);
-      text-shadow: 0 1px 14px rgba(0, 0, 0, 0.45);
-    }
-
-    .scene-nav {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin-bottom: 1.15rem;
-    }
-
-    .nav-btn {
-      font: inherit;
-      font-size: 0.65rem;
-      font-weight: 400;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--text);
-      background: rgba(12, 11, 10, 0.35);
-      border: 1px solid var(--line);
-      padding: 0.6rem 1rem;
-      cursor: pointer;
-      backdrop-filter: blur(6px);
-      transition: background 0.4s ease, border-color 0.4s ease;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    .nav-btn:hover {
-      background: rgba(235, 231, 223, 0.08);
-      border-color: rgba(235, 231, 223, 0.28);
-    }
-
-    .nav-btn:focus-visible {
-      outline: 1px solid rgba(235, 231, 223, 0.45);
-      outline-offset: 2px;
-    }
-
-    .scene-index {
-      font-size: 0.65rem;
-      letter-spacing: 0.12em;
-      color: var(--muted);
-    }
-
-    .credits {
-      padding-top: 0.85rem;
-      border-top: 1px solid var(--line);
-      margin-bottom: 0.85rem;
-    }
-
-    .credits .credit-byline {
-      font-family: var(--font-display);
-      font-size: 0.88rem;
-      margin-bottom: 0.2rem;
-      text-shadow: 0 1px 14px rgba(0, 0, 0, 0.45);
-    }
-
-    .credits .credit-permission {
-      font-size: 0.7rem;
-      font-style: italic;
-      color: var(--muted);
-      letter-spacing: 0.04em;
-    }
-
-    .site-footer {
-      text-align: center;
-      font-size: 0.65rem;
-      letter-spacing: 0.06em;
-      color: rgba(235, 231, 223, 0.62);
-      line-height: 1.75;
-      pointer-events: none;
-    }
-
-    .motion-hint {
-      display: none;
-      font-size: 0.62rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--muted);
-      text-align: center;
-      margin-top: 0.5rem;
-      cursor: pointer;
-      border: none;
-      background: none;
-      font-family: inherit;
-      padding: 0.25rem;
-      width: 100%;
-    }
-
-    body.is-mobile .motion-hint.is-needed {
-      display: block;
-      pointer-events: auto;
-    }
-
-    @media (min-width: 768px) {
-      .overlay {
-        padding:
-          calc(2rem + var(--safe-top))
-          calc(2.5rem + var(--safe-right))
-          calc(2rem + var(--safe-bottom))
-          calc(2.5rem + var(--safe-left));
-      }
-
-      .content {
-        max-width: 28rem;
-        margin: 0;
-      }
-
-      .studio {
-        text-align: left;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="styles/site.css">
 </head>
 <body>
-  <main class="experience" id="experience">
-    <div class="stage" id="stage" aria-hidden="true">
-      <div class="layer is-active" id="layer-0" style="background-image: url('./boardwalk.jpg');"></div>
-      <div class="layer" id="layer-1" style="background-image: url('./fogforest.jpg');"></div>
-
-      <div class="effects effects-0 is-active" id="effects-0">
-        <div class="fx fx-light"></div>
-        <div class="fx fx-clouds"></div>
-        <div class="fx fx-air"></div>
-        <div class="fx fx-depth"></div>
-      </div>
-      <div class="effects effects-1" id="effects-1">
-        <div class="fx fx-fog-a"></div>
-        <div class="fx fx-fog-b"></div>
-        <div class="fx fx-glow"></div>
-        <div class="fx fx-depth"></div>
-      </div>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="./">Waypoint Studio</a>
+      <nav class="site-nav" aria-label="Main">
+        <a href="./" aria-current="page">Home</a>
+        <a href="waypoint-scenes/">Waypoint Scenes</a>
+        <a href="foragecast/">ForageCast</a>
+        <a href="sheds/">Sheds</a>
+        <a href="fieldry/">Fieldry</a>
+        <a href="education/">Education</a>
+      </nav>
     </div>
+  </header>
 
-    <div class="overlay">
-      <header class="studio">
-        <p class="studio-name">Waypoint Studio</p>
-        <p class="studio-motto">Observe. Understand. Create. Share.</p>
-      </header>
+  <main>
+    <div class="wrap">
+      <section class="hero">
+        <h1>Waypoint Studio</h1>
+        <ul class="mission-lines" aria-label="Mission">
+          <li>Observe.</li>
+          <li>Understand.</li>
+          <li>Create.</li>
+          <li>Share.</li>
+        </ul>
+        <p class="lead">
+          Waypoint Studio creates nature-focused digital tools, landscape
+          experiences, field datasets, and quiet creative projects rooted in
+          observation, ecology, and place.
+        </p>
+      </section>
 
-      <div class="content">
-        <section class="feature" aria-labelledby="feature-title">
-          <h1 class="feature-title display" id="feature-title">Waypoint Scenes</h1>
-          <p class="feature-tagline">Living Landscape Studies</p>
-          <p class="feature-desc">
-            Interactive landscape photography transformed into quiet digital places for observation, reflection, and presence.
-          </p>
+      <section>
+        <h2>Featured Projects</h2>
+        <div class="grid">
+          <a class="card col-4" href="waypoint-scenes/">
+            <p class="meta">Active</p>
+            <h3>Waypoint Scenes</h3>
+            <p class="desc">Living landscape studies — interactive photography for observation and presence.</p>
+          </a>
+          <a class="card col-4" href="foragecast/">
+            <p class="meta">Concept</p>
+            <h3>ForageCast</h3>
+            <p class="desc">Terrain and season-aware foraging prediction.</p>
+          </a>
+          <a class="card col-4" href="sheds/">
+            <p class="meta">Concept</p>
+            <h3>Sheds</h3>
+            <p class="desc">Ethical shed hunting intelligence and terrain understanding.</p>
+          </a>
+          <a class="card col-4" href="fieldry/">
+            <p class="meta">Concept</p>
+            <h3>Fieldry</h3>
+            <p class="desc">A real-world nature journal for noticing more.</p>
+          </a>
+          <a class="card col-4" href="education/">
+            <p class="meta">Concept</p>
+            <h3>Waypoint Education</h3>
+            <p class="desc">Nature, ecology, and Earth systems explained simply.</p>
+          </a>
+          <a class="card col-4" href="waypoint-scenes/">
+            <p class="meta">Active</p>
+            <h3>Photography Studies</h3>
+            <p class="desc">Field photography and landscape observation within Waypoint Scenes.</p>
+          </a>
+        </div>
+      </section>
 
-          <div class="scene-info" id="scene-info">
-            <h2 id="scene-title">Boardwalk</h2>
-            <p class="scene-desc" id="scene-desc"></p>
-          </div>
-
-          <nav class="scene-nav" aria-label="Scene navigation">
-            <button type="button" class="nav-btn" id="btn-prev">Previous</button>
-            <span class="scene-index" id="scene-index">1 / 2</span>
-            <button type="button" class="nav-btn" id="btn-next">Next</button>
-          </nav>
-
-          <div class="credits" aria-label="Photography credit">
-            <p class="credit-byline">Photography by Anthony Muccari</p>
-            <p class="credit-permission">Used with permission</p>
-          </div>
-        </section>
-
-        <button type="button" class="motion-hint is-needed" id="motion-hint" hidden>
-          Tap to enable gentle motion
-        </button>
-
-        <footer class="site-footer">
-          <p>Photography © Anthony Muccari · Scene Development by Waypoint Studio</p>
-        </footer>
-      </div>
+      <section>
+        <h2>About</h2>
+        <p>
+          Waypoint Studio combines naturalist observation, photography, GIS,
+          environmental education, and small creative tools. Work here is built
+          slowly — for the field, for learning, and for quiet attention to the
+          living world.
+        </p>
+      </section>
     </div>
   </main>
 
-  <script>
-    (function () {
-      var SCENES = [
-        {
-          image: "./boardwalk.jpg",
-          title: "Boardwalk",
-          description:
-            "A wooden path through marsh grass and coastal forest, late light resting along the rails."
-        },
-        {
-          image: "./fogforest.jpg",
-          title: "Fog Forest",
-          description:
-            "Cedar trunks in cool mist, the woodland held in a slow, breathing stillness."
-        }
-      ];
-
-      var fadeMs = 2200;
-      var maxShift = 16;
-      var ease = 0.035;
-
-      var stage = document.getElementById("stage");
-      var layers = [
-        document.getElementById("layer-0"),
-        document.getElementById("layer-1")
-      ];
-      var effects = [
-        document.getElementById("effects-0"),
-        document.getElementById("effects-1")
-      ];
-      var sceneInfo = document.getElementById("scene-info");
-      var sceneTitle = document.getElementById("scene-title");
-      var sceneDesc = document.getElementById("scene-desc");
-      var sceneIndex = document.getElementById("scene-index");
-      var btnPrev = document.getElementById("btn-prev");
-      var btnNext = document.getElementById("btn-next");
-      var motionHint = document.getElementById("motion-hint");
-
-      var current = 0;
-      var fading = false;
-      var targetX = 0;
-      var targetY = 0;
-      var currentX = 0;
-      var currentY = 0;
-      var autoPhase = 0;
-
-      var isMobile = window.matchMedia("(max-width: 767px), (pointer: coarse)").matches;
-      var motionMode = "mouse";
-      var tiltEnabled = false;
-      var orientationHandler = null;
-
-      if (isMobile) {
-        document.body.classList.add("is-mobile");
-      }
-
-      SCENES.forEach(function (s) {
-        var img = new Image();
-        img.src = s.image;
-      });
-
-      function updateMeta(index) {
-        sceneTitle.textContent = SCENES[index].title;
-        sceneDesc.textContent = SCENES[index].description;
-        sceneIndex.textContent = (index + 1) + " / " + SCENES.length;
-      }
-
-      function goTo(index) {
-        if (fading || index === current) return;
-        fading = true;
-        sceneInfo.classList.add("is-fading");
-        layers[current].classList.remove("is-active");
-        effects[current].classList.remove("is-active");
-        layers[index].classList.add("is-active");
-        effects[index].classList.add("is-active");
-        current = index;
-        updateMeta(index);
-        window.setTimeout(function () {
-          fading = false;
-          sceneInfo.classList.remove("is-fading");
-        }, fadeMs);
-      }
-
-      function next() {
-        goTo((current + 1) % SCENES.length);
-      }
-
-      function prev() {
-        goTo((current - 1 + SCENES.length) % SCENES.length);
-      }
-
-      function setTarget(x, y) {
-        targetX = Math.max(-maxShift, Math.min(maxShift, x));
-        targetY = Math.max(-maxShift, Math.min(maxShift, y));
-      }
-
-      function onMouseMove(e) {
-        if (motionMode !== "mouse") return;
-        var x = (e.clientX / window.innerWidth - 0.5) * 2;
-        var y = (e.clientY / window.innerHeight - 0.5) * 2;
-        setTarget(x * maxShift, y * maxShift);
-      }
-
-      function onOrientation(e) {
-        if (motionMode !== "tilt" || e.beta == null || e.gamma == null) return;
-        var x = Math.max(-1, Math.min(1, e.gamma / 35));
-        var y = Math.max(-1, Math.min(1, (e.beta - 45) / 35));
-        setTarget(x * maxShift * 0.85, y * maxShift * 0.85);
-      }
-
-      function startAutoMotion() {
-        motionMode = "auto";
-        motionHint.hidden = true;
-      }
-
-      function startTilt() {
-        motionMode = "tilt";
-        tiltEnabled = true;
-        motionHint.hidden = true;
-        window.addEventListener("deviceorientation", onOrientation, { passive: true });
-      }
-
-      function enableMotion() {
-        if (typeof DeviceOrientationEvent !== "undefined" &&
-            typeof DeviceOrientationEvent.requestPermission === "function") {
-          DeviceOrientationEvent.requestPermission()
-            .then(function (state) {
-              if (state === "granted") startTilt();
-              else startAutoMotion();
-            })
-            .catch(startAutoMotion);
-        } else if (window.DeviceOrientationEvent) {
-          orientationHandler = function (e) {
-            if (e.gamma != null) {
-              startTilt();
-              window.removeEventListener("deviceorientation", orientationHandler);
-            }
-          };
-          window.addEventListener("deviceorientation", orientationHandler, { passive: true });
-          window.setTimeout(function () {
-            if (!tiltEnabled) startAutoMotion();
-          }, 1200);
-        } else {
-          startAutoMotion();
-        }
-      }
-
-      function initMotion() {
-        if (!isMobile) {
-          motionMode = "mouse";
-          return;
-        }
-
-        startAutoMotion();
-
-        if (typeof DeviceOrientationEvent !== "undefined" &&
-            typeof DeviceOrientationEvent.requestPermission === "function") {
-          motionHint.hidden = false;
-          return;
-        }
-
-        if (window.DeviceOrientationEvent) {
-          window.addEventListener("deviceorientation", function tryTilt(e) {
-            if (e.gamma != null && motionMode === "auto") {
-              startTilt();
-            }
-          }, { passive: true });
-        }
-      }
-
-      motionHint.addEventListener("click", enableMotion);
-
-      function tick() {
-        if (motionMode === "auto") {
-          autoPhase += 0.004;
-          setTarget(
-            Math.sin(autoPhase) * maxShift * 0.55,
-            Math.cos(autoPhase * 0.75) * maxShift * 0.4
-          );
-        }
-        currentX += (targetX - currentX) * ease;
-        currentY += (targetY - currentY) * ease;
-        stage.style.transform =
-          "translate3d(" + currentX.toFixed(2) + "px," + currentY.toFixed(2) + "px,0)";
-        requestAnimationFrame(tick);
-      }
-
-      function onKey(e) {
-        if (e.key === "ArrowRight") {
-          e.preventDefault();
-          next();
-        } else if (e.key === "ArrowLeft") {
-          e.preventDefault();
-          prev();
-        }
-      }
-
-      btnPrev.addEventListener("click", prev);
-      btnNext.addEventListener("click", next);
-      window.addEventListener("mousemove", onMouseMove, { passive: true });
-      window.addEventListener("keydown", onKey);
-      initMotion();
-      requestAnimationFrame(tick);
-      updateMeta(0);
-    })();
-  </script>
+  <footer class="site-footer">
+    <div class="footer-inner">
+      Waypoint Studio · Observe. Understand. Create. Share.
+    </div>
+  </footer>
 </body>
 </html>
