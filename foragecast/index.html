@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="ForageCast — terrain, weather, and seasonal intelligence for responsible foraging. MorelCast v1 demo for the Northeast.">
+  <meta name="description" content="ForageCast — terrain, weather, and seasonal intelligence for responsible foraging. MorelCast with weather-aware field reads.">
   <title>ForageCast | Waypoint Studio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -30,13 +30,14 @@
     <div class="wrap">
       <!-- 1. Hero -->
       <section class="foragecast-hero page-hero">
-        <span class="badge badge-dev">In Development</span>
+        <span class="badge badge-dev">In Development · V2</span>
         <h1>ForageCast</h1>
         <p class="tagline">
           Terrain, weather, and seasonal intelligence for responsible foraging.
         </p>
         <div class="cta-row">
-          <a class="btn-primary" href="#morelcast-demo">Explore MorelCast v1</a>
+          <a class="btn-primary" href="#weather-read">Weather-Aware Field Read</a>
+          <a class="btn-secondary" href="#manual-read">Manual Field Read</a>
         </div>
         <p class="foragecast-sub">Starting with morels. Expanding species by species.</p>
       </section>
@@ -57,92 +58,217 @@
         </p>
       </section>
 
-      <!-- 3. MorelCast v1 demo -->
-      <section class="demo-panel" id="morelcast-demo">
-        <p class="demo-label">MorelCast v1 · Field read demo</p>
-        <h2>Generate a regional timing estimate</h2>
+      <!-- 3. MorelCast demos -->
+      <section id="morelcast-demo">
+        <h2>MorelCast</h2>
         <p class="muted">
-          Rule-based preview logic — not connected to live GIS or weather data
-          yet. Use for learning how ForageCast will interpret field conditions.
+          Environmental timing estimates for morel mushrooms in the Northeast.
+          Rule-based preview — not connected to live weather APIs yet.
         </p>
 
-        <form class="demo-form" id="morelcast-form" novalidate>
-          <div class="form-field">
-            <label for="state">State</label>
-            <select id="state" name="state" required>
-              <option value="Pennsylvania">Pennsylvania</option>
-              <option value="New York">New York</option>
-              <option value="New Jersey">New Jersey</option>
-              <option value="Vermont">Vermont</option>
-              <option value="Massachusetts">Massachusetts</option>
-              <option value="Maine">Maine</option>
-            </select>
-          </div>
+        <p class="global-disclaimer">
+          ForageCast is an environmental guidance tool, not a guarantee of presence, safety, legality, or edibility. Always confirm identification and follow local regulations.
+        </p>
 
-          <div class="form-field">
-            <label for="region">County / region</label>
-            <input type="text" id="region" name="region" placeholder="e.g. Centre County, Hudson Valley" autocomplete="off">
-          </div>
+        <div class="demo-stack">
+          <!-- Weather-Aware Field Read (V2) -->
+          <div class="demo-panel demo-panel-v2" id="weather-read">
+            <p class="demo-label">MorelCast · V2 preview</p>
+            <h3 class="demo-panel-title">Weather-Aware Field Read</h3>
+            <p class="muted">
+              Interprets moisture, temperature trend, habitat, and elevation together —
+              closer to how the full ForageCast engine will read environmental signals.
+            </p>
 
-          <div class="form-field">
-            <label for="elevation">Elevation band</label>
-            <select id="elevation" name="elevation" required>
-              <option value="low">Low</option>
-              <option value="mid" selected>Mid</option>
-              <option value="high">High</option>
-            </select>
-          </div>
+            <form class="demo-form" id="weather-form" novalidate>
+              <div class="form-field">
+                <label for="weather-state">State</label>
+                <select id="weather-state" name="state" required>
+                  <option value="Pennsylvania">Pennsylvania</option>
+                  <option value="New York">New York</option>
+                  <option value="New Jersey">New Jersey</option>
+                  <option value="Vermont">Vermont</option>
+                  <option value="Massachusetts">Massachusetts</option>
+                  <option value="Maine">Maine</option>
+                </select>
+              </div>
 
-          <div class="form-field">
-            <label for="rainfall">Recent rainfall</label>
-            <select id="rainfall" name="rainfall" required>
-              <option value="dry">Dry</option>
-              <option value="moderate" selected>Moderate</option>
-              <option value="wet">Wet</option>
-            </select>
-          </div>
+              <div class="form-field">
+                <label for="weather-region">County / region</label>
+                <input type="text" id="weather-region" name="region" placeholder="e.g. Centre County, Hudson Valley" autocomplete="off">
+              </div>
 
-          <div class="form-field">
-            <label for="temperature">Temperature trend</label>
-            <select id="temperature" name="temperature" required>
-              <option value="cold">Cold</option>
-              <option value="warming" selected>Warming</option>
-              <option value="warm">Warm</option>
-            </select>
-          </div>
+              <div class="form-field">
+                <label for="weather-rainfall">Recent rainfall</label>
+                <select id="weather-rainfall" name="rainfall" required>
+                  <option value="dry">Dry</option>
+                  <option value="moderate" selected>Moderate</option>
+                  <option value="wet">Wet</option>
+                </select>
+              </div>
 
-          <div class="form-field">
-            <label for="forest">Forest type</label>
-            <select id="forest" name="forest" required>
-              <option value="mixed" selected>Mixed hardwood</option>
-              <option value="ash">Ash / elm / apple</option>
-              <option value="conifer">Conifer-heavy</option>
-              <option value="unknown">Unknown</option>
-            </select>
-          </div>
+              <div class="form-field">
+                <label for="weather-temperature">Temperature trend</label>
+                <select id="weather-temperature" name="temperature" required>
+                  <option value="cold">Cold</option>
+                  <option value="warming" selected>Warming</option>
+                  <option value="warm">Warm</option>
+                </select>
+              </div>
 
-          <div class="demo-submit">
-            <button type="submit" class="btn-primary">Generate field read</button>
-          </div>
-        </form>
+              <div class="form-field">
+                <label for="weather-elevation">Elevation band</label>
+                <select id="weather-elevation" name="elevation" required>
+                  <option value="low">Low</option>
+                  <option value="mid" selected>Mid</option>
+                  <option value="high">High</option>
+                </select>
+              </div>
 
-        <div class="result-panel" id="field-read-result" aria-live="polite">
-          <dl class="result-grid">
-            <div class="result-stat">
-              <dt>Timing status</dt>
-              <dd id="result-timing">—</dd>
+              <div class="form-field">
+                <label for="weather-forest">Forest type</label>
+                <select id="weather-forest" name="forest" required>
+                  <option value="mixed" selected>Mixed hardwood</option>
+                  <option value="ash">Ash-elm-apple</option>
+                  <option value="conifer">Conifer-heavy</option>
+                  <option value="unknown">Unknown</option>
+                </select>
+              </div>
+
+              <div class="demo-submit">
+                <button type="submit" class="btn-primary">Generate weather-aware read</button>
+              </div>
+            </form>
+
+            <div class="result-panel" id="weather-result" aria-live="polite">
+              <dl class="result-grid">
+                <div class="result-stat">
+                  <dt>Timing status</dt>
+                  <dd id="weather-timing">—</dd>
+                </div>
+                <div class="result-stat">
+                  <dt>Confidence</dt>
+                  <dd id="weather-confidence">—</dd>
+                </div>
+              </dl>
+
+              <dl class="signal-grid">
+                <div class="signal-stat">
+                  <dt>Moisture signal</dt>
+                  <dd id="weather-moisture">—</dd>
+                </div>
+                <div class="signal-stat">
+                  <dt>Temperature signal</dt>
+                  <dd id="weather-temperature-signal">—</dd>
+                </div>
+                <div class="signal-stat">
+                  <dt>Habitat signal</dt>
+                  <dd id="weather-habitat">—</dd>
+                </div>
+                <div class="signal-stat">
+                  <dt>Elevation note</dt>
+                  <dd id="weather-elevation-note">—</dd>
+                </div>
+              </dl>
+
+              <p class="result-explanation" id="weather-explanation"></p>
+
+              <div class="why-panel">
+                <h3>Why this result?</h3>
+                <ul id="weather-why"></ul>
+              </div>
+
+              <p class="result-ethical" id="weather-ethical"></p>
             </div>
-            <div class="result-stat">
-              <dt>Confidence</dt>
-              <dd id="result-confidence">—</dd>
+          </div>
+
+          <!-- Manual Field Read (V1) -->
+          <div class="demo-panel" id="manual-read">
+            <p class="demo-label">MorelCast · V1</p>
+            <h3 class="demo-panel-title">Manual Field Read</h3>
+            <p class="muted">
+              Enter field conditions manually for a regional timing estimate.
+            </p>
+
+            <form class="demo-form" id="manual-form" novalidate>
+              <div class="form-field">
+                <label for="manual-state">State</label>
+                <select id="manual-state" name="state" required>
+                  <option value="Pennsylvania">Pennsylvania</option>
+                  <option value="New York">New York</option>
+                  <option value="New Jersey">New Jersey</option>
+                  <option value="Vermont">Vermont</option>
+                  <option value="Massachusetts">Massachusetts</option>
+                  <option value="Maine">Maine</option>
+                </select>
+              </div>
+
+              <div class="form-field">
+                <label for="manual-region">County / region</label>
+                <input type="text" id="manual-region" name="region" placeholder="e.g. Centre County, Hudson Valley" autocomplete="off">
+              </div>
+
+              <div class="form-field">
+                <label for="manual-elevation">Elevation band</label>
+                <select id="manual-elevation" name="elevation" required>
+                  <option value="low">Low</option>
+                  <option value="mid" selected>Mid</option>
+                  <option value="high">High</option>
+                </select>
+              </div>
+
+              <div class="form-field">
+                <label for="manual-rainfall">Recent rainfall</label>
+                <select id="manual-rainfall" name="rainfall" required>
+                  <option value="dry">Dry</option>
+                  <option value="moderate" selected>Moderate</option>
+                  <option value="wet">Wet</option>
+                </select>
+              </div>
+
+              <div class="form-field">
+                <label for="manual-temperature">Temperature trend</label>
+                <select id="manual-temperature" name="temperature" required>
+                  <option value="cold">Cold</option>
+                  <option value="warming" selected>Warming</option>
+                  <option value="warm">Warm</option>
+                </select>
+              </div>
+
+              <div class="form-field">
+                <label for="manual-forest">Forest type</label>
+                <select id="manual-forest" name="forest" required>
+                  <option value="mixed" selected>Mixed hardwood</option>
+                  <option value="ash">Ash / elm / apple</option>
+                  <option value="conifer">Conifer-heavy</option>
+                  <option value="unknown">Unknown</option>
+                </select>
+              </div>
+
+              <div class="demo-submit">
+                <button type="submit" class="btn-primary">Generate field read</button>
+              </div>
+            </form>
+
+            <div class="result-panel" id="manual-result" aria-live="polite">
+              <dl class="result-grid">
+                <div class="result-stat">
+                  <dt>Timing status</dt>
+                  <dd id="manual-timing">—</dd>
+                </div>
+                <div class="result-stat">
+                  <dt>Confidence</dt>
+                  <dd id="manual-confidence">—</dd>
+                </div>
+              </dl>
+              <p class="result-explanation" id="manual-explanation"></p>
+              <p class="result-ethical" id="manual-ethical"></p>
             </div>
-          </dl>
-          <p class="result-explanation" id="result-explanation"></p>
-          <p class="result-ethical" id="result-ethical"></p>
+          </div>
         </div>
 
         <p class="demo-disclaimer">
-          Demo output is illustrative only. ForageCast is not yet a launched product.
+          Demo output is illustrative only. ForageCast is not yet a launched product. No live weather API connected.
         </p>
       </section>
 
@@ -207,7 +333,39 @@
         </p>
       </section>
 
-      <!-- 7. Call to action -->
+      <!-- 7. V2 Roadmap -->
+      <section>
+        <h2>ForageCast V2 Roadmap</h2>
+        <p class="muted">Planned capabilities beyond the current rule-based preview.</p>
+        <div class="roadmap-grid">
+          <div class="roadmap-item">
+            <strong>Real weather data integration</strong>
+            Live precipitation, soil temperature proxies, and regional forecasts.
+          </div>
+          <div class="roadmap-item">
+            <strong>County-based seasonal timing</strong>
+            Refined emergence windows calibrated to local phenology.
+          </div>
+          <div class="roadmap-item">
+            <strong>Terrain and elevation map</strong>
+            Slope, aspect, and elevation bands overlaid on search context.
+          </div>
+          <div class="roadmap-item">
+            <strong>Species expansion</strong>
+            Dedicated models beyond morels — one species at a time.
+          </div>
+          <div class="roadmap-item">
+            <strong>Observation logging</strong>
+            Structured field notes linked to conditions at time of find.
+          </div>
+          <div class="roadmap-item">
+            <strong>Habitat explanation engine</strong>
+            Clear, educational breakdowns of why habitat matters — not hotspots.
+          </div>
+        </div>
+      </section>
+
+      <!-- 8. Call to action -->
       <section class="waitlist-cta">
         <h2>Join the early list</h2>
         <p>
