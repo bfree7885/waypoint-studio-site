@@ -3,14 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="ForageCast — terrain-aware foraging forecasts combining GIS, weather, seasonality, and ecological patterns.">
+  <meta name="description" content="ForageCast — terrain, weather, and seasonal intelligence for responsible foraging. MorelCast v1 demo for the Northeast.">
   <title>ForageCast | Waypoint Studio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Source+Sans+3:wght@300;400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../styles/site.css">
+  <link rel="stylesheet" href="../styles/foragecast.css">
 </head>
-<body>
+<body class="foragecast-page">
   <header class="site-header">
     <div class="header-inner">
       <a class="brand" href="../">Waypoint Studio</a>
@@ -27,83 +28,193 @@
 
   <main>
     <div class="wrap">
-      <section class="page-hero">
+      <!-- 1. Hero -->
+      <section class="foragecast-hero page-hero">
         <span class="badge badge-dev">In Development</span>
         <h1>ForageCast</h1>
-        <p class="tagline">Terrain-aware foraging forecasts.</p>
-        <p>
-          ForageCast is a future GIS-based foraging prediction tool that combines
-          terrain, weather, seasonality, and ecological patterns to help users
-          understand where wild edible species may be likely to appear.
+        <p class="tagline">
+          Terrain, weather, and seasonal intelligence for responsible foraging.
         </p>
-        <p class="subscription-note">Subscription model coming soon.</p>
+        <div class="cta-row">
+          <a class="btn-primary" href="#morelcast-demo">Explore MorelCast v1</a>
+        </div>
+        <p class="foragecast-sub">Starting with morels. Expanding species by species.</p>
       </section>
 
+      <!-- 2. What it does -->
       <section>
-        <h2>V1 focus</h2>
-        <p class="v1-focus">Morel mushrooms</p>
+        <h2>What it does</h2>
+        <p>
+          ForageCast combines terrain clues, recent weather, soil temperature
+          proxies, elevation, slope and aspect, forest edge context, and
+          seasonal timing to estimate when conditions may be improving for target
+          species — not where to extract them.
+        </p>
+        <p>
+          The system is built for habitat awareness and ethical field
+          decision-making. Predictions describe environmental readiness, not
+          guaranteed finds.
+        </p>
       </section>
 
+      <!-- 3. MorelCast v1 demo -->
+      <section class="demo-panel" id="morelcast-demo">
+        <p class="demo-label">MorelCast v1 · Field read demo</p>
+        <h2>Generate a regional timing estimate</h2>
+        <p class="muted">
+          Rule-based preview logic — not connected to live GIS or weather data
+          yet. Use for learning how ForageCast will interpret field conditions.
+        </p>
+
+        <form class="demo-form" id="morelcast-form" novalidate>
+          <div class="form-field">
+            <label for="state">State</label>
+            <select id="state" name="state" required>
+              <option value="Pennsylvania">Pennsylvania</option>
+              <option value="New York">New York</option>
+              <option value="New Jersey">New Jersey</option>
+              <option value="Vermont">Vermont</option>
+              <option value="Massachusetts">Massachusetts</option>
+              <option value="Maine">Maine</option>
+            </select>
+          </div>
+
+          <div class="form-field">
+            <label for="region">County / region</label>
+            <input type="text" id="region" name="region" placeholder="e.g. Centre County, Hudson Valley" autocomplete="off">
+          </div>
+
+          <div class="form-field">
+            <label for="elevation">Elevation band</label>
+            <select id="elevation" name="elevation" required>
+              <option value="low">Low</option>
+              <option value="mid" selected>Mid</option>
+              <option value="high">High</option>
+            </select>
+          </div>
+
+          <div class="form-field">
+            <label for="rainfall">Recent rainfall</label>
+            <select id="rainfall" name="rainfall" required>
+              <option value="dry">Dry</option>
+              <option value="moderate" selected>Moderate</option>
+              <option value="wet">Wet</option>
+            </select>
+          </div>
+
+          <div class="form-field">
+            <label for="temperature">Temperature trend</label>
+            <select id="temperature" name="temperature" required>
+              <option value="cold">Cold</option>
+              <option value="warming" selected>Warming</option>
+              <option value="warm">Warm</option>
+            </select>
+          </div>
+
+          <div class="form-field">
+            <label for="forest">Forest type</label>
+            <select id="forest" name="forest" required>
+              <option value="mixed" selected>Mixed hardwood</option>
+              <option value="ash">Ash / elm / apple</option>
+              <option value="conifer">Conifer-heavy</option>
+              <option value="unknown">Unknown</option>
+            </select>
+          </div>
+
+          <div class="demo-submit">
+            <button type="submit" class="btn-primary">Generate field read</button>
+          </div>
+        </form>
+
+        <div class="result-panel" id="field-read-result" aria-live="polite">
+          <dl class="result-grid">
+            <div class="result-stat">
+              <dt>Timing status</dt>
+              <dd id="result-timing">—</dd>
+            </div>
+            <div class="result-stat">
+              <dt>Confidence</dt>
+              <dd id="result-confidence">—</dd>
+            </div>
+          </dl>
+          <p class="result-explanation" id="result-explanation"></p>
+          <p class="result-ethical" id="result-ethical"></p>
+        </div>
+
+        <p class="demo-disclaimer">
+          Demo output is illustrative only. ForageCast is not yet a launched product.
+        </p>
+      </section>
+
+      <!-- 4. Ethical foraging rules -->
       <section>
-        <h2>Features</h2>
-        <div class="feature-grid">
-          <article class="feature-card">
-            <h3>Terrain suitability</h3>
-            <p>Slope, aspect, soil context, and landscape position mapped to species habitat preferences.</p>
+        <h2>Ethical foraging rules</h2>
+        <ul class="ethics-list">
+          <li>Know property boundaries before you enter any land.</li>
+          <li>Follow state and local regulations, permits, and seasonal restrictions.</li>
+          <li>Harvest lightly — leave enough for regeneration and wildlife.</li>
+          <li>Leave habitat intact. Avoid trampling understory and disturbing soils.</li>
+          <li>Do not rely on app predictions as permission to enter land.</li>
+          <li>Learn identification from trusted sources before consuming anything.</li>
+        </ul>
+      </section>
+
+      <!-- 5. Future species -->
+      <section>
+        <h2>Future species</h2>
+        <p class="muted">ForageCast will expand one species at a time, with dedicated seasonal models.</p>
+        <div class="species-grid">
+          <article class="species-card is-focus">
+            <h3>Morels</h3>
+            <p class="species-status">v1 focus</p>
           </article>
-          <article class="feature-card">
-            <h3>Weather and timing signals</h3>
-            <p>Recent precipitation, temperature patterns, and seasonal windows integrated into forecasts.</p>
+          <article class="species-card">
+            <h3>Chanterelles</h3>
+            <p class="species-status">Planned</p>
           </article>
-          <article class="feature-card">
-            <h3>Species-specific season models</h3>
-            <p>Focused models built around individual species — starting with morels in v1.</p>
+          <article class="species-card">
+            <h3>Ramps</h3>
+            <p class="species-status">Planned</p>
           </article>
-          <article class="feature-card">
-            <h3>Field notes and observations</h3>
-            <p>Structured logging to connect real-world finds with landscape and weather context.</p>
+          <article class="species-card">
+            <h3>Blueberries</h3>
+            <p class="species-status">Planned</p>
           </article>
-          <article class="feature-card">
-            <h3>Education-first foraging guidance</h3>
-            <p>Context and ecology over hotspots — built to support learning, not extraction.</p>
+          <article class="species-card">
+            <h3>Chicken of the Woods</h3>
+            <p class="species-status">Planned</p>
+          </article>
+          <article class="species-card">
+            <h3>Black Trumpets</h3>
+            <p class="species-status">Planned</p>
           </article>
         </div>
       </section>
 
+      <!-- 6. Research / data vision -->
       <section>
-        <h2>Ethics</h2>
-        <div class="note">
-          ForageCast is designed for education, responsible harvest, and ecological
-          awareness. It does not replace expert identification or local regulations.
-        </div>
+        <h2>Research &amp; data vision</h2>
+        <p>
+          ForageCast is intended to become a structured field-observation and
+          environmental modeling platform. Over time, user observations — paired
+          with terrain, weather, and habitat GIS layers — will build toward
+          repeatable seasonal models grounded in real ecology, not anecdote.
+        </p>
+        <p>
+          The long-term goal is a dataset that supports responsible foraging
+          education, regional research, and better understanding of how species
+          respond to landscape and climate patterns.
+        </p>
       </section>
 
-      <section>
-        <h2>Pricing preview</h2>
-        <p class="muted">No payment processing yet.</p>
-        <div class="pricing-grid">
-          <article class="price-card">
-            <h3>Free seasonal outlook</h3>
-            <p class="price-label">Basic timing and education content</p>
-            <span class="price-badge price-soon">Planned</span>
-          </article>
-          <article class="price-card">
-            <h3>ForageCast Plus</h3>
-            <p class="price-label">Full terrain forecasts and field tools</p>
-            <span class="price-badge price-soon">Planned</span>
-          </article>
-          <article class="price-card">
-            <h3>Research / data access</h3>
-            <p class="price-label">Aggregated observation datasets</p>
-            <span class="price-badge price-future">Future</span>
-          </article>
-        </div>
-      </section>
-
+      <!-- 7. Call to action -->
       <section class="waitlist-cta">
-        <h2>Join the ForageCast waitlist</h2>
-        <p>Be notified when ForageCast enters beta and subscriptions open.</p>
-        <a class="btn-primary" href="mailto:hello@waypointstudio.org?subject=Waitlist%20-%20ForageCast">Join the ForageCast waitlist</a>
+        <h2>Join the early list</h2>
+        <p>
+          Be notified when ForageCast connects to live data and opens for early
+          access. Subscription model coming soon — no payment processing yet.
+        </p>
+        <a class="btn-primary" href="mailto:hello@waypointstudio.org?subject=ForageCast%20Early%20List">Join the early list</a>
       </section>
     </div>
   </main>
@@ -113,5 +224,7 @@
       Waypoint Studio · Observe. Understand. Create. Share.
     </div>
   </footer>
+
+  <script src="foragecast.js"></script>
 </body>
 </html>

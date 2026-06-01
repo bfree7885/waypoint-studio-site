@@ -1,0 +1,288 @@
+/* ForageCast — page-specific theme */
+.foragecast-page {
+  --bg: #0a0e0c;
+  --surface: #111612;
+  --surface-raised: #161c17;
+  --text: #ebe8df;
+  --muted: #8a948c;
+  --line: rgba(235, 232, 223, 0.11);
+  --accent: #c4a574;
+  --accent-dim: rgba(196, 165, 116, 0.15);
+  --green: #6b8f71;
+}
+
+.foragecast-page::before {
+  opacity: 0.05;
+}
+
+.foragecast-page::after {
+  opacity: 0.14;
+  background-image:
+    linear-gradient(rgba(196, 165, 116, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(196, 165, 116, 0.03) 1px, transparent 1px),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='280' viewBox='0 0 280 280'%3E%3Cg fill='none' stroke='%23c4a574' stroke-opacity='0.12' stroke-width='0.7'%3E%3Cpath d='M0 48c48-20 84-20 140 0s92 20 140 0'/%3E%3Cpath d='M0 104c52-18 90-18 140 0s90 18 140 0'/%3E%3Cpath d='M0 160c46-18 82-18 140 0s94 18 140 0'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 48px 48px, 48px 48px, 280px 280px;
+}
+
+.foragecast-hero {
+  padding-bottom: var(--space-4);
+}
+
+.foragecast-hero .tagline {
+  color: var(--text);
+  opacity: 0.88;
+  font-style: normal;
+  max-width: 36ch;
+}
+
+.foragecast-sub {
+  font-size: 0.92rem;
+  color: var(--muted);
+  margin-top: var(--space-3);
+}
+
+.foragecast-page .badge-dev {
+  color: var(--accent);
+  border-color: rgba(196, 165, 116, 0.35);
+}
+
+.foragecast-page .btn-primary {
+  background: var(--accent-dim);
+  border-color: rgba(196, 165, 116, 0.45);
+}
+
+.foragecast-page .btn-primary:hover,
+.foragecast-page .btn-primary:focus-visible {
+  background: rgba(196, 165, 116, 0.25);
+  border-color: rgba(196, 165, 116, 0.6);
+}
+
+.foragecast-page .feature-card {
+  background: var(--surface-raised);
+}
+
+.foragecast-page .feature-card h3 {
+  color: var(--text);
+}
+
+.foragecast-page .note {
+  border-left-color: rgba(196, 165, 116, 0.4);
+}
+
+/* —— MorelCast demo —— */
+.demo-panel {
+  background: var(--surface-raised);
+  border: 1px solid var(--line);
+  padding: var(--space-4);
+}
+
+.demo-panel h2 {
+  margin-top: 0;
+}
+
+.demo-panel .demo-label {
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: var(--space-2);
+}
+
+.demo-form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.form-field.full {
+  grid-column: 1 / -1;
+}
+
+.form-field label {
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.form-field select,
+.form-field input {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 300;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  padding: 0.65rem 0.75rem;
+  border-radius: 0;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.form-field select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%238a948c' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  padding-right: 2rem;
+}
+
+.form-field select:focus,
+.form-field input:focus {
+  outline: none;
+  border-color: rgba(196, 165, 116, 0.5);
+}
+
+.demo-submit {
+  grid-column: 1 / -1;
+  margin-top: var(--space-1);
+}
+
+.result-panel {
+  display: none;
+  border-top: 1px solid var(--line);
+  padding-top: var(--space-4);
+  margin-top: var(--space-2);
+}
+
+.result-panel.is-visible {
+  display: block;
+}
+
+.result-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.result-stat {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  padding: var(--space-3);
+}
+
+.result-stat dt {
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 0.35rem;
+}
+
+.result-stat dd {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  color: var(--text);
+}
+
+.result-stat dd.timing-prime,
+.result-stat dd.timing-improving {
+  color: var(--accent);
+}
+
+.result-stat dd.timing-early {
+  color: #8fafc4;
+}
+
+.result-stat dd.timing-late,
+.result-stat dd.timing-poor {
+  color: var(--muted);
+}
+
+.result-explanation {
+  font-size: 0.95rem;
+  line-height: 1.65;
+  margin-bottom: var(--space-3);
+}
+
+.result-ethical {
+  font-size: 0.88rem;
+  color: var(--muted);
+  padding: var(--space-3);
+  border-left: 2px solid rgba(196, 165, 116, 0.35);
+  margin: 0;
+}
+
+.demo-disclaimer {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-top: var(--space-3);
+  font-style: italic;
+}
+
+/* —— Species cards —— */
+.species-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--space-3);
+}
+
+.species-card {
+  background: var(--surface-raised);
+  border: 1px solid var(--line);
+  padding: var(--space-3) var(--space-4);
+}
+
+.species-card.is-focus {
+  border-color: rgba(196, 165, 116, 0.35);
+}
+
+.species-card h3 {
+  font-size: 1rem;
+  margin-bottom: var(--space-2);
+}
+
+.species-card .species-status {
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.species-card.is-focus .species-status {
+  color: var(--accent);
+}
+
+.ethics-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.ethics-list li {
+  position: relative;
+  padding-left: 1.25rem;
+  margin-bottom: var(--space-2);
+  max-width: 62ch;
+  color: var(--text);
+  font-size: 0.95rem;
+}
+
+.ethics-list li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+}
+
+@media (max-width: 640px) {
+  .demo-form {
+    grid-template-columns: 1fr;
+  }
+
+  .form-field.full {
+    grid-column: auto;
+  }
+
+  .demo-submit {
+    grid-column: auto;
+  }
+}
