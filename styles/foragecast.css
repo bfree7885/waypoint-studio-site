@@ -1,5 +1,6 @@
 /* ForageCast — page-specific theme */
 .foragecast-page {
+  padding-bottom: env(safe-area-inset-bottom, 0);
   --bg: #0a0e0c;
   --surface: #111612;
   --surface-raised: #161c17;
@@ -41,7 +42,8 @@
   margin-top: var(--space-3);
 }
 
-.foragecast-page .badge-dev {
+.foragecast-page .badge-dev,
+.foragecast-page .badge-beta {
   color: var(--accent);
   border-color: rgba(196, 165, 116, 0.35);
 }
@@ -55,6 +57,18 @@
 .foragecast-page .btn-primary:focus-visible {
   background: rgba(196, 165, 116, 0.25);
   border-color: rgba(196, 165, 116, 0.6);
+}
+
+.foragecast-page .btn-primary:disabled {
+  opacity: 0.55;
+  cursor: wait;
+}
+
+#weather-read,
+#manual-read,
+#join-beta,
+#feedback {
+  scroll-margin-top: 1.5rem;
 }
 
 .foragecast-page .feature-card {
@@ -113,7 +127,7 @@
 }
 
 .form-field select,
-.form-field input {
+.form-field input:not([type="checkbox"]):not([type="radio"]) {
   font-family: var(--font-body);
   font-size: 0.95rem;
   font-weight: 300;
@@ -376,16 +390,462 @@
   color: var(--accent);
 }
 
+/* —— Beta status —— */
+.beta-status {
+  background: var(--surface-raised);
+  border: 1px solid rgba(196, 165, 116, 0.22);
+  padding: var(--space-4);
+  margin-bottom: var(--space-5);
+}
+
+.beta-status.is-joined {
+  border-color: rgba(107, 143, 113, 0.4);
+}
+
+.beta-status h2 {
+  margin-top: 0;
+  font-size: 1.35rem;
+}
+
+.beta-status-note {
+  max-width: 62ch;
+  margin-bottom: var(--space-3);
+}
+
+.beta-perks {
+  list-style: none;
+  margin: 0 0 var(--space-4);
+  padding: 0;
+}
+
+.beta-perks li {
+  position: relative;
+  padding-left: 1.1rem;
+  margin-bottom: var(--space-2);
+  font-size: 0.92rem;
+  color: var(--muted);
+  max-width: none;
+}
+
+.beta-perks li::before {
+  content: "·";
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+}
+
+/* —— Studio forms (waitlist, beta, feedback) —— */
+.studio-form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+  text-align: left;
+}
+
+.studio-form-inline {
+  max-width: 28rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.form-honey {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.label-optional {
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  text-transform: lowercase;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.form-field textarea {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 300;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  padding: 0.65rem 0.75rem;
+  border-radius: 0;
+  resize: vertical;
+  min-height: 6rem;
+  width: 100%;
+}
+
+.form-field textarea:focus {
+  outline: none;
+  border-color: rgba(196, 165, 116, 0.5);
+}
+
+.form-checkbox {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: var(--space-2);
+}
+
+.form-checkbox input[type="checkbox"] {
+  margin-top: 0.2rem;
+  flex-shrink: 0;
+  width: 1.1rem;
+  height: 1.1rem;
+  min-height: 1.1rem;
+  padding: 0;
+  border: none;
+  background: transparent;
+  -webkit-appearance: checkbox;
+  appearance: auto;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+.form-checkbox label {
+  font-size: 0.88rem;
+  text-transform: none;
+  letter-spacing: normal;
+  color: var(--muted);
+  line-height: 1.5;
+  cursor: pointer;
+}
+
+.form-submit {
+  grid-column: 1 / -1;
+}
+
+.form-submit .btn-primary {
+  min-height: 2.75rem;
+  width: 100%;
+}
+
+.form-message {
+  margin-top: var(--space-3);
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.form-message.is-success {
+  color: var(--green);
+}
+
+.form-message.is-error {
+  color: #e8b4a8;
+  background: rgba(196, 120, 100, 0.1);
+  border: 1px solid rgba(196, 120, 100, 0.35);
+  padding: var(--space-3);
+  text-align: left;
+}
+
+.beta-panel,
+.feedback-panel {
+  scroll-margin-top: 1.5rem;
+}
+
+#roadmap {
+  scroll-margin-top: 1.5rem;
+}
+
+.roadmap-phases {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--space-3);
+  margin-bottom: var(--space-5);
+}
+
+.roadmap-phase {
+  background: var(--surface-raised);
+  border: 1px solid var(--line);
+  padding: var(--space-3) var(--space-4);
+}
+
+.roadmap-phase-label {
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 var(--space-3);
+}
+
+.roadmap-phase-list {
+  margin: 0;
+  padding-left: 1.1rem;
+}
+
+.roadmap-phase-list li {
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin-bottom: 0.5rem;
+  max-width: none;
+}
+
+.roadmap-phase-list li.is-done {
+  color: var(--green);
+  list-style-type: "✓ ";
+}
+
+.roadmap-phase-list li.is-active {
+  color: var(--text);
+}
+
+.roadmap-subhead {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 400;
+  margin: 0 0 var(--space-3);
+  color: var(--muted);
+}
+
+.waitlist-cta .studio-form-inline .form-submit .btn-primary {
+  width: 100%;
+}
+
+/* —— Live weather —— */
+.weather-load-bar .field-label {
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.weather-load-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-2);
+}
+
+.weather-load-actions .btn-primary,
+.weather-load-actions .btn-secondary {
+  min-height: 2.75rem;
+}
+
+.weather-load-status {
+  font-size: 0.88rem;
+  color: var(--muted);
+  margin: 0;
+  min-height: 1.25rem;
+}
+
+.weather-load-status.is-loading {
+  color: var(--accent);
+}
+
+.weather-load-status.is-success {
+  color: var(--green);
+}
+
+.weather-load-status.is-error {
+  color: #c49a8a;
+}
+
+.weather-live-panel {
+  background: var(--surface);
+  border: 1px solid rgba(196, 165, 116, 0.25);
+  padding: var(--space-3);
+  margin-top: var(--space-2);
+}
+
+.weather-live-label {
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 var(--space-2);
+}
+
+.weather-live-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: var(--space-2);
+  margin: 0 0 var(--space-2);
+}
+
+.weather-live-stats dt {
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 0.2rem;
+}
+
+.weather-live-stats dd {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text);
+  line-height: 1.45;
+}
+
+.weather-live-note {
+  margin: 0;
+  font-size: 0.85rem;
+}
+
+.form-field select.is-live-filled {
+  border-color: rgba(107, 143, 113, 0.45);
+}
+
+/* —— Beta CTA strip —— */
+.beta-cta-strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-top: var(--space-5);
+  padding: var(--space-3) var(--space-4);
+  background: var(--surface-raised);
+  border: 1px solid var(--line);
+}
+
+.beta-cta-strip p {
+  margin: 0;
+  max-width: none;
+  font-size: 0.92rem;
+  color: var(--muted);
+}
+
+/* —— Beta expectations —— */
+.beta-expectations {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.beta-expect-block {
+  background: var(--surface-raised);
+  border: 1px solid var(--line);
+  padding: var(--space-3) var(--space-4);
+}
+
+.beta-expect-block h3 {
+  font-size: 0.95rem;
+  margin: 0 0 var(--space-2);
+  color: var(--accent);
+}
+
+.beta-expect-block ul {
+  margin: 0;
+  padding-left: 1.1rem;
+}
+
+.beta-expect-block li {
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin-bottom: 0.4rem;
+  max-width: none;
+}
+
+.form-success-panel {
+  text-align: center;
+  padding: var(--space-4);
+  background: var(--surface-raised);
+  border: 1px solid rgba(107, 143, 113, 0.35);
+  margin-bottom: var(--space-4);
+}
+
+.form-success-title {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  color: var(--green);
+  margin: 0 0 var(--space-2);
+}
+
+.form-success-panel p {
+  margin: 0 0 var(--space-3);
+  max-width: 42ch;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.waitlist-cta a {
+  color: var(--accent);
+}
+
 @media (max-width: 640px) {
-  .demo-form {
+  .demo-form,
+  .studio-form {
     grid-template-columns: 1fr;
   }
 
-  .form-field.full {
+  .form-field.full,
+  .demo-submit,
+  .form-submit {
     grid-column: auto;
   }
 
-  .demo-submit {
-    grid-column: auto;
+  .foragecast-hero .cta-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .foragecast-hero .cta-row .btn-primary,
+  .foragecast-hero .cta-row .btn-secondary {
+    text-align: center;
+    width: 100%;
+    min-height: 2.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .demo-submit .btn-primary,
+  .form-submit .btn-primary {
+    width: 100%;
+    min-height: 2.75rem;
+  }
+
+  .form-field select,
+  .form-field input:not([type="checkbox"]):not([type="radio"]),
+  .form-field textarea {
+    font-size: 1rem;
+    min-height: 2.75rem;
+    padding: 0.75rem;
+  }
+
+  .form-field textarea {
+    min-height: 7rem;
+  }
+
+  .result-panel.is-visible {
+    scroll-margin-bottom: 2rem;
+  }
+
+  .signal-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .roadmap-phases {
+    grid-template-columns: 1fr;
+  }
+
+  .weather-load-actions {
+    flex-direction: column;
+  }
+
+  .weather-load-actions .btn-primary,
+  .weather-load-actions .btn-secondary {
+    width: 100%;
+    text-align: center;
+  }
+
+  .beta-cta-strip {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+  }
+
+  .beta-cta-strip .btn-secondary {
+    width: 100%;
+    text-align: center;
+    min-height: 2.75rem;
   }
 }

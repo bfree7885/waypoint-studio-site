@@ -200,38 +200,57 @@
     });
   }
 
+  var liveWeatherBullets = [];
+
+  function displayWeatherRead(read) {
+    var panel = document.getElementById("weather-result");
+    if (!panel) return;
+
+    setTimingEl(document.getElementById("weather-timing"), read.timing);
+    document.getElementById("weather-confidence").textContent = read.confidence;
+    document.getElementById("weather-moisture").textContent = read.moistureSignal;
+    document.getElementById("weather-temperature-signal").textContent =
+      read.temperatureSignal;
+    document.getElementById("weather-habitat").textContent = read.habitatSignal;
+    document.getElementById("weather-elevation-note").textContent =
+      read.elevationNote;
+    document.getElementById("weather-explanation").textContent = read.explanation;
+    document.getElementById("weather-ethical").textContent = read.ethicalNote;
+
+    var whyList = document.getElementById("weather-why");
+    whyList.innerHTML = "";
+    var bullets = liveWeatherBullets.concat(read.whyBullets);
+    bullets.forEach(function (bullet) {
+      var li = document.createElement("li");
+      li.textContent = bullet;
+      whyList.appendChild(li);
+    });
+
+    panel.classList.add("is-visible");
+    panel.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  }
+
   function bindWeatherForm() {
     var form = document.getElementById("weather-form");
-    var panel = document.getElementById("weather-result");
-    if (!form || !panel) return;
+    if (!form) return;
 
     form.addEventListener("submit", function (e) {
       e.preventDefault();
-      var read = computeMorelRead(getFormValues(form));
-      setTimingEl(document.getElementById("weather-timing"), read.timing);
-      document.getElementById("weather-confidence").textContent = read.confidence;
-      document.getElementById("weather-moisture").textContent = read.moistureSignal;
-      document.getElementById("weather-temperature-signal").textContent =
-        read.temperatureSignal;
-      document.getElementById("weather-habitat").textContent = read.habitatSignal;
-      document.getElementById("weather-elevation-note").textContent =
-        read.elevationNote;
-      document.getElementById("weather-explanation").textContent = read.explanation;
-      document.getElementById("weather-ethical").textContent = read.ethicalNote;
-
-      var whyList = document.getElementById("weather-why");
-      whyList.innerHTML = "";
-      read.whyBullets.forEach(function (bullet) {
-        var li = document.createElement("li");
-        li.textContent = bullet;
-        whyList.appendChild(li);
-      });
-
-      panel.classList.add("is-visible");
-      panel.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      displayWeatherRead(computeMorelRead(getFormValues(form)));
     });
   }
+
+  window.ForageCast = {
+    computeMorelRead: computeMorelRead,
+    setLiveWeatherBullets: function (bullets) {
+      liveWeatherBullets = bullets || [];
+    },
+    clearLiveWeatherBullets: function () {
+      liveWeatherBullets = [];
+    }
+  };
 
   bindWeatherForm();
   bindManualForm();
 })();
+
