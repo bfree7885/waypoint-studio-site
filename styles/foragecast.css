@@ -1,15 +1,17 @@
-/* ForageCast — page-specific theme */
+/* ForageCast — page-specific theme (extends studio tokens) */
 .foragecast-page {
   padding-bottom: env(safe-area-inset-bottom, 0);
-  --bg: #0a0e0c;
-  --surface: #111612;
-  --surface-raised: #161c17;
-  --text: #ebe8df;
-  --muted: #8a948c;
-  --line: rgba(235, 232, 223, 0.11);
-  --accent: #c4a574;
-  --accent-dim: rgba(196, 165, 116, 0.15);
-  --green: #6b8f71;
+  --bg: #070b14;
+  --surface: #0e1524;
+  --surface-raised: #141e32;
+  --text: #e8edf5;
+  --muted: #8b9bb8;
+  --line: #243047;
+  --accent: #c6ff4d;
+  --accent-purple: #9b7ed4;
+  --accent-cyan: #6ec8e8;
+  --accent-dim: rgba(198, 255, 77, 0.12);
+  --signal-ok: #c6ff4d;
 }
 
 .foragecast-page::before {
@@ -19,9 +21,9 @@
 .foragecast-page::after {
   opacity: 0.14;
   background-image:
-    linear-gradient(rgba(196, 165, 116, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(196, 165, 116, 0.03) 1px, transparent 1px),
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='280' viewBox='0 0 280 280'%3E%3Cg fill='none' stroke='%23c4a574' stroke-opacity='0.12' stroke-width='0.7'%3E%3Cpath d='M0 48c48-20 84-20 140 0s92 20 140 0'/%3E%3Cpath d='M0 104c52-18 90-18 140 0s90 18 140 0'/%3E%3Cpath d='M0 160c46-18 82-18 140 0s94 18 140 0'/%3E%3C/g%3E%3C/svg%3E");
+    linear-gradient(rgba(155, 126, 212, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(155, 126, 212, 0.04) 1px, transparent 1px),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='280' viewBox='0 0 280 280'%3E%3Cg fill='none' stroke='%239b7ed4' stroke-opacity='0.12' stroke-width='0.7'%3E%3Cpath d='M0 48c48-20 84-20 140 0s92 20 140 0'/%3E%3Cpath d='M0 104c52-18 90-18 140 0s90 18 140 0'/%3E%3Cpath d='M0 160c46-18 82-18 140 0s94 18 140 0'/%3E%3C/g%3E%3C/svg%3E");
   background-size: 48px 48px, 48px 48px, 280px 280px;
 }
 
@@ -45,18 +47,18 @@
 .foragecast-page .badge-dev,
 .foragecast-page .badge-beta {
   color: var(--accent);
-  border-color: rgba(196, 165, 116, 0.35);
+  border-color: rgba(198, 255, 77, 0.4);
 }
 
 .foragecast-page .btn-primary {
   background: var(--accent-dim);
-  border-color: rgba(196, 165, 116, 0.45);
+  border-color: rgba(198, 255, 77, 0.45);
 }
 
 .foragecast-page .btn-primary:hover,
 .foragecast-page .btn-primary:focus-visible {
-  background: rgba(196, 165, 116, 0.25);
-  border-color: rgba(196, 165, 116, 0.6);
+  background: rgba(198, 255, 77, 0.2);
+  border-color: rgba(198, 255, 77, 0.55);
 }
 
 .foragecast-page .btn-primary:disabled {
@@ -71,6 +73,138 @@
   scroll-margin-top: 1.5rem;
 }
 
+#scouting-map {
+  scroll-margin-top: 1.5rem;
+}
+
+/* —— Scouting heatmap —— */
+.heatmap-prototype-note {
+  font-size: 0.88rem;
+  color: var(--muted);
+  padding: var(--space-3);
+  border: 1px solid rgba(155, 126, 212, 0.35);
+  background: var(--surface);
+  margin-bottom: var(--space-3);
+  line-height: 1.55;
+  max-width: none;
+}
+
+.heatmap-prototype-note strong {
+  color: var(--accent-purple);
+}
+
+.heatmap-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+}
+
+.heatmap-controls .btn-primary,
+.heatmap-controls .btn-secondary {
+  min-height: 2.75rem;
+}
+
+.heatmap-status {
+  font-size: 0.88rem;
+  color: var(--muted);
+  margin: 0 0 var(--space-3);
+  min-height: 1.25rem;
+}
+
+.heatmap-status.is-loading {
+  color: var(--accent-purple);
+}
+
+.heatmap-status.is-success {
+  color: var(--signal-ok);
+}
+
+.heatmap-status.is-error {
+  color: #e8a8a8;
+}
+
+.heatmap-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-bottom: var(--space-2);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.heatmap-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.heatmap-location-form {
+  margin-bottom: var(--space-3);
+}
+
+.heatmap-assumptions {
+  margin: 0 0 var(--space-3);
+  padding-left: 1.1rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.heatmap-assumptions li {
+  margin-bottom: 0.45rem;
+  max-width: none;
+  line-height: 1.5;
+}
+
+.heatmap-assumptions strong {
+  color: var(--text);
+  font-weight: 400;
+}
+
+.swatch {
+  display: inline-block;
+  width: 0.85rem;
+  height: 0.85rem;
+  border: 1px solid var(--line);
+}
+
+.swatch-high {
+  background: rgba(198, 255, 77, 0.55);
+}
+
+.swatch-medium {
+  background: rgba(155, 126, 212, 0.45);
+}
+
+.swatch-low {
+  background: rgba(110, 200, 232, 0.25);
+}
+
+.heatmap-map {
+  height: min(420px, 55vh);
+  min-height: 280px;
+  width: 100%;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  z-index: 0;
+}
+
+.heatmap-map.leaflet-container {
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+}
+
+.heatmap-map .leaflet-control-attribution {
+  background: rgba(14, 21, 36, 0.85);
+  color: var(--muted);
+}
+
+.heatmap-map .leaflet-control-attribution a {
+  color: var(--accent-cyan);
+}
+
 .foragecast-page .feature-card {
   background: var(--surface-raised);
 }
@@ -80,7 +214,7 @@
 }
 
 .foragecast-page .note {
-  border-left-color: rgba(196, 165, 116, 0.4);
+  border-left-color: rgba(155, 126, 212, 0.45);
 }
 
 /* —— MorelCast demo —— */
@@ -141,7 +275,7 @@
 }
 
 .form-field select {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%238a948c' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%238b9bb8' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 0.75rem center;
   padding-right: 2rem;
@@ -150,7 +284,7 @@
 .form-field select:focus,
 .form-field input:focus {
   outline: none;
-  border-color: rgba(196, 165, 116, 0.5);
+  border-color: rgba(198, 255, 77, 0.45);
 }
 
 .demo-submit {
@@ -203,7 +337,7 @@
 }
 
 .result-stat dd.timing-early {
-  color: #8fafc4;
+  color: var(--accent-cyan);
 }
 
 .result-stat dd.timing-late,
@@ -221,7 +355,7 @@
   font-size: 0.88rem;
   color: var(--muted);
   padding: var(--space-3);
-  border-left: 2px solid rgba(196, 165, 116, 0.35);
+  border-left: 2px solid rgba(155, 126, 212, 0.4);
   margin: 0;
 }
 
@@ -249,7 +383,7 @@
 }
 
 .demo-panel-v2 {
-  border-color: rgba(196, 165, 116, 0.22);
+  border-color: rgba(155, 126, 212, 0.28);
 }
 
 .demo-panel-title {
@@ -297,7 +431,7 @@
 .why-panel h3 {
   font-size: 0.95rem;
   margin: 0 0 var(--space-2);
-  color: var(--accent);
+  color: var(--accent-purple);
 }
 
 .why-panel ul {
@@ -349,7 +483,7 @@
 }
 
 .species-card.is-focus {
-  border-color: rgba(196, 165, 116, 0.35);
+  border-color: rgba(198, 255, 77, 0.35);
 }
 
 .species-card h3 {
@@ -387,19 +521,19 @@
   content: "—";
   position: absolute;
   left: 0;
-  color: var(--accent);
+  color: var(--accent-purple);
 }
 
 /* —— Beta status —— */
 .beta-status {
   background: var(--surface-raised);
-  border: 1px solid rgba(196, 165, 116, 0.22);
+  border: 1px solid rgba(155, 126, 212, 0.25);
   padding: var(--space-4);
   margin-bottom: var(--space-5);
 }
 
 .beta-status.is-joined {
-  border-color: rgba(107, 143, 113, 0.4);
+  border-color: rgba(198, 255, 77, 0.4);
 }
 
 .beta-status h2 {
@@ -481,7 +615,7 @@
 
 .form-field textarea:focus {
   outline: none;
-  border-color: rgba(196, 165, 116, 0.5);
+  border-color: rgba(198, 255, 77, 0.45);
 }
 
 .form-checkbox {
@@ -531,13 +665,13 @@
 }
 
 .form-message.is-success {
-  color: var(--green);
+  color: var(--signal-ok);
 }
 
 .form-message.is-error {
-  color: #e8b4a8;
-  background: rgba(196, 120, 100, 0.1);
-  border: 1px solid rgba(196, 120, 100, 0.35);
+  color: #e8a8a8;
+  background: rgba(232, 120, 120, 0.1);
+  border: 1px solid rgba(232, 120, 120, 0.35);
   padding: var(--space-3);
   text-align: left;
 }
@@ -568,7 +702,7 @@
   font-size: 0.68rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--accent-purple);
   margin: 0 0 var(--space-3);
 }
 
@@ -585,7 +719,7 @@
 }
 
 .roadmap-phase-list li.is-done {
-  color: var(--green);
+  color: var(--signal-ok);
   list-style-type: "✓ ";
 }
 
@@ -639,16 +773,16 @@
 }
 
 .weather-load-status.is-success {
-  color: var(--green);
+  color: var(--signal-ok);
 }
 
 .weather-load-status.is-error {
-  color: #c49a8a;
+  color: #e8a8a8;
 }
 
 .weather-live-panel {
   background: var(--surface);
-  border: 1px solid rgba(196, 165, 116, 0.25);
+  border: 1px solid rgba(155, 126, 212, 0.3);
   padding: var(--space-3);
   margin-top: var(--space-2);
 }
@@ -689,7 +823,7 @@
 }
 
 .form-field select.is-live-filled {
-  border-color: rgba(107, 143, 113, 0.45);
+  border-color: rgba(198, 255, 77, 0.45);
 }
 
 /* —— Beta CTA strip —— */
@@ -729,7 +863,7 @@
 .beta-expect-block h3 {
   font-size: 0.95rem;
   margin: 0 0 var(--space-2);
-  color: var(--accent);
+  color: var(--accent-purple);
 }
 
 .beta-expect-block ul {
@@ -748,14 +882,14 @@
   text-align: center;
   padding: var(--space-4);
   background: var(--surface-raised);
-  border: 1px solid rgba(107, 143, 113, 0.35);
+  border: 1px solid rgba(198, 255, 77, 0.35);
   margin-bottom: var(--space-4);
 }
 
 .form-success-title {
   font-family: var(--font-display);
   font-size: 1.25rem;
-  color: var(--green);
+  color: var(--signal-ok);
   margin: 0 0 var(--space-2);
 }
 
@@ -847,5 +981,15 @@
     width: 100%;
     text-align: center;
     min-height: 2.75rem;
+  }
+
+  .heatmap-controls {
+    flex-direction: column;
+  }
+
+  .heatmap-controls .btn-primary,
+  .heatmap-controls .btn-secondary {
+    width: 100%;
+    text-align: center;
   }
 }

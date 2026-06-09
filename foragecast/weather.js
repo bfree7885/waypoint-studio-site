@@ -281,6 +281,18 @@
             window.ForageCast.setLiveWeatherBullets(applied.liveBullets);
           }
 
+          document.dispatchEvent(
+            new CustomEvent("foragecast:location", {
+              detail: {
+                lat: place.latitude,
+                lon: place.longitude,
+                place: place,
+                signals: signals,
+                elevation: elevation
+              }
+            })
+          );
+
           return applied;
         });
       })
@@ -373,4 +385,11 @@
   }
 
   bindWeatherLoad();
+
+  window.ForageCastWeather = {
+    geocode: geocode,
+    fetchForecast: fetchForecast,
+    analyzeForecast: analyzeForecast,
+    mapElevation: mapElevation
+  };
 })();

@@ -10,6 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Source+Sans+3:wght@300;400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../styles/site.css">
   <link rel="stylesheet" href="../styles/foragecast.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
 </head>
 <body class="foragecast-page">
   <header class="site-header">
@@ -37,7 +38,8 @@
         </p>
         <div class="cta-row">
           <a class="btn-primary" href="#join-beta">Join Beta</a>
-          <a class="btn-secondary" href="#weather-read">Try the demo</a>
+          <a class="btn-secondary" href="#scouting-map">Scouting map</a>
+          <a class="btn-secondary" href="#weather-read">Field read</a>
         </div>
         <p class="foragecast-sub">Starting with morels. Expanding species by species.</p>
       </section>
@@ -292,6 +294,64 @@
               <p class="result-explanation" id="manual-explanation"></p>
               <p class="result-ethical" id="manual-ethical"></p>
             </div>
+          </div>
+
+          <!-- Scouting heatmap prototype -->
+          <div class="demo-panel demo-panel-v2" id="scouting-map">
+            <p class="demo-label">Scouting prototype · MVP</p>
+            <h3 class="demo-panel-title">Local scouting map</h3>
+            <p class="muted">
+              A prototype layer to help decide where to scout — not where to harvest.
+              Zones combine live weather signals with simplified elevation and slope assumptions.
+            </p>
+
+            <p class="heatmap-prototype-note">
+              <strong>Scouting heatmap — not a mushroom map.</strong> Likelihood zones suggest where
+              conditions may favor scouting morels. They are not harvest guarantees, property lines,
+              or permission to enter land.
+            </p>
+
+            <form class="demo-form heatmap-location-form" id="heatmap-location-form">
+              <div class="form-field">
+                <label for="heatmap-state">State</label>
+                <select id="heatmap-state" name="state" required>
+                  <option value="Pennsylvania">Pennsylvania</option>
+                  <option value="New York">New York</option>
+                  <option value="New Jersey">New Jersey</option>
+                  <option value="Vermont">Vermont</option>
+                  <option value="Massachusetts">Massachusetts</option>
+                  <option value="Maine">Maine</option>
+                </select>
+              </div>
+              <div class="form-field">
+                <label for="heatmap-region">City or county</label>
+                <input type="text" id="heatmap-region" name="region" required placeholder="e.g. State College, Centre County" autocomplete="off">
+              </div>
+            </form>
+
+            <div class="heatmap-controls">
+              <button type="button" class="btn-primary" id="heatmap-generate-btn">Generate scouting map</button>
+              <button type="button" class="btn-secondary" id="heatmap-locate-btn">Use my location</button>
+              <button type="button" class="btn-secondary" id="heatmap-sync-btn">Copy from weather form</button>
+            </div>
+
+            <p class="heatmap-status" id="heatmap-status" aria-live="polite">
+              Enter a city or county above, then generate your scouting map.
+            </p>
+
+            <div class="heatmap-legend" aria-label="Likelihood legend">
+              <span class="heatmap-legend-item"><i class="swatch swatch-high"></i> High likelihood</span>
+              <span class="heatmap-legend-item"><i class="swatch swatch-medium"></i> Medium</span>
+              <span class="heatmap-legend-item"><i class="swatch swatch-low"></i> Low</span>
+            </div>
+
+            <ul class="heatmap-assumptions">
+              <li><strong>Real data:</strong> Map center from geocoding; 7-day precipitation and temperature from Open-Meteo; elevation per cell from Open-Meteo.</li>
+              <li><strong>Prototype scoring:</strong> Slope/aspect proxy, habitat preference, and cell variation — not forest cover, soil, or survey data.</li>
+              <li><strong>From MorelCast:</strong> Forest type and timing signals from the weather form when set.</li>
+            </ul>
+
+            <div id="heatmap-map" class="heatmap-map" role="img" aria-label="Scouting likelihood map"></div>
           </div>
         </div>
 
@@ -587,9 +647,11 @@
     </div>
   </footer>
 
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   <script src="forms.config.js"></script>
   <script src="forms.js"></script>
   <script src="foragecast.js"></script>
   <script src="weather.js"></script>
+  <script src="heatmap.js"></script>
 </body>
 </html>

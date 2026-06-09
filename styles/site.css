@@ -1,10 +1,15 @@
 :root {
-  --bg: #0c0f0d;
-  --surface: #121816;
-  --text: #e8ebe6;
-  --muted: #8f9a92;
-  --line: rgba(232, 235, 230, 0.12);
-  --accent: #a8b5a4;
+  --bg: #070b14;
+  --surface: #0e1524;
+  --surface-raised: #141e32;
+  --text: #e8edf5;
+  --muted: #8b9bb8;
+  --line: #243047;
+  --accent: #c6ff4d;
+  --accent-purple: #9b7ed4;
+  --accent-cyan: #6ec8e8;
+  --accent-dim: rgba(198, 255, 77, 0.12);
+  --accent-purple-dim: rgba(155, 126, 212, 0.15);
   --max: 960px;
   --space-1: 0.5rem;
   --space-2: 0.875rem;
@@ -53,7 +58,7 @@ body::after {
   inset: 0;
   pointer-events: none;
   opacity: 0.1;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='280' viewBox='0 0 280 280'%3E%3Cg fill='none' stroke='%23a8b5a4' stroke-opacity='0.15' stroke-width='0.7'%3E%3Cpath d='M0 48c48-20 84-20 140 0s92 20 140 0'/%3E%3Cpath d='M0 104c52-18 90-18 140 0s90 18 140 0'/%3E%3Cpath d='M0 160c46-18 82-18 140 0s94 18 140 0'/%3E%3Cpath d='M0 216c50-18 88-18 140 0s90 18 140 0'/%3E%3C/g%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='280' viewBox='0 0 280 280'%3E%3Cg fill='none' stroke='%239b7ed4' stroke-opacity='0.14' stroke-width='0.7'%3E%3Cpath d='M0 48c48-20 84-20 140 0s92 20 140 0'/%3E%3Cpath d='M0 104c52-18 90-18 140 0s90 18 140 0'/%3E%3Cpath d='M0 160c46-18 82-18 140 0s94 18 140 0'/%3E%3Cpath d='M0 216c50-18 88-18 140 0s90 18 140 0'/%3E%3C/g%3E%3C/svg%3E");
   z-index: 0;
 }
 
@@ -118,7 +123,7 @@ main,
 
 .site-header {
   border-bottom: 1px solid var(--line);
-  background: rgba(12, 15, 13, 0.94);
+  background: rgba(7, 11, 20, 0.94);
   position: sticky;
   top: 0;
   z-index: 10;
@@ -222,7 +227,7 @@ section:last-child {
 
 .card:hover,
 .card:focus-visible {
-  border-color: rgba(168, 181, 164, 0.35);
+  border-color: rgba(198, 255, 77, 0.35);
   text-decoration: none;
 }
 
@@ -313,12 +318,12 @@ section:last-child {
 
 .badge-active {
   color: var(--accent);
-  border-color: rgba(168, 181, 164, 0.4);
+  border-color: rgba(198, 255, 77, 0.4);
 }
 
 .badge-dev {
-  color: #b8c4a8;
-  border-color: rgba(184, 196, 168, 0.35);
+  color: var(--accent-purple);
+  border-color: rgba(155, 126, 212, 0.4);
 }
 
 .badge-planned {
@@ -432,15 +437,15 @@ section:last-child {
 }
 
 .btn-primary {
-  background: rgba(168, 181, 164, 0.12);
-  border-color: rgba(168, 181, 164, 0.35);
+  background: var(--accent-dim);
+  border-color: rgba(198, 255, 77, 0.35);
   color: var(--text);
 }
 
 .btn-primary:hover,
 .btn-primary:focus-visible {
-  background: rgba(168, 181, 164, 0.2);
-  border-color: rgba(168, 181, 164, 0.5);
+  background: rgba(198, 255, 77, 0.2);
+  border-color: rgba(198, 255, 77, 0.5);
   color: var(--text);
   text-decoration: none;
 }
@@ -453,7 +458,7 @@ section:last-child {
 .btn-secondary:hover,
 .btn-secondary:focus-visible {
   color: var(--text);
-  border-color: rgba(168, 181, 164, 0.35);
+  border-color: rgba(198, 255, 77, 0.35);
   text-decoration: none;
 }
 
