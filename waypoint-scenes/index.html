@@ -11,10 +11,13 @@
   <link rel="stylesheet" href="../styles/site.css">
   <style>
     :root {
-      --bg: #0c0b0a;
-      --text: #ebe7df;
-      --muted: #9a948a;
-      --line: rgba(235, 231, 223, 0.14);
+      --bg: #070b14;
+      --text: #e8edf5;
+      --muted: #8b9bb8;
+      --line: #243047;
+      --accent: #c6ff4d;
+      --accent-purple: #9b7ed4;
+      --accent-cyan: #6ec8e8;
       --fade: 2.2s;
       --font-display: "Cormorant Garamond", Georgia, serif;
       --font-body: "Source Sans 3", system-ui, sans-serif;
@@ -106,7 +109,7 @@
       background: radial-gradient(
         ellipse 90% 85% at 50% 50%,
         transparent 50%,
-        rgba(6, 8, 6, 0.07) 100%
+        rgba(7, 11, 20, 0.07) 100%
       );
       animation: depthShift 44s ease-in-out infinite alternate;
     }
@@ -133,7 +136,7 @@
     }
 
     .fx-air {
-      background: linear-gradient(95deg, transparent, rgba(50, 66, 46, 0.03) 50%, transparent);
+      background: linear-gradient(95deg, transparent, rgba(36, 48, 71, 0.04) 50%, transparent);
       background-size: 220% 100%;
       animation: airDrift 50s linear infinite;
     }
@@ -200,10 +203,10 @@
         calc(1.25rem + var(--safe-left));
       background: linear-gradient(
         180deg,
-        rgba(12, 11, 10, 0.72) 0%,
-        rgba(12, 11, 10, 0.18) 32%,
-        rgba(12, 11, 10, 0.28) 58%,
-        rgba(12, 11, 10, 0.92) 100%
+        rgba(7, 11, 20, 0.72) 0%,
+        rgba(7, 11, 20, 0.18) 32%,
+        rgba(7, 11, 20, 0.28) 58%,
+        rgba(7, 11, 20, 0.92) 100%
       );
       pointer-events: none;
     }
@@ -229,7 +232,7 @@
       font-size: clamp(0.68rem, 2.8vw, 0.78rem);
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: rgba(235, 231, 223, 0.82);
+      color: rgba(232, 237, 245, 0.82);
       text-shadow: 0 1px 16px rgba(0, 0, 0, 0.45);
     }
 
@@ -257,7 +260,7 @@
     .feature-desc {
       font-size: clamp(0.88rem, 3.6vw, 0.95rem);
       line-height: 1.7;
-      color: rgba(235, 231, 223, 0.88);
+      color: rgba(232, 237, 245, 0.88);
       margin-bottom: 1.35rem;
       text-shadow: 0 1px 20px rgba(0, 0, 0, 0.5);
     }
@@ -299,7 +302,7 @@
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--text);
-      background: rgba(12, 11, 10, 0.35);
+      background: rgba(7, 11, 20, 0.35);
       border: 1px solid var(--line);
       padding: 0.6rem 1rem;
       cursor: pointer;
@@ -309,12 +312,12 @@
     }
 
     .nav-btn:hover {
-      background: rgba(235, 231, 223, 0.08);
-      border-color: rgba(235, 231, 223, 0.28);
+      background: rgba(198, 255, 77, 0.08);
+      border-color: rgba(198, 255, 77, 0.28);
     }
 
     .nav-btn:focus-visible {
-      outline: 1px solid rgba(235, 231, 223, 0.45);
+      outline: 1px solid rgba(198, 255, 77, 0.45);
       outline-offset: 2px;
     }
 
@@ -348,7 +351,7 @@
       text-align: center;
       font-size: 0.65rem;
       letter-spacing: 0.06em;
-      color: rgba(235, 231, 223, 0.62);
+      color: rgba(232, 237, 245, 0.62);
       line-height: 1.75;
       pointer-events: none;
     }
@@ -405,7 +408,7 @@
       justify-content: center;
       gap: 0.5rem 1rem;
       padding: calc(0.55rem + var(--safe-top)) calc(0.75rem + var(--safe-right)) 0.55rem calc(0.75rem + var(--safe-left));
-      background: rgba(12, 11, 10, 0.72);
+      background: rgba(7, 11, 20, 0.72);
       border-bottom: 1px solid var(--line);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
@@ -415,7 +418,7 @@
       font-size: 0.58rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: rgba(235, 231, 223, 0.65);
+      color: rgba(232, 237, 245, 0.65);
       text-decoration: none;
     }
 
@@ -425,7 +428,7 @@
     }
 
     .studio-nav a[aria-current="page"] {
-      color: var(--text);
+      color: var(--accent);
     }
 
     @media (prefers-reduced-motion: reduce) {

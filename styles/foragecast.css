@@ -769,7 +769,7 @@
 }
 
 .weather-load-status.is-loading {
-  color: var(--accent);
+  color: var(--accent-cyan);
 }
 
 .weather-load-status.is-success {
@@ -791,7 +791,7 @@
   font-size: 0.68rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--accent-cyan);
   margin: 0 0 var(--space-2);
 }
 

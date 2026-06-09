@@ -166,7 +166,7 @@ main,
 }
 
 .site-nav a[aria-current="page"] {
-  color: var(--text);
+  color: var(--accent);
 }
 
 .wrap {
