@@ -232,7 +232,7 @@
       var note = banner.querySelector(".beta-status-note");
       if (note) {
         note.textContent =
-          "You're registered for beta updates. Try the demos below and send feedback when you're ready.";
+          "You're on the beta list. Try the field read or scouting map below — feedback welcome anytime.";
       }
     }
   }

@@ -30,74 +30,56 @@
   <main>
     <div class="wrap">
       <!-- 1. Hero -->
-      <section class="foragecast-hero page-hero">
+      <section class="foragecast-hero page-hero fc-section">
         <span class="badge badge-beta">Open Beta</span>
         <h1>ForageCast</h1>
         <p class="tagline">
-          Terrain, weather, and seasonal intelligence for responsible foraging.
+          Seasonal field intelligence for responsible foraging — starting with morels in the Northeast.
         </p>
-        <div class="cta-row">
-          <a class="btn-primary" href="#join-beta">Join Beta</a>
-          <a class="btn-secondary" href="#scouting-map">Scouting map</a>
-          <a class="btn-secondary" href="#weather-read">Field read</a>
-        </div>
-        <p class="foragecast-sub">Starting with morels. Expanding species by species.</p>
+        <nav class="fc-jump" aria-label="Jump to tools">
+          <a class="fc-jump-link" href="#weather-read">Field read</a>
+          <a class="fc-jump-link" href="#scouting-map">Scouting map</a>
+          <a class="fc-jump-link" href="#join-beta">Join beta</a>
+        </nav>
       </section>
 
       <!-- Beta status -->
-      <section class="beta-status" id="beta-status" aria-label="Beta program">
-        <div class="beta-status-inner">
-          <h2>Beta preview</h2>
-          <p class="beta-status-note">
-            ForageCast is in open beta. MorelCast loads live precipitation and
-            temperature from Open-Meteo — maps and observation logging are still
-            in development. Join beta to test new builds and help shape what ships next.
-          </p>
-          <ul class="beta-perks">
-            <li>Early access to new field-read features</li>
-            <li>Direct line for feedback while we build</li>
-            <li>No payment — subscription comes after beta</li>
-          </ul>
-          <a class="btn-primary" href="#join-beta">Join the beta</a>
-        </div>
+      <section class="beta-status fc-section-tight" id="beta-status" aria-label="Beta program">
+        <p class="beta-status-note">
+          Open beta — live weather and scouting prototypes ship first; observation logging is still in development.
+        </p>
       </section>
 
       <!-- 2. What it does -->
-      <section>
+      <section class="fc-section fc-section-compact">
         <h2>What it does</h2>
-        <p>
-          ForageCast combines terrain clues, recent weather, soil temperature
-          proxies, elevation, slope and aspect, forest edge context, and
-          seasonal timing to estimate when conditions may be improving for target
-          species — not where to extract them.
-        </p>
-        <p>
-          The system is built for habitat awareness and ethical field
-          decision-making. Predictions describe environmental readiness, not
-          guaranteed finds.
+        <p class="fc-lead">
+          Combines terrain context, recent weather, elevation, and seasonal timing to estimate when conditions
+          may be improving — for habitat awareness, not harvest guarantees.
         </p>
       </section>
 
       <!-- 3. MorelCast demos -->
-      <section id="morelcast-demo">
-        <h2>MorelCast</h2>
-        <p class="muted">
-          Environmental timing estimates for morel mushrooms in the Northeast.
-          Load live weather for your area, then generate a field read.
-        </p>
+      <section class="fc-tools fc-section" id="morelcast-demo">
+        <header class="fc-section-head">
+          <h2>MorelCast</h2>
+          <p class="muted fc-section-intro">
+            Load live weather, generate a field read, or explore the scouting map for your area.
+          </p>
+        </header>
 
         <p class="global-disclaimer">
-          ForageCast is an environmental guidance tool, not a guarantee of presence, safety, legality, or edibility. Always confirm identification and follow local regulations.
+          Environmental guidance only — not a guarantee of presence, safety, legality, or edibility.
+          Confirm identification and follow local regulations.
         </p>
 
         <div class="demo-stack">
           <!-- Weather-Aware Field Read (V2) -->
           <div class="demo-panel demo-panel-v2" id="weather-read">
-            <p class="demo-label">MorelCast · V2 preview</p>
-            <h3 class="demo-panel-title">Weather-Aware Field Read</h3>
-            <p class="muted">
-              Interprets moisture, temperature trend, habitat, and elevation together.
-              Live weather fills rainfall and temperature — you still choose forest type.
+            <p class="demo-label">Live weather</p>
+            <h3 class="demo-panel-title">Weather-aware field read</h3>
+            <p class="demo-panel-desc muted">
+              Open-Meteo fills rainfall and temperature; you set forest type and elevation.
             </p>
 
             <form class="demo-form" id="weather-form" novalidate>
@@ -166,7 +148,7 @@
               </div>
 
               <div class="demo-submit">
-                <button type="submit" class="btn-primary">Generate weather-aware read</button>
+                <button type="submit" class="btn-primary">Generate read</button>
               </div>
             </form>
 
@@ -213,11 +195,15 @@
           </div>
 
           <!-- Manual Field Read (V1) -->
-          <div class="demo-panel" id="manual-read">
-            <p class="demo-label">MorelCast · V1</p>
-            <h3 class="demo-panel-title">Manual Field Read</h3>
-            <p class="muted">
-              Enter field conditions manually for a regional timing estimate.
+          <details class="demo-panel demo-panel-collapsible" id="manual-read">
+            <summary class="demo-panel-summary">
+              <span class="demo-label">Manual entry</span>
+              <span class="demo-panel-title">Field read without live weather</span>
+              <span class="demo-panel-chevron" aria-hidden="true"></span>
+            </summary>
+            <div class="demo-panel-body">
+            <p class="demo-panel-desc muted">
+              Enter conditions manually when you already know rainfall and temperature trends.
             </p>
 
             <form class="demo-form" id="manual-form" novalidate>
@@ -276,7 +262,7 @@
               </div>
 
               <div class="demo-submit">
-                <button type="submit" class="btn-primary">Generate field read</button>
+                <button type="submit" class="btn-primary">Generate read</button>
               </div>
             </form>
 
@@ -294,21 +280,20 @@
               <p class="result-explanation" id="manual-explanation"></p>
               <p class="result-ethical" id="manual-ethical"></p>
             </div>
-          </div>
+            </div>
+          </details>
 
           <!-- Scouting heatmap prototype -->
           <div class="demo-panel demo-panel-v2" id="scouting-map">
-            <p class="demo-label">Scouting prototype · MVP</p>
+            <p class="demo-label">Scouting map</p>
             <h3 class="demo-panel-title">Local scouting map</h3>
-            <p class="muted">
-              A prototype layer to help decide where to scout — not where to harvest.
-              Zones combine live weather signals with simplified elevation and slope assumptions.
+            <p class="demo-panel-desc muted">
+              Where to scout — not where to harvest. Zones blend live weather with elevation and slope proxies.
             </p>
 
             <p class="heatmap-prototype-note">
-              <strong>Scouting heatmap — not a mushroom map.</strong> Likelihood zones suggest where
-              conditions may favor scouting morels. They are not harvest guarantees, property lines,
-              or permission to enter land.
+              <strong>Not a mushroom map.</strong> Broad scouting zones — not property lines, parcel boundaries, or permission to enter land.
+              Use public access maps and local regulations before entering any area.
             </p>
 
             <form class="demo-form heatmap-location-form" id="heatmap-location-form">
@@ -336,38 +321,37 @@
             </div>
 
             <p class="heatmap-status" id="heatmap-status" aria-live="polite">
-              Enter a city or county above, then generate your scouting map.
+              Enter a location, then generate the map.
+            </p>
+            <p class="heatmap-elevation-note" id="heatmap-elevation-note" hidden>
+              Using regional elevation estimate.
             </p>
 
             <div class="heatmap-legend" aria-label="Likelihood legend">
-              <span class="heatmap-legend-item"><i class="swatch swatch-high"></i> High likelihood</span>
-              <span class="heatmap-legend-item"><i class="swatch swatch-medium"></i> Medium</span>
-              <span class="heatmap-legend-item"><i class="swatch swatch-low"></i> Low</span>
+              <span class="heatmap-legend-item"><i class="swatch swatch-high"></i> High scouting zone</span>
+              <span class="heatmap-legend-item"><i class="swatch swatch-medium"></i> Medium zone</span>
+              <span class="heatmap-legend-item"><i class="swatch swatch-low"></i> Low zone</span>
             </div>
 
             <ul class="heatmap-assumptions">
-              <li><strong>Real data:</strong> Map center from geocoding; 7-day precipitation and temperature from Open-Meteo; elevation per cell from Open-Meteo.</li>
-              <li><strong>Prototype scoring:</strong> Slope/aspect proxy, habitat preference, and cell variation — not forest cover, soil, or survey data.</li>
-              <li><strong>From MorelCast:</strong> Forest type and timing signals from the weather form when set.</li>
+              <li><strong>Real:</strong> Geocoding, 7-day precip/temp (Open-Meteo), per-zone elevation when available.</li>
+              <li><strong>Prototype:</strong> Slope/aspect proxy and habitat scoring — not forest cover, ownership, or survey data.</li>
+              <li><strong>Zones:</strong> Approximate scouting areas across the visible map — not exact land parcels.</li>
             </ul>
 
             <div id="heatmap-map" class="heatmap-map" role="img" aria-label="Scouting likelihood map"></div>
+
+            <div class="heatmap-view-controls">
+              <button type="button" class="btn-secondary" id="heatmap-update-view-btn" hidden>
+                Update heatmap for this view
+              </button>
+            </div>
           </div>
         </div>
-
-        <p class="demo-disclaimer">
-          Beta preview — live weather via Open-Meteo feeds the same rule-based engine.
-          Habitat and forest type are still manual. Use field reads as context, not guarantees.
-        </p>
-
-        <aside class="beta-cta-strip">
-          <p>Help shape the next build — join the beta and share field feedback.</p>
-          <a class="btn-secondary" href="#join-beta">Join Beta</a>
-        </aside>
       </section>
 
       <!-- 4. Ethical foraging rules -->
-      <section>
+      <section class="fc-section fc-section-compact">
         <h2>Ethical foraging rules</h2>
         <ul class="ethics-list">
           <li>Know property boundaries before you enter any land.</li>
@@ -380,9 +364,9 @@
       </section>
 
       <!-- 5. Future species -->
-      <section>
+      <section class="fc-section fc-section-compact">
         <h2>Future species</h2>
-        <p class="muted">ForageCast will expand one species at a time, with dedicated seasonal models.</p>
+        <p class="muted fc-section-intro">One dedicated model at a time after morels.</p>
         <div class="species-grid">
           <article class="species-card is-focus">
             <h3>Morels</h3>
@@ -411,41 +395,27 @@
         </div>
       </section>
 
-      <!-- 6. Research / data vision -->
-      <section>
-        <h2>Research &amp; data vision</h2>
-        <p>
-          ForageCast is intended to become a structured field-observation and
-          environmental modeling platform. Over time, user observations — paired
-          with terrain, weather, and habitat GIS layers — will build toward
-          repeatable seasonal models grounded in real ecology, not anecdote.
-        </p>
-        <p>
-          The long-term goal is a dataset that supports responsible foraging
-          education, regional research, and better understanding of how species
-          respond to landscape and climate patterns.
-        </p>
-      </section>
-
-      <!-- 7. Roadmap -->
-      <section id="roadmap">
-        <h2>Roadmap</h2>
-        <p class="muted">Where ForageCast is now and what beta testers can expect next.</p>
+      <!-- 6. Roadmap -->
+      <section class="fc-section" id="roadmap">
+        <header class="fc-section-head">
+          <h2>Roadmap</h2>
+          <p class="muted fc-section-intro">Current build and what beta testers can expect next.</p>
+        </header>
 
         <div class="roadmap-phases">
           <div class="roadmap-phase">
             <p class="roadmap-phase-label">Now · Beta</p>
             <ul class="roadmap-phase-list">
-              <li class="is-done">MorelCast weather-aware and manual field reads</li>
-              <li class="is-done">Mobile-friendly beta page and feedback forms</li>
-              <li class="is-done">Live precipitation and temperature (Open-Meteo)</li>
-              <li class="is-active">Beta tester onboarding and field feedback</li>
+              <li class="is-done">Weather-aware and manual field reads</li>
+              <li class="is-done">Scouting heatmap MVP</li>
+              <li class="is-done">Live precip and temperature (Open-Meteo)</li>
+              <li class="is-active">Beta onboarding and field feedback</li>
             </ul>
           </div>
           <div class="roadmap-phase">
             <p class="roadmap-phase-label">Next · 30–60 days</p>
             <ul class="roadmap-phase-list">
-              <li>County-level seasonal timing refinements</li>
+              <li>County-level timing refinements</li>
               <li>Installable mobile web app (PWA)</li>
               <li>Soil temperature proxies from live data</li>
             </ul>
@@ -453,73 +423,51 @@
           <div class="roadmap-phase">
             <p class="roadmap-phase-label">Later</p>
             <ul class="roadmap-phase-list">
-              <li>Terrain and elevation map context</li>
               <li>Observation logging linked to conditions</li>
+              <li>Terrain and habitat GIS layers</li>
               <li>Additional species — one at a time</li>
             </ul>
           </div>
         </div>
 
-        <h3 class="roadmap-subhead">Full vision</h3>
-        <div class="roadmap-grid">
-          <div class="roadmap-item">
-            <strong>Real weather data integration</strong>
-            Live precipitation, soil temperature proxies, and regional forecasts.
-          </div>
-          <div class="roadmap-item">
-            <strong>County-based seasonal timing</strong>
-            Refined emergence windows calibrated to local phenology.
-          </div>
-          <div class="roadmap-item">
-            <strong>Terrain and elevation map</strong>
-            Slope, aspect, and elevation bands overlaid on search context.
-          </div>
-          <div class="roadmap-item">
-            <strong>Species expansion</strong>
-            Dedicated models beyond morels — one species at a time.
-          </div>
-          <div class="roadmap-item">
-            <strong>Observation logging</strong>
-            Structured field notes linked to conditions at time of find.
-          </div>
-          <div class="roadmap-item">
-            <strong>Habitat explanation engine</strong>
-            Clear, educational breakdowns of why habitat matters — not hotspots.
-          </div>
-        </div>
+        <p class="fc-roadmap-note muted">
+          Long term: structured field observations paired with terrain and weather layers,
+          building seasonal models grounded in ecology — not anecdote.
+        </p>
       </section>
 
-      <!-- 8. Join Beta -->
-      <section class="beta-panel" id="join-beta">
-        <h2>Join Beta</h2>
-        <p class="muted">
-          Tell us where you forage. We'll email you when new beta builds are ready.
-          No spam — unsubscribe anytime.
+      <!-- 7. Join Beta -->
+      <section class="beta-panel fc-section fc-panel-section" id="join-beta">
+        <h2>Join beta</h2>
+        <p class="muted fc-section-intro">
+          Get an email when new builds ship. No payment during beta.
         </p>
 
         <div class="beta-expectations">
           <div class="beta-expect-block">
-            <h3>What you receive</h3>
+            <h3>You get</h3>
             <ul>
-              <li>Email when new beta features ship</li>
-              <li>Early access to MorelCast improvements</li>
-              <li>A direct channel for field feedback</li>
+              <li>Early access to new features</li>
+              <li>A direct feedback channel</li>
             </ul>
           </div>
           <div class="beta-expect-block">
-            <h3>What we ask</h3>
+            <h3>We ask</h3>
             <ul>
-              <li>Try the demo in real field conditions when you can</li>
-              <li>Share honest feedback — what helped, what didn't</li>
-              <li>Follow local regulations and ethical foraging practice</li>
+              <li>Try the tools in real conditions when you can</li>
+              <li>Share honest field feedback</li>
+              <li>Follow local regulations and ethical practice</li>
             </ul>
           </div>
         </div>
 
         <div class="form-success-panel" id="beta-success" hidden>
           <p class="form-success-title">You're on the beta list</p>
-          <p>Your signup was saved. Try a live weather field read below while you wait for beta updates.</p>
-          <a class="btn-primary" href="#weather-read">Try live weather read</a>
+          <p>Try a field read or scouting map while you wait for the next build.</p>
+          <div class="fc-success-actions">
+            <a class="btn-primary" href="#weather-read">Field read</a>
+            <a class="btn-secondary" href="#scouting-map">Scouting map</a>
+          </div>
         </div>
 
         <form class="studio-form" id="beta-form">
@@ -568,18 +516,18 @@
         <p class="form-message" id="beta-message" role="status" hidden></p>
       </section>
 
-      <!-- 9. Waitlist -->
-      <section class="waitlist-cta" id="waitlist">
+      <!-- 8. Waitlist -->
+      <section class="waitlist-cta fc-section fc-panel-section" id="waitlist">
         <h2>Updates only</h2>
-        <p>
-          Not ready for beta? Leave your email for launch announcements —
-          no field testing required. Prefer testing? <a href="#join-beta">Join Beta</a>.
+        <p class="fc-section-intro">
+          Launch announcements without beta testing. Prefer to help build?
+          <a href="#join-beta">Join beta</a>.
         </p>
 
         <div class="form-success-panel" id="waitlist-success" hidden>
           <p class="form-success-title">You're on the list</p>
-          <p>We'll email you when ForageCast moves beyond beta. Explore the demo anytime.</p>
-          <a class="btn-primary" href="#weather-read">Try the demo</a>
+          <p>We'll email when ForageCast moves beyond beta.</p>
+          <a class="btn-primary" href="#weather-read">Try the tools</a>
         </div>
 
         <form class="studio-form studio-form-inline" id="waitlist-form" novalidate>
@@ -595,11 +543,11 @@
         <p class="form-message" id="waitlist-message" role="status" hidden></p>
       </section>
 
-      <!-- 10. Feedback -->
-      <section class="feedback-panel" id="feedback">
+      <!-- 9. Feedback -->
+      <section class="feedback-panel fc-section fc-panel-section" id="feedback">
         <h2>Beta feedback</h2>
-        <p class="muted">
-          Used the demo in the field or on your phone? Tell us what worked and what didn't.
+        <p class="muted fc-section-intro">
+          Used the tools in the field? Tell us what worked and what didn't.
         </p>
         <form class="studio-form" id="feedback-form" novalidate>
           <input type="text" name="_honey" class="form-honey" tabindex="-1" autocomplete="off" aria-hidden="true">
@@ -611,10 +559,11 @@
             <label for="feedback-area">Area tested</label>
             <select id="feedback-area" name="area_tested" required>
               <option value="">Select one</option>
-              <option value="weather-read">Weather-Aware Field Read</option>
-              <option value="manual-read">Manual Field Read</option>
-              <option value="both">Both demos</option>
-              <option value="page-only">Page only — haven't used demos yet</option>
+              <option value="weather-read">Weather-aware field read</option>
+              <option value="manual-read">Manual field read</option>
+              <option value="scouting-map">Scouting map</option>
+              <option value="both">Multiple tools</option>
+              <option value="page-only">Page only — haven't used tools yet</option>
             </select>
           </div>
           <div class="form-field">
