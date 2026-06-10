@@ -45,10 +45,23 @@
       .trim();
   }
 
-  function pickPlace(results, state, query) {
+  function matchesSelectedState(result, normState) {
+    if (!result || result.country_code !== "US") return false;
+    if (
+      window.ForageCastCounties &&
+      window.ForageCastCounties.matchesState
+    ) {
+      return window.ForageCastCounties.matchesState(result.admin1, normState);
+    }
+    return result.admin1 === normState;
+  }
+
+  function pickPlace(results, state, query, options) {
+    var opts = options || {};
+    var requireCountyMatch = !!opts.requireCountyMatch;
     var normState = normalizeState(state);
     var inState = results.filter(function (r) {
-      return r.admin1 === normState && r.country_code === "US";
+      return matchesSelectedState(r, normState);
     });
 
     if (!inState.length) {
@@ -82,6 +95,16 @@
         );
       });
       if (countyMatch) return countyMatch;
+
+      if (requireCountyMatch) {
+        throw new Error(
+          "No " +
+            countyKey +
+            " county found in " +
+            normState +
+            ". Check spelling or try a nearby city."
+        );
+      }
     }
 
     var q = (query || "").toLowerCase();
@@ -112,17 +135,7 @@
     });
   }
 
-  function geocodeViaRegistry(query, state) {
-    if (!window.ForageCastCounties) {
-      return Promise.reject(new Error("County registry unavailable"));
-    }
-    return window.ForageCastCounties.resolve(state, query).then(function (entry) {
-      if (!entry) throw new Error("County not in registry");
-      return window.ForageCastCounties.toPlace(entry);
-    });
-  }
-
-  function geocodeViaOpenMeteo(query, state) {
+  function geocodeViaOpenMeteo(query, state, requireCountyMatch) {
     var normState = normalizeState(state);
     var stripped = query.replace(/\s+county$/i, "").trim();
     var attempts = [
@@ -140,7 +153,9 @@
           if (!data.results || !data.results.length) {
             throw new Error("no results");
           }
-          return pickPlace(data.results, normState, query);
+          return pickPlace(data.results, normState, query, {
+            requireCountyMatch: requireCountyMatch
+          });
         });
       });
     });
@@ -155,25 +170,55 @@
     }
 
     var normState = normalizeState(state);
-    var registryFirst =
+    var countyIntent =
       window.ForageCastCounties &&
-      (window.ForageCastCounties.looksLikeCountyQuery(trimmed) ||
-        window.ForageCastCounties.extractCountyKey(trimmed, normState));
+      window.ForageCastCounties.looksLikeCountyQuery(trimmed);
 
-    var chain = registryFirst
-      ? geocodeViaRegistry(trimmed, normState).catch(function () {
-          return geocodeViaOpenMeteo(trimmed, normState);
-        })
-      : geocodeViaOpenMeteo(trimmed, normState).catch(function () {
-          return geocodeViaRegistry(trimmed, normState);
-        });
+    if (!window.ForageCastCounties) {
+      return geocodeViaOpenMeteo(trimmed, normState, countyIntent).catch(
+        function (err) {
+          if (
+            err &&
+            err.message &&
+            err.message.indexOf("No matching location in") === 0
+          ) {
+            throw err;
+          }
+          throw new Error(
+            "Location not found in " +
+              normState +
+              " — try a city or county name."
+          );
+        }
+      );
+    }
 
-    return chain.catch(function (err) {
-      if (err && err.message && err.message.indexOf("No matching location in") === 0) {
-        throw err;
-      }
-      throw new Error("Location not found in " + normState + " — try a city or county name.");
-    });
+    return window.ForageCastCounties.resolve(normState, trimmed)
+      .then(function (entry) {
+        if (entry) {
+          return window.ForageCastCounties.toPlace(entry);
+        }
+
+        if (countyIntent) {
+          return geocodeViaOpenMeteo(trimmed, normState, true);
+        }
+
+        return geocodeViaOpenMeteo(trimmed, normState, false);
+      })
+      .catch(function (err) {
+        if (
+          err &&
+          err.message &&
+          (err.message.indexOf("No matching location in") === 0 ||
+            (err.message.indexOf("No ") === 0 &&
+              err.message.indexOf(" county found in ") !== -1))
+        ) {
+          throw err;
+        }
+        throw new Error(
+          "Location not found in " + normState + " — try a city or county name."
+        );
+      });
   }
 
   function fetchForecast(lat, lon) {

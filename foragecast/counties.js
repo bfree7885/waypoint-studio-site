@@ -91,6 +91,17 @@
     });
   }
 
+  function matchesState(admin1, state) {
+    var normState = normalizeState(state);
+    if (!admin1 || !normState) return false;
+    if (admin1 === normState) return true;
+    var abbr = null;
+    Object.keys(STATE_ABBR).forEach(function (key) {
+      if (STATE_ABBR[key] === normState) abbr = key;
+    });
+    return abbr && String(admin1).toUpperCase() === abbr;
+  }
+
   function findDuplicateCountyNames() {
     return loadData().then(function (d) {
       var byName = {};
@@ -129,6 +140,7 @@
     normalizeCountyKey: normalizeCountyKey,
     extractCountyKey: extractCountyKey,
     looksLikeCountyQuery: looksLikeCountyQuery,
+    matchesState: matchesState,
     resolve: resolveCounty,
     toPlace: countyToPlace,
     findDuplicateCountyNames: findDuplicateCountyNames
