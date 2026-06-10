@@ -28,26 +28,76 @@
     return sum(arr, start, count) / count;
   }
 
-  function pickPlace(results, state, query) {
-    var q = (query || "").toLowerCase();
-    var inState = results.filter(function (r) {
-      return r.admin1 === state && r.country_code === "US";
-    });
-    var pool = inState.length ? inState : results;
+  function normalizeState(state) {
+    if (window.ForageCastCounties && window.ForageCastCounties.normalizeState) {
+      return window.ForageCastCounties.normalizeState(state);
+    }
+    return state;
+  }
 
-    if (q) {
-      var countyMatch = pool.find(function (r) {
-        return r.admin2 && r.admin2.toLowerCase().indexOf(q.replace(/ county$/, "")) !== -1;
+  function normalizeAdmin2(admin2) {
+    if (!admin2) return "";
+    return admin2
+      .toLowerCase()
+      .replace(/\s+county$/, "")
+      .replace(/\s+parish$/, "")
+      .replace(/\./g, "")
+      .trim();
+  }
+
+  function pickPlace(results, state, query) {
+    var normState = normalizeState(state);
+    var inState = results.filter(function (r) {
+      return r.admin1 === normState && r.country_code === "US";
+    });
+
+    if (!inState.length) {
+      throw new Error(
+        "No matching location in " +
+          normState +
+          ". Check the state selector and try a city or county name."
+      );
+    }
+
+    var countyKey = "";
+    if (window.ForageCastCounties && window.ForageCastCounties.extractCountyKey) {
+      countyKey = window.ForageCastCounties.extractCountyKey(query, normState);
+    } else {
+      countyKey = (query || "")
+        .toLowerCase()
+        .replace(/\s+county$/, "")
+        .trim();
+    }
+
+    if (countyKey) {
+      var countyMatch = inState.find(function (r) {
+        return normalizeAdmin2(r.admin2) === countyKey;
       });
       if (countyMatch) return countyMatch;
 
-      var nameMatch = pool.find(function (r) {
+      countyMatch = inState.find(function (r) {
+        return (
+          normalizeAdmin2(r.admin2).indexOf(countyKey) !== -1 ||
+          countyKey.indexOf(normalizeAdmin2(r.admin2)) !== -1
+        );
+      });
+      if (countyMatch) return countyMatch;
+    }
+
+    var q = (query || "").toLowerCase();
+    if (q) {
+      var nameMatch = inState.find(function (r) {
+        return r.name && r.name.toLowerCase() === q;
+      });
+      if (nameMatch) return nameMatch;
+
+      nameMatch = inState.find(function (r) {
         return r.name && r.name.toLowerCase().indexOf(q) !== -1;
       });
       if (nameMatch) return nameMatch;
     }
 
-    return pool[0];
+    return inState[0];
   }
 
   function searchPlaces(term) {
@@ -62,13 +112,25 @@
     });
   }
 
-  function geocode(query, state) {
+  function geocodeViaRegistry(query, state) {
+    if (!window.ForageCastCounties) {
+      return Promise.reject(new Error("County registry unavailable"));
+    }
+    return window.ForageCastCounties.resolve(state, query).then(function (entry) {
+      if (!entry) throw new Error("County not in registry");
+      return window.ForageCastCounties.toPlace(entry);
+    });
+  }
+
+  function geocodeViaOpenMeteo(query, state) {
+    var normState = normalizeState(state);
     var stripped = query.replace(/\s+county$/i, "").trim();
     var attempts = [
-      query + ", " + state,
-      query,
-      stripped + ", " + state,
-      stripped + " " + state
+      query + ", " + normState + ", USA",
+      query + ", " + normState,
+      stripped + ", " + normState + ", USA",
+      stripped + ", " + normState,
+      stripped + " " + normState
     ];
     var chain = Promise.reject();
 
@@ -78,13 +140,39 @@
           if (!data.results || !data.results.length) {
             throw new Error("no results");
           }
-          return pickPlace(data.results, state, query);
+          return pickPlace(data.results, normState, query);
         });
       });
     });
 
-    return chain.catch(function () {
-      throw new Error("Location not found — try a city or county name.");
+    return chain;
+  }
+
+  function geocode(query, state) {
+    var trimmed = (query || "").trim();
+    if (!trimmed) {
+      return Promise.reject(new Error("Enter a county or city name."));
+    }
+
+    var normState = normalizeState(state);
+    var registryFirst =
+      window.ForageCastCounties &&
+      (window.ForageCastCounties.looksLikeCountyQuery(trimmed) ||
+        window.ForageCastCounties.extractCountyKey(trimmed, normState));
+
+    var chain = registryFirst
+      ? geocodeViaRegistry(trimmed, normState).catch(function () {
+          return geocodeViaOpenMeteo(trimmed, normState);
+        })
+      : geocodeViaOpenMeteo(trimmed, normState).catch(function () {
+          return geocodeViaRegistry(trimmed, normState);
+        });
+
+    return chain.catch(function (err) {
+      if (err && err.message && err.message.indexOf("No matching location in") === 0) {
+        throw err;
+      }
+      throw new Error("Location not found in " + normState + " — try a city or county name.");
     });
   }
 
@@ -288,7 +376,7 @@
                 lon: place.longitude,
                 place: place,
                 signals: signals,
-                elevation: elevation
+                elevation: applied.elevation
               }
             })
           );
