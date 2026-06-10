@@ -11,6 +11,44 @@
       .replace(/"/g, "&quot;");
   }
 
+  function imageAlt(species) {
+    return (
+      species.commonName +
+      " — illustrative silhouette, not a field-identification photo"
+    );
+  }
+
+  function renderSpeciesImage(species, variant) {
+    if (!registry || !registry.imageUrl) return "";
+    var src = registry.imageUrl(species);
+    if (!src) return "";
+
+    var alt = imageAlt(species);
+    var sizeClass =
+      variant === "hero" ? " fc-species-figure--hero" : " fc-species-figure--card";
+
+    return (
+      '<figure class="fc-species-figure' +
+      sizeClass +
+      '">' +
+      '<div class="fc-species-figure-frame fc-species-figure-frame--' +
+      escapeHtml(species.slug) +
+      '">' +
+      '<img class="fc-species-img" src="' +
+      escapeHtml(src) +
+      '" alt="' +
+      escapeHtml(alt) +
+      '" width="800" height="560" loading="lazy" decoding="async">' +
+      "</div>" +
+      (variant === "hero"
+        ? '<figcaption class="fc-species-img-caption">' +
+          escapeHtml(registry.imageDisclaimer) +
+          "</figcaption>"
+        : "") +
+      "</figure>"
+    );
+  }
+
   function renderList(items) {
     if (!items || !items.length) return "<p class=\"muted\">Coming soon.</p>";
     return (
@@ -30,13 +68,7 @@
       '<a class="fc-species-card-link" href="' +
       escapeHtml(species.slug) +
       '/">' +
-      '<div class="fc-species-card-img fc-species-hero-img fc-species-hero-img--' +
-      escapeHtml(species.slug) +
-      '" aria-hidden="true">' +
-      '<span class="fc-species-img-label">' +
-      escapeHtml(species.commonName) +
-      "</span>" +
-      "</div>" +
+      renderSpeciesImage(species, "card") +
       '<div class="fc-species-card-body">' +
       "<h2>" +
       escapeHtml(species.commonName) +
@@ -94,13 +126,7 @@
     container.innerHTML =
       '<article class="fc-species-profile">' +
       '<header class="fc-species-hero">' +
-      '<div class="fc-species-hero-img fc-species-hero-img--' +
-      escapeHtml(species.slug) +
-      '">' +
-      '<span class="fc-species-img-label">' +
-      escapeHtml(species.heroLabel) +
-      "</span>" +
-      "</div>" +
+      renderSpeciesImage(species, "hero") +
       '<div class="fc-species-hero-text">' +
       '<p class="fc-species-kicker">' +
       escapeHtml(species.category) +

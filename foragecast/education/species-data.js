@@ -3,16 +3,23 @@
 
   /**
    * Single source of truth for ForageCast species profiles.
-   * To add a species: push a new entry to SPECIES and create
-   * education/{slug}/index.html with data-species="{slug}".
+   * To add a species: push a new entry to SPECIES, add an image to
+   * /assets/species/, and create education/{slug}/index.html with
+   * data-species="{slug}".
+   *
+   * Swap placeholders for verified photos by updating `image` (e.g. morel.jpg).
    */
+  var IMAGE_BASE = "/assets/species/";
+  var IMAGE_DISCLAIMER =
+    "Images are illustrative placeholders until verified field photos are added.";
+
   var SPECIES = [
     {
       slug: "morel",
       commonName: "Morel",
       scientificName: "Morchella spp.",
       category: "Fungus",
-      heroLabel: "Morel — hero image placeholder",
+      image: "morel.svg",
       habitat:
         "Mixed hardwood forests, floodplains, south-facing slopes, and disturbed ground near elm, ash, apple, and tulip poplar.",
       season: "Early to mid-spring; often after soil warms and following rain.",
@@ -42,7 +49,7 @@
       commonName: "Chanterelle",
       scientificName: "Cantharellus cibarius and allies",
       category: "Fungus",
-      heroLabel: "Chanterelle — hero image placeholder",
+      image: "chanterelle.svg",
       habitat:
         "Mossy hardwood and mixed forests; often on rolling ground with oak, beech, birch, and hemlock nearby.",
       season: "Mid-summer through fall; peaks after consistent humidity.",
@@ -66,7 +73,7 @@
       commonName: "Black Trumpet",
       scientificName: "Craterellus cornucopioides",
       category: "Fungus",
-      heroLabel: "Black trumpet — hero image placeholder",
+      image: "black-trumpet.svg",
       habitat:
         "Low, moist hardwood forests; often near moss, streams, and decaying leaf litter.",
       season: "Late summer through fall; often after sustained rain.",
@@ -90,7 +97,7 @@
       commonName: "Ramps",
       scientificName: "Allium tricoccum",
       category: "Plant",
-      heroLabel: "Ramps — hero image placeholder",
+      image: "ramps.svg",
       habitat:
         "Rich, moist deciduous forest floors; often on north-facing slopes with deep leaf litter.",
       season: "Early spring; leaves fade before or during summer.",
@@ -120,7 +127,7 @@
       commonName: "Blueberry",
       scientificName: "Vaccinium spp.",
       category: "Plant",
-      heroLabel: "Blueberry — hero image placeholder",
+      image: "blueberry.svg",
       habitat:
         "Acidic soils in open woods, barrens, and old fields; full sun to partial shade.",
       season: "Mid- to late summer for fruit; flowers in spring.",
@@ -153,6 +160,12 @@
 
   window.ForageCastSpecies = {
     all: SPECIES,
+    imageBase: IMAGE_BASE,
+    imageDisclaimer: IMAGE_DISCLAIMER,
+    imageUrl: function (species) {
+      if (!species || !species.image) return "";
+      return IMAGE_BASE + species.image;
+    },
     get: function (slug) {
       return bySlug[slug] || null;
     }

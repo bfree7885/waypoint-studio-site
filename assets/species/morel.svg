@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 280" role="img" aria-label="Morel mushroom silhouette">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a2438"/>
+      <stop offset="100%" stop-color="#0e1524"/>
+    </linearGradient>
+    <linearGradient id="cap" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#c6ff4d" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#8fad3a" stop-opacity="0.35"/>
+    </linearGradient>
+    <linearGradient id="stem" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#d4c4a8" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#9a8b72" stop-opacity="0.4"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="280" fill="url(#bg)"/>
+  <ellipse cx="200" cy="248" rx="120" ry="12" fill="#000" opacity="0.2"/>
+  <!-- stem -->
+  <path d="M188 248 L188 168 Q200 160 212 168 L212 248 Z" fill="url(#stem)"/>
+  <!-- honeycombed cap -->
+  <path d="M130 168 Q200 55 270 168 Q200 148 130 168 Z" fill="url(#cap)"/>
+  <path d="M145 155 Q200 75 255 155" fill="none" stroke="#c6ff4d" stroke-opacity="0.25" stroke-width="1.5"/>
+  <path d="M155 140 Q200 95 245 140" fill="none" stroke="#c6ff4d" stroke-opacity="0.2" stroke-width="1"/>
+  <path d="M165 125 Q200 110 235 125" fill="none" stroke="#c6ff4d" stroke-opacity="0.15" stroke-width="1"/>
+  <!-- pit grid suggestion -->
+  <ellipse cx="175" cy="130" rx="8" ry="6" fill="#0e1524" opacity="0.35"/>
+  <ellipse cx="200" cy="115" rx="10" ry="7" fill="#0e1524" opacity="0.35"/>
+  <ellipse cx="225" cy="130" rx="8" ry="6" fill="#0e1524" opacity="0.35"/>
+  <ellipse cx="190" cy="145" rx="7" ry="5" fill="#0e1524" opacity="0.3"/>
+  <ellipse cx="215" cy="145" rx="7" ry="5" fill="#0e1524" opacity="0.3"/>
+</svg>

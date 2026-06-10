@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 280" role="img" aria-label="Black trumpet mushroom silhouette">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#141c2e"/>
+      <stop offset="100%" stop-color="#0a1018"/>
+    </linearGradient>
+    <linearGradient id="trumpet" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#6ec8e8" stop-opacity="0.35"/>
+      <stop offset="50%" stop-color="#3a4a5a" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#1a2230" stop-opacity="0.85"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="280" fill="url(#bg)"/>
+  <ellipse cx="200" cy="252" rx="90" ry="8" fill="#000" opacity="0.25"/>
+  <!-- group of trumpets -->
+  <path d="M175 250 L168 140 Q175 110 182 140 L189 250 Z" fill="url(#trumpet)"/>
+  <path d="M195 250 L188 120 Q200 85 212 120 L205 250 Z" fill="url(#trumpet)"/>
+  <path d="M218 250 L212 150 Q220 125 228 150 L234 250 Z" fill="url(#trumpet)" opacity="0.85"/>
+  <!-- rim highlights -->
+  <ellipse cx="182" cy="138" rx="10" ry="4" fill="#6ec8e8" opacity="0.2"/>
+  <ellipse cx="200" cy="118" rx="14" ry="5" fill="#6ec8e8" opacity="0.25"/>
+  <ellipse cx="220" cy="148" rx="9" ry="3" fill="#6ec8e8" opacity="0.15"/>
+</svg>

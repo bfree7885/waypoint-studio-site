@@ -146,75 +146,58 @@
   border-radius: var(--fc-radius);
 }
 
-/* Hero image placeholders */
-.fc-species-hero-img {
+/* Species images — swap SVG placeholders for verified photos via species-data `image` */
+.fc-species-figure {
+  margin: 0;
+}
+
+.fc-species-figure-frame {
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 10rem;
-  background:
-    linear-gradient(145deg, rgba(155, 126, 212, 0.18), rgba(14, 21, 36, 0.95)),
-    var(--surface);
-  border-bottom: 1px solid var(--line);
+  aspect-ratio: 10 / 7;
   overflow: hidden;
-}
-
-.fc-species-card .fc-species-hero-img {
-  min-height: 8.5rem;
+  background: var(--surface);
   border-bottom: 1px solid var(--line);
 }
 
-.fc-species-hero-img::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  opacity: 0.35;
-  background-image:
-    linear-gradient(rgba(155, 126, 212, 0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(155, 126, 212, 0.06) 1px, transparent 1px);
-  background-size: 24px 24px;
+.fc-species-figure--hero .fc-species-figure-frame {
+  border: 1px solid var(--line);
+  border-radius: var(--fc-radius);
 }
 
-.fc-species-img-label {
-  position: relative;
-  z-index: 1;
-  font-family: var(--font-serif, "Cormorant Garamond", Georgia, serif);
-  font-size: 1rem;
+.fc-species-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.fc-species-figure-frame--morel {
+  background: linear-gradient(145deg, rgba(198, 255, 77, 0.08), var(--surface));
+}
+
+.fc-species-figure-frame--chanterelle {
+  background: linear-gradient(145deg, rgba(255, 196, 77, 0.1), var(--surface));
+}
+
+.fc-species-figure-frame--black-trumpet {
+  background: linear-gradient(145deg, rgba(110, 200, 232, 0.08), var(--surface));
+}
+
+.fc-species-figure-frame--ramps {
+  background: linear-gradient(145deg, rgba(198, 255, 77, 0.1), var(--surface));
+}
+
+.fc-species-figure-frame--blueberry {
+  background: linear-gradient(145deg, rgba(155, 126, 212, 0.12), var(--surface));
+}
+
+.fc-species-img-caption {
+  margin: var(--space-2) 0 0;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: var(--muted);
   font-style: italic;
-  color: rgba(232, 237, 245, 0.55);
-  text-align: center;
-  padding: var(--space-2);
-}
-
-.fc-species-hero-img--morel {
-  background:
-    linear-gradient(145deg, rgba(198, 255, 77, 0.12), rgba(14, 21, 36, 0.95)),
-    var(--surface);
-}
-
-.fc-species-hero-img--chanterelle {
-  background:
-    linear-gradient(145deg, rgba(255, 196, 77, 0.14), rgba(14, 21, 36, 0.95)),
-    var(--surface);
-}
-
-.fc-species-hero-img--black-trumpet {
-  background:
-    linear-gradient(145deg, rgba(110, 200, 232, 0.12), rgba(14, 21, 36, 0.98)),
-    var(--surface);
-}
-
-.fc-species-hero-img--ramps {
-  background:
-    linear-gradient(145deg, rgba(198, 255, 77, 0.16), rgba(14, 21, 36, 0.94)),
-    var(--surface);
-}
-
-.fc-species-hero-img--blueberry {
-  background:
-    linear-gradient(145deg, rgba(155, 126, 212, 0.2), rgba(14, 21, 36, 0.94)),
-    var(--surface);
 }
 
 /* Species profile page */
@@ -226,10 +209,7 @@
   margin-bottom: var(--space-4);
 }
 
-.fc-species-hero .fc-species-hero-img {
-  min-height: 14rem;
-  border: 1px solid var(--line);
-  border-radius: var(--fc-radius);
+.fc-species-hero .fc-species-figure--hero {
   margin-bottom: var(--space-3);
 }
 

@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 280" role="img" aria-label="Ramps plant silhouette">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a2830"/>
+      <stop offset="100%" stop-color="#0e1524"/>
+    </linearGradient>
+    <linearGradient id="leaf" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#c6ff4d" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#5a8a3a" stop-opacity="0.35"/>
+    </linearGradient>
+    <linearGradient id="bulb" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#e8d4c0" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#c07060" stop-opacity="0.35"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="280" fill="url(#bg)"/>
+  <ellipse cx="200" cy="255" rx="110" ry="10" fill="#000" opacity="0.2"/>
+  <!-- soil line -->
+  <path d="M80 248 Q200 242 320 248" fill="none" stroke="#3a4a3a" stroke-opacity="0.4" stroke-width="2"/>
+  <!-- bulb -->
+  <ellipse cx="200" cy="248" rx="14" ry="18" fill="url(#bulb)"/>
+  <!-- two broad leaves -->
+  <path d="M200 230 Q140 200 130 80 Q145 75 200 230 Z" fill="url(#leaf)"/>
+  <path d="M200 230 Q260 200 270 80 Q255 75 200 230 Z" fill="url(#leaf)"/>
+  <!-- leaf veins -->
+  <path d="M200 220 Q165 150 140 90" fill="none" stroke="#c6ff4d" stroke-opacity="0.15" stroke-width="1.5"/>
+  <path d="M200 220 Q235 150 260 90" fill="none" stroke="#c6ff4d" stroke-opacity="0.15" stroke-width="1.5"/>
+</svg>
