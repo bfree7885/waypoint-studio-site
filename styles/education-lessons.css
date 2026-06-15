@@ -1,0 +1,328 @@
+/* Waypoint Education — lesson catalog & profiles */
+
+.edu-subnav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--line);
+}
+
+.edu-subnav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.25rem;
+  padding: 0.45rem 0.9rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--muted);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  text-decoration: none;
+  transition:
+    color 0.18s ease,
+    border-color 0.18s ease,
+    background 0.18s ease;
+}
+
+.edu-subnav a:hover,
+.edu-subnav a:focus-visible {
+  color: var(--text);
+  border-color: rgba(198, 255, 77, 0.35);
+  background: var(--accent-dim);
+  text-decoration: none;
+}
+
+.edu-subnav a[aria-current="page"] {
+  color: var(--accent-purple);
+  border-color: rgba(155, 126, 212, 0.45);
+  background: var(--accent-purple-dim);
+}
+
+.edu-hero-lead {
+  max-width: 58ch;
+  line-height: 1.65;
+}
+
+.edu-level-key {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin: var(--space-4) 0;
+}
+
+.edu-level-key-item {
+  flex: 1 1 12rem;
+  padding: var(--space-3);
+  background: var(--surface-raised);
+  border: 1px solid var(--line);
+  border-radius: 3px;
+}
+
+.edu-level-key-item h3 {
+  margin-top: 0;
+  font-size: 1rem;
+}
+
+.edu-lesson-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr));
+  gap: var(--space-3);
+}
+
+.edu-lesson-card {
+  margin: 0;
+  background: var(--surface-raised);
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  overflow: hidden;
+  transition:
+    border-color 0.18s ease,
+    transform 0.18s ease;
+}
+
+.edu-lesson-card:hover,
+.edu-lesson-card:focus-within {
+  border-color: rgba(155, 126, 212, 0.4);
+  transform: translateY(-2px);
+}
+
+.edu-lesson-card-link {
+  display: block;
+  padding: var(--space-3);
+  color: inherit;
+  text-decoration: none;
+}
+
+.edu-lesson-card-link:hover,
+.edu-lesson-card-link:focus-visible {
+  text-decoration: none;
+}
+
+.edu-lesson-card h2 {
+  margin: var(--space-2) 0 var(--space-1);
+  font-size: 1.25rem;
+}
+
+.edu-lesson-card p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+.edu-lesson-card-head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  align-items: center;
+}
+
+.edu-lesson-meta {
+  margin-top: var(--space-2) !important;
+  font-size: 0.82rem !important;
+}
+
+.edu-level-badge {
+  display: inline-block;
+  padding: 0.15rem 0.5rem;
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-radius: 3px;
+  border: 1px solid var(--line);
+}
+
+.edu-level-badge--101 {
+  color: var(--accent-cyan);
+  border-color: rgba(110, 200, 232, 0.35);
+  background: rgba(110, 200, 232, 0.08);
+}
+
+.edu-level-badge--102 {
+  color: var(--accent-purple);
+  border-color: rgba(155, 126, 212, 0.35);
+  background: rgba(155, 126, 212, 0.08);
+}
+
+.edu-category-tag {
+  display: inline-block;
+  padding: 0.15rem 0.45rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border: 1px solid var(--line);
+  border-radius: 3px;
+}
+
+/* Lesson profile */
+.edu-lesson {
+  max-width: 52rem;
+}
+
+.edu-lesson-header {
+  margin-bottom: var(--space-4);
+}
+
+.edu-lesson-breadcrumb {
+  margin: 0 0 var(--space-2);
+  font-size: 0.88rem;
+}
+
+.edu-lesson-breadcrumb a {
+  color: var(--muted);
+}
+
+.edu-lesson-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  align-items: center;
+  margin-bottom: var(--space-2);
+}
+
+.edu-reading-time {
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+.edu-lesson-summary {
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: var(--muted);
+  max-width: 58ch;
+}
+
+.edu-lesson-body {
+  margin-bottom: var(--space-4);
+}
+
+.edu-lesson-section {
+  margin-bottom: var(--space-4);
+}
+
+.edu-lesson-section h2 {
+  margin-top: 0;
+  font-size: 1.1rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--accent-cyan);
+}
+
+.edu-lesson-section p:last-child {
+  margin-bottom: 0;
+}
+
+.edu-lesson-aside {
+  display: grid;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+@media (min-width: 640px) {
+  .edu-lesson-aside {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .edu-lesson-related {
+    grid-column: 1 / -1;
+  }
+}
+
+.edu-aside-block {
+  padding: var(--space-3);
+  background: var(--surface-raised);
+  border: 1px solid var(--line);
+  border-radius: 3px;
+}
+
+.edu-aside-block h2 {
+  margin: 0 0 var(--space-2);
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.edu-aside-block--tips {
+  border-color: rgba(198, 255, 77, 0.25);
+}
+
+.edu-aside-block--tips h2 {
+  color: var(--accent);
+}
+
+.edu-aside-block--mistakes {
+  border-color: rgba(232, 168, 168, 0.3);
+}
+
+.edu-aside-block--mistakes h2 {
+  color: #e8a8a8;
+}
+
+.edu-lesson-list {
+  margin: 0;
+  padding-left: 1.15rem;
+  line-height: 1.6;
+}
+
+.edu-lesson-list li + li {
+  margin-top: 0.35rem;
+}
+
+.edu-lesson-related h2 {
+  margin: 0 0 var(--space-2);
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--accent-purple);
+}
+
+.edu-related-links {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.edu-related-links li + li {
+  margin-top: var(--space-2);
+}
+
+.edu-related-links a {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  align-items: center;
+  color: var(--text);
+}
+
+.edu-lesson-foot {
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--line);
+}
+
+.edu-lesson-foot .global-disclaimer {
+  margin-bottom: var(--space-3);
+  font-size: 0.88rem;
+}
+
+.edu-category-intro {
+  max-width: 58ch;
+  margin-bottom: var(--space-4);
+}
+
+.edu-crosslink {
+  margin-top: var(--space-4);
+  padding: var(--space-3);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 3px;
+}
+
+.edu-crosslink p {
+  margin: 0;
+}

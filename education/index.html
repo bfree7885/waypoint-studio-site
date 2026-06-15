@@ -3,14 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Waypoint Education — Earth systems, ecology, and nature explained simply for learners and classrooms.">
+  <meta name="description" content="Waypoint Education — calm field-guide lessons on species, skills, ecosystems, and foraging safety. 101 and 102 level learning.">
   <title>Waypoint Education | Waypoint Studio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Source+Sans+3:wght@300;400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../styles/site.css">
+  <link rel="stylesheet" href="../styles/education-lessons.css">
 </head>
-<body>
+<body data-edu-page="hub">
   <header class="site-header">
     <div class="header-inner">
       <a class="brand" href="../">Waypoint Studio</a>
@@ -28,64 +29,73 @@
 
   <main>
     <div class="wrap">
+      <div id="edu-subnav"></div>
+
       <section class="page-hero">
-        <span class="badge badge-planned">Planned</span>
+        <span class="badge badge-active">Learning</span>
         <h1>Waypoint Education</h1>
-        <p class="tagline">Earth systems, ecology, and nature explained simply.</p>
-        <p>
-          Waypoint Education will collect clear explanations, field notes,
-          naturalist learning, and Earth science resources.
+        <p class="tagline">Calm, field-guide lessons for curious beginners.</p>
+        <p class="edu-hero-lead">
+          Structured 101 and 102 level content — species, field skills, ecosystems, and safety.
+          Read slowly. Practice in the field. Build understanding over seasons.
         </p>
-        <p class="subscription-note">Subscription model coming soon for classroom packs.</p>
       </section>
 
       <section>
-        <h2>Planned resources</h2>
+        <h2>How levels work</h2>
+        <div class="edu-level-key">
+          <article class="edu-level-key-item">
+            <h3><span class="edu-level-badge edu-level-badge--101">101</span> Foundations</h3>
+            <p class="muted">First concepts, safe habits, and what to notice before going deeper.</p>
+          </article>
+          <article class="edu-level-key-item">
+            <h3><span class="edu-level-badge edu-level-badge--102">102</span> Going further</h3>
+            <p class="muted">Nuance, patterns, and repeatable field practice for returning learners.</p>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>Browse by topic</h2>
         <div class="feature-grid">
           <article class="feature-card">
-            <h3>Earth science</h3>
-            <p>Geology, weather, water, and climate — explained at introductory depth.</p>
+            <h3><a href="species/">Species</a></h3>
+            <p>Morels, chanterelles, and other forageables — habitat, season, and careful identification context.</p>
           </article>
           <article class="feature-card">
-            <h3>Ecology</h3>
-            <p>Energy flow, habitats, species interactions, and landscape patterns.</p>
+            <h3><a href="skills/">Skills</a></h3>
+            <p>Reading terrain, observation, and the quiet craft of moving well through a landscape.</p>
           </article>
           <article class="feature-card">
-            <h3>Field skills</h3>
-            <p>Observation, identification basics, note-taking, and map reading.</p>
+            <h3><a href="ecosystems/">Ecosystems</a></h3>
+            <p>Forest succession, habitat patterns, and why places change over decades.</p>
           </article>
           <article class="feature-card">
-            <h3>Naturalist reading</h3>
-            <p>Articles and field notes written for curious learners, not experts.</p>
-          </article>
-          <article class="feature-card">
-            <h3>Classroom-friendly resources</h3>
-            <p>Materials designed for teachers — clear, printable, and adaptable.</p>
+            <h3><a href="safety/">Safety</a></h3>
+            <p>Identification discipline, legal awareness, and responsible foraging habits.</p>
           </article>
         </div>
       </section>
 
       <section>
-        <h2>Pricing preview</h2>
-        <p class="muted">No payment processing yet.</p>
-        <div class="pricing-grid">
-          <article class="price-card">
-            <h3>Free resources</h3>
-            <p class="price-label">Articles, field notes, and introductory guides</p>
-            <span class="price-badge price-soon">Planned</span>
-          </article>
-          <article class="price-card">
-            <h3>Classroom resource packs</h3>
-            <p class="price-label">Curated materials for educators</p>
-            <span class="price-badge price-future">Future</span>
-          </article>
+        <header>
+          <h2>All lessons</h2>
+          <p class="muted">Six lessons to start — more added over time.</p>
+        </header>
+        <div class="edu-lesson-grid" id="edu-lesson-grid">
+          <p class="muted">Loading lessons…</p>
         </div>
       </section>
 
-      <section class="waitlist-cta">
-        <h2>Join updates</h2>
-        <p>Be notified when Waypoint Education resources and classroom packs launch.</p>
-        <a class="btn-primary" href="mailto:hello@waypointstudio.org?subject=Waitlist%20-%20Waypoint%20Education">Join updates</a>
+      <section class="edu-crosslink">
+        <p>
+          <strong>ForageCast users:</strong>
+          Pair these lessons with
+          <a href="../foragecast/">ForageCast</a>
+          for weather reads and scouting maps, or browse
+          <a href="../foragecast/education/">species profiles</a>
+          for quick field reference.
+        </p>
       </section>
     </div>
   </main>
@@ -95,5 +105,8 @@
       Waypoint Studio · Observe. Understand. Create. Share.
     </div>
   </footer>
+
+  <script src="lessons-data.js"></script>
+  <script src="lessons-render.js"></script>
 </body>
 </html>

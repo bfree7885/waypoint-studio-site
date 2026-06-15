@@ -315,3 +315,15 @@
 .fc-species-breadcrumb a:focus-visible {
   color: var(--accent);
 }
+
+.fc-education-crosslink {
+  padding: var(--space-3);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--fc-radius);
+}
+
+.fc-education-crosslink p {
+  margin: 0;
+  max-width: none;
+}
