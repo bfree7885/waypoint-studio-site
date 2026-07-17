@@ -2,117 +2,161 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Sheds — ethical shed hunting intelligence for terrain understanding, seasonal timing, and wildlife-aware field decisions.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="Sheds — map-first field view for ethical shed hunting and terrain understanding.">
+  <meta name="theme-color" content="#070b14">
   <title>Sheds | Waypoint Studio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Source+Sans+3:wght@300;400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Source+Sans+3:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
   <link rel="stylesheet" href="../styles/site.css">
+  <link rel="stylesheet" href="../styles/sheds.css">
 </head>
-<body>
-  <header class="site-header">
-    <div class="header-inner">
-      <a class="brand" href="../">Waypoint Studio</a>
-      <nav class="site-nav" aria-label="Main">
-        <a href="../">Home</a>
-        <a href="../waypoint-scenes/">Waypoint Scenes</a>
-        <a href="../foragecast/">ForageCast</a>
-        <a href="./" aria-current="page">Sheds</a>
-        <a href="../fieldry/">Fieldry</a>
-        <a href="../education/">Education</a>
-      </nav>
+<body class="sheds-app">
+  <a class="sheds-skip" href="#sheds-panel">Skip to details</a>
+
+  <div class="sheds-shell" id="sheds-shell">
+    <!-- Slim field bar (not full studio marketing nav) -->
+    <header class="sheds-bar" role="banner">
+      <div class="sheds-bar-left">
+        <a class="sheds-brand" href="../">Waypoint</a>
+        <span class="sheds-product" aria-current="page">Sheds</span>
+      </div>
+      <div class="sheds-bar-actions">
+        <button type="button" class="sheds-bar-btn" id="sheds-about-btn" aria-expanded="false" aria-controls="sheds-about">About</button>
+        <a class="sheds-bar-btn sheds-bar-btn-accent" href="mailto:hello@waypointstudio.org?subject=Waitlist%20-%20Sheds">Waitlist</a>
+      </div>
+    </header>
+
+    <!-- Status banners -->
+    <div class="sheds-banners" aria-live="polite">
+      <p class="sheds-banner sheds-banner-offline" id="sheds-offline" hidden>You’re offline. Map tiles may be limited.</p>
+      <p class="sheds-banner sheds-banner-edu" id="sheds-edu-banner" hidden>Education mode — hotspot-style zones are hidden.</p>
     </div>
-  </header>
 
-  <main>
-    <div class="wrap">
-      <section class="page-hero">
-        <span class="badge badge-planned">Planned</span>
-        <h1>Sheds</h1>
-        <p class="tagline">Ethical shed hunting intelligence.</p>
-        <p>
-          Sheds is a future field tool for responsible shed hunting, terrain
-          understanding, seasonal timing, observation logging, and wildlife-aware
-          decision support.
-        </p>
-        <p class="subscription-note">Subscription model coming soon.</p>
-      </section>
+    <!-- Map is the application -->
+    <div class="sheds-map-wrap" id="sheds-map-wrap">
+      <div id="sheds-map" class="sheds-map" role="application" aria-label="Sheds field map"></div>
 
-      <section>
-        <h2>Features</h2>
-        <div class="feature-grid">
-          <article class="feature-card">
-            <h3>Field View</h3>
-            <p>Map-first interface designed for use on the ground — explore terrain layers in real time.</p>
-          </article>
-          <article class="feature-card">
-            <h3>Terrain Insight</h3>
-            <p>Slope, aspect, terrain position, and habitat context combined into probability-weighted zones.</p>
-          </article>
-          <article class="feature-card">
-            <h3>Seasonal timing</h3>
-            <p>Understand when landscape conditions align with shed activity — not just where.</p>
-          </article>
-          <article class="feature-card">
-            <h3>Observation logging</h3>
-            <p>Each find becomes a structured data point linked to terrain at time of discovery.</p>
-          </article>
-          <article class="feature-card">
-            <h3>Photo-based shed records</h3>
-            <p>Field photos paired with estimated characteristics and landscape context.</p>
-          </article>
-          <article class="feature-card">
-            <h3>Research-grade ecology dataset</h3>
-            <p>Contributions build toward understanding wildlife movement and habitat use over time.</p>
-          </article>
+      <!-- Compact HUD (mobile); desktop uses side panel + location chip -->
+      <div class="sheds-hud" id="sheds-hud">
+        <div class="sheds-hud-row">
+          <p class="sheds-hud-label">Location</p>
+          <p class="sheds-hud-value" id="sheds-location">Finding map…</p>
         </div>
-      </section>
-
-      <section>
-        <h2>Ethics</h2>
-        <div class="note">
-          During closed seasons, hotspot-style guidance is disabled and the app
-          shifts into education mode. The goal is to reduce wildlife pressure,
-          support responsible off-trail awareness, and help users understand
-          landscapes without harming animals.
+        <div class="sheds-hud-row sheds-hud-conditions">
+          <p class="sheds-hud-label">Today</p>
+          <p class="sheds-condition" id="sheds-condition" data-level="fair">
+            <span class="sheds-condition-dot" aria-hidden="true"></span>
+            <span id="sheds-condition-text">Fair</span>
+          </p>
         </div>
-      </section>
-
-      <section>
-        <h2>Pricing preview</h2>
-        <p class="muted">No payment processing yet.</p>
-        <div class="pricing-grid">
-          <article class="price-card">
-            <h3>Free education mode</h3>
-            <p class="price-label">Terrain learning and seasonal ecology content</p>
-            <span class="price-badge price-soon">Planned</span>
-          </article>
-          <article class="price-card">
-            <h3>Sheds Field subscription</h3>
-            <p class="price-label">Full field tools and observation logging</p>
-            <span class="price-badge price-soon">Planned</span>
-          </article>
-          <article class="price-card">
-            <h3>Research / data access</h3>
-            <p class="price-label">Aggregated ecology datasets</p>
-            <span class="price-badge price-future">Future</span>
-          </article>
+        <div class="sheds-hud-row">
+          <p class="sheds-hud-label">Best nearby</p>
+          <p class="sheds-hud-value" id="sheds-opportunity">South benches — demo</p>
         </div>
-      </section>
+        <p class="sheds-hud-why" id="sheds-why">Warm aspect holds sun longer after cold nights.</p>
+        <p class="sheds-hud-status" id="sheds-gps-status"></p>
+      </div>
 
-      <section class="waitlist-cta">
-        <h2>Join the Sheds waitlist</h2>
-        <p>Be notified when Sheds enters development beta and subscriptions open.</p>
-        <a class="btn-primary" href="mailto:hello@waypointstudio.org?subject=Waitlist%20-%20Sheds">Join the Sheds waitlist</a>
-      </section>
+      <div class="sheds-map-location" id="sheds-map-location" aria-live="polite">
+        <span id="sheds-location-desktop">Finding map…</span>
+        <p class="sheds-hud-status" id="sheds-gps-status-desktop"></p>
+      </div>
+
+      <!-- Field controls -->
+      <div class="sheds-controls" role="toolbar" aria-label="Map controls">
+        <button type="button" class="sheds-ctrl sheds-ctrl-primary" id="sheds-locate-btn" title="Use my location" aria-label="Use my location">
+          <span class="sheds-ctrl-icon" aria-hidden="true"></span>
+          <span class="sheds-ctrl-label">Locate</span>
+        </button>
+        <button type="button" class="sheds-ctrl" id="sheds-zones-btn" aria-pressed="true" title="Toggle demo zones">
+          Zones
+        </button>
+        <button type="button" class="sheds-ctrl" id="sheds-edu-btn" aria-pressed="false" title="Education mode">
+          Edu
+        </button>
+        <button type="button" class="sheds-ctrl sheds-ctrl-sheet" id="sheds-sheet-toggle" aria-expanded="true" aria-controls="sheds-panel" title="Details">
+          Details
+        </button>
+      </div>
+
+      <p class="sheds-demo-tag" id="sheds-demo-tag">Demo zones · not a find guarantee</p>
     </div>
-  </main>
 
-  <footer class="site-footer">
-    <div class="footer-inner">
-      Waypoint Studio · Observe. Understand. Create. Share.
+    <!-- Desktop side panel / mobile bottom sheet -->
+    <aside class="sheds-panel" id="sheds-panel" aria-label="Field details">
+      <div class="sheds-sheet-handle" id="sheds-sheet-handle" aria-hidden="true">
+        <span class="sheds-sheet-grip"></span>
+      </div>
+
+      <div class="sheds-panel-inner">
+        <header class="sheds-panel-head">
+          <h1 class="sheds-panel-title">Field View</h1>
+          <p class="sheds-panel-tagline">Terrain context for ethical shed hunting.</p>
+        </header>
+
+        <section class="sheds-panel-section" aria-labelledby="sheds-read-heading">
+          <h2 id="sheds-read-heading" class="sheds-panel-h">Today’s read</h2>
+          <dl class="sheds-read">
+            <div>
+              <dt>Conditions</dt>
+              <dd id="sheds-panel-condition">Fair</dd>
+            </div>
+            <div>
+              <dt>Opportunity</dt>
+              <dd id="sheds-panel-opportunity">South benches — demo</dd>
+            </div>
+          </dl>
+          <p class="sheds-panel-why" id="sheds-panel-why">Warm aspect holds sun longer after cold nights.</p>
+          <p class="sheds-panel-note" id="sheds-panel-note">Illustrative demo only. Patterns are patterned — not guarantees.</p>
+        </section>
+
+        <section class="sheds-panel-section" aria-labelledby="sheds-legend-heading">
+          <h2 id="sheds-legend-heading" class="sheds-panel-h">Legend</h2>
+          <ul class="sheds-legend" id="sheds-legend">
+            <li><span class="sheds-swatch sheds-swatch-high"></span> Higher relative interest</li>
+            <li><span class="sheds-swatch sheds-swatch-med"></span> Moderate</li>
+            <li><span class="sheds-swatch sheds-swatch-low"></span> Lower</li>
+          </ul>
+          <p class="sheds-legend-state muted" id="sheds-legend-state"></p>
+        </section>
+
+        <section class="sheds-panel-section" aria-labelledby="sheds-ethics-heading">
+          <h2 id="sheds-ethics-heading" class="sheds-panel-h">Ethics</h2>
+          <p class="sheds-panel-copy">
+            During closed seasons, turn on Education mode. Hotspot-style guidance stays off.
+            Learn the land without adding pressure.
+          </p>
+        </section>
+      </div>
+    </aside>
+  </div>
+
+  <!-- About overlay -->
+  <div class="sheds-about" id="sheds-about" hidden role="dialog" aria-modal="true" aria-labelledby="sheds-about-title">
+    <div class="sheds-about-backdrop" id="sheds-about-backdrop" tabindex="-1"></div>
+    <div class="sheds-about-card">
+      <header class="sheds-about-head">
+        <h2 id="sheds-about-title">About Sheds</h2>
+        <button type="button" class="sheds-about-close" id="sheds-about-close" aria-label="Close">Close</button>
+      </header>
+      <p>
+        Sheds is a map-first field prototype for terrain understanding and ethical shed hunting.
+        Demo zones are illustrative — not a prediction model.
+      </p>
+      <p class="muted">
+        Deep product story:
+        <a href="../projects/sheds/">projects/sheds</a>
+      </p>
+      <p>
+        <a class="btn-primary" href="mailto:hello@waypointstudio.org?subject=Waitlist%20-%20Sheds">Join the waitlist</a>
+      </p>
     </div>
-  </footer>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="sheds.js" defer></script>
 </body>
 </html>
