@@ -1,0 +1,397 @@
+{
+  "version": 1,
+  "updatedAt": "2026-07-16",
+  "description": "Canonical relationship type registry for the Waypoint knowledge graph. Prefer reusing these keys across all products.",
+  "types": [
+    {
+      "key": "observed_at",
+      "label": "Observed At",
+      "class": "observational",
+      "description": "Subject was noticed at a place.",
+      "inverse": "has_observation",
+      "typicalFrom": ["observation", "species"],
+      "typicalTo": ["location", "habitat", "park", "trail"],
+      "allowsSelf": false
+    },
+    {
+      "key": "photographed_at",
+      "label": "Photographed At",
+      "class": "observational",
+      "description": "Media was captured at a place.",
+      "inverse": "has_photo",
+      "typicalFrom": ["photo"],
+      "typicalTo": ["location", "habitat", "park", "trail"],
+      "allowsSelf": false
+    },
+    {
+      "key": "found_near",
+      "label": "Found Near",
+      "class": "observational",
+      "description": "Loose spatial proximity without requiring a precise point.",
+      "inverse": "nearby_find",
+      "typicalFrom": ["observation", "species", "photo"],
+      "typicalTo": ["location", "habitat", "trail", "river", "terrain_feature"],
+      "allowsSelf": false
+    },
+    {
+      "key": "observed_together",
+      "label": "Observed Together",
+      "class": "observational",
+      "description": "Co-occurrence in the field.",
+      "inverse": "observed_together",
+      "typicalFrom": ["observation", "species"],
+      "typicalTo": ["species", "observation"],
+      "allowsSelf": false
+    },
+    {
+      "key": "referenced_by",
+      "label": "Referenced By",
+      "class": "observational",
+      "description": "Another entity cites, includes, or points at this one.",
+      "inverse": "references",
+      "typicalFrom": ["article", "research_paper", "collection", "topic"],
+      "typicalTo": ["species", "location", "photo", "article", "research_paper"],
+      "allowsSelf": false
+    },
+    {
+      "key": "occurs_during",
+      "label": "Occurs During",
+      "class": "temporal",
+      "description": "Happens within a temporal window or named season/event.",
+      "inverse": "includes_occurrence",
+      "typicalFrom": ["observation", "phenology_event", "weather_event", "species"],
+      "typicalTo": ["season", "weather_event", "historical_event", "climate_pattern"],
+      "allowsSelf": false
+    },
+    {
+      "key": "influenced_by",
+      "label": "Influenced By",
+      "class": "systemic",
+      "description": "Causal or strongly conditioning relationship across domains.",
+      "inverse": "influences",
+      "typicalFrom": ["species", "observation", "radio_signal", "phenology_event"],
+      "typicalTo": ["weather_event", "climate_pattern", "historical_event", "terrain_feature"],
+      "allowsSelf": false
+    },
+    {
+      "key": "supported_by",
+      "label": "Supported By",
+      "class": "evidential",
+      "description": "Claim, guidance, or interpretation backed by a source.",
+      "inverse": "supports",
+      "typicalFrom": ["topic", "article", "species", "habitat"],
+      "typicalTo": ["research_paper", "article", "government_publication", "observation"],
+      "allowsSelf": false
+    },
+    {
+      "key": "contradicted_by",
+      "label": "Contradicted By",
+      "class": "evidential",
+      "description": "Conflicting evidence relative to a claim or source.",
+      "inverse": "contradicts",
+      "typicalFrom": ["article", "research_paper", "topic"],
+      "typicalTo": ["research_paper", "article", "government_publication"],
+      "allowsSelf": false
+    },
+    {
+      "key": "related_research",
+      "label": "Related Research",
+      "class": "evidential",
+      "description": "Relevant study without asserting strong support or contradiction.",
+      "inverse": "research_related_to",
+      "typicalFrom": ["species", "habitat", "topic", "location"],
+      "typicalTo": ["research_paper", "government_publication"],
+      "allowsSelf": false
+    },
+    {
+      "key": "parent_topic",
+      "label": "Parent Topic",
+      "class": "topical",
+      "description": "Broader topic hub.",
+      "inverse": "child_topic",
+      "typicalFrom": ["topic"],
+      "typicalTo": ["topic"],
+      "allowsSelf": false
+    },
+    {
+      "key": "child_topic",
+      "label": "Child Topic",
+      "class": "topical",
+      "description": "Narrower topic hub. Prefer storing parent_topic only when possible.",
+      "inverse": "parent_topic",
+      "typicalFrom": ["topic"],
+      "typicalTo": ["topic"],
+      "allowsSelf": false
+    },
+    {
+      "key": "similar_species",
+      "label": "Similar Species",
+      "class": "ecological",
+      "description": "Taxonomic or ecological similarity.",
+      "inverse": "similar_species",
+      "typicalFrom": ["species"],
+      "typicalTo": ["species"],
+      "allowsSelf": false
+    },
+    {
+      "key": "often_confused_with",
+      "label": "Often Confused With",
+      "class": "ecological",
+      "description": "Identification lookalike or common confusion pair.",
+      "inverse": "often_confused_with",
+      "typicalFrom": ["species"],
+      "typicalTo": ["species"],
+      "allowsSelf": false
+    },
+    {
+      "key": "associated_habitat",
+      "label": "Associated Habitat",
+      "class": "ecological",
+      "description": "Species or process linked to a habitat.",
+      "inverse": "habitat_for",
+      "typicalFrom": ["species", "observation", "phenology_event"],
+      "typicalTo": ["habitat"],
+      "allowsSelf": false
+    },
+    {
+      "key": "seasonal_relationship",
+      "label": "Seasonal Relationship",
+      "class": "ecological",
+      "description": "Recurring seasonal association.",
+      "inverse": "seasonally_related_to",
+      "typicalFrom": ["species", "habitat", "phenology_event", "topic"],
+      "typicalTo": ["season", "phenology_event"],
+      "allowsSelf": false
+    },
+    {
+      "key": "weather_relationship",
+      "label": "Weather Relationship",
+      "class": "systemic",
+      "description": "Association with weather conditions or events.",
+      "inverse": "weather_related_to",
+      "typicalFrom": ["species", "observation", "phenology_event", "photo"],
+      "typicalTo": ["weather_event", "climate_pattern"],
+      "allowsSelf": false
+    },
+    {
+      "key": "terrain_relationship",
+      "label": "Terrain Relationship",
+      "class": "ecological",
+      "description": "Association with landform or substrate.",
+      "inverse": "terrain_related_to",
+      "typicalFrom": ["species", "habitat", "location", "observation"],
+      "typicalTo": ["terrain_feature"],
+      "allowsSelf": false
+    },
+    {
+      "key": "historical_relationship",
+      "label": "Historical Relationship",
+      "class": "systemic",
+      "description": "Link grounded in historical change or event.",
+      "inverse": "historically_related_to",
+      "typicalFrom": ["location", "habitat", "species", "infrastructure"],
+      "typicalTo": ["historical_event"],
+      "allowsSelf": false
+    },
+    {
+      "key": "future_extension",
+      "label": "Future Extension",
+      "class": "extensibility",
+      "description": "Reserved experimental link for domains not yet given a stable type.",
+      "inverse": "future_extension",
+      "typicalFrom": [],
+      "typicalTo": [],
+      "allowsSelf": true
+    },
+    {
+      "key": "derived_from",
+      "label": "Derived From",
+      "class": "evidential",
+      "description": "Built from prior work, dataset, or entity.",
+      "inverse": "derivative",
+      "typicalFrom": ["article", "research_paper", "collection", "topic"],
+      "typicalTo": ["research_paper", "article", "government_publication", "collection"],
+      "allowsSelf": false
+    },
+    {
+      "key": "explains",
+      "label": "Explains",
+      "class": "evidential",
+      "description": "Provides an explanatory account of another entity.",
+      "inverse": "explained_by",
+      "typicalFrom": ["article", "research_paper", "topic"],
+      "typicalTo": ["species", "habitat", "phenology_event", "weather_event", "terrain_feature"],
+      "allowsSelf": false
+    },
+    {
+      "key": "expands_upon",
+      "label": "Expands Upon",
+      "class": "evidential",
+      "description": "Extends prior work with additional detail or scope.",
+      "inverse": "expanded_by",
+      "typicalFrom": ["article", "research_paper"],
+      "typicalTo": ["article", "research_paper", "topic"],
+      "allowsSelf": false
+    },
+    {
+      "key": "updated_research",
+      "label": "Updated Research",
+      "class": "evidential",
+      "description": "Newer work that updates or supersedes older research.",
+      "inverse": "superseded_by_research",
+      "typicalFrom": ["research_paper"],
+      "typicalTo": ["research_paper"],
+      "allowsSelf": false
+    },
+    {
+      "key": "recommended_reading",
+      "label": "Recommended Reading",
+      "class": "editorial",
+      "description": "Suggested next read for learning or context.",
+      "inverse": "recommended_for",
+      "typicalFrom": ["topic", "species", "habitat"],
+      "typicalTo": ["article", "book", "field_guide", "research_paper"],
+      "allowsSelf": false
+    },
+    {
+      "key": "background",
+      "label": "Background",
+      "class": "editorial",
+      "description": "Helpful optional context.",
+      "inverse": "background_for",
+      "typicalFrom": ["topic", "article", "species"],
+      "typicalTo": ["article", "book", "historical_event"],
+      "allowsSelf": false
+    },
+    {
+      "key": "prerequisite_knowledge",
+      "label": "Prerequisite Knowledge",
+      "class": "editorial",
+      "description": "Should understand first.",
+      "inverse": "unlocks_understanding_of",
+      "typicalFrom": ["topic", "article"],
+      "typicalTo": ["topic", "article"],
+      "allowsSelf": false
+    },
+    {
+      "key": "conflicting_evidence",
+      "label": "Conflicting Evidence",
+      "class": "editorial",
+      "description": "Editorial flag that sources disagree.",
+      "inverse": "conflict_noted_for",
+      "typicalFrom": ["topic", "article", "species"],
+      "typicalTo": ["research_paper", "article"],
+      "allowsSelf": false
+    },
+    {
+      "key": "historical_context",
+      "label": "Historical Context",
+      "class": "editorial",
+      "description": "Past framing that still matters to understanding.",
+      "inverse": "provides_historical_context_for",
+      "typicalFrom": ["topic", "location", "species"],
+      "typicalTo": ["historical_event", "article", "government_publication"],
+      "allowsSelf": false
+    },
+    {
+      "key": "foundational_research",
+      "label": "Foundational Research",
+      "class": "editorial",
+      "description": "Cornerstone citation for a topic or taxon.",
+      "inverse": "foundational_for",
+      "typicalFrom": ["topic", "species", "habitat"],
+      "typicalTo": ["research_paper"],
+      "allowsSelf": false
+    },
+    {
+      "key": "expert_commentary",
+      "label": "Expert Commentary",
+      "class": "editorial",
+      "description": "Expert framing or commentary.",
+      "inverse": "comments_on",
+      "typicalFrom": ["author", "organization"],
+      "typicalTo": ["article", "topic", "research_paper", "species"],
+      "allowsSelf": false
+    },
+    {
+      "key": "waypoint_perspective",
+      "label": "Waypoint Perspective",
+      "class": "editorial",
+      "description": "Studio interpretive stance or synthesis.",
+      "inverse": "perspective_on",
+      "typicalFrom": ["topic", "article"],
+      "typicalTo": ["species", "habitat", "topic", "location"],
+      "allowsSelf": false
+    },
+    {
+      "key": "within",
+      "label": "Within",
+      "class": "spatial",
+      "description": "Contained by a larger place or region.",
+      "inverse": "contains",
+      "typicalFrom": ["location", "park", "habitat", "trail", "observation"],
+      "typicalTo": ["region", "park", "location", "habitat"],
+      "allowsSelf": false
+    },
+    {
+      "key": "adjacent_to",
+      "label": "Adjacent To",
+      "class": "spatial",
+      "description": "Shares boundary, corridor, or immediate neighborhood.",
+      "inverse": "adjacent_to",
+      "typicalFrom": ["location", "habitat", "park", "region"],
+      "typicalTo": ["location", "habitat", "park", "region"],
+      "allowsSelf": false
+    },
+    {
+      "key": "drains_to",
+      "label": "Drains To",
+      "class": "spatial",
+      "description": "Hydrologic flow relationship.",
+      "inverse": "receives_drainage_from",
+      "typicalFrom": ["river", "location", "region"],
+      "typicalTo": ["river", "region"],
+      "allowsSelf": false
+    },
+    {
+      "key": "along",
+      "label": "Along",
+      "class": "spatial",
+      "description": "Follows or is associated with a linear feature.",
+      "inverse": "has_along",
+      "typicalFrom": ["location", "observation", "photo", "habitat"],
+      "typicalTo": ["trail", "river"],
+      "allowsSelf": false
+    },
+    {
+      "key": "precedes",
+      "label": "Precedes",
+      "class": "temporal",
+      "description": "Ordered before in time or lifecycle sequence.",
+      "inverse": "follows",
+      "typicalFrom": ["phenology_event", "historical_event", "observation", "weather_event", "research_paper"],
+      "typicalTo": ["phenology_event", "historical_event", "observation", "weather_event", "research_paper"],
+      "allowsSelf": false
+    },
+    {
+      "key": "follows",
+      "label": "Follows",
+      "class": "temporal",
+      "description": "Ordered after. Prefer storing precedes as canonical.",
+      "inverse": "precedes",
+      "typicalFrom": ["phenology_event", "historical_event", "observation", "weather_event"],
+      "typicalTo": ["phenology_event", "historical_event", "observation", "weather_event"],
+      "allowsSelf": false
+    },
+    {
+      "key": "overlaps_in_time",
+      "label": "Overlaps In Time",
+      "class": "temporal",
+      "description": "Concurrent or overlapping temporal windows.",
+      "inverse": "overlaps_in_time",
+      "typicalFrom": ["observation", "weather_event", "phenology_event", "season"],
+      "typicalTo": ["observation", "weather_event", "phenology_event", "season"],
+      "allowsSelf": false
+    }
+  ]
+}

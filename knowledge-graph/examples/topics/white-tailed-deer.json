@@ -1,0 +1,59 @@
+{
+  "id": "wp:topic:white-tailed-deer",
+  "type": "topic",
+  "label": "White-tailed Deer",
+  "summary": "Living hub for deer ecology, winter bedding, shed context, photography, and field history.",
+  "status": "active",
+  "hubEntityId": "wp:species:white-tailed-deer",
+  "provenance": {
+    "source": "waypoint-editorial",
+    "createdAt": "2026-07-16"
+  },
+  "sections": [
+    {
+      "key": "identity",
+      "title": "Identity",
+      "entityIds": ["wp:species:white-tailed-deer"]
+    },
+    {
+      "key": "habitat_place",
+      "title": "Habitat & Place",
+      "relationshipTypes": ["associated_habitat", "found_near", "terrain_relationship"]
+    },
+    {
+      "key": "conditions",
+      "title": "Current & Seasonal Conditions",
+      "relationshipTypes": ["influenced_by", "seasonal_relationship", "weather_relationship", "occurs_during"]
+    },
+    {
+      "key": "evidence",
+      "title": "Research & Guides",
+      "relationshipTypes": ["related_research", "foundational_research", "recommended_reading", "supported_by"]
+    },
+    {
+      "key": "media",
+      "title": "Photographs & Scenes",
+      "relationshipTypes": ["photographed_at", "referenced_by"]
+    },
+    {
+      "key": "field_history",
+      "title": "Field History",
+      "relationshipTypes": ["observed_at", "observed_together", "precedes"]
+    }
+  ],
+  "crossAppHints": [
+    { "app": "sheds", "reason": "Terrain and winter bedding intelligence" },
+    { "app": "fieldry", "reason": "Historical and personal observations" },
+    { "app": "waypoint-scenes", "reason": "Wildlife lighting and scene studies" },
+    { "app": "education", "reason": "Ecology and reading paths" }
+  ],
+  "seedRelationshipsFromSample": [
+    "rel:deer-habitat-oak",
+    "rel:deer-found-near-ridge",
+    "rel:deer-influenced-warmup",
+    "rel:deer-season-bedding",
+    "rel:deer-research-bedding",
+    "rel:deer-reading-guide",
+    "rel:fieldry-obs-deer"
+  ]
+}

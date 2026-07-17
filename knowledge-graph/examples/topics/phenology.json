@@ -1,0 +1,49 @@
+{
+  "id": "wp:topic:phenology",
+  "type": "topic",
+  "label": "Phenology",
+  "summary": "Living hub for seasonal life-cycle timing — flowering, fruiting, migration, leaf-out, and return visits to place.",
+  "status": "active",
+  "hubEntityId": "wp:topic:phenology",
+  "provenance": {
+    "source": "waypoint-editorial",
+    "createdAt": "2026-07-16"
+  },
+  "sections": [
+    {
+      "key": "identity",
+      "title": "Identity",
+      "entityIds": ["wp:topic:phenology"]
+    },
+    {
+      "key": "events",
+      "title": "Phenology Events",
+      "relationshipTypes": ["seasonal_relationship", "precedes", "follows", "occurs_during"]
+    },
+    {
+      "key": "drivers",
+      "title": "Drivers",
+      "relationshipTypes": ["influenced_by", "weather_relationship", "terrain_relationship"]
+    },
+    {
+      "key": "species",
+      "title": "Species Windows",
+      "relationshipTypes": ["seasonal_relationship", "associated_habitat"]
+    },
+    {
+      "key": "learning",
+      "title": "Reading & Research",
+      "relationshipTypes": ["recommended_reading", "foundational_research", "related_research"]
+    }
+  ],
+  "crossAppHints": [
+    { "app": "fieldry", "reason": "Personal seasonal collections" },
+    { "app": "foragecast", "reason": "Fruiting and forage windows" },
+    { "app": "education", "reason": "Earth-systems explainers" },
+    { "app": "sheds", "reason": "Seasonal wildlife timing" }
+  ],
+  "timelineSupport": {
+    "preferredEdgeTypes": ["precedes", "occurs_during", "seasonal_relationship"],
+    "preferredTemporalKinds": ["seasonal", "interval", "instant"]
+  }
+}

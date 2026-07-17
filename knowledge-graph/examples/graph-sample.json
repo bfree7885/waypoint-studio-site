@@ -1,0 +1,523 @@
+{
+  "version": 1,
+  "title": "Waypoint Knowledge Graph — Sample Slice",
+  "description": "Illustrative connected graph: White-tailed Deer story spanning habitat, weather, research, photography, Fieldry, ForageCast ecology, and conditions. Not production data.",
+  "generatedAt": "2026-07-16",
+  "entities": [
+    {
+      "id": "wp:species:white-tailed-deer",
+      "type": "species",
+      "label": "White-tailed Deer",
+      "summary": "Common eastern woodland ungulate with strong seasonal habitat shifts and high photographic interest.",
+      "aliases": ["Odocoileus virginianus", "whitetail"],
+      "status": "active",
+      "spatial": null,
+      "temporal": null,
+      "externalIds": [],
+      "provenance": {
+        "source": "waypoint-editorial",
+        "createdAt": "2026-07-16",
+        "updatedAt": "2026-07-16"
+      },
+      "properties": {
+        "scientificName": "Odocoileus virginianus",
+        "category": "Mammal"
+      },
+      "apps": ["sheds", "fieldry", "education", "waypoint-scenes"]
+    },
+    {
+      "id": "wp:habitat:oak-forest",
+      "type": "habitat",
+      "label": "Oak Forest",
+      "summary": "Hardwood forest dominated by oak; mast, cover, and understory structure shape wildlife use.",
+      "status": "active",
+      "spatial": null,
+      "temporal": null,
+      "provenance": {
+        "source": "waypoint-editorial",
+        "createdAt": "2026-07-16"
+      },
+      "properties": {},
+      "apps": ["foragecast", "sheds", "fieldry", "education"]
+    },
+    {
+      "id": "wp:location:oak-ridge",
+      "type": "location",
+      "label": "Oak Ridge",
+      "summary": "Example named ridge with mixed oak cover and south-facing benches.",
+      "status": "active",
+      "spatial": {
+        "kind": "point",
+        "geometry": { "type": "Point", "coordinates": [-78.5, 42.1] },
+        "precision": "approximate",
+        "placeHierarchy": {
+          "county": "Example County",
+          "state": "NY",
+          "country": "US"
+        }
+      },
+      "temporal": null,
+      "provenance": {
+        "source": "waypoint-editorial",
+        "createdAt": "2026-07-16",
+        "notes": "Coordinates are illustrative only."
+      },
+      "properties": {},
+      "apps": ["fieldry", "sheds", "foragecast"]
+    },
+    {
+      "id": "wp:terrain_feature:south-facing-slope",
+      "type": "terrain_feature",
+      "label": "South-facing Slope",
+      "summary": "Warm aspect that sheds snow earlier and concentrates winter sun.",
+      "status": "active",
+      "spatial": null,
+      "temporal": null,
+      "provenance": {
+        "source": "waypoint-editorial",
+        "createdAt": "2026-07-16"
+      },
+      "properties": { "aspect": "south" },
+      "apps": ["sheds", "foragecast", "fieldry"]
+    },
+    {
+      "id": "wp:weather_event:south-slope-warm-up",
+      "type": "weather_event",
+      "label": "South-facing Slope Warming",
+      "summary": "Multi-day late-winter warm-up that softens south benches and shifts wildlife and photographer timing.",
+      "status": "active",
+      "spatial": {
+        "kind": "region_ref",
+        "regionId": "wp:location:oak-ridge",
+        "precision": "region_only"
+      },
+      "temporal": {
+        "kind": "interval",
+        "start": "2026-02-18",
+        "end": "2026-02-22",
+        "label": "Late-winter warm spell"
+      },
+      "provenance": {
+        "source": "waypoint-editorial",
+        "createdAt": "2026-07-16"
+      },
+      "properties": {},
+      "apps": ["foragecast", "sheds", "waypoint-scenes", "platform"]
+    },
+    {
+      "id": "wp:season:winter-bedding",
+      "type": "season",
+      "label": "Winter Bedding Season",
+      "summary": "Cold-season window when thermal cover and solar intercept strongly influence deer bedding.",
+      "status": "active",
+      "spatial": null,
+      "temporal": {
+        "kind": "seasonal",
+        "seasons": ["winter", "late-winter"],
+        "hemisphere": "northern"
+      },
+      "provenance": {
+        "source": "waypoint-editorial",
+        "createdAt": "2026-07-16"
+      },
+      "properties": {},
+      "apps": ["sheds", "education", "fieldry"]
+    },
+    {
+      "id": "wp:research_paper:winter-bedding-study",
+      "type": "research_paper",
+      "label": "Winter Bedding Study",
+      "summary": "Illustrative study on winter bedding site selection relative to aspect and cover.",
+      "status": "draft",
+      "spatial": null,
+      "temporal": {
+        "kind": "instant",
+        "at": "2019-01-01",
+        "label": "Publication year (illustrative)"
+      },
+      "provenance": {
+        "source": "waypoint-editorial",
+        "createdAt": "2026-07-16",
+        "notes": "Placeholder paper node for graph architecture demos."
+      },
+      "properties": { "year": 2019 },
+      "apps": ["education", "sheds"]
+    },
+    {
+      "id": "wp:article:good-wildlife-lighting",
+      "type": "article",
+      "label": "Good Wildlife Lighting Today",
+      "summary": "Photo Coach-style note on using warm side-light on south slopes after a cold stretch.",
+      "status": "draft",
+      "spatial": null,
+      "temporal": null,
+      "provenance": {
+        "source": "waypoint-editorial",
+        "createdAt": "2026-07-16"
+      },
+      "properties": {},
+      "apps": ["waypoint-scenes", "education"]
+    },
+    {
+      "id": "wp:topic:wildlife-photography",
+      "type": "topic",
+      "label": "Wildlife Photography",
+      "summary": "Living hub for photographing animals with ecological awareness.",
+      "status": "active",
+      "spatial": null,
+      "temporal": null,
+      "provenance": {
+        "source": "waypoint-editorial",
+        "createdAt": "2026-07-16"
+      },
+      "properties": {},
+      "apps": ["education", "waypoint-scenes", "gallery"]
+    },
+    {
+      "id": "wp:topic:oak-forest",
+      "type": "topic",
+      "label": "Oak Forest",
+      "summary": "Living hub for oak forest ecology, mast, wildlife, and foraging context.",
+      "status": "active",
+      "spatial": null,
+      "temporal": null,
+      "provenance": {
+        "source": "waypoint-editorial",
+        "createdAt": "2026-07-16"
+      },
+      "properties": {},
+      "apps": ["education", "foragecast", "fieldry", "sheds"]
+    },
+    {
+      "id": "wp:observation:fieldry-oak-ridge-2025-02-20",
+      "type": "observation",
+      "label": "Deer tracks on south bench",
+      "summary": "Fieldry-style historical observation: fresh tracks along a thawed south-facing bench.",
+      "status": "active",
+      "spatial": {
+        "kind": "point",
+        "geometry": { "type": "Point", "coordinates": [-78.501, 42.102] },
+        "precision": "obscured"
+      },
+      "temporal": {
+        "kind": "instant",
+        "at": "2025-02-20T08:40:00",
+        "timezone": "America/New_York"
+      },
+      "provenance": {
+        "source": "fieldry",
+        "createdAt": "2025-02-20"
+      },
+      "properties": { "notes": "Illustrative Fieldry record." },
+      "apps": ["fieldry"]
+    },
+    {
+      "id": "wp:species:morel",
+      "type": "species",
+      "label": "Morel",
+      "summary": "Spring fruiting fungus of mixed hardwoods and disturbance edges; ForageCast education species.",
+      "aliases": ["Morchella spp."],
+      "status": "active",
+      "spatial": null,
+      "temporal": {
+        "kind": "seasonal",
+        "seasons": ["early-spring", "spring"],
+        "hemisphere": "northern"
+      },
+      "provenance": {
+        "source": "foragecast",
+        "createdAt": "2026-07-16",
+        "notes": "Aligned with foragecast/education species slug."
+      },
+      "properties": {
+        "scientificName": "Morchella spp.",
+        "category": "Fungus",
+        "foragecastSlug": "morel"
+      },
+      "apps": ["foragecast", "fieldry", "education"]
+    },
+    {
+      "id": "wp:article:oak-forest-ecology",
+      "type": "article",
+      "label": "Oak Forest Ecology",
+      "summary": "ForageCast-adjacent ecology explainer tying mast, understory light, and spring fungi.",
+      "status": "draft",
+      "spatial": null,
+      "temporal": null,
+      "provenance": {
+        "source": "waypoint-editorial",
+        "createdAt": "2026-07-16"
+      },
+      "properties": {},
+      "apps": ["foragecast", "education"]
+    },
+    {
+      "id": "wp:climate_pattern:late-winter-thaw-trend",
+      "type": "climate_pattern",
+      "label": "Late-Winter Thaw Trend",
+      "summary": "Dashboard-facing weather trend node: earlier or sharper late-winter thaws in the sample region.",
+      "status": "draft",
+      "spatial": {
+        "kind": "region_ref",
+        "regionId": "wp:region:example-county",
+        "precision": "region_only"
+      },
+      "temporal": {
+        "kind": "interval",
+        "start": "2020-01-01",
+        "end": "2026-02-28",
+        "label": "Illustrative multi-year window"
+      },
+      "provenance": {
+        "source": "waypoint-editorial",
+        "createdAt": "2026-07-16"
+      },
+      "properties": {},
+      "apps": ["platform", "foragecast", "sheds"]
+    },
+    {
+      "id": "wp:region:example-county",
+      "type": "region",
+      "label": "Example County",
+      "summary": "Illustrative county region for hierarchy demos.",
+      "status": "active",
+      "spatial": {
+        "kind": "bbox",
+        "bbox": [-78.8, 41.9, -78.2, 42.3],
+        "precision": "region_only",
+        "placeHierarchy": { "state": "NY", "country": "US" }
+      },
+      "temporal": null,
+      "provenance": {
+        "source": "waypoint-editorial",
+        "createdAt": "2026-07-16"
+      },
+      "properties": { "adminLevel": "county" },
+      "apps": ["foragecast", "platform"]
+    },
+    {
+      "id": "wp:photo:oak-ridge-morning-side-light",
+      "type": "photo",
+      "label": "Oak Ridge morning side-light",
+      "summary": "Illustrative photograph of warm low light on a south oak bench.",
+      "status": "draft",
+      "spatial": {
+        "kind": "point",
+        "geometry": { "type": "Point", "coordinates": [-78.5, 42.1] },
+        "precision": "approximate"
+      },
+      "temporal": {
+        "kind": "instant",
+        "at": "2026-02-20T07:55:00",
+        "timezone": "America/New_York"
+      },
+      "provenance": {
+        "source": "waypoint-scenes",
+        "createdAt": "2026-02-20"
+      },
+      "properties": {},
+      "apps": ["waypoint-scenes", "gallery"]
+    },
+    {
+      "id": "wp:field_guide:eastern-mammals",
+      "type": "field_guide",
+      "label": "Eastern Mammals Field Guide",
+      "summary": "Illustrative field guide node for recommended reading.",
+      "status": "draft",
+      "spatial": null,
+      "temporal": null,
+      "provenance": {
+        "source": "waypoint-editorial",
+        "createdAt": "2026-07-16"
+      },
+      "properties": {},
+      "apps": ["education", "fieldry"]
+    }
+  ],
+  "relationships": [
+    {
+      "id": "rel:deer-habitat-oak",
+      "type": "associated_habitat",
+      "from": "wp:species:white-tailed-deer",
+      "to": "wp:habitat:oak-forest",
+      "confidence": 0.9,
+      "temporal": { "kind": "seasonal", "seasons": ["winter", "fall", "year-round"] },
+      "provenance": { "source": "waypoint-editorial", "createdAt": "2026-07-16" },
+      "properties": {}
+    },
+    {
+      "id": "rel:deer-found-near-ridge",
+      "type": "found_near",
+      "from": "wp:species:white-tailed-deer",
+      "to": "wp:location:oak-ridge",
+      "confidence": 0.8,
+      "provenance": { "source": "waypoint-editorial", "createdAt": "2026-07-16" },
+      "properties": {}
+    },
+    {
+      "id": "rel:ridge-terrain-south",
+      "type": "terrain_relationship",
+      "from": "wp:location:oak-ridge",
+      "to": "wp:terrain_feature:south-facing-slope",
+      "confidence": 0.95,
+      "provenance": { "source": "waypoint-editorial", "createdAt": "2026-07-16" },
+      "properties": {}
+    },
+    {
+      "id": "rel:deer-influenced-warmup",
+      "type": "influenced_by",
+      "from": "wp:species:white-tailed-deer",
+      "to": "wp:weather_event:south-slope-warm-up",
+      "confidence": 0.7,
+      "temporal": { "kind": "interval", "start": "2026-02-18", "end": "2026-02-22" },
+      "provenance": { "source": "waypoint-editorial", "createdAt": "2026-07-16" },
+      "properties": { "note": "Movement and bedding shift toward thawed south benches." }
+    },
+    {
+      "id": "rel:warmup-during-bedding",
+      "type": "occurs_during",
+      "from": "wp:weather_event:south-slope-warm-up",
+      "to": "wp:season:winter-bedding",
+      "provenance": { "source": "waypoint-editorial", "createdAt": "2026-07-16" },
+      "properties": {}
+    },
+    {
+      "id": "rel:deer-season-bedding",
+      "type": "seasonal_relationship",
+      "from": "wp:species:white-tailed-deer",
+      "to": "wp:season:winter-bedding",
+      "provenance": { "source": "waypoint-editorial", "createdAt": "2026-07-16" },
+      "properties": {}
+    },
+    {
+      "id": "rel:deer-research-bedding",
+      "type": "related_research",
+      "from": "wp:species:white-tailed-deer",
+      "to": "wp:research_paper:winter-bedding-study",
+      "provenance": { "source": "waypoint-editorial", "createdAt": "2026-07-16" },
+      "properties": {}
+    },
+    {
+      "id": "rel:deer-foundational-bedding",
+      "type": "foundational_research",
+      "from": "wp:topic:oak-forest",
+      "to": "wp:research_paper:winter-bedding-study",
+      "provenance": { "source": "waypoint-editorial", "createdAt": "2026-07-16" },
+      "properties": {}
+    },
+    {
+      "id": "rel:photo-coach-lighting",
+      "type": "recommended_reading",
+      "from": "wp:topic:wildlife-photography",
+      "to": "wp:article:good-wildlife-lighting",
+      "provenance": { "source": "waypoint-editorial", "createdAt": "2026-07-16" },
+      "properties": {}
+    },
+    {
+      "id": "rel:lighting-explains-warmup",
+      "type": "explains",
+      "from": "wp:article:good-wildlife-lighting",
+      "to": "wp:weather_event:south-slope-warm-up",
+      "provenance": { "source": "waypoint-editorial", "createdAt": "2026-07-16" },
+      "properties": {}
+    },
+    {
+      "id": "rel:fieldry-obs-at-ridge",
+      "type": "observed_at",
+      "from": "wp:observation:fieldry-oak-ridge-2025-02-20",
+      "to": "wp:location:oak-ridge",
+      "confidence": 0.9,
+      "provenance": { "source": "fieldry", "createdAt": "2025-02-20" },
+      "properties": {}
+    },
+    {
+      "id": "rel:fieldry-obs-deer",
+      "type": "observed_together",
+      "from": "wp:observation:fieldry-oak-ridge-2025-02-20",
+      "to": "wp:species:white-tailed-deer",
+      "confidence": 0.75,
+      "provenance": { "source": "fieldry", "createdAt": "2025-02-20", "notes": "Tracks attributed to deer." },
+      "properties": {}
+    },
+    {
+      "id": "rel:morel-habitat-oak",
+      "type": "associated_habitat",
+      "from": "wp:species:morel",
+      "to": "wp:habitat:oak-forest",
+      "confidence": 0.6,
+      "temporal": { "kind": "seasonal", "seasons": ["early-spring", "spring"] },
+      "provenance": { "source": "foragecast", "createdAt": "2026-07-16", "notes": "Oaks among several hardwood associates." },
+      "properties": {}
+    },
+    {
+      "id": "rel:topic-oak-habitat",
+      "type": "waypoint_perspective",
+      "from": "wp:topic:oak-forest",
+      "to": "wp:habitat:oak-forest",
+      "provenance": { "source": "waypoint-editorial", "createdAt": "2026-07-16" },
+      "properties": {}
+    },
+    {
+      "id": "rel:foragecast-oak-article",
+      "type": "recommended_reading",
+      "from": "wp:topic:oak-forest",
+      "to": "wp:article:oak-forest-ecology",
+      "provenance": { "source": "waypoint-editorial", "createdAt": "2026-07-16" },
+      "properties": {}
+    },
+    {
+      "id": "rel:article-explains-habitat",
+      "type": "explains",
+      "from": "wp:article:oak-forest-ecology",
+      "to": "wp:habitat:oak-forest",
+      "provenance": { "source": "waypoint-editorial", "createdAt": "2026-07-16" },
+      "properties": {}
+    },
+    {
+      "id": "rel:ridge-within-county",
+      "type": "within",
+      "from": "wp:location:oak-ridge",
+      "to": "wp:region:example-county",
+      "provenance": { "source": "waypoint-editorial", "createdAt": "2026-07-16" },
+      "properties": {}
+    },
+    {
+      "id": "rel:warmup-influenced-by-trend",
+      "type": "influenced_by",
+      "from": "wp:weather_event:south-slope-warm-up",
+      "to": "wp:climate_pattern:late-winter-thaw-trend",
+      "confidence": 0.5,
+      "provenance": { "source": "waypoint-editorial", "createdAt": "2026-07-16" },
+      "properties": {}
+    },
+    {
+      "id": "rel:photo-at-ridge",
+      "type": "photographed_at",
+      "from": "wp:photo:oak-ridge-morning-side-light",
+      "to": "wp:location:oak-ridge",
+      "confidence": 0.9,
+      "provenance": { "source": "waypoint-scenes", "createdAt": "2026-02-20" },
+      "properties": {}
+    },
+    {
+      "id": "rel:deer-reading-guide",
+      "type": "recommended_reading",
+      "from": "wp:species:white-tailed-deer",
+      "to": "wp:field_guide:eastern-mammals",
+      "provenance": { "source": "waypoint-editorial", "createdAt": "2026-07-16" },
+      "properties": {}
+    },
+    {
+      "id": "rel:wildlife-photo-background-deer",
+      "type": "background",
+      "from": "wp:topic:wildlife-photography",
+      "to": "wp:species:white-tailed-deer",
+      "provenance": {
+        "source": "waypoint-editorial",
+        "createdAt": "2026-07-16",
+        "notes": "Species context helps wildlife lighting decisions."
+      },
+      "properties": {}
+    }
+  ]
+}

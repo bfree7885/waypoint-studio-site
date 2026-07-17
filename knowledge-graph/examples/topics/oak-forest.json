@@ -1,0 +1,52 @@
+{
+  "id": "wp:topic:oak-forest",
+  "type": "topic",
+  "label": "Oak Forest",
+  "summary": "Living hub for oak forest ecology — wildlife, fungi, mast, terrain, and place-based learning.",
+  "status": "active",
+  "hubEntityId": "wp:habitat:oak-forest",
+  "provenance": {
+    "source": "waypoint-editorial",
+    "createdAt": "2026-07-16"
+  },
+  "sections": [
+    {
+      "key": "identity",
+      "title": "Identity",
+      "entityIds": ["wp:habitat:oak-forest", "wp:topic:oak-forest"]
+    },
+    {
+      "key": "species",
+      "title": "Associated Species",
+      "relationshipTypes": ["associated_habitat"]
+    },
+    {
+      "key": "places",
+      "title": "Places",
+      "relationshipTypes": ["within", "adjacent_to", "terrain_relationship"]
+    },
+    {
+      "key": "evidence",
+      "title": "Ecology & Research",
+      "relationshipTypes": ["explains", "related_research", "foundational_research", "recommended_reading"]
+    },
+    {
+      "key": "conditions",
+      "title": "Conditions",
+      "relationshipTypes": ["weather_relationship", "seasonal_relationship", "influenced_by"]
+    }
+  ],
+  "crossAppHints": [
+    { "app": "foragecast", "reason": "Forage ecology and hardwood associates" },
+    { "app": "sheds", "reason": "Cover, mast, and winter use" },
+    { "app": "fieldry", "reason": "Place-based noticing" },
+    { "app": "education", "reason": "Ecology curriculum topics" }
+  ],
+  "seedRelationshipsFromSample": [
+    "rel:deer-habitat-oak",
+    "rel:morel-habitat-oak",
+    "rel:topic-oak-habitat",
+    "rel:foragecast-oak-article",
+    "rel:article-explains-habitat"
+  ]
+}

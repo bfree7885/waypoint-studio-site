@@ -1,0 +1,39 @@
+{
+  "id": "wp:topic:solar-storms",
+  "type": "topic",
+  "label": "Solar Storms",
+  "summary": "Living hub for solar storms and space weather — and how they condition radio, sensing, and Earth systems narratives.",
+  "status": "active",
+  "hubEntityId": "wp:topic:solar-storms",
+  "provenance": {
+    "source": "waypoint-editorial",
+    "createdAt": "2026-07-16"
+  },
+  "sections": [
+    {
+      "key": "identity",
+      "title": "Identity",
+      "entityIds": ["wp:topic:solar-storms"]
+    },
+    {
+      "key": "timeline",
+      "title": "Event Timeline",
+      "relationshipTypes": ["precedes", "follows", "occurs_during", "overlaps_in_time"]
+    },
+    {
+      "key": "influences",
+      "title": "Influences",
+      "relationshipTypes": ["influenced_by", "weather_relationship", "historical_relationship"]
+    },
+    {
+      "key": "evidence",
+      "title": "Research & Agencies",
+      "relationshipTypes": ["related_research", "supported_by", "foundational_research", "historical_context"]
+    }
+  ],
+  "crossAppHints": [
+    { "app": "education", "reason": "Earth–sun systems literacy" },
+    { "app": "platform", "reason": "Cross-link to HF radio and future sensing products" }
+  ],
+  "relatedTopicIds": ["wp:topic:hf-radio", "wp:topic:phenology"]
+}

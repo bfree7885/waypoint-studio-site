@@ -1,0 +1,59 @@
+{
+  "id": "wp:topic:morel-mushrooms",
+  "type": "topic",
+  "label": "Morel Mushrooms",
+  "summary": "Living hub for morels: habitat associates, lookalikes, spring weather, ecology reading, and field observations.",
+  "status": "active",
+  "hubEntityId": "wp:species:morel",
+  "provenance": {
+    "source": "foragecast",
+    "createdAt": "2026-07-16",
+    "notes": "Bridges ForageCast species education into the shared graph."
+  },
+  "sections": [
+    {
+      "key": "identity",
+      "title": "Identity",
+      "entityIds": ["wp:species:morel"]
+    },
+    {
+      "key": "habitat",
+      "title": "Habitat & Trees",
+      "relationshipTypes": ["associated_habitat", "found_near", "terrain_relationship"]
+    },
+    {
+      "key": "lookalikes",
+      "title": "Lookalikes",
+      "relationshipTypes": ["often_confused_with", "similar_species"]
+    },
+    {
+      "key": "season_weather",
+      "title": "Season & Weather",
+      "relationshipTypes": ["seasonal_relationship", "weather_relationship", "influenced_by", "occurs_during"]
+    },
+    {
+      "key": "learning",
+      "title": "Learning Path",
+      "relationshipTypes": ["recommended_reading", "background", "prerequisite_knowledge", "explains"]
+    },
+    {
+      "key": "field_history",
+      "title": "Observations",
+      "relationshipTypes": ["observed_at", "observed_together"]
+    }
+  ],
+  "crossAppHints": [
+    { "app": "foragecast", "reason": "Species profile, season windows, county context" },
+    { "app": "fieldry", "reason": "Personal finds and return visits" },
+    { "app": "education", "reason": "Forest ecology articles" },
+    { "app": "waypoint-scenes", "reason": "Forest floor photography suggestions" }
+  ],
+  "exampleDiscoveryPath": [
+    "wp:observation (morel find)",
+    "→ associated tree / habitat",
+    "→ forest ecology article",
+    "→ photography suggestion",
+    "→ recent weather",
+    "→ historical observations nearby"
+  ]
+}

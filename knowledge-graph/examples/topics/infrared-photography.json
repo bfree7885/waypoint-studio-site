@@ -1,0 +1,49 @@
+{
+  "id": "wp:topic:infrared-photography",
+  "type": "topic",
+  "label": "Infrared Photography",
+  "summary": "Living hub for infrared and alternate-spectrum landscape photography — technique, light, and place.",
+  "status": "active",
+  "hubEntityId": "wp:topic:infrared-photography",
+  "provenance": {
+    "source": "waypoint-editorial",
+    "createdAt": "2026-07-16"
+  },
+  "sections": [
+    {
+      "key": "identity",
+      "title": "Identity",
+      "entityIds": ["wp:topic:infrared-photography"]
+    },
+    {
+      "key": "learning",
+      "title": "Learning Path",
+      "relationshipTypes": ["prerequisite_knowledge", "recommended_reading", "background", "expands_upon"]
+    },
+    {
+      "key": "media",
+      "title": "Example Work",
+      "relationshipTypes": ["referenced_by", "photographed_at"]
+    },
+    {
+      "key": "conditions",
+      "title": "Light & Conditions",
+      "relationshipTypes": ["weather_relationship", "occurs_during", "influenced_by"]
+    },
+    {
+      "key": "place",
+      "title": "Places & Habitats",
+      "relationshipTypes": ["photographed_at", "found_near", "associated_habitat"]
+    }
+  ],
+  "crossAppHints": [
+    { "app": "waypoint-scenes", "reason": "Scene studies and capture context" },
+    { "app": "gallery", "reason": "Finished work" },
+    { "app": "education", "reason": "Technique explainers" },
+    { "app": "workshop", "reason": "Hands-on learning (future)" }
+  ],
+  "notes": [
+    "Topic exists as a hub even before many child entities are authored.",
+    "Add article/photo entities over time; relationships make the hub feel alive."
+  ]
+}

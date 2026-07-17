@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://waypointstudio.org/schema/temporal.schema.json",
+  "title": "Waypoint Temporal Attachment",
+  "description": "Optional temporal descriptor for an entity or relationship.",
+  "type": "object",
+  "required": ["kind"],
+  "additionalProperties": false,
+  "properties": {
+    "kind": {
+      "type": "string",
+      "enum": ["instant", "interval", "seasonal", "relative"]
+    },
+    "at": {
+      "type": "string",
+      "description": "ISO-8601 instant when kind is instant."
+    },
+    "start": {
+      "type": "string",
+      "description": "ISO-8601 start when kind is interval."
+    },
+    "end": {
+      "type": "string",
+      "description": "ISO-8601 end when kind is interval. Open-ended if omitted."
+    },
+    "seasons": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "winter",
+          "late-winter",
+          "early-spring",
+          "spring",
+          "late-spring",
+          "early-summer",
+          "summer",
+          "late-summer",
+          "early-fall",
+          "fall",
+          "late-fall",
+          "year-round"
+        ]
+      },
+      "description": "Named seasonal windows when kind is seasonal."
+    },
+    "hemisphere": {
+      "type": "string",
+      "enum": ["northern", "southern", "tropical", "unspecified"],
+      "default": "northern"
+    },
+    "relative": {
+      "type": "string",
+      "description": "Qualitative timing when kind is relative, e.g. after-rain, before-leaf-out."
+    },
+    "timezone": {
+      "type": "string",
+      "description": "IANA timezone when local wall time matters."
+    },
+    "label": {
+      "type": "string",
+      "description": "Optional human label, e.g. Early spring morel window."
+    }
+  }
+}
