@@ -26,9 +26,19 @@
   }
 
   function distanceLabel(opp) {
+    if (opp.remote) return "Remote";
     if (opp.distanceMiles == null) return "Distance unknown";
     if (opp.distanceMiles < 1) return "Under 1 mi";
     return opp.distanceMiles + " mi";
+  }
+
+  function settingLabel(opp) {
+    if (opp.remote) return "Remote";
+    return opp.indoorOutdoor === "indoor" ? "Indoor" : "Outdoor";
+  }
+
+  function pageHref(opp) {
+    return "opportunity/?id=" + encodeURIComponent(opp.id);
   }
 
   function boolChip(on, label) {
@@ -92,16 +102,17 @@
       escapeHtml(distanceLabel(opp)) +
       "</span>" +
       '<span class="vol-meta-item">' +
-      escapeHtml(opp.estimatedCommitment) +
+      escapeHtml(opp.estimatedCommitment || "") +
       "</span>" +
       '<span class="vol-meta-item">' +
-      escapeHtml(opp.indoorOutdoor === "indoor" ? "Indoor" : "Outdoor") +
+      escapeHtml(settingLabel(opp)) +
       "</span>" +
       '<span class="vol-meta-item">' +
-      escapeHtml(opp.physicalIntensity) +
+      escapeHtml(opp.physicalDemand || opp.physicalIntensity || "") +
       "</span>" +
       "</div>" +
       '<div class="vol-card-chips">' +
+      boolChip(opp.isCitizenScience, "Citizen science") +
       boolChip(opp.familyFriendly, "Family friendly") +
       boolChip(opp.petFriendly, "Pet friendly") +
       boolChip(
@@ -110,9 +121,10 @@
       ) +
       boolChip(opp.weekdayWeekend === "weekend", "Weekend") +
       boolChip(opp.weekdayWeekend === "weekday", "Weekday") +
+      boolChip(opp.remote, "Remote") +
       "</div>" +
       '<p class="vol-card-desc">' +
-      escapeHtml(opp.description) +
+      escapeHtml(opp.whatYoullDo || opp.description) +
       "</p>" +
       '<div class="vol-card-actions" role="group" aria-label="Personal planning">' +
       '<button type="button" class="vol-action' +
@@ -137,6 +149,9 @@
       (orgBookmarked ? "true" : "false") +
       '">Bookmark org</button>' +
       "</div>" +
+      '<p class="vol-card-open"><a class="vol-link vol-link-accent" href="' +
+      escapeHtml(pageHref(opp)) +
+      '">Open opportunity page</a></p>' +
       '<button type="button" class="vol-card-more" data-action="toggle-detail" aria-expanded="' +
       (expanded ? "true" : "false") +
       '" aria-controls="' +
@@ -163,22 +178,29 @@
       escapeHtml((opp.seasonality || []).join(", ") || "Year-round") +
       "</dd></div>" +
       "<div><dt>Schedule</dt><dd>" +
-      escapeHtml(opp.scheduleHint || "See organization") +
+      escapeHtml(
+        (opp.schedule && opp.schedule.hint) ||
+          opp.scheduleHint ||
+          "See organization"
+      ) +
       "</dd></div>" +
       "<div><dt>Location</dt><dd>" +
       escapeHtml(opp.locationLabel || "") +
       "</dd></div>" +
       "</dl>" +
       '<div class="vol-card-links">' +
+      '<a class="vol-link vol-link-accent" href="' +
+      escapeHtml(pageHref(opp)) +
+      '">Full page</a>' +
       (opp.officialWebsite
         ? '<a class="vol-link" href="' +
           escapeHtml(opp.officialWebsite) +
           '" target="_blank" rel="noopener noreferrer">Official website</a>'
         : "") +
       (opp.applicationLink
-        ? '<a class="vol-link vol-link-accent" href="' +
+        ? '<a class="vol-link" href="' +
           escapeHtml(opp.applicationLink) +
-          '" target="_blank" rel="noopener noreferrer">Application / signup</a>'
+          '" target="_blank" rel="noopener noreferrer">Registration</a>'
         : "") +
       '<button type="button" class="vol-link" data-action="focus-map">Show on map</button>' +
       "</div>" +

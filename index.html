@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Waypoint Studio — nature-focused digital tools and landscape experiences. Upcoming products for observation, ecology, and place.">
+  <meta name="description" content="Waypoint Studio — observe, understand, create, and share. Nature-focused tools and landscape experiences. Privacy-first prototypes you can try today.">
   <title>Waypoint Studio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="styles/site.css">
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header">
     <div class="header-inner">
       <a class="brand" href="./">Waypoint Studio</a>
@@ -26,7 +27,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="main">
     <div class="wrap">
       <section class="hero">
         <h1>Waypoint Studio</h1>
@@ -37,19 +38,19 @@
           <li>Share.</li>
         </ul>
         <p class="lead">
-          A studio portfolio of upcoming nature-focused products — digital tools,
-          landscape experiences, field datasets, and quiet creative work rooted in
-          observation, ecology, and place.
+          A calm studio of nature-focused tools and landscape experiences —
+          built for observation, ecology, and place. Sharing stays optional.
+          Private stays the default for personal notes and locations.
         </p>
         <div class="cta-row">
-          <a class="btn-primary" href="#products">Explore Projects</a>
-          <a class="btn-secondary" href="mailto:hello@waypointstudio.org?subject=Waypoint%20Studio%20Updates">Join updates</a>
+          <a class="btn-primary" href="#available">Try what’s available</a>
+          <a class="btn-secondary" href="privacy/">Privacy</a>
         </div>
       </section>
 
-      <section id="products">
-        <h2>Featured Products</h2>
-        <p class="muted">Subscription models coming soon across all products. No payment processing yet.</p>
+      <section id="available">
+        <h2>Available now</h2>
+        <p class="muted">Working prototypes and open betas. Honest about uncertainty — not finished products.</p>
         <div class="grid">
           <a class="card col-4" href="waypoint-scenes/">
             <span class="badge badge-active">Active Prototype</span>
@@ -59,29 +60,55 @@
           <a class="card col-4" href="foragecast/">
             <span class="badge badge-dev">Open Beta</span>
             <h3>ForageCast</h3>
-            <p class="desc">Terrain, weather, and seasonal intelligence for responsible foraging — MorelCast beta demos live.</p>
+            <p class="desc">Terrain, weather, and seasonal intelligence for responsible foraging — guidance, not harvest guarantees.</p>
           </a>
           <a class="card col-4" href="sheds/">
             <span class="badge badge-dev">Open Prototype</span>
             <h3>Sheds</h3>
-            <p class="desc">Map-first field view for ethical shed hunting and terrain understanding.</p>
+            <p class="desc">Map-first field view for ethical shed hunting and terrain understanding. Demo zones only.</p>
           </a>
           <a class="card col-4" href="volunteer/">
             <span class="badge badge-dev">Open Prototype</span>
             <h3>Waypoint Volunteer</h3>
-            <p class="desc">Discover meaningful ways to help nearby — what good can I do today?</p>
+            <p class="desc">What good can I do today? Discovery with filters and private saves — demo catalog.</p>
           </a>
+        </div>
+      </section>
+
+      <section id="products">
+        <h2>Early foundations</h2>
+        <p class="muted">Public pages exist; full product experiences are still forming.</p>
+        <div class="grid">
           <a class="card col-4" href="fieldry/">
             <span class="badge badge-planned">Planned</span>
             <h3>Fieldry</h3>
-            <p class="desc">A real-world nature journal for noticing more.</p>
+            <p class="desc">A real-world nature journal for noticing more. Landing page only today.</p>
           </a>
           <a class="card col-4" href="education/">
-            <span class="badge badge-planned">Planned</span>
+            <span class="badge badge-dev">Early Foundation</span>
             <h3>Waypoint Education</h3>
-            <p class="desc">Earth systems, ecology, and nature explained simply.</p>
+            <p class="desc">Earth systems and ecology topics — thin study notes plus ForageCast Learn species pages.</p>
           </a>
         </div>
+      </section>
+
+      <section id="direction">
+        <h2>Long-term direction</h2>
+        <p class="muted">
+          Named for planning clarity. <strong>Not available in this repository build</strong> —
+          do not expect public routes yet.
+        </p>
+        <ul class="direction-list">
+          <li>Dashboard / Today Outside (outdoor intelligence)</li>
+          <li>Photo Coach</li>
+          <li>SignalTerrain — Radio &amp; Spectrum</li>
+          <li>SignalTerrain — Cyber Awareness (defensive only)</li>
+          <li>Steepleaf</li>
+          <li>Savant Sommelier</li>
+          <li>Landscape Interpretation</li>
+          <li>Hidden Landscapes</li>
+          <li>Shared profile, locations, collections, and settings</li>
+        </ul>
       </section>
 
       <section>
@@ -92,7 +119,15 @@
           built slowly — for the field, for learning, and for quiet attention to
           the living world.
         </p>
-        <p class="subscription-note">Products are in pre-launch development. Join a waitlist on any project page to receive updates when subscriptions open.</p>
+        <p class="subscription-note">
+          No payment processing yet. Volunteer is intended to remain free.
+          Other subscription models are exploratory only.
+        </p>
+        <div class="cta-row">
+          <a class="btn-secondary" href="about/">About</a>
+          <a class="btn-secondary" href="contact/">Contact</a>
+          <a class="btn-secondary" href="privacy/">Privacy</a>
+        </div>
       </section>
 
       <section class="waitlist-cta">
@@ -104,8 +139,14 @@
   </main>
 
   <footer class="site-footer">
-    <div class="footer-inner">
-      Waypoint Studio · Observe. Understand. Create. Share.
+    <div class="footer-inner footer-links">
+      <span>Waypoint Studio · Observe. Understand. Create. Share.</span>
+      <span>
+        <a href="about/">About</a> ·
+        <a href="privacy/">Privacy</a> ·
+        <a href="contact/">Contact</a> ·
+        <a href="support/">Support</a>
+      </span>
     </div>
   </footer>
 </body>

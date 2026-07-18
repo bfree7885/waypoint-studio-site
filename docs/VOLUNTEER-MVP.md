@@ -189,6 +189,11 @@ No accounts. No sync. No public feed.
 
 ---
 
-## Owner review
+Related docs (Discovery Engine v0.1):
 
-Work Block 2 deliverable. **Do not commit or push until owner review.**
+- [VOLUNTEER-DISCOVERY.md](VOLUNTEER-DISCOVERY.md)
+- [VOLUNTEER-DATA-MODEL.md](VOLUNTEER-DATA-MODEL.md)
+- [VOLUNTEER-RECOMMENDATION-ENGINE.md](VOLUNTEER-RECOMMENDATION-ENGINE.md)
+- [VOLUNTEER-UX.md](VOLUNTEER-UX.md)
+
+**Owner review required before commit.**

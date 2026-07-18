@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Waypoint Studio privacy philosophy — what we collect, what stays local, and how location is handled.">
+  <title>Privacy | Waypoint Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Source+Sans+3:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/site.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="../">Waypoint Studio</a>
+      <nav class="site-nav" aria-label="Main">
+        <a href="../">Home</a>
+        <a href="../about/">About</a>
+        <a href="./" aria-current="page">Privacy</a>
+        <a href="../contact/">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="wrap">
+      <section class="page-hero">
+        <h1>Privacy</h1>
+        <p class="tagline">Private by default. Sharing is optional. No social graph.</p>
+      </section>
+
+      <section>
+        <h2>Our stance</h2>
+        <p>
+          Waypoint Studio builds education-first tools for observing the living world.
+          We do not use likes, followers, streaks, leaderboards, or engagement pressure.
+          Personal notes, saved opportunities, and location use should stay under your control.
+        </p>
+      </section>
+
+      <section>
+        <h2>What stays in your browser</h2>
+        <ul>
+          <li><strong>Waypoint Volunteer</strong> — saves, lists, completed marks, and personal notes use <code>localStorage</code> on your device. They are not uploaded to Waypoint servers (this static site has none).</li>
+          <li><strong>ForageCast</strong> — a small flag may remember that you dismissed the beta banner.</li>
+          <li>We do not operate accounts or shared profiles on this static platform build.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Location</h2>
+        <p>
+          Sheds, ForageCast, and Volunteer may ask for your location only when you choose Locate / “Use my location.”
+          Coordinates are used in the browser to center maps and estimate distances.
+          Denying permission still allows demo-region browsing.
+        </p>
+        <p class="muted">
+          Location is approximate for discovery. Sensitive wildlife or private property details should never be shared publicly from these tools.
+        </p>
+      </section>
+
+      <section>
+        <h2>Third-party requests</h2>
+        <ul>
+          <li><strong>Fonts</strong> — Google Fonts (when pages load).</li>
+          <li><strong>Maps</strong> — Leaflet (CDN) and CARTO / OpenStreetMap tiles.</li>
+          <li><strong>Weather / elevation / geocoding</strong> — Open-Meteo public APIs (ForageCast, Volunteer Today context).</li>
+          <li><strong>Forms</strong> — ForageCast beta / waitlist / feedback may submit to Formspree when configured.</li>
+        </ul>
+        <p>
+          We do not embed invasive analytics or advertising trackers in this repository.
+        </p>
+      </section>
+
+      <section>
+        <h2>Photography &amp; scenes</h2>
+        <p>
+          Waypoint Scenes displays curated photography. There is no Photo Coach upload pipeline in this repository build.
+          Do not assume EXIF stripping or local image processing unless a future product page states it clearly.
+        </p>
+      </section>
+
+      <section>
+        <h2>Demo &amp; illustrative data</h2>
+        <p>
+          Volunteer opportunity catalogs and Sheds map zones may be illustrative demo data.
+          Demo organization links may point to example domains. Treat them as product prototypes, not verified live listings.
+        </p>
+      </section>
+
+      <section>
+        <h2>Contact</h2>
+        <p>
+          Privacy questions:
+          <a href="mailto:hello@waypointstudio.org?subject=Privacy">hello@waypointstudio.org</a>
+        </p>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner footer-links">
+      <span>Waypoint Studio · Observe. Understand. Create. Share.</span>
+      <span>
+        <a href="../">Home</a> ·
+        <a href="../about/">About</a> ·
+        <a href="./">Privacy</a> ·
+        <a href="../contact/">Contact</a>
+      </span>
+    </div>
+  </footer>
+</body>
+</html>

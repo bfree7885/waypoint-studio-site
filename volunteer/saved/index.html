@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Your private saved opportunities — Waypoint Volunteer">
+  <title>Saved | Waypoint Volunteer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Source+Sans+3:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../styles/site.css">
+  <link rel="stylesheet" href="../../styles/volunteer.css">
+</head>
+<body class="vol-page">
+  <a class="vol-skip" href="#vol-page-main">Skip to content</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="../../">Waypoint Studio</a>
+      <nav class="site-nav" aria-label="Main">
+        <a href="../">Volunteer</a>
+        <a href="./" aria-current="page">Saved</a>
+      </nav>
+    </div>
+  </header>
+  <main class="wrap vol-page-main" id="vol-page-main">
+    <p class="vol-back"><a href="../">← Back to discovery</a></p>
+    <header class="page-hero">
+      <h1>Saved opportunities</h1>
+      <p class="tagline">Private by default. Stored in this browser only.</p>
+      <p class="muted">No public profiles. Sharing is optional and not built into this prototype.</p>
+    </header>
+
+    <section aria-labelledby="vol-lists-heading">
+      <h2 id="vol-lists-heading">Personal lists</h2>
+      <form id="vol-new-list" class="vol-new-list">
+        <label for="vol-list-name">Create a list</label>
+        <div class="vol-new-list-row">
+          <input type="text" id="vol-list-name" maxlength="80" placeholder="e.g. Weekend ideas" required>
+          <button type="submit" class="btn-primary">Create</button>
+        </div>
+      </form>
+      <div id="vol-lists"></div>
+    </section>
+
+    <section aria-labelledby="vol-saved-heading">
+      <h2 id="vol-saved-heading">Saved for later</h2>
+      <div id="vol-saved-list"></div>
+    </section>
+
+    <section aria-labelledby="vol-done-heading">
+      <h2 id="vol-done-heading">Completed (private)</h2>
+      <div id="vol-completed-list"></div>
+    </section>
+
+    <section aria-labelledby="vol-orgs-heading">
+      <h2 id="vol-orgs-heading">Bookmarked organizations</h2>
+      <div id="vol-org-list"></div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="footer-inner">Waypoint Studio · Observe. Understand. Create. Share.</div>
+  </footer>
+  <script src="../data/model.js"></script>
+  <script src="../data/categories.js"></script>
+  <script src="../data/organizations.js"></script>
+  <script src="../data/opportunities.js"></script>
+  <script src="../data/enrichment.js"></script>
+  <script src="../js/catalog.js"></script>
+  <script src="../js/planning.js"></script>
+  <script src="../js/detail.js"></script>
+  <script src="../js/saved-page.js"></script>
+</body>
+</html>

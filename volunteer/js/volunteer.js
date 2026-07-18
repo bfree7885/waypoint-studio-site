@@ -1,5 +1,5 @@
 /**
- * Waypoint Volunteer — main app
+ * Waypoint Volunteer — Discovery Engine v0.1 app
  * Mission: "What good can I do today?"
  */
 (function () {
@@ -16,7 +16,9 @@
     locating: false,
     selectedId: null,
     expandedId: null,
+    activePromptId: null,
     filters: {
+      facets: [],
       distanceMiles: "50",
       availableHours: "",
       indoorOutdoor: "any",
@@ -30,10 +32,12 @@
       weatherSuitability: "any",
       matchCurrentSeason: false,
       matchWeather: false,
-      personalOnly: false
+      personalOnly: false,
+      citizenScienceOnly: false
     },
     weatherBundle: null,
     todayResult: null,
+    recommendResult: null,
     filtered: [],
     sheetOpen: true
   };
@@ -45,9 +49,10 @@
   }
 
   function opportunities() {
-    return (window.VolunteerOpportunities &&
-      window.VolunteerOpportunities.list) ||
-      [];
+    return (
+      (window.VolunteerOpportunities && window.VolunteerOpportunities.list) ||
+      []
+    );
   }
 
   function planning() {
@@ -69,6 +74,7 @@
     f.matchCurrentSeason = $("vol-filter-match-season").checked;
     f.matchWeather = $("vol-filter-match-weather").checked;
     f.personalOnly = $("vol-filter-personal").checked;
+    f.citizenScienceOnly = $("vol-filter-science").checked;
 
     var cats = [];
     document.querySelectorAll("[data-cat-filter]").forEach(function (el) {
@@ -76,9 +82,16 @@
     });
     f.categories = cats;
 
-    var hours = f.availableHours;
+    var facets = [];
+    document.querySelectorAll("[data-facet].is-on").forEach(function (el) {
+      facets.push(el.getAttribute("data-facet"));
+    });
+    f.facets = facets;
+
     if (planning()) {
-      planning().setAvailableHours(hours === "" ? null : hours);
+      planning().setAvailableHours(
+        f.availableHours === "" ? null : f.availableHours
+      );
       planning().setInterests(cats);
       planning().setMobility({
         preferAccessible: f.accessible,
@@ -90,7 +103,6 @@
 
   function buildTodayContext() {
     var season = window.VolunteerFilters.currentSeason();
-    var plan = planning() ? planning().getState() : {};
     var ctx = window.VolunteerTodayEngine.emptyContext();
     ctx.now = new Date();
     ctx.season = season;
@@ -120,13 +132,11 @@
       ctx.daylight = Object.assign(ctx.daylight, state.weatherBundle.daylight);
       ctx.forecast = Object.assign(ctx.forecast, state.weatherBundle.forecast);
     }
-
     return ctx;
   }
 
   function refreshToday() {
-    var ctx = buildTodayContext();
-    state.todayResult = window.VolunteerTodayEngine.run(ctx);
+    state.todayResult = window.VolunteerTodayEngine.run(buildTodayContext());
     renderInsights();
   }
 
@@ -138,7 +148,8 @@
       userLon: state.userLon != null ? state.userLon : DEFAULT_CENTER[1],
       planning: planning(),
       season: window.VolunteerFilters.currentSeason(),
-      weatherTags: weatherTags
+      weatherTags: weatherTags,
+      now: new Date()
     });
 
     if (state.todayResult) {
@@ -173,17 +184,80 @@
       .join("");
   }
 
+  function renderTodayICan() {
+    var host = $("vol-today-ican-results");
+    if (!host) return;
+    if (!state.recommendResult) {
+      host.innerHTML =
+        '<p class="muted">Choose a prompt above. Recommendations include clear reasons — never pressure.</p>';
+      return;
+    }
+    var res = state.recommendResult;
+    if (!res.results.length) {
+      host.innerHTML =
+        "<p>" + window.VolunteerCards.escapeHtml(res.message) + "</p>";
+      return;
+    }
+    host.innerHTML =
+      "<p class=\"vol-ican-msg\">" +
+      window.VolunteerCards.escapeHtml(res.message) +
+      "</p>" +
+      res.results
+        .map(function (r) {
+          var opp = r.opportunity;
+          return (
+            '<article class="vol-ican-card">' +
+            "<h3><a href=\"opportunity/?id=" +
+            encodeURIComponent(opp.id) +
+            '">' +
+            window.VolunteerCards.escapeHtml(opp.title) +
+            "</a></h3>" +
+            "<ul class=\"vol-reason-list\">" +
+            r.reasons
+              .map(function (reason) {
+                return (
+                  "<li>" +
+                  window.VolunteerCards.escapeHtml(reason) +
+                  "</li>"
+                );
+              })
+              .join("") +
+            "</ul></article>"
+          );
+        })
+        .join("");
+  }
+
+  function runPrompt(promptId) {
+    state.activePromptId = promptId;
+    document.querySelectorAll("[data-prompt]").forEach(function (btn) {
+      var on = btn.getAttribute("data-prompt") === promptId;
+      btn.classList.toggle("is-on", on);
+      btn.setAttribute("aria-pressed", on ? "true" : "false");
+    });
+    var ctx = buildTodayContext();
+    if (state.todayResult && state.todayResult.context) {
+      ctx = Object.assign(ctx, state.todayResult.context);
+    }
+    state.recommendResult = window.VolunteerTodayICan.recommend(
+      opportunities(),
+      promptId,
+      ctx,
+      { planning: planning(), distanceMiles: state.filters.distanceMiles, limit: 5 }
+    );
+    renderTodayICan();
+  }
+
   function renderResultsMeta() {
     var el = $("vol-results-meta");
     if (!el) return;
     var n = state.filtered.length;
-    var label =
+    el.textContent =
       n === 0
         ? "No opportunities in this view"
         : n === 1
           ? "1 opportunity"
           : n + " opportunities";
-    el.textContent = label;
   }
 
   function renderList() {
@@ -210,6 +284,7 @@
     renderList();
     renderMapMarkers();
     updateLocateLabel();
+    if (state.activePromptId) runPrompt(state.activePromptId);
   }
 
   function selectOpportunity(id, options) {
@@ -222,7 +297,11 @@
     if (opp && mapApi) {
       mapApi.focusOpportunity(opp, opts.fromMap ? null : 12);
     }
-    if (opts.fromMap && state.view === "map" && window.matchMedia("(max-width: 959px)").matches) {
+    if (
+      opts.fromMap &&
+      state.view === "map" &&
+      window.matchMedia("(max-width: 959px)").matches
+    ) {
       openSheet(true);
       var card = document.querySelector('[data-opp-id="' + id + '"]');
       if (card) card.scrollIntoView({ behavior: "smooth", block: "nearest" });
@@ -288,8 +367,7 @@
       .catch(function () {
         state.weatherBundle = null;
         if (status) {
-          status.textContent =
-            "Weather unavailable — browsing still works.";
+          status.textContent = "Weather unavailable — browsing still works.";
         }
         refresh();
       });
@@ -324,9 +402,7 @@
   function setView(view) {
     state.view = view;
     var shell = $("vol-shell");
-    if (shell) {
-      shell.setAttribute("data-view", view);
-    }
+    if (shell) shell.setAttribute("data-view", view);
     document.querySelectorAll("[data-view-btn]").forEach(function (btn) {
       var on = btn.getAttribute("data-view-btn") === view;
       btn.setAttribute("aria-pressed", on ? "true" : "false");
@@ -359,6 +435,7 @@
       window.VolunteerOpportunities && window.VolunteerOpportunities.get(id);
 
     if (!actionBtn) {
+      if (e.target.closest("a")) return;
       selectOpportunity(id);
       return;
     }
@@ -402,7 +479,6 @@
       setView("map");
       selectOpportunity(id);
       if (mapApi) mapApi.focusOpportunity(opp, 13);
-      return;
     }
   }
 
@@ -423,6 +499,38 @@
           window.VolunteerCards.escapeHtml(cat.shortLabel) +
           "</span>" +
           "</label>"
+        );
+      })
+      .join("");
+  }
+
+  function renderFacets() {
+    var host = $("vol-facets");
+    if (!host || !window.VolunteerModel) return;
+    host.innerHTML = window.VolunteerModel.discoveryFacets
+      .map(function (facet) {
+        return (
+          '<button type="button" class="vol-facet" data-facet="' +
+          facet.id +
+          '" aria-pressed="false">' +
+          window.VolunteerCards.escapeHtml(facet.label) +
+          "</button>"
+        );
+      })
+      .join("");
+  }
+
+  function renderPrompts() {
+    var host = $("vol-today-ican-prompts");
+    if (!host || !window.VolunteerTodayICan) return;
+    host.innerHTML = window.VolunteerTodayICan.prompts
+      .map(function (p) {
+        return (
+          '<button type="button" class="vol-prompt" data-prompt="' +
+          p.id +
+          '" aria-pressed="false">' +
+          window.VolunteerCards.escapeHtml(p.label) +
+          "</button>"
         );
       })
       .join("");
@@ -458,9 +566,21 @@
     $("vol-filter-match-season").checked = false;
     $("vol-filter-match-weather").checked = false;
     $("vol-filter-personal").checked = false;
+    $("vol-filter-science").checked = false;
     document.querySelectorAll("[data-cat-filter]").forEach(function (el) {
       el.checked = false;
     });
+    document.querySelectorAll("[data-facet]").forEach(function (el) {
+      el.classList.remove("is-on");
+      el.setAttribute("aria-pressed", "false");
+    });
+    state.activePromptId = null;
+    state.recommendResult = null;
+    document.querySelectorAll("[data-prompt]").forEach(function (el) {
+      el.classList.remove("is-on");
+      el.setAttribute("aria-pressed", "false");
+    });
+    renderTodayICan();
     refresh();
   }
 
@@ -488,27 +608,51 @@
       if (e.target && e.target.id === "vol-filter-hours") refresh();
     });
 
-    $("vol-about-btn").addEventListener("click", function () {
-      var dlg = $("vol-about");
-      dlg.hidden = false;
-      $("vol-about-btn").setAttribute("aria-expanded", "true");
-      $("vol-about-close").focus();
+    $("vol-facets").addEventListener("click", function (e) {
+      var btn = e.target.closest("[data-facet]");
+      if (!btn) return;
+      btn.classList.toggle("is-on");
+      btn.setAttribute(
+        "aria-pressed",
+        btn.classList.contains("is-on") ? "true" : "false"
+      );
+      refresh();
     });
 
-    function closeAbout() {
-      $("vol-about").hidden = true;
-      $("vol-about-btn").setAttribute("aria-expanded", "false");
-      $("vol-about-btn").focus();
-    }
+    $("vol-today-ican-prompts").addEventListener("click", function (e) {
+      var btn = e.target.closest("[data-prompt]");
+      if (!btn) return;
+      runPrompt(btn.getAttribute("data-prompt"));
+    });
 
-    $("vol-about-close").addEventListener("click", closeAbout);
-    $("vol-about-backdrop").addEventListener("click", closeAbout);
+    if (window.WaypointA11y && window.WaypointA11y.bindDialog) {
+      window.WaypointA11y.bindDialog({
+        dialog: $("vol-about"),
+        openBtn: $("vol-about-btn"),
+        closeBtn: $("vol-about-close"),
+        backdrop: $("vol-about-backdrop")
+      });
+    } else {
+      $("vol-about-btn").addEventListener("click", function () {
+        var dlg = $("vol-about");
+        dlg.hidden = false;
+        $("vol-about-btn").setAttribute("aria-expanded", "true");
+        $("vol-about-close").focus();
+      });
 
-    document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape" && !$("vol-about").hidden) {
-        closeAbout();
+      function closeAbout() {
+        $("vol-about").hidden = true;
+        $("vol-about-btn").setAttribute("aria-expanded", "false");
+        $("vol-about-btn").focus();
       }
-    });
+
+      $("vol-about-close").addEventListener("click", closeAbout);
+      $("vol-about-backdrop").addEventListener("click", closeAbout);
+
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape" && !$("vol-about").hidden) closeAbout();
+      });
+    }
 
     $("vol-reset-hidden").addEventListener("click", function () {
       planning().clearHidden();
@@ -527,13 +671,15 @@
   function init() {
     document.documentElement.classList.add("vol-lock");
     renderCategoryFilters();
+    renderFacets();
+    renderPrompts();
     renderLegend();
+    renderTodayICan();
     initMap();
     bind();
     setView("list");
     openSheet(true);
 
-    /* Start with demo region; weather still loads for Today insights */
     state.userLat = DEFAULT_CENTER[0];
     state.userLon = DEFAULT_CENTER[1];
     loadWeather(DEFAULT_CENTER[0], DEFAULT_CENTER[1]);

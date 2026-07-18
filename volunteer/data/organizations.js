@@ -170,13 +170,101 @@
     }
   ];
 
+  var PROFILE = {
+    "org-ridgeway-trails": {
+      supportedCauses: ["Trails", "Public land stewardship", "Habitat edges"],
+      accessibility: {
+        summary: "Trailhead meetings; terrain varies by project.",
+        notes: "Ask ahead about seated or staging roles."
+      },
+      recurringEvents: ["Saturday soft-maintenance mornings"],
+      seasonalWork: ["Spring invasive pulls", "Fall water-bar resets"]
+    },
+    "org-clearwater-friends": {
+      supportedCauses: ["Water", "Habitat restoration", "Citizen science"],
+      accessibility: {
+        summary: "Many park-based events use paved loops.",
+        notes: "Bank work is always optional."
+      },
+      recurringEvents: ["Second-Sunday shoreline cleanups"],
+      seasonalWork: ["Spring buffer plantings", "Fall shrub care"]
+    },
+    "org-valley-wildlife": {
+      supportedCauses: ["Animals", "Wildlife rehab support", "Bird monitoring"],
+      accessibility: {
+        summary: "Indoor facility roles are accessible; field routes vary.",
+        notes: "No animal handling in laundry/prep roles."
+      },
+      recurringEvents: ["Neighborhood bird count routes"],
+      seasonalWork: ["Spring amphibian monitoring nights"]
+    },
+    "org-pollinator-pact": {
+      supportedCauses: ["Pollinators", "Habitat restoration", "Phenology"],
+      accessibility: {
+        summary: "Garden-edge observation can be done from seating.",
+        notes: "Planting days involve soft ground."
+      },
+      recurringEvents: ["Pollinator watch stations"],
+      seasonalWork: ["Spring and fall native plantings"]
+    },
+    "org-open-sky-observatory": {
+      supportedCauses: ["Education", "Citizen science", "Nature interpretation"],
+      accessibility: {
+        summary: "Exhibit halls and boardwalk overlook are accessible.",
+        notes: "Restrooms at the nature center."
+      },
+      recurringEvents: ["Weekend floor hosts", "eBird mornings"],
+      seasonalWork: ["BioBlitz weekends", "Tree phenology windows"]
+    },
+    "org-table-and-shelf": {
+      supportedCauses: ["Food security", "Community hospitality", "Gardens"],
+      accessibility: {
+        summary: "Pantry warehouse and phone roles include seated options.",
+        notes: "Remote companion calls require no travel."
+      },
+      recurringEvents: ["Weekday packing shifts"],
+      seasonalWork: ["Growing-season garden workshares"]
+    },
+    "org-ready-neighbors": {
+      supportedCauses: ["Emergency preparedness", "Community resilience"],
+      accessibility: {
+        summary: "Classroom trainings use an accessible hall.",
+        notes: "Informational only — not emergency deployment."
+      },
+      recurringEvents: ["Monthly CERT intro evenings"],
+      seasonalWork: ["Blood-drive hospitality as scheduled"]
+    },
+    "org-library-commons": {
+      supportedCauses: ["Education", "Community", "STEM outreach"],
+      accessibility: {
+        summary: "Fully accessible public library spaces.",
+        notes: "Elevators and accessible restrooms."
+      },
+      recurringEvents: ["Shelving shifts", "Monthly STEM night helpers"],
+      seasonalWork: []
+    }
+  };
+
   var BY_ID = {};
   ORGANIZATIONS.forEach(function (o) {
-    BY_ID[o.id] = o;
+    var enriched = Object.assign({}, o, PROFILE[o.id] || {});
+    enriched.supportedCauses = enriched.supportedCauses || [];
+    enriched.accessibility = enriched.accessibility || {
+      summary: "Contact the organization for details.",
+      notes: null
+    };
+    enriched.recurringEvents = enriched.recurringEvents || [];
+    enriched.seasonalWork = enriched.seasonalWork || [];
+    /* No ratings. No popularity metrics. */
+    BY_ID[enriched.id] = enriched;
+  });
+
+  var LIST = Object.keys(BY_ID).map(function (id) {
+    return BY_ID[id];
   });
 
   global.VolunteerOrganizations = {
-    list: ORGANIZATIONS,
+    list: LIST,
     byId: BY_ID,
     get: function (id) {
       return BY_ID[id] || null;

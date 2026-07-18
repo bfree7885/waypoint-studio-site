@@ -72,6 +72,64 @@ a:focus-visible {
   color: var(--accent);
 }
 
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  padding: 0.65rem 1rem;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid rgba(198, 255, 77, 0.45);
+  border-radius: 0.35rem;
+  font-size: 0.8rem;
+}
+
+.skip-link:focus,
+.skip-link:focus-visible {
+  left: 0.75rem;
+  top: 0.75rem;
+  color: var(--text);
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.25rem;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.footer-links a {
+  color: var(--muted);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+}
+
+.footer-links a:hover,
+.footer-links a:focus-visible {
+  color: var(--accent);
+}
+
+.direction-list {
+  color: var(--muted);
+  max-width: 62ch;
+  line-height: 1.7;
+}
+
+.direction-list li {
+  margin-bottom: 0.35rem;
+}
+
+.noscript-banner {
+  margin: 0;
+  padding: 0.85rem 1rem;
+  background: #141e32;
+  border-bottom: 1px solid var(--line);
+  color: var(--text);
+  font-size: 0.9rem;
+}
+
 h1,
 h2,
 h3 {

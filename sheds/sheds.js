@@ -343,14 +343,15 @@
   }
 
   function openAbout(open) {
+    /* Kept for compatibility; Prefer WaypointA11y.bindDialog when available. */
     var about = $("sheds-about");
     var btn = $("sheds-about-btn");
     if (!about) return;
     about.hidden = !open;
     if (btn) btn.setAttribute("aria-expanded", open ? "true" : "false");
     if (open) {
-      var close = $("sheds-about-close");
-      if (close) close.focus();
+      var closeEl = $("sheds-about-close");
+      if (closeEl) closeEl.focus();
     }
   }
 
@@ -371,9 +372,6 @@
     var eduBtn = $("sheds-edu-btn");
     var sheetToggle = $("sheds-sheet-toggle");
     var sheetHandle = $("sheds-sheet-handle");
-    var aboutBtn = $("sheds-about-btn");
-    var aboutClose = $("sheds-about-close");
-    var aboutBackdrop = $("sheds-about-backdrop");
 
     if (locateBtn) locateBtn.addEventListener("click", locate);
     if (zonesBtn) {
@@ -396,26 +394,15 @@
         setSheet(!state.sheetOpen);
       });
     }
-    if (aboutBtn) {
-      aboutBtn.addEventListener("click", function () {
-        openAbout(true);
-      });
-    }
-    if (aboutClose) {
-      aboutClose.addEventListener("click", function () {
-        openAbout(false);
-        aboutBtn && aboutBtn.focus();
-      });
-    }
-    if (aboutBackdrop) {
-      aboutBackdrop.addEventListener("click", function () {
-        openAbout(false);
-      });
-    }
 
-    document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape") openAbout(false);
-    });
+    if (window.WaypointA11y && window.WaypointA11y.bindDialog) {
+      window.WaypointA11y.bindDialog({
+        dialog: $("sheds-about"),
+        openBtn: $("sheds-about-btn"),
+        closeBtn: $("sheds-about-close"),
+        backdrop: $("sheds-about-backdrop")
+      });
+    }
 
     window.addEventListener("resize", function () {
       if (map) map.invalidateSize();

@@ -14,6 +14,9 @@
   <link rel="stylesheet" href="../styles/sheds.css">
 </head>
 <body class="sheds-app">
+  <noscript>
+    <p class="noscript-banner">Sheds needs JavaScript for the map. Enable JavaScript, or read the product story at <a href="../projects/sheds/">projects/sheds</a>.</p>
+  </noscript>
   <a class="sheds-skip" href="#sheds-panel">Skip to details</a>
 
   <div class="sheds-shell" id="sheds-shell">
@@ -157,6 +160,7 @@
   </div>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="../shared/a11y-dialog.js"></script>
   <script src="sheds.js" defer></script>
 </body>
 </html>

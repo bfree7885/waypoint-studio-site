@@ -14,6 +14,9 @@
   <link rel="stylesheet" href="../styles/volunteer.css">
 </head>
 <body class="vol-app">
+  <noscript>
+    <p class="noscript-banner">Waypoint Volunteer needs JavaScript for discovery filters and the map. You can still read <a href="../docs/VOLUNTEER-DISCOVERY.md">the discovery documentation</a>.</p>
+  </noscript>
   <a class="vol-skip" href="#vol-panel">Skip to opportunities</a>
 
   <div class="vol-shell" id="vol-shell" data-view="list">
@@ -28,6 +31,7 @@
           <button type="button" class="vol-bar-btn" data-view-btn="map" aria-pressed="false">Map</button>
         </div>
         <button type="button" class="vol-bar-btn vol-sheet-toggle" id="vol-sheet-toggle" aria-expanded="true" aria-controls="vol-panel">Hide list</button>
+        <a class="vol-bar-btn" href="saved/">Saved</a>
         <button type="button" class="vol-bar-btn" id="vol-about-btn" aria-expanded="false" aria-controls="vol-about">About</button>
       </div>
     </header>
@@ -58,7 +62,7 @@
         <ul class="vol-map-legend" id="vol-map-legend"></ul>
       </div>
 
-      <p class="vol-demo-tag">Demo catalog · illustrative opportunities</p>
+      <p class="vol-demo-tag">Demo catalog · illustrative opportunities · example.org links are not live orgs</p>
     </div>
 
     <aside class="vol-panel is-open" id="vol-panel" aria-label="Opportunity list and filters">
@@ -73,8 +77,18 @@
           <p class="vol-results-meta" id="vol-results-meta">Loading…</p>
         </header>
 
+        <section class="vol-today-ican" aria-labelledby="vol-ican-heading">
+          <h2 class="vol-ican-heading" id="vol-ican-heading">Today I can…</h2>
+          <p class="muted vol-ican-intro">Pick a prompt. We’ll suggest options with reasons — no pressure to act.</p>
+          <div class="vol-prompt-row" id="vol-today-ican-prompts" role="group" aria-label="Recommendation prompts"></div>
+          <div class="vol-ican-results" id="vol-today-ican-results" aria-live="polite"></div>
+        </section>
+
         <form class="vol-filters" id="vol-filters" aria-label="Filters">
-          <h3 class="vol-filters-title">Filters</h3>
+          <h3 class="vol-filters-title">Discover</h3>
+          <div class="vol-facet-row" id="vol-facets" role="group" aria-label="Discovery facets"></div>
+
+          <h3 class="vol-filters-title">More filters</h3>
           <div class="vol-filter-grid">
             <div class="vol-field">
               <label for="vol-filter-distance">Distance</label>
@@ -165,6 +179,10 @@
                 <span>Accessibility</span>
               </label>
               <label class="vol-check">
+                <input type="checkbox" id="vol-filter-science">
+                <span>Citizen science</span>
+              </label>
+              <label class="vol-check">
                 <input type="checkbox" id="vol-filter-match-season">
                 <span>Current season</span>
               </label>
@@ -217,21 +235,30 @@
         for the central Pennsylvania region.
       </p>
       <p class="muted">
-        Architecture notes:
-        <a href="../docs/VOLUNTEER-MVP.md">docs/VOLUNTEER-MVP.md</a>
+        Architecture:
+        <a href="../docs/VOLUNTEER-DISCOVERY.md">Discovery</a> ·
+        <a href="../docs/VOLUNTEER-DATA-MODEL.md">Data model</a> ·
+        <a href="../docs/VOLUNTEER-RECOMMENDATION-ENGINE.md">Recommendations</a> ·
+        <a href="../docs/VOLUNTEER-UX.md">UX</a>
       </p>
     </div>
   </div>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="../shared/a11y-dialog.js"></script>
+  <script src="data/model.js"></script>
   <script src="data/categories.js"></script>
   <script src="data/organizations.js"></script>
   <script src="data/opportunities.js"></script>
+  <script src="data/enrichment.js"></script>
+  <script src="js/catalog.js"></script>
   <script src="js/planning.js"></script>
   <script src="js/filters.js"></script>
   <script src="js/today-engine.js"></script>
+  <script src="js/today-i-can.js"></script>
   <script src="js/weather-context.js"></script>
   <script src="js/cards.js"></script>
+  <script src="js/detail.js"></script>
   <script src="js/map.js"></script>
   <script src="js/volunteer.js"></script>
 </body>

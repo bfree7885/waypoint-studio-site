@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Waypoint Studio — Master Platform Audit Bundle (July 2026)</title>
+<style>
+  @page { size: letter; margin: 0.75in; }
+  body {
+    font-family: "Source Sans 3", "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: 10.5pt;
+    line-height: 1.45;
+    color: #111;
+  }
+  h1 { font-size: 20pt; page-break-after: avoid; margin-top: 0; }
+  h2 { font-size: 14pt; page-break-after: avoid; margin-top: 1.2em; }
+  h3 { font-size: 12pt; page-break-after: avoid; }
+  h4, h5, h6 { font-size: 11pt; }
+  .cover {
+    page-break-after: always;
+    padding-top: 2.5in;
+  }
+  .cover h1 { font-size: 26pt; margin-bottom: 0.4em; }
+  .cover p { color: #444; font-size: 12pt; }
+  .doc { page-break-before: always; }
+  .doc:first-of-type { page-break-before: auto; }
+  .doc-file {
+    font-size: 9pt;
+    color: #666;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 1em;
+    padding-bottom: 0.35em;
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 0.8em 0 1.1em;
+    font-size: 9pt;
+    page-break-inside: auto;
+  }
+  th, td {
+    border: 1px solid #bbb;
+    padding: 0.35em 0.45em;
+    vertical-align: top;
+    text-align: left;
+  }
+  th { background: #f2f2f2; }
+  tr { page-break-inside: avoid; }
+  code, pre {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 8.5pt;
+  }
+  pre {
+    background: #f6f6f6;
+    border: 1px solid #ddd;
+    padding: 0.65em 0.75em;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+  code { background: #f3f3f3; padding: 0.05em 0.25em; }
+  hr { border: none; border-top: 1px solid #ccc; margin: 1.2em 0; }
+  ul, ol { margin: 0.4em 0 0.8em 1.2em; }
+  a { color: #0645ad; text-decoration: none; }
+  .toc a { color: #111; }
+  .toc li { margin: 0.25em 0; }
+</style>
+</head>
+<body>
+  <section class="cover">
+    <h1>Waypoint Studio</h1>
+    <p><strong>Master Platform Audit, Repair &amp; Polish</strong></p>
+    <p>July 2026 · Combined evidence packet</p>
+    <p>Observe. Understand. Create. Share.</p>
+    <hr>
+    <h2>Contents</h2>
+    <ol class="toc">
+      <li>MASTER-PLATFORM-INVENTORY.md</li><li>MASTER-AUDIT-2026-07.md</li><li>MASTER-REPAIR-LOG-2026-07.md</li><li>MASTER-QA-2026-07.md</li><li>ACCESSIBILITY-REVIEW-2026-07.md</li><li>PRIVACY-SECURITY-REVIEW-2026-07.md</li><li>PERFORMANCE-REVIEW-2026-07.md</li><li>DOMAIN-QUALITY-REVIEW-2026-07.md</li><li>KNOWN-LIMITATIONS.md</li>
+    </ol>
+  </section>
+  <section class="doc"><header class="doc-file"><code>MASTER-PLATFORM-INVENTORY.md</code></header><h1>Master Platform Inventory</h1>
+<p><strong>Date:</strong> 2026-07-17</p>
+<p><strong>Repo:</strong> <code>waypoint-studio-site</code></p>
+<p><strong>Stack:</strong> Static multi-page HTML / CSS / vanilla JS (no package manager, no build step, no framework)</p>
+<p>This inventory describes the <strong>actual</strong> repository, not aspirational architecture.</p>
+<hr>
+<h2>What exists</h2>
+<h3>Studio shell</h3>
+<table>
+<thead><tr><th>Route</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td><code>/</code></td><td>Homepage (product catalog)</td></tr>
+<tr><td><code>/about/</code></td><td>Archive-style about (older <code>styles.css</code>)</td></tr>
+<tr><td><code>/privacy/</code></td><td>Privacy philosophy page (<strong>added this audit</strong>)</td></tr>
+<tr><td><code>/contact/</code></td><td>Contact / email (<strong>added</strong>)</td></tr>
+<tr><td><code>/support/</code></td><td>Redirects to Contact (<strong>added</strong>)</td></tr>
+<tr><td><code>/404.html</code></td><td>Not-found page (<strong>added</strong>)</td></tr>
+<tr><td><code>/robots.txt</code>, <code>/sitemap.xml</code></td><td>Crawler basics (<strong>added</strong>)</td></tr>
+</tbody></table>
+<h3>Interactive / product surfaces</h3>
+<table>
+<thead><tr><th>Route</th><th>Status</th><th>Notes</th></tr></thead>
+<tbody>
+<tr><td><code>/waypoint-scenes/</code></td><td>Active prototype</td><td>Two-scene interactive photography</td></tr>
+<tr><td><code>/foragecast/</code></td><td>Open beta</td><td>Weather reads, heatmap, forms, Learn</td></tr>
+<tr><td><code>/foragecast/education/</code></td><td>Live</td><td>Species catalog</td></tr>
+<tr><td><code>/sheds/</code></td><td>Open prototype</td><td>Leaflet Field View + demo zones</td></tr>
+<tr><td><code>/volunteer/</code></td><td>Open prototype</td><td>Discovery Engine v0.1</td></tr>
+<tr><td><code>/volunteer/opportunity/</code></td><td>Live</td><td>Detail by <code>?id=</code></td></tr>
+<tr><td><code>/volunteer/organization/</code></td><td>Live</td><td>Org profile by <code>?id=</code></td></tr>
+<tr><td><code>/volunteer/saved/</code></td><td>Live</td><td>Private localStorage planning</td></tr>
+<tr><td><code>/fieldry/</code></td><td>Planned landing</td><td>No app yet</td></tr>
+<tr><td><code>/education/</code></td><td>Early foundation</td><td>Landing + topic placeholders</td></tr>
+<tr><td><code>/knowledge-graph/</code></td><td>Schema / docs / examples</td><td>Not a public end-user app UI</td></tr>
+</tbody></table>
+<h3>Archive IA (older nav)</h3>
+<p><code>/projects/</code>, <code>/gallery/</code>, <code>/workshop/</code>, education topics, podcast/articles placeholders.</p>
+<h3>Shared assets</h3>
+<table>
+<thead><tr><th>Path</th><th>Role</th></tr></thead>
+<tbody>
+<tr><td><code>styles/site.css</code></td><td>Primary product design system</td></tr>
+<tr><td><code>styles/styles.css</code></td><td>Older archive system</td></tr>
+<tr><td><code>styles/foragecast.css</code>, <code>foragecast-education.css</code>, <code>sheds.css</code>, <code>volunteer.css</code></td><td>Product chrome</td></tr>
+<tr><td><code>shared/a11y-dialog.js</code></td><td>Dialog focus trap helper (<strong>added</strong>)</td></tr>
+<tr><td><code>assets/species/</code></td><td>ForageCast SVG placeholders</td></tr>
+</tbody></table>
+<hr>
+<h2>What does <strong>not</strong> exist in this repo</h2>
+<p>No public routes / implementations for:</p>
+<ul>
+<li>Dashboard / Today Outside</li>
+<li>Photo Coach / Photographer Profile</li>
+<li>SignalTerrain Radio &amp; Spectrum</li>
+<li>SignalTerrain Cyber Awareness</li>
+<li>Steepleaf</li>
+<li>Savant Sommelier</li>
+<li>Landscape Interpretation</li>
+<li>Hidden Landscapes app</li>
+<li>Shared profile / locations / collections / settings</li>
+<li>Service workers, web manifests, IndexedDB layers</li>
+<li><code>package.json</code>, CI workflows, automated browser e2e (beyond <code>tests/smoke.mjs</code>)</li>
+<li>Custom domain <code>CNAME</code> (deleted historically)</li>
+</ul>
+<p>Homepage now lists these under <strong>Long-term direction</strong> with an explicit “not available” disclaimer.</p>
+<hr>
+<h2>Data providers &amp; third parties</h2>
+<table>
+<thead><tr><th>Provider</th><th>Used by</th></tr></thead>
+<tbody>
+<tr><td>Open-Meteo (forecast, geocoding, elevation)</td><td>ForageCast, Volunteer</td></tr>
+<tr><td>Leaflet 1.9.4 + CARTO tiles</td><td>Sheds, ForageCast, Volunteer</td></tr>
+<tr><td>Google Fonts</td><td>Most product pages</td></tr>
+<tr><td>Formspree</td><td>ForageCast beta/waitlist/feedback</td></tr>
+<tr><td><code>mailto:</code></td><td>Waitlists / contact</td></tr>
+</tbody></table>
+<p>No analytics trackers found in-repo.</p>
+<hr>
+<h2>Client storage</h2>
+<table>
+<thead><tr><th>Key / system</th><th>App</th></tr></thead>
+<tbody>
+<tr><td><code>waypoint-volunteer-planning-v2</code> (+ v1 migrate)</td><td>Volunteer</td></tr>
+<tr><td>ForageCast beta dismiss flag</td><td>ForageCast</td></tr>
+</tbody></table>
+<p>Geolocation: Sheds, ForageCast, Volunteer (user-initiated).</p>
+<hr>
+<h2>Maps</h2>
+<p>Leaflet on Sheds, ForageCast heatmap, Volunteer discovery.</p>
+<hr>
+<h2>Forms</h2>
+<p>ForageCast beta, waitlist, feedback → Formspree endpoint in <code>foragecast/forms.config.js</code>.</p>
+<hr>
+<h2>Duplication / debt</h2>
+<ul>
+<li>Product nav HTML copied per page (no shared partials — static hosting).</li>
+<li>Two CSS systems (<code>site.css</code> vs <code>styles.css</code>).</li>
+<li>Large hero JPEGs (~13MB / ~5.7MB) duplicated at root and under <code>waypoint-scenes/</code>.</li>
+<li>Archive gallery/workshop still use “Placeholder” tiles.</li>
+</ul>
+<hr>
+<h2>Deploy posture</h2>
+<p>GitHub Pages–style static hosting expected (<code>bfree7885/waypoint-studio-site</code>).</p>
+<p>Live <code>*.github.io</code> probe from this environment returned <strong>403</strong> (cannot verify public deploy parity here).</p></section><section class="doc"><header class="doc-file"><code>MASTER-AUDIT-2026-07.md</code></header><h1>Master Audit — July 2026</h1>
+<h2>Scope reality check</h2>
+<p>The audit brief names many applications (Dashboard, SignalTerrain, Photo Coach, Steepleaf, etc.).</p>
+<p><strong>Those applications are not present in this repository.</strong> They are documented as long-term direction only.</p>
+<p>Audit and repair focused on the <strong>actual</strong> public surface: homepage, About/Privacy/Contact, Waypoint Scenes, ForageCast, Sheds, Volunteer, Education/Fieldry landings, knowledge-graph docs, archive pages.</p>
+<h2>Condition before</h2>
+<ul>
+<li>Strong prototypes (Scenes, ForageCast, Sheds, Volunteer) on a calm design system.</li>
+<li>No Privacy/Contact/Support routes; no robots/sitemap/404.</li>
+<li>Homepage mixed “upcoming” language with live prototypes; did not disclose missing future apps.</li>
+<li>Volunteer Discovery Engine v0.1 present locally (uncommitted) with demo <code>example.org</code> links.</li>
+<li>Missing ambient mp3s under archive WS_0001 experience.</li>
+<li>About dialogs lacked focus trapping.</li>
+<li>No automated smoke tests; no package/lint/typecheck toolchain.</li>
+<li>Deployed site not verifiable from this environment (HTTP 403).</li>
+</ul>
+<h2>Condition after</h2>
+<ul>
+<li>Trust routes: Privacy, Contact, Support→Contact, 404, robots, sitemap.</li>
+<li>Homepage splits <strong>Available now / Early foundations / Long-term direction</strong>.</li>
+<li>Shared <code>a11y-dialog.js</code> with focus trap; wired into Sheds + Volunteer.</li>
+<li>Noscript banners on Sheds, Volunteer, ForageCast.</li>
+<li>Broken WS_0001 mp3 references removed (silent ambient channels).</li>
+<li>Stronger Volunteer demo labeling.</li>
+<li><code>tests/smoke.mjs</code> covers routes, honesty markers, Volunteer engine, link warnings.</li>
+<li>Full review doc set under <code>docs/MASTER-*</code> and domain/privacy/a11y/perf reviews.</li>
+</ul>
+<h2>Largest improvements</h2>
+<ol>
+<li>Public honesty about what is / is not available.</li>
+<li>Privacy expectations match behavior.</li>
+<li>Accessibility of About dialogs.</li>
+<li>Crawl/error basics for static hosting.</li>
+<li>Regression smoke coverage for Volunteer + critical routes.</li>
+</ol>
+<h2>Remaining risks</h2>
+<ul>
+<li>Unoptimized multi‑MB hero images (performance / mobile data).</li>
+<li>Formspree + Google Fonts third-party network dependency.</li>
+<li>Volunteer catalog is demo-only — risk of user confusion if labeling overlooked.</li>
+<li>No real CI, HTML validators, or cross-browser automation in-repo.</li>
+<li>Cannot confirm GitHub Pages deployment or cache state from this environment.</li>
+</ul></section><section class="doc"><header class="doc-file"><code>MASTER-REPAIR-LOG-2026-07.md</code></header><h1>Master Repair Log — July 2026</h1>
+<table>
+<thead><tr><th>ID</th><th>Priority</th><th>Problem</th><th>Root cause</th><th>Repair</th><th>Verification</th></tr></thead>
+<tbody>
+<tr><td>R1</td><td>P1</td><td>No Privacy page despite privacy-first claims</td><td>Missing route</td><td>Added <code>privacy/index.html</code></td><td>Smoke + manual read</td></tr>
+<tr><td>R2</td><td>P1</td><td>No Contact/Support</td><td>Missing routes</td><td><code>contact/</code>, <code>support/</code>→contact</td><td>Smoke</td></tr>
+<tr><td>R3</td><td>P1</td><td>Homepage implied broader catalog than exists</td><td>Content drift</td><td>Available / foundations / direction sections</td><td>Smoke honesty asserts</td></tr>
+<tr><td>R4</td><td>P1</td><td>About dialogs: no focus trap</td><td>Custom handlers only</td><td><code>shared/a11y-dialog.js</code>; Sheds + Volunteer</td><td>Code review + smoke load</td></tr>
+<tr><td>R5</td><td>P1</td><td>Dialog helper <code>close</code> shadowed by DOM node</td><td>Naming bug in first draft</td><td>Renamed to <code>closeDialog</code></td><td>Code review</td></tr>
+<tr><td>R6</td><td>P1</td><td>WS_0001 referenced missing mp3 files</td><td>Assets never committed</td><td>Removed <code>&lt;source&gt;</code> tags; comment left</td><td>Link scan + smoke</td></tr>
+<tr><td>R7</td><td>P2</td><td>JS apps had no noscript explanation</td><td>Omission</td><td>Noscript banners</td><td>Manual HTML check</td></tr>
+<tr><td>R8</td><td>P2</td><td>No robots/sitemap/404</td><td>Omission</td><td>Added root files</td><td>Smoke exists</td></tr>
+<tr><td>R9</td><td>P2</td><td>Volunteer demo links could look real</td><td>Demo data + weak chrome</td><td>Stronger map demo tag</td><td>Visual/copy check</td></tr>
+<tr><td>R10</td><td>P2</td><td>No automated regression net</td><td>No tooling</td><td><code>tests/smoke.js</code></td><td><code>node tests/smoke.js</code></td></tr>
+<tr><td>R11</td><td>P2</td><td>About page isolated from privacy</td><td>Archive IA</td><td>Links to products/privacy/contact</td><td>File check</td></tr>
+<tr><td>R12</td><td>P3</td><td>Skip link missing on homepage</td><td>Omission</td><td><code>.skip-link</code> in <code>site.css</code> + homepage</td><td>CSS/HTML</td></tr>
+</tbody></table>
+<h2>Intentionally not repaired (documented)</h2>
+<ul>
+<li>Compressing 13MB hero JPEGs (needs image pipeline / owner assets).</li>
+<li>Building missing apps (Dashboard, SignalTerrain, etc.).</li>
+<li>Replacing Formspree or self-hosting fonts.</li>
+<li>Full WCAG certification claim.</li>
+</ul></section><section class="doc"><header class="doc-file"><code>MASTER-QA-2026-07.md</code></header><h1>Master QA — July 2026</h1>
+<h2>Tooling baseline</h2>
+<table>
+<thead><tr><th>Command</th><th>Result</th><th>Notes</th></tr></thead>
+<tbody>
+<tr><td><code>ls package.json</code></td><td>Missing</td><td>Predates audit — no npm install/build/lint/typecheck</td></tr>
+<tr><td><code>npm test</code> / Playwright / Jest</td><td>N/A</td><td>No harness</td></tr>
+<tr><td>HTML/CSS validators (W3C)</td><td>Not run</td><td>Network/tooling not wired in CI</td></tr>
+<tr><td><code>npm audit</code></td><td>N/A</td><td>No lockfile; CDN deps only</td></tr>
+<tr><td>Service worker tests</td><td>N/A</td><td>No SW</td></tr>
+<tr><td>Manifest validation</td><td>N/A</td><td>No manifest</td></tr>
+</tbody></table>
+<h2>Checks run this work block</h2>
+<table>
+<thead><tr><th>Command</th><th>Result</th></tr></thead>
+<tbody>
+<tr><td>Python internal link scan (pre-repair)</td><td>9 missing → all WS_0001 <code>.mp3</code></td></tr>
+<tr><td>Python internal link scan (post-repair)</td><td>Re-run via smoke WARN if any</td></tr>
+<tr><td><code>node --check</code> on Volunteer JS modules</td><td>Pass (prior session + engine load)</td></tr>
+<tr><td><code>node tests/smoke.js</code></td><td>See latest run output in owner report</td></tr>
+<tr><td><code>curl</code> GitHub Pages</td><td><strong>403 Forbidden</strong> — deploy parity unknown</td></tr>
+<tr><td>Chromium/Firefox interactive</td><td>Available in environment; full matrix not automated</td></tr>
+</tbody></table>
+<h2>Manual interaction checklist (high confidence)</h2>
+<table>
+<thead><tr><th>Action</th><th>Result</th></tr></thead>
+<tbody>
+<tr><td>Homepage → each Available product</td><td>Links resolve</td></tr>
+<tr><td>Privacy / Contact / Support</td><td>Resolve</td></tr>
+<tr><td>Volunteer filters + Today I Can (engine)</td><td>Unit-level via smoke</td></tr>
+<tr><td>Sheds/Volunteer About dialog script hooks</td><td>Present</td></tr>
+<tr><td>ForageCast disclaimers</td><td>Present in HTML/JS</td></tr>
+<tr><td>Sheds “not a find guarantee”</td><td>Present</td></tr>
+</tbody></table>
+<h2>Gaps</h2>
+<ul>
+<li>No headless screenshot matrix across breakpoints.</li>
+<li>No offline simulation beyond code review of banners.</li>
+<li>No Formspree live submit test (would create real inbox noise).</li>
+</ul></section><section class="doc"><header class="doc-file"><code>ACCESSIBILITY-REVIEW-2026-07.md</code></header><h1>Accessibility Review — July 2026</h1>
+<h2>Method</h2>
+<p>Code review of product HTML/CSS/JS against WCAG-oriented heuristics.</p>
+<p><strong>Not a full WCAG conformance audit.</strong> No claim of compliance.</p>
+<h2>Strengths already present</h2>
+<ul>
+<li>Skip links on Sheds and Volunteer field apps.</li>
+<li><code>aria-current</code>, <code>aria-pressed</code>, <code>aria-live</code> in places.</li>
+<li>Focus-visible styles on shared buttons/links.</li>
+<li>Reduced-motion rules in Scenes and Volunteer CSS.</li>
+<li>Touch-oriented control sizes in Sheds/Volunteer.</li>
+</ul>
+<h2>Findings &amp; repairs</h2>
+<table>
+<thead><tr><th>Priority</th><th>Finding</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td>P1</td><td>About dialogs lacked focus trap</td><td><strong>Fixed</strong> via <code>shared/a11y-dialog.js</code></td></tr>
+<tr><td>P1</td><td>Homepage lacked skip link</td><td><strong>Fixed</strong></td></tr>
+<tr><td>P2</td><td>JS-only apps silent without JS</td><td><strong>Fixed</strong> noscript banners</td></tr>
+<tr><td>P2</td><td>Archive WS_0001 <code>cursor:none</code> / no language attr</td><td>Remaining (archive experience)</td></tr>
+<tr><td>P2</td><td>Map-only content needs text alternatives</td><td>Partial — lists accompany maps</td></tr>
+<tr><td>P3</td><td>Duplicate H1 patterns across marketing pages</td><td>Acceptable for MPA</td></tr>
+</tbody></table>
+<h2>Remaining</h2>
+<ul>
+<li>Full keyboard pass on ForageCast multi-form page.</li>
+<li>Screen-reader pass with NVDA/VoiceOver not performed in this block.</li>
+<li>Contrast sampling not instrumented; dark theme relies on design tokens.</li>
+</ul></section><section class="doc"><header class="doc-file"><code>PRIVACY-SECURITY-REVIEW-2026-07.md</code></header><h1>Privacy &amp; Security Review — July 2026</h1>
+<p>Defensive review only. No offensive testing.</p>
+<h2>Privacy promises vs behavior</h2>
+<table>
+<thead><tr><th>Promise</th><th>Behavior</th><th>Verdict</th></tr></thead>
+<tbody>
+<tr><td>Private saves (Volunteer)</td><td><code>localStorage</code> only</td><td>Matches — documented on Privacy page</td></tr>
+<tr><td>No social graph</td><td>No profiles/followers</td><td>Matches</td></tr>
+<tr><td>Location optional</td><td>Geolocation on user gesture; demo fallback</td><td>Matches</td></tr>
+<tr><td>No invasive analytics</td><td>None found in repo</td><td>Matches</td></tr>
+</tbody></table>
+<h2>Security findings</h2>
+<table>
+<thead><tr><th>Priority</th><th>Finding</th><th>Action</th></tr></thead>
+<tbody>
+<tr><td>P2</td><td>Formspree endpoint public in repo</td><td>Expected for Formspree; documented; not a secret key</td></tr>
+<tr><td>P2</td><td><code>innerHTML</code> used for cards/insights</td><td>Content from static catalog + escaped helpers in Volunteer cards/detail</td><td>Keep discipline; no user HTML</td></tr>
+<tr><td>P2</td><td>External scripts (Leaflet, fonts)</td><td>Leaflet uses SRI; fonts without SRI</td><td>Accept / document</td></tr>
+<tr><td>P3</td><td><code>target=_blank</code></td><td>Volunteer uses <code>rel=&quot;noopener noreferrer&quot;</code></td><td>OK</td></tr>
+<tr><td>—</td><td>Secrets / API keys</td><td>None found beyond public Formspree form id</td><td>OK</td></tr>
+<tr><td>—</td><td>Open redirects</td><td>Not observed</td><td>OK</td></tr>
+</tbody></table>
+<h2>Data leaving the browser</h2>
+<ul>
+<li>Open-Meteo queries include lat/lon when user/demo location set.</li>
+<li>Map tile requests reveal approximate viewport.</li>
+<li>Formspree receives emails users submit.</li>
+</ul>
+<h2>Cannot fix in-repo alone</h2>
+<ul>
+<li>GitHub Pages security headers.</li>
+<li>Confirming production caching / HTTPS config.</li>
+<li>User device compromise of <code>localStorage</code>.</li>
+</ul></section><section class="doc"><header class="doc-file"><code>PERFORMANCE-REVIEW-2026-07.md</code></header><h1>Performance Review — July 2026</h1>
+<h2>Measured / observed</h2>
+<table>
+<thead><tr><th>Asset</th><th>Size</th><th>Impact</th></tr></thead>
+<tbody>
+<tr><td><code>boardwalk.jpg</code> (root + scenes)</td><td>~13 MB each</td><td>Severe mobile cost; largest P2 issue</td></tr>
+<tr><td><code>fogforest.jpg</code></td><td>~5.7 MB</td><td>High</td></tr>
+<tr><td><code>ws0001.jpg</code></td><td>~2.8 MB</td><td>High for archive scene</td></tr>
+<tr><td><code>counties.data.json</code></td><td>~50 KB</td><td>Fine</td></tr>
+<tr><td>Leaflet CDN</td><td>Shared</td><td>Network dependency</td></tr>
+</tbody></table>
+<p>No bundler; many small JS files on Volunteer (acceptable for clarity).</p>
+<h2>Improvements this block</h2>
+<ul>
+<li>Documented image weight as known limitation.</li>
+<li>Removed missing audio fetches (failed requests).</li>
+<li>Noscript avoids implying broken interactivity.</li>
+</ul>
+<h2>Not done (needs owner assets / tooling)</h2>
+<ul>
+<li>Re-encode hero images (WebP/AVIF, responsive <code>srcset</code>).</li>
+<li>Deduplicate root vs <code>waypoint-scenes/</code> copies.</li>
+<li>Font self-hosting.</li>
+<li>Map tile caching strategy.</li>
+</ul>
+<h2>Resilience</h2>
+<ul>
+<li>Weather failures degrade Volunteer Today insights.</li>
+<li>Geolocation denial falls back to demo center.</li>
+<li>Sheds offline banner exists.</li>
+<li>No service worker (no stale-SW risk; also no offline shell).</li>
+</ul></section><section class="doc"><header class="doc-file"><code>DOMAIN-QUALITY-REVIEW-2026-07.md</code></header><h1>Domain Quality Review — July 2026</h1>
+<p>Domain reviewers are <strong>not</strong> licensed professionals. Judgments use public product honesty + existing in-repo disclaimers.</p>
+<h2>Present applications</h2>
+<h3>ForageCast</h3>
+<ul>
+<li>Disclaimers present: not edibility/legal/safety guarantee; land permission language; lookalikes in Learn.</li>
+<li>Residual risk: users may still over-trust scores — keep “guidance only” prominent (already on hero).</li>
+<li>Leafturn “what should I do on my land today?” property tasks: <strong>not</strong> a full product module yet.</li>
+</ul>
+<h3>Sheds</h3>
+<ul>
+<li>Demo zones labeled; education mode hides hotspots; ethics copy present.</li>
+<li>Does not claim guaranteed finds.</li>
+<li>Regulation specifics are thin — appropriate for prototype; avoid expanding into legal advice.</li>
+</ul>
+<h3>Waypoint Volunteer</h3>
+<ul>
+<li>Mission fit: “What good can I do today?”</li>
+<li>Demo catalog + example.org — must remain labeled (strengthened).</li>
+<li>No gamification. Citizen science integrated as opportunity type.</li>
+<li>Not a VMS / social network.</li>
+</ul>
+<h3>Waypoint Scenes</h3>
+<ul>
+<li>Photography experience; credits present on main scenes page.</li>
+<li>Photo Coach / EXIF critique: <strong>absent</strong>.</li>
+</ul>
+<h3>Fieldry / Education</h3>
+<ul>
+<li>Landings / thin topics — correctly “planned” or “early foundation.”</li>
+<li>Do not imply validated biodiversity records.</li>
+</ul>
+<h2>Absent applications (direction only)</h2>
+<p>Dashboard, Photo Coach, SignalTerrain (radio/cyber), Steepleaf, Savant Sommelier, Landscape Interpretation, Hidden Landscapes — <strong>no domain certification possible</strong>; do not advertise as live.</p>
+<h2>Knowledge graph</h2>
+<ul>
+<li>Schema-first foundation; suitable as shared future substrate; not user-facing discovery yet.</li>
+</ul></section><section class="doc"><header class="doc-file"><code>KNOWN-LIMITATIONS.md</code></header><h1>Known Limitations</h1>
+<p>Living list for operators and future agents.</p>
+<ol>
+<li><strong>Static hosting only</strong> — no accounts, sync, or server-side validation.</li>
+<li><strong>Hero imagery</strong> — multi‑MB JPEGs hurt mobile performance.</li>
+<li><strong>Volunteer data</strong> — illustrative demo catalog; not verified nonprofit listings.</li>
+<li><strong>Sheds zones</strong> — synthetic demo polygons, not predictive habitat models.</li>
+<li><strong>ForageCast</strong> — environmental guidance only; never treat as ID or edibility authority.</li>
+<li><strong>Missing apps</strong> — Dashboard, SignalTerrain, Photo Coach, Steepleaf, Sommelier, Landscape Interpretation are direction-only.</li>
+<li><strong>Third parties</strong> — Google Fonts, Leaflet/CARTO, Open-Meteo, Formspree.</li>
+<li><strong>No service worker</strong> — limited offline; also avoids SW cache staleness.</li>
+<li><strong>Archive pages</strong> — gallery/workshop/podcast placeholders remain.</li>
+<li><strong>WS_0001 ambient mp3s</strong> — not bundled; channels silent.</li>
+<li><strong>Deploy verification</strong> — GitHub Pages may 403 from some environments; confirm in browser after publish.</li>
+<li><strong>Tests</strong> — <code>tests/smoke.js</code> only; no visual/e2e matrix.</li>
+<li><strong>Dual CSS systems</strong> — <code>site.css</code> vs archive <code>styles.css</code>.</li>
+<li><strong>Nav duplication</strong> — hand-maintained across HTML files.</li>
+</ol></section>
+</body>
+</html>
