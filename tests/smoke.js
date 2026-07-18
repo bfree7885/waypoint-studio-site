@@ -158,7 +158,7 @@ var missingLinks = 0;
 var htmlFiles = [];
 function walk(dir) {
   fs.readdirSync(dir).forEach(function (name) {
-    if (name === ".git" || name === "node_modules") return;
+    if (name === ".git" || name === "node_modules" || name === ".tmp-audit") return;
     var full = path.join(dir, name);
     var st = fs.statSync(full);
     if (st.isDirectory()) walk(full);
