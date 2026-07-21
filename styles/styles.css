@@ -1,4 +1,5 @@
 :root {
+  /* Legacy archive pages — prefer site.css + Aurora for new work */
   --bg: #070b14;
   --panel: #0e1524;
   --surface-raised: #141e32;

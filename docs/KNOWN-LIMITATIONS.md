@@ -7,7 +7,9 @@ Living list for operators and future agents.
 3. **Volunteer data** — illustrative demo catalog; not verified nonprofit listings.  
 4. **Sheds zones** — synthetic demo polygons, not predictive habitat models.  
 5. **ForageCast** — environmental guidance only; never treat as ID or edibility authority.  
-6. **Missing apps** — Dashboard, SignalTerrain, Photo Coach, Steepleaf, Sommelier, Landscape Interpretation are direction-only.  
+6. **Dashboard** — public landing and IA exist (`/dashboard/`); live outdoor-intelligence widgets continue in RC3 Sprint 2.  
+7. **Incubator apps** — SignalTerrain, Steepleaf, Savant Sommelier are vision-only (`/incubator/`), not available products.  
+8. **Photo Coach / Hidden Landscapes** — Scenes roadmap capabilities; not fully shipped as standalone apps.  
 7. **Third parties** — Google Fonts, Leaflet/CARTO, Open-Meteo, Formspree.  
 8. **No service worker** — limited offline; also avoids SW cache staleness.  
 9. **Archive pages** — gallery/workshop/podcast placeholders remain.  

@@ -42,6 +42,12 @@ var required = [
   "contact/index.html",
   "support/index.html",
   "about/index.html",
+  "dashboard/index.html",
+  "incubator/index.html",
+  "design-system/index.html",
+  "styles/aurora-tokens.css",
+  "styles/aurora.css",
+  "docs/AURORA-DESIGN-SYSTEM.md",
   "volunteer/index.html",
   "volunteer/opportunity/index.html",
   "volunteer/organization/index.html",
@@ -52,6 +58,10 @@ var required = [
   "waypoint-scenes/index.html",
   "fieldry/index.html",
   "education/index.html",
+  "docs/RC3-CONSTITUTION.md",
+  "docs/PRODUCTS.md",
+  "docs/NAVIGATION-PLAN.md",
+  "docs/INCUBATOR.md",
   "shared/a11y-dialog.js"
 ];
 
@@ -60,9 +70,8 @@ required.forEach(function (rel) {
   else fail("route " + rel, "missing");
 });
 
-/* —— Apps that must NOT be claimed as live routes —— */
+/* —— Apps that must NOT be claimed as live product routes —— */
 [
-  "dashboard/index.html",
   "photo-coach/index.html",
   "signalterrain/index.html",
   "steepleaf/index.html",
@@ -70,15 +79,24 @@ required.forEach(function (rel) {
   "landscape-interpretation/index.html"
 ].forEach(function (rel) {
   if (exists(rel)) warn("unexpected live app", rel + " exists — update homepage claims");
-  else ok("absent (direction-only) " + rel);
+  else ok("absent (incubator/direction-only) " + rel);
 });
 
-/* —— Homepage honesty —— */
+/* —— Homepage IA honesty —— */
 var home = fs.readFileSync(path.join(root, "index.html"), "utf8");
-assert(home.indexOf("Long-term direction") !== -1, "homepage missing direction section");
+assert(home.indexOf("Observe.") !== -1, "homepage missing Observe mission");
+assert(home.indexOf("Discover.") !== -1, "homepage missing Discover mission");
+assert(home.indexOf("Understand.") !== -1, "homepage missing Understand mission");
+assert(home.indexOf("Capture what you find") !== -1, "homepage missing tagline");
+assert(home.indexOf("dashboard/") !== -1, "homepage missing Dashboard");
+assert(home.indexOf("waypoint-scenes/") !== -1, "homepage missing Scenes");
+assert(home.indexOf("sheds/") !== -1, "homepage missing Sheds");
+assert(home.indexOf("volunteer/") !== -1, "homepage missing Volunteer");
+assert(home.indexOf("incubator/") !== -1, "homepage missing Incubator");
 assert(home.indexOf("privacy/") !== -1, "homepage missing privacy link");
-assert(home.indexOf("Not available in this repository build") !== -1, "homepage must disclaim missing apps");
-ok("homepage honesty markers");
+assert(home.indexOf("Waypoint’s Take") !== -1 || home.indexOf("Waypoint's Take") !== -1, "homepage missing Waypoint's Take");
+assert(home.indexOf("foragecast/") !== -1, "homepage should still link supporting ForageCast");
+ok("homepage IA honesty markers");
 
 /* —— Broken audio sources removed —— */
 var ws = fs.readFileSync(

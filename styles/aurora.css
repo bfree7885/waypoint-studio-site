@@ -1,0 +1,517 @@
+/**
+ * Waypoint Studio — Aurora component library
+ * Quiet, premium primitives for marketing + product shells.
+ */
+
+@import url("./aurora-tokens.css");
+
+/* —— Focus —— */
+:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.aurora-btn:focus-visible,
+.btn-primary:focus-visible,
+.btn-secondary:focus-visible,
+.btn-ghost:focus-visible {
+  box-shadow: var(--focus-ring);
+}
+
+/* —— Buttons —— */
+.aurora-btn,
+.btn-primary,
+.btn-secondary,
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 2.75rem;
+  padding: 0.75rem 1.4rem;
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 400;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--line);
+  cursor: pointer;
+  transition:
+    border-color var(--duration-fast) var(--ease-out),
+    background var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out);
+}
+
+.aurora-btn:hover,
+.btn-primary:hover,
+.btn-secondary:hover,
+.btn-ghost:hover {
+  text-decoration: none;
+}
+
+.btn-primary,
+.aurora-btn--primary {
+  background: var(--accent-dim);
+  border-color: color-mix(in srgb, var(--accent) 40%, var(--line));
+  color: var(--text-strong);
+}
+
+.btn-primary:hover,
+.btn-primary:focus-visible,
+.aurora-btn--primary:hover,
+.aurora-btn--primary:focus-visible {
+  background: color-mix(in srgb, var(--accent) 22%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 55%, var(--line));
+  color: var(--text-strong);
+}
+
+.btn-secondary,
+.aurora-btn--secondary {
+  background: transparent;
+  color: var(--muted);
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus-visible,
+.aurora-btn--secondary:hover,
+.aurora-btn--secondary:focus-visible {
+  color: var(--text);
+  border-color: color-mix(in srgb, var(--accent) 35%, var(--line));
+}
+
+.btn-ghost,
+.aurora-btn--ghost {
+  background: transparent;
+  border-color: transparent;
+  color: var(--muted);
+  min-height: 2.5rem;
+  padding-inline: 0.75rem;
+}
+
+.btn-ghost:hover,
+.aurora-btn--ghost:hover {
+  color: var(--accent);
+  background: var(--accent-dim);
+}
+
+.aurora-btn:disabled,
+.aurora-btn[aria-disabled="true"] {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.aurora-btn--sm {
+  min-height: 2.25rem;
+  padding: 0.45rem 1rem;
+  font-size: var(--text-xs);
+}
+
+.aurora-btn--icon {
+  width: 2.75rem;
+  padding: 0;
+}
+
+/* —— Cards —— */
+.aurora-card,
+.card {
+  display: block;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  transition:
+    border-color var(--duration-med) var(--ease-out),
+    box-shadow var(--duration-med) var(--ease-out),
+    transform var(--duration-med) var(--ease-out);
+}
+
+a.aurora-card:hover,
+a.aurora-card:focus-visible,
+a.card:hover,
+a.card:focus-visible {
+  border-color: color-mix(in srgb, var(--accent) 35%, var(--line));
+  box-shadow: var(--shadow-lift);
+  text-decoration: none;
+  transform: translateY(-1px);
+}
+
+.aurora-card--quiet {
+  background: transparent;
+  box-shadow: none;
+}
+
+.aurora-card--raised {
+  background: var(--surface-raised);
+}
+
+.aurora-card__meta,
+.card .meta {
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 var(--space-2);
+}
+
+.aurora-card__title {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  margin: 0 0 var(--space-2);
+}
+
+.aurora-card__body {
+  color: var(--muted);
+  font-size: var(--text-md);
+  margin: 0;
+  line-height: 1.55;
+}
+
+/* —— Badges —— */
+.badge {
+  display: inline-block;
+  font-size: 0.68rem;
+  letter-spacing: var(--tracking-kicker);
+  text-transform: uppercase;
+  padding: 0.35rem 0.65rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  margin-bottom: var(--space-3);
+}
+
+.badge-free,
+.badge-active {
+  color: var(--accent-cyan);
+  border-color: color-mix(in srgb, var(--accent-cyan) 45%, var(--line));
+}
+
+.badge-flagship,
+.badge-dev {
+  color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 40%, var(--line));
+}
+
+.badge-planned {
+  color: var(--muted);
+}
+
+.badge-beta {
+  color: var(--accent-purple);
+  border-color: color-mix(in srgb, var(--accent-purple) 40%, var(--line));
+}
+
+/* —— Navigation —— */
+.site-header {
+  backdrop-filter: blur(10px);
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  border-bottom: 1px solid var(--line);
+}
+
+.site-nav a {
+  position: relative;
+  min-height: 2.5rem;
+  display: inline-flex;
+  align-items: center;
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+.site-nav a[aria-current="page"]::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0.2rem;
+  height: 1px;
+  background: color-mix(in srgb, var(--accent) 70%, transparent);
+}
+
+/* —— Icons (inline SVG host) —— */
+.aurora-icon {
+  display: inline-flex;
+  width: 1.25rem;
+  height: 1.25rem;
+  flex-shrink: 0;
+  color: currentColor;
+}
+
+.aurora-icon svg {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.aurora-icon--lg {
+  width: 1.75rem;
+  height: 1.75rem;
+}
+
+.aurora-icon-tile {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--line);
+  background: var(--surface-raised);
+  color: var(--accent);
+}
+
+/* —— Loading —— */
+.aurora-skeleton {
+  display: block;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(
+    90deg,
+    var(--surface) 0%,
+    var(--surface-raised) 45%,
+    var(--surface) 90%
+  );
+  background-size: 200% 100%;
+  animation: aurora-shimmer var(--duration-slow) var(--ease-in-out) infinite;
+}
+
+.aurora-skeleton--text {
+  height: 0.9rem;
+  width: 100%;
+  margin-bottom: 0.65rem;
+}
+
+.aurora-skeleton--title {
+  height: 1.4rem;
+  width: 55%;
+  margin-bottom: 1rem;
+}
+
+.aurora-skeleton--card {
+  height: 8.5rem;
+}
+
+.aurora-spinner {
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 2px solid var(--line);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: aurora-spin 0.8s linear infinite;
+}
+
+.aurora-loading {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--muted);
+  font-size: var(--text-sm);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+}
+
+@keyframes aurora-shimmer {
+  0% { background-position: 100% 0; }
+  100% { background-position: -100% 0; }
+}
+
+@keyframes aurora-spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes aurora-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(0.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.aurora-enter {
+  animation: aurora-fade-up var(--duration-med) var(--ease-out) both;
+}
+
+/* —— Empty states —— */
+.aurora-empty {
+  text-align: center;
+  padding: var(--space-5) var(--space-4);
+  border: 1px dashed var(--line);
+  border-radius: var(--radius-md);
+  background: var(--surface-sunken);
+}
+
+.aurora-empty__title {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  margin: 0 0 var(--space-2);
+}
+
+.aurora-empty__body {
+  color: var(--muted);
+  margin: 0 auto var(--space-4);
+  max-width: 36ch;
+}
+
+/* —— Take panel (interpretation) —— */
+.take-panel,
+.aurora-take {
+  padding: var(--space-4);
+  background: linear-gradient(160deg, var(--surface-raised), var(--surface));
+  border: 1px solid var(--line);
+  border-left: 3px solid color-mix(in srgb, var(--accent) 55%, transparent);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+}
+
+.take-example {
+  margin: 0 0 var(--space-3);
+  padding: 0;
+  border: 0;
+  max-width: 58ch;
+}
+
+.take-example p {
+  font-family: var(--font-display);
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  font-style: italic;
+  line-height: 1.55;
+  color: var(--text);
+  margin: 0 0 var(--space-2);
+}
+
+.take-example footer {
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* —— Forms —— */
+.aurora-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: var(--space-3);
+}
+
+.aurora-label {
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.aurora-input,
+.aurora-select,
+.aurora-textarea {
+  width: 100%;
+  min-height: 2.75rem;
+  padding: 0.65rem 0.85rem;
+  font: inherit;
+  color: var(--text);
+  background: var(--surface-sunken);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  transition: border-color var(--duration-fast) var(--ease-out);
+}
+
+.aurora-input:hover,
+.aurora-select:hover,
+.aurora-textarea:hover {
+  border-color: var(--line-strong);
+}
+
+.aurora-input:focus-visible,
+.aurora-select:focus-visible,
+.aurora-textarea:focus-visible {
+  border-color: color-mix(in srgb, var(--accent) 50%, var(--line));
+  box-shadow: var(--focus-ring);
+  outline: none;
+}
+
+.aurora-textarea {
+  min-height: 6rem;
+  resize: vertical;
+}
+
+.aurora-hint {
+  font-size: var(--text-sm);
+  color: var(--muted);
+}
+
+.aurora-error {
+  font-size: var(--text-sm);
+  color: var(--danger);
+}
+
+/* —— Palette swatches (docs / showcase) —— */
+.aurora-swatch-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: var(--space-3);
+}
+
+.aurora-swatch {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--surface);
+}
+
+.aurora-swatch__chip {
+  height: 4.5rem;
+}
+
+.aurora-swatch__meta {
+  padding: var(--space-2);
+  font-size: var(--text-xs);
+  letter-spacing: 0.04em;
+}
+
+.aurora-swatch__meta strong {
+  display: block;
+  font-weight: 400;
+  color: var(--text);
+  margin-bottom: 0.2rem;
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: var(--text-sm);
+}
+
+/* —— Atmosphere helpers —— */
+.aurora-atmosphere {
+  position: relative;
+}
+
+.aurora-atmosphere::before {
+  content: "";
+  position: absolute;
+  inset: -20% -10% auto;
+  height: 18rem;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 20% 40%, var(--aurora-glow), transparent 55%),
+    radial-gradient(ellipse at 80% 30%, var(--golden-glow), transparent 50%);
+  opacity: 0.9;
+  z-index: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aurora-skeleton,
+  .aurora-spinner,
+  .aurora-enter,
+  a.aurora-card,
+  a.card,
+  .aurora-btn,
+  .btn-primary,
+  .btn-secondary {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+}

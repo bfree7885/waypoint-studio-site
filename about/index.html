@@ -6,74 +6,93 @@
     <title>About | Waypoint Studio</title>
     <meta
       name="description"
-      content="Why Waypoint Studio exists as a long-term creative portfolio and archive."
+      content="Waypoint Studio helps people explore, document, understand, and care for the natural world. Observe. Discover. Understand."
     />
-    <link rel="stylesheet" href="../styles/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Source+Sans+3:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/site.css" />
   </head>
   <body>
+    <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header">
-      <div class="wrap header-inner">
+      <div class="header-inner">
         <a class="brand" href="../">Waypoint Studio</a>
-        <nav class="site-nav" aria-label="Global">
-          <a href="../">Home</a>
-          <a href="../education/">Education</a>
-          <a href="../projects/">Projects</a>
-          <a href="../gallery/">Gallery</a>
-          <a href="../workshop/">Workshop</a>
+        <nav class="site-nav" aria-label="Main">
+          <a href="../dashboard/">Dashboard</a>
+          <a href="../waypoint-scenes/">Scenes</a>
+          <a href="../sheds/">Sheds</a>
+          <a href="../volunteer/">Volunteer</a>
+          <a href="../education/">Articles</a>
           <a href="./" aria-current="page">About</a>
         </nav>
       </div>
     </header>
 
-    <main>
+    <main id="main">
       <div class="wrap">
-        <section>
-          <h1>Why Waypoint Exists</h1>
-          <ul class="tagline-lines" aria-label="Mission">
+        <section class="page-hero">
+          <h1>About Waypoint Studio</h1>
+          <ul class="mission-lines" aria-label="Mission">
             <li>Observe.</li>
+            <li>Discover.</li>
             <li>Understand.</li>
-            <li>Create.</li>
-            <li>Share.</li>
           </ul>
+          <p class="tagline">Capture what you find. Learn why it matters.</p>
           <p class="lead">
-            Waypoint Studio is a long-term creative portfolio and archive.
+            Waypoint Studio is an outdoor exploration platform.
+            We help people explore, document, understand, and care for the natural world —
+            with privacy-first tools and education-first interpretation.
           </p>
+        </section>
+
+        <section>
+          <h2>What we offer</h2>
+          <ul class="about-product-list">
+            <li><strong>Dashboard</strong> (free) — plan today’s outdoor adventure with conditions and Waypoint’s Take.</li>
+            <li><strong>Scenes</strong> (flagship) — outdoor photography craft, coaching, and discovery.</li>
+            <li><strong>Sheds</strong> (flagship) — a dedicated shed hunting platform with map-first intelligence.</li>
+            <li><strong>Volunteer</strong> (free) — meaningful outdoor stewardship near you.</li>
+            <li><strong>Articles</strong> — platform-wide learning that supports every experience.</li>
+          </ul>
+        </section>
+
+        <section class="take-panel">
+          <h2>Waypoint’s Take</h2>
           <p>
-            Its purpose is to collect and share projects, education, photography,
-            maps, making, art, experiments, and field observations.
+            Data alone is incomplete. Waypoint’s Take interprets conditions and habitat —
+            why today’s weather matters for photography, why river levels matter for safety,
+            why a season favors shed hunting — always educational, never clickbait.
           </p>
+        </section>
+
+        <section>
+          <h2>How we work</h2>
           <p>
-            Part field notebook.<br />
-            Part education project.<br />
-            Part gallery.<br />
-            Part workshop.
-          </p>
-          <p>
-            Waypoint Studio is not intended to present expertise. It exists to
-            organize interests into a public archive and support a lifelong
-            practice of observing, understanding, creating, and sharing.
+            Part field notebook. Part photography studio. Part stewardship guide.
+            We ship slowly, label maturity honestly, and keep personal locations private by default.
           </p>
           <p class="muted">
-            This site is not optimized for growth. It exists to document making
-            and curiosity over time.
+            Future products live in the <a href="../incubator/">Incubator</a> without distracting
+            from what you can use today.
           </p>
-          <p>
-            <a href="../">Current products</a> ·
-            <a href="../privacy/">Privacy</a> ·
-            <a href="../contact/">Contact</a>
-          </p>
+          <div class="cta-row">
+            <a class="btn-primary" href="../">Explore the studio</a>
+            <a class="btn-secondary" href="../privacy/">Privacy</a>
+            <a class="btn-secondary" href="../contact/">Contact</a>
+          </div>
         </section>
       </div>
     </main>
 
-        <footer class="site-footer">
-      <div class="wrap footer-inner">
-        <ul class="footer-mission" aria-label="Mission">
-          <li>Observe.</li>
-          <li>Understand.</li>
-          <li>Create.</li>
-          <li>Share.</li>
-        </ul>
+    <footer class="site-footer">
+      <div class="footer-inner footer-links">
+        <span>Waypoint Studio · Observe. Discover. Understand.</span>
+        <span>
+          <a href="../incubator/">Incubator</a> ·
+          <a href="../privacy/">Privacy</a> ·
+          <a href="../contact/">Contact</a>
+        </span>
       </div>
     </footer>
   </body>

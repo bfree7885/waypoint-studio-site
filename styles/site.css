@@ -1,25 +1,5 @@
-:root {
-  --bg: #070b14;
-  --surface: #0e1524;
-  --surface-raised: #141e32;
-  --text: #e8edf5;
-  --muted: #8b9bb8;
-  --line: #243047;
-  --accent: #c6ff4d;
-  --accent-purple: #9b7ed4;
-  --accent-cyan: #6ec8e8;
-  --accent-dim: rgba(198, 255, 77, 0.12);
-  --accent-purple-dim: rgba(155, 126, 212, 0.15);
-  --max: 960px;
-  --space-1: 0.5rem;
-  --space-2: 0.875rem;
-  --space-3: 1.25rem;
-  --space-4: 2rem;
-  --space-5: 3rem;
-  --space-6: 4.5rem;
-  --font-display: "Cormorant Garamond", Georgia, serif;
-  --font-body: "Source Sans 3", system-ui, sans-serif;
-}
+/* Aurora Design System — official tokens + components (RC3 Sprint 2) */
+@import url("./aurora.css");
 
 *,
 *::before,
@@ -180,8 +160,6 @@ main,
 }
 
 .site-header {
-  border-bottom: 1px solid var(--line);
-  background: rgba(7, 11, 20, 0.94);
   position: sticky;
   top: 0;
   z-index: 10;
@@ -276,17 +254,7 @@ section:last-child {
 }
 
 .card {
-  display: block;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  padding: var(--space-4);
   min-height: 9rem;
-}
-
-.card:hover,
-.card:focus-visible {
-  border-color: rgba(198, 255, 77, 0.35);
-  text-decoration: none;
 }
 
 .card h3 {
@@ -363,30 +331,7 @@ section:last-child {
   margin-bottom: 0;
 }
 
-/* —— Product / pre-launch —— */
-.badge {
-  display: inline-block;
-  font-size: 0.68rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  padding: 0.35rem 0.65rem;
-  border: 1px solid var(--line);
-  margin-bottom: var(--space-3);
-}
-
-.badge-active {
-  color: var(--accent);
-  border-color: rgba(198, 255, 77, 0.4);
-}
-
-.badge-dev {
-  color: var(--accent-purple);
-  border-color: rgba(155, 126, 212, 0.4);
-}
-
-.badge-planned {
-  color: var(--muted);
-}
+/* —— Product / pre-launch (badge colors live in aurora.css) —— */
 
 .subscription-note {
   font-size: 0.88rem;
@@ -479,46 +424,7 @@ section:last-child {
   margin-right: auto;
 }
 
-.btn-primary,
-.btn-secondary {
-  display: inline-block;
-  font-family: var(--font-body);
-  font-size: 0.82rem;
-  font-weight: 400;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  padding: 0.85rem 1.5rem;
-  border: 1px solid var(--line);
-  cursor: pointer;
-  text-decoration: none;
-  transition: border-color 0.2s ease, background 0.2s ease;
-}
-
-.btn-primary {
-  background: var(--accent-dim);
-  border-color: rgba(198, 255, 77, 0.35);
-  color: var(--text);
-}
-
-.btn-primary:hover,
-.btn-primary:focus-visible {
-  background: rgba(198, 255, 77, 0.2);
-  border-color: rgba(198, 255, 77, 0.5);
-  color: var(--text);
-  text-decoration: none;
-}
-
-.btn-secondary {
-  background: transparent;
-  color: var(--muted);
-}
-
-.btn-secondary:hover,
-.btn-secondary:focus-visible {
-  color: var(--text);
-  border-color: rgba(198, 255, 77, 0.35);
-  text-decoration: none;
-}
+/* Buttons: see aurora.css (.btn-primary / .btn-secondary / .aurora-btn) */
 
 .cta-row {
   display: flex;
@@ -576,6 +482,220 @@ section:last-child {
   color: var(--muted);
 }
 
+/* —— RC3 homepage & IA —— */
+.hero-kicker {
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 var(--space-2);
+}
+
+.tagline-home {
+  font-family: var(--font-display);
+  font-size: clamp(1.15rem, 2.4vw, 1.45rem);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--text);
+  margin: 0 0 var(--space-3);
+  max-width: 28ch;
+}
+
+.section-lede {
+  color: var(--muted);
+  max-width: 52ch;
+  margin-top: calc(var(--space-2) * -1);
+  margin-bottom: var(--space-4);
+}
+
+.experiences {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.experience-block {
+  display: grid;
+  grid-template-columns: minmax(12rem, 0.9fr) 1.4fr;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  background: var(--surface);
+  border: 1px solid var(--line);
+}
+
+.experience-block.experience-flagship {
+  border-color: rgba(198, 255, 77, 0.22);
+}
+
+.experience-meta h3 {
+  margin: 0 0 var(--space-2);
+  font-size: clamp(1.35rem, 2.5vw, 1.7rem);
+}
+
+.experience-meta h3 a:hover,
+.experience-meta h3 a:focus-visible {
+  color: var(--accent);
+}
+
+.experience-promise {
+  color: var(--muted);
+  font-style: italic;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.experience-body p {
+  margin-top: 0;
+  color: var(--muted);
+}
+
+.experience-body strong {
+  color: var(--text);
+  font-weight: 400;
+}
+
+.badge-free {
+  color: var(--accent-cyan);
+  border-color: rgba(110, 200, 232, 0.4);
+}
+
+.badge-flagship {
+  color: var(--accent);
+  border-color: rgba(198, 255, 77, 0.4);
+}
+
+.text-link {
+  display: inline-block;
+  margin-top: var(--space-2);
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.text-link:hover,
+.text-link:focus-visible {
+  color: var(--text);
+}
+
+.take-panel {
+  padding: var(--space-4);
+  background: linear-gradient(160deg, var(--surface-raised), var(--surface));
+  border: 1px solid var(--line);
+  border-left: 3px solid rgba(198, 255, 77, 0.45);
+}
+
+.take-panel h2 {
+  margin-top: 0;
+}
+
+.take-example {
+  margin: 0 0 var(--space-3);
+  padding: 0;
+  border: 0;
+  max-width: 58ch;
+}
+
+.take-example p {
+  font-family: var(--font-display);
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  font-style: italic;
+  line-height: 1.55;
+  color: var(--text);
+  margin: 0 0 var(--space-2);
+}
+
+.take-example footer {
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: var(--space-3);
+}
+
+.category-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  padding: var(--space-4);
+  min-height: 9.5rem;
+}
+
+.category-card h3 {
+  margin: 0 0 var(--space-2);
+  font-size: 1.1rem;
+}
+
+.category-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.category-card .meta {
+  margin-top: var(--space-3);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-purple);
+}
+
+.incubator-teaser,
+.supporting-strip {
+  padding-top: var(--space-2);
+}
+
+.supporting-copy {
+  margin: 0;
+  max-width: 62ch;
+}
+
+.incubator-item {
+  padding: var(--space-4) 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.incubator-item:last-of-type {
+  border-bottom: 0;
+}
+
+.incubator-item h3 {
+  margin: 0 0 var(--space-2);
+}
+
+.incubator-item .meta {
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: var(--space-2) 0 0;
+}
+
+.about-product-list {
+  color: var(--muted);
+  max-width: 62ch;
+  line-height: 1.75;
+  padding-left: 1.15rem;
+}
+
+.about-product-list strong {
+  color: var(--text);
+  font-weight: 400;
+}
+
+.visually-quiet {
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-family: var(--font-body);
+  font-weight: 400;
+}
+
 @media (max-width: 768px) {
   .col-4,
   .col-6 {
@@ -587,7 +707,37 @@ section:last-child {
     align-items: flex-start;
   }
 
+  .site-nav {
+    gap: 0.65rem 1rem;
+  }
+
+  .site-nav a {
+    min-height: 2.5rem;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .experience-block {
+    grid-template-columns: 1fr;
+    gap: var(--space-3);
+  }
+
   main {
     padding: var(--space-5) 0 var(--space-4);
+  }
+
+  .cta-row .btn-primary,
+  .cta-row .btn-secondary {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-primary,
+  .btn-secondary,
+  .card,
+  .experience-block {
+    transition: none;
   }
 }

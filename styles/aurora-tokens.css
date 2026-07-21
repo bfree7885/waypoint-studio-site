@@ -1,0 +1,181 @@
+/**
+ * Waypoint Studio — Aurora Design System tokens
+ * RC3 Sprint 2 — Official visual identity
+ *
+ * Inspiration: Northern Lights, New England autumn, aspen & evergreen
+ * forests, golden hour, blue hour, night photography.
+ *
+ * Feel: a National Park visitor center designed by photographers.
+ * Not SaaS chrome, cyberpunk, gaming UI, or generic Bootstrap.
+ */
+
+:root {
+  /* —— Core —— */
+  --aurora-charcoal: #0c1018;
+  --aurora-slate: #1a2332;
+  --aurora-off-white: #eef2f6;
+
+  /* —— Scenes (aurora / night photography) —— */
+  --scenes-aurora-violet: #9b7ed4;
+  --scenes-midnight-blue: #0b1a3a;
+  --scenes-aurora-lime: #c6ff4d;
+  --scenes-magenta: #d46ba8;
+
+  /* —— Dashboard (day arc) —— */
+  --dash-morning-blue: #6ea8c9;
+  --dash-golden-hour: #e8b86d;
+  --dash-twilight-purple: #7a6aad;
+  --dash-night-sky: #070b14;
+
+  /* —— Sheds (aspen / autumn / bark) —— */
+  --sheds-aspen-gold: #d4c46a;
+  --sheds-evergreen: #2f5c47;
+  --sheds-burnt-orange: #c46a3a;
+  --sheds-bark-brown: #5c4638;
+
+  /* —— Volunteer (forest stewardship) —— */
+  --vol-evergreen: #2f5c47;
+  --vol-forest-green: #1e4d3a;
+  --vol-moss: #7a9b6a;
+
+  /* —— Semantic surfaces (dark default) —— */
+  --bg: var(--dash-night-sky);
+  --bg-elevated: #0a1220;
+  --surface: #0e1524;
+  --surface-raised: #141e32;
+  --surface-sunken: #080c14;
+  --text: var(--aurora-off-white);
+  --text-strong: #f7f9fc;
+  --muted: #8b9bb8;
+  --line: #243047;
+  --line-strong: #334560;
+
+  /* —— Semantic accents (platform default = Scenes lime) —— */
+  --accent: var(--scenes-aurora-lime);
+  --accent-hover: #d4ff70;
+  --accent-purple: var(--scenes-aurora-violet);
+  --accent-cyan: var(--dash-morning-blue);
+  --accent-magenta: var(--scenes-magenta);
+  --accent-gold: var(--dash-golden-hour);
+  --accent-dim: rgba(198, 255, 77, 0.12);
+  --accent-purple-dim: rgba(155, 126, 212, 0.15);
+  --accent-cyan-dim: rgba(110, 168, 201, 0.14);
+  --danger: #d4736a;
+  --warning: var(--dash-golden-hour);
+  --success: var(--vol-moss);
+
+  /* —— Focus & a11y —— */
+  --focus-ring: 0 0 0 2px var(--bg), 0 0 0 4px var(--accent);
+  --focus-ring-inset: inset 0 0 0 2px var(--accent);
+  --contrast-border: rgba(238, 242, 246, 0.18);
+
+  /* —— Typography —— */
+  --font-display: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --font-body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --text-xs: 0.72rem;
+  --text-sm: 0.82rem;
+  --text-md: 0.95rem;
+  --text-lg: 1.1rem;
+  --text-xl: 1.35rem;
+  --leading-tight: 1.25;
+  --leading-body: 1.7;
+  --tracking-label: 0.08em;
+  --tracking-kicker: 0.14em;
+
+  /* —— Spacing scale —— */
+  --space-1: 0.5rem;
+  --space-2: 0.875rem;
+  --space-3: 1.25rem;
+  --space-4: 2rem;
+  --space-5: 3rem;
+  --space-6: 4.5rem;
+  --space-7: 6rem;
+  --radius-sm: 0.35rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --max: 1040px;
+  --max-narrow: 42rem;
+  --header-h: 4.25rem;
+
+  /* —— Elevation & motion —— */
+  --shadow-soft: 0 12px 40px rgba(0, 0, 0, 0.28);
+  --shadow-lift: 0 8px 24px rgba(0, 0, 0, 0.22);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.45, 0, 0.55, 1);
+  --duration-fast: 160ms;
+  --duration-med: 280ms;
+  --duration-slow: 480ms;
+
+  /* —— Atmosphere —— */
+  --aurora-glow: rgba(155, 126, 212, 0.12);
+  --golden-glow: rgba(232, 184, 109, 0.1);
+  --forest-glow: rgba(47, 92, 71, 0.18);
+}
+
+/* Product theme scopes — quiet accent shifts, same structure */
+.theme-scenes,
+[data-product="scenes"] {
+  --accent: var(--scenes-aurora-lime);
+  --accent-purple: var(--scenes-aurora-violet);
+  --accent-dim: rgba(198, 255, 77, 0.12);
+  --product-tint: var(--scenes-aurora-violet);
+}
+
+.theme-dashboard,
+[data-product="dashboard"] {
+  --accent: var(--dash-morning-blue);
+  --accent-hover: #84bdd6;
+  --accent-purple: var(--dash-twilight-purple);
+  --accent-dim: rgba(110, 168, 201, 0.16);
+  --product-tint: var(--dash-golden-hour);
+}
+
+.theme-sheds,
+[data-product="sheds"] {
+  --accent: var(--sheds-aspen-gold);
+  --accent-hover: #e0d484;
+  --accent-purple: var(--sheds-burnt-orange);
+  --accent-dim: rgba(212, 196, 106, 0.14);
+  --product-tint: var(--sheds-evergreen);
+}
+
+.theme-volunteer,
+[data-product="volunteer"] {
+  --accent: var(--vol-moss);
+  --accent-hover: #8faf7c;
+  --accent-purple: var(--vol-evergreen);
+  --accent-dim: rgba(122, 155, 106, 0.16);
+  --product-tint: var(--vol-forest-green);
+}
+
+/* Light mode — off-white field, charcoal type (rare; dark remains default) */
+[data-theme="light"] {
+  --bg: #f3f5f8;
+  --bg-elevated: #ffffff;
+  --surface: #ffffff;
+  --surface-raised: #e8edf4;
+  --surface-sunken: #e2e8f0;
+  --text: #141a24;
+  --text-strong: #0c1018;
+  --muted: #5a6a82;
+  --line: #cfd8e6;
+  --line-strong: #aebacf;
+  --accent-dim: rgba(47, 92, 71, 0.1);
+  --shadow-soft: 0 12px 32px rgba(20, 30, 50, 0.08);
+  --focus-ring: 0 0 0 2px var(--bg), 0 0 0 4px var(--sheds-evergreen);
+  color-scheme: light;
+}
+
+:root,
+[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-fast: 1ms;
+    --duration-med: 1ms;
+    --duration-slow: 1ms;
+  }
+}

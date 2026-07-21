@@ -3,149 +3,176 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Waypoint Studio — observe, understand, create, and share. Nature-focused tools and landscape experiences. Privacy-first prototypes you can try today.">
-  <title>Waypoint Studio</title>
+  <meta name="description" content="Waypoint Studio — observe, discover, and understand the outdoors. Dashboard, Scenes, Sheds, and Volunteer. Capture what you find. Learn why it matters.">
+  <title>Waypoint Studio — Observe. Discover. Understand.</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Source+Sans+3:wght@300;400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles/site.css">
 </head>
-<body>
+<body class="aurora-atmosphere">
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header">
     <div class="header-inner">
       <a class="brand" href="./">Waypoint Studio</a>
       <nav class="site-nav" aria-label="Main">
-        <a href="./" aria-current="page">Home</a>
-        <a href="waypoint-scenes/">Waypoint Scenes</a>
-        <a href="foragecast/">ForageCast</a>
+        <a href="dashboard/">Dashboard</a>
+        <a href="waypoint-scenes/">Scenes</a>
         <a href="sheds/">Sheds</a>
         <a href="volunteer/">Volunteer</a>
-        <a href="fieldry/">Fieldry</a>
-        <a href="education/">Education</a>
+        <a href="education/">Articles</a>
+        <a href="about/">About</a>
       </nav>
     </div>
   </header>
 
   <main id="main">
     <div class="wrap">
-      <section class="hero">
+      <section class="hero hero-home">
+        <p class="hero-kicker">Outdoor exploration platform</p>
         <h1>Waypoint Studio</h1>
         <ul class="mission-lines" aria-label="Mission">
           <li>Observe.</li>
+          <li>Discover.</li>
           <li>Understand.</li>
-          <li>Create.</li>
-          <li>Share.</li>
         </ul>
+        <p class="tagline-home">Capture what you find. Learn why it matters.</p>
         <p class="lead">
-          A calm studio of nature-focused tools and landscape experiences —
-          built for observation, ecology, and place. Sharing stays optional.
-          Private stays the default for personal notes and locations.
+          Plan your day outdoors, deepen your photography, explore shed country with care,
+          and find ways to give back — with calm tools that interpret conditions, not just list them.
         </p>
         <div class="cta-row">
-          <a class="btn-primary" href="#available">Try what’s available</a>
-          <a class="btn-secondary" href="privacy/">Privacy</a>
+          <a class="btn-primary" href="dashboard/">Open Dashboard</a>
+          <a class="btn-secondary" href="#experiences">Explore experiences</a>
         </div>
       </section>
 
-      <section id="available">
-        <h2>Available now</h2>
-        <p class="muted">Working prototypes and open betas. Honest about uncertainty — not finished products.</p>
-        <div class="grid">
-          <a class="card col-4" href="waypoint-scenes/">
-            <span class="badge badge-active">Active Prototype</span>
-            <h3>Waypoint Scenes</h3>
-            <p class="desc">Living landscape studies — interactive photography with a live two-scene demo.</p>
-          </a>
-          <a class="card col-4" href="foragecast/">
-            <span class="badge badge-dev">Open Beta</span>
-            <h3>ForageCast</h3>
-            <p class="desc">Terrain, weather, and seasonal intelligence for responsible foraging — guidance, not harvest guarantees.</p>
-          </a>
-          <a class="card col-4" href="sheds/">
-            <span class="badge badge-dev">Open Prototype</span>
-            <h3>Sheds</h3>
-            <p class="desc">Map-first field view for ethical shed hunting and terrain understanding. Demo zones only.</p>
-          </a>
-          <a class="card col-4" href="volunteer/">
-            <span class="badge badge-dev">Open Prototype</span>
-            <h3>Waypoint Volunteer</h3>
-            <p class="desc">What good can I do today? Discovery with filters and private saves — demo catalog.</p>
-          </a>
-        </div>
+      <section id="experiences" class="experiences" aria-labelledby="experiences-heading">
+        <h2 id="experiences-heading">Four ways to begin</h2>
+        <p class="section-lede">Two free tools for daily life outdoors. Two flagship platforms for craft and field craft.</p>
+
+        <article class="experience-block experience-free">
+          <div class="experience-meta">
+            <span class="badge badge-free">Free</span>
+            <h3><a href="dashboard/">Dashboard</a></h3>
+            <p class="experience-promise">Plan today’s outdoor adventure.</p>
+          </div>
+          <div class="experience-body">
+            <p>
+              Your outdoor mission control — weather, photography conditions, sun &amp; moon,
+              air quality, river context, alerts, volunteer ideas, and articles — with
+              <strong>Waypoint’s Take</strong> explaining why it matters.
+            </p>
+            <a class="text-link" href="dashboard/">Enter Dashboard</a>
+          </div>
+        </article>
+
+        <article class="experience-block experience-flagship">
+          <div class="experience-meta">
+            <span class="badge badge-flagship">Flagship</span>
+            <h3><a href="waypoint-scenes/">Scenes</a></h3>
+            <p class="experience-promise">See more. Keep better work. Grow as a photographer.</p>
+          </div>
+          <div class="experience-body">
+            <p>
+              Outdoor photography with living landscape studies, Photo Coach guidance,
+              portfolio building, thoughtful AI culling, collections, Hidden Landscapes,
+              and discovery — focused on craft, not feature clutter.
+            </p>
+            <a class="text-link" href="waypoint-scenes/">Enter Scenes</a>
+          </div>
+        </article>
+
+        <article class="experience-block experience-flagship">
+          <div class="experience-meta">
+            <span class="badge badge-flagship">Flagship</span>
+            <h3><a href="sheds/">Sheds</a></h3>
+            <p class="experience-promise">A serious platform for shed hunters.</p>
+          </div>
+          <div class="experience-body">
+            <p>
+              Map-first habitat intelligence, find logging, heat maps, seasonal learning,
+              and analytics — built for ethical field practice, equal in stature to Scenes.
+              Current prototype uses demo zones only.
+            </p>
+            <a class="text-link" href="sheds/">Enter Sheds</a>
+          </div>
+        </article>
+
+        <article class="experience-block experience-free">
+          <div class="experience-meta">
+            <span class="badge badge-free">Free</span>
+            <h3><a href="volunteer/">Volunteer</a></h3>
+            <p class="experience-promise">What good can I do today?</p>
+          </div>
+          <div class="experience-body">
+            <p>
+              Trail work, conservation, citizen science, animal shelters, and outdoor
+              stewardship — quiet discovery that connects care for place with action.
+            </p>
+            <a class="text-link" href="volunteer/">Find opportunities</a>
+          </div>
+        </article>
       </section>
 
-      <section id="products">
-        <h2>Early foundations</h2>
-        <p class="muted">Public pages exist; full product experiences are still forming.</p>
-        <div class="grid">
-          <a class="card col-4" href="fieldry/">
-            <span class="badge badge-planned">Planned</span>
-            <h3>Fieldry</h3>
-            <p class="desc">A real-world nature journal for noticing more. Landing page only today.</p>
-          </a>
-          <a class="card col-4" href="education/">
-            <span class="badge badge-dev">Early Foundation</span>
-            <h3>Waypoint Education</h3>
-            <p class="desc">Earth systems and ecology topics — thin study notes plus ForageCast Learn species pages.</p>
-          </a>
-        </div>
-      </section>
-
-      <section id="direction">
-        <h2>Long-term direction</h2>
+      <section class="take-panel" aria-labelledby="take-heading">
+        <h2 id="take-heading">Waypoint’s Take</h2>
+        <p class="section-lede">Interpretation is part of the product — not an afterthought.</p>
+        <blockquote class="take-example">
+          <p>
+            Strong UV after late morning, light northwest wind, and open skies favor
+            ridgeline photography before haze builds. River gauges remain elevated —
+            choose bank-safe vantage points and leave room for others on popular trails.
+          </p>
+          <footer>Example Take · calm, educational, never sensational</footer>
+        </blockquote>
         <p class="muted">
-          Named for planning clarity. <strong>Not available in this repository build</strong> —
-          do not expect public routes yet.
+          Takes appear across Dashboard, Scenes, Sheds, Volunteer, and Articles —
+          teaching why conditions matter for the day you are planning.
         </p>
-        <ul class="direction-list">
-          <li>Dashboard / Today Outside (outdoor intelligence)</li>
-          <li>Photo Coach</li>
-          <li>SignalTerrain — Radio &amp; Spectrum</li>
-          <li>SignalTerrain — Cyber Awareness (defensive only)</li>
-          <li>Steepleaf</li>
-          <li>Savant Sommelier</li>
-          <li>Landscape Interpretation</li>
-          <li>Hidden Landscapes</li>
-          <li>Shared profile, locations, collections, and settings</li>
-        </ul>
       </section>
 
-      <section>
-        <h2>About the Studio</h2>
-        <p>
-          Waypoint Studio combines naturalist observation, photography, GIS,
-          environmental education, and small creative tools. Each product is
-          built slowly — for the field, for learning, and for quiet attention to
-          the living world.
-        </p>
-        <p class="subscription-note">
-          No payment processing yet. Volunteer is intended to remain free.
-          Other subscription models are exploratory only.
+      <section aria-labelledby="articles-heading">
+        <h2 id="articles-heading">Articles</h2>
+        <p class="section-lede">
+          Platform-wide learning for every flagship experience — photography, shed hunting,
+          mushrooms, wildlife, conservation, outdoor skills, science, and seasonal guides.
         </p>
         <div class="cta-row">
-          <a class="btn-secondary" href="about/">About</a>
-          <a class="btn-secondary" href="contact/">Contact</a>
-          <a class="btn-secondary" href="privacy/">Privacy</a>
+          <a class="btn-primary" href="education/">Browse Articles</a>
+          <a class="btn-secondary" href="education/#categories">View categories</a>
         </div>
       </section>
 
-      <section class="waitlist-cta">
-        <h2>Stay informed</h2>
-        <p>Receive studio updates as products move toward launch.</p>
-        <a class="btn-primary" href="mailto:hello@waypointstudio.org?subject=Waypoint%20Studio%20Updates">Join updates</a>
+      <section class="supporting-strip" aria-labelledby="supporting-heading">
+        <h2 id="supporting-heading" class="visually-quiet">Also available</h2>
+        <p class="muted supporting-copy">
+          Working prototypes outside primary navigation:
+          <a href="foragecast/">ForageCast</a> (foraging guidance)
+          · <a href="fieldry/">Fieldry</a> (nature journaling foundation)
+        </p>
+      </section>
+
+      <section class="incubator-teaser" aria-labelledby="incubator-heading">
+        <h2 id="incubator-heading">Incubator</h2>
+        <p class="muted">
+          Future projects — SignalTerrain, Steepleaf, and Savant Sommelier — are documented
+          without competing with today’s flagship experiences.
+        </p>
+        <a class="text-link" href="incubator/">View Incubator</a>
+        <p class="muted" style="margin-top:1rem"><a href="design-system/">Aurora Design System</a></p>
       </section>
     </div>
   </main>
 
   <footer class="site-footer">
     <div class="footer-inner footer-links">
-      <span>Waypoint Studio · Observe. Understand. Create. Share.</span>
+      <span>Waypoint Studio · Observe. Discover. Understand.</span>
       <span>
         <a href="about/">About</a> ·
+        <a href="incubator/">Incubator</a> ·
         <a href="privacy/">Privacy</a> ·
-        <a href="contact/">Contact</a> ·
-        <a href="support/">Support</a>
+        <a href="contact/">Contact</a>
       </span>
     </div>
   </footer>
