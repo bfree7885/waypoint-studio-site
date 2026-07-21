@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="description" content="Sheds — map-first field view for ethical shed hunting and terrain understanding.">
-  <meta name="theme-color" content="#070b14">
-  <title>Sheds | Waypoint Studio</title>
+  <meta name="description" content="Sheds 3.0 — map-first field intelligence for ethical shed hunting, habitat learning, and calm seasonal guidance.">
+  <meta name="theme-color" content="#2f5c47">
+  <title>Sheds 3.0 | Waypoint Studio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Source+Sans+3:wght@300;400;500&display=swap" rel="stylesheet">
@@ -20,11 +20,11 @@
   <a class="sheds-skip" href="#sheds-panel">Skip to details</a>
 
   <div class="sheds-shell" id="sheds-shell">
-    <!-- Slim field bar (not full studio marketing nav) -->
     <header class="sheds-bar" role="banner">
       <div class="sheds-bar-left">
         <a class="sheds-brand" href="../">Waypoint</a>
         <span class="sheds-product" aria-current="page">Sheds</span>
+        <span class="sheds-version" title="Sheds 3.0 field experience">3.0</span>
       </div>
       <div class="sheds-bar-actions">
         <button type="button" class="sheds-bar-btn" id="sheds-about-btn" aria-expanded="false" aria-controls="sheds-about">About</button>
@@ -32,17 +32,14 @@
       </div>
     </header>
 
-    <!-- Status banners -->
     <div class="sheds-banners" aria-live="polite">
-      <p class="sheds-banner sheds-banner-offline" id="sheds-offline" hidden>You’re offline. Map tiles may be limited.</p>
-      <p class="sheds-banner sheds-banner-edu" id="sheds-edu-banner" hidden>Education mode — hotspot-style zones are hidden.</p>
+      <p class="sheds-banner sheds-banner-offline" id="sheds-offline" hidden>You’re offline. Cached field notes and education still work; map tiles may be limited.</p>
+      <p class="sheds-banner sheds-banner-edu" id="sheds-edu-banner" hidden>Education mode — hotspot-style zones and prediction fills are hidden.</p>
     </div>
 
-    <!-- Map is the application -->
     <div class="sheds-map-wrap" id="sheds-map-wrap">
       <div id="sheds-map" class="sheds-map" role="application" aria-label="Sheds field map"></div>
 
-      <!-- Compact HUD (mobile); desktop uses side panel + location chip -->
       <div class="sheds-hud" id="sheds-hud">
         <div class="sheds-hud-row">
           <p class="sheds-hud-label">Location</p>
@@ -68,27 +65,35 @@
         <p class="sheds-hud-status" id="sheds-gps-status-desktop"></p>
       </div>
 
-      <!-- Field controls -->
+      <form class="sheds-search" id="sheds-search-form" role="search" autocomplete="off">
+        <label class="visually-hidden" for="sheds-search-input">Search demo places</label>
+        <input
+          type="search"
+          id="sheds-search-input"
+          class="sheds-search-input"
+          placeholder="Search demo places…"
+          enterkeyhint="search"
+          maxlength="80"
+        >
+        <button type="submit" class="sheds-search-go" id="sheds-search-go">Go</button>
+        <ul class="sheds-search-results" id="sheds-search-results" hidden role="listbox" aria-label="Demo places"></ul>
+      </form>
+
       <div class="sheds-controls" role="toolbar" aria-label="Map controls">
         <button type="button" class="sheds-ctrl sheds-ctrl-primary" id="sheds-locate-btn" title="Use my location" aria-label="Use my location">
           <span class="sheds-ctrl-icon" aria-hidden="true"></span>
           <span class="sheds-ctrl-label">Locate</span>
         </button>
-        <button type="button" class="sheds-ctrl" id="sheds-zones-btn" aria-pressed="true" title="Toggle demo zones">
-          Zones
-        </button>
-        <button type="button" class="sheds-ctrl" id="sheds-edu-btn" aria-pressed="false" title="Education mode">
-          Edu
-        </button>
-        <button type="button" class="sheds-ctrl sheds-ctrl-sheet" id="sheds-sheet-toggle" aria-expanded="true" aria-controls="sheds-panel" title="Details">
-          Details
-        </button>
+        <button type="button" class="sheds-ctrl" id="sheds-zones-btn" aria-pressed="true" title="Toggle demo zones">Zones</button>
+        <button type="button" class="sheds-ctrl" id="sheds-predict-btn" aria-pressed="false" title="Toggle prediction teaching layer">Predict</button>
+        <button type="button" class="sheds-ctrl" id="sheds-obs-btn" title="Log a private observation at map center">Log</button>
+        <button type="button" class="sheds-ctrl" id="sheds-edu-btn" aria-pressed="false" title="Education mode">Edu</button>
+        <button type="button" class="sheds-ctrl sheds-ctrl-sheet" id="sheds-sheet-toggle" aria-expanded="true" aria-controls="sheds-panel" title="Details">Details</button>
       </div>
 
       <p class="sheds-demo-tag" id="sheds-demo-tag">Demo zones · not a find guarantee</p>
     </div>
 
-    <!-- Desktop side panel / mobile bottom sheet -->
     <aside class="sheds-panel" id="sheds-panel" aria-label="Field details">
       <div class="sheds-sheet-handle" id="sheds-sheet-handle" aria-hidden="true">
         <span class="sheds-sheet-grip"></span>
@@ -100,58 +105,152 @@
           <p class="sheds-panel-tagline">Terrain context for ethical shed hunting.</p>
         </header>
 
-        <section class="sheds-panel-section" aria-labelledby="sheds-read-heading">
-          <h2 id="sheds-read-heading" class="sheds-panel-h">Today’s read</h2>
-          <dl class="sheds-read">
-            <div>
-              <dt>Conditions</dt>
-              <dd id="sheds-panel-condition">Fair</dd>
-            </div>
-            <div>
-              <dt>Opportunity</dt>
-              <dd id="sheds-panel-opportunity">South benches — demo</dd>
-            </div>
-          </dl>
-          <p class="sheds-panel-why" id="sheds-panel-why">Warm aspect holds sun longer after cold nights.</p>
-          <p class="sheds-panel-note" id="sheds-panel-note">Illustrative demo only. Patterns are patterned — not guarantees.</p>
-        </section>
+        <div class="sheds-tabs" role="tablist" aria-label="Field panels">
+          <button type="button" class="sheds-tab is-active" role="tab" id="sheds-tab-today" aria-selected="true" aria-controls="sheds-pane-today" data-pane="today">Today</button>
+          <button type="button" class="sheds-tab" role="tab" id="sheds-tab-learn" aria-selected="false" aria-controls="sheds-pane-learn" data-pane="learn">Learn</button>
+          <button type="button" class="sheds-tab" role="tab" id="sheds-tab-notes" aria-selected="false" aria-controls="sheds-pane-notes" data-pane="notes">Notes</button>
+        </div>
 
-        <section class="sheds-panel-section" aria-labelledby="sheds-legend-heading">
-          <h2 id="sheds-legend-heading" class="sheds-panel-h">Legend</h2>
-          <ul class="sheds-legend" id="sheds-legend">
-            <li><span class="sheds-swatch sheds-swatch-high"></span> Higher relative interest</li>
-            <li><span class="sheds-swatch sheds-swatch-med"></span> Moderate</li>
-            <li><span class="sheds-swatch sheds-swatch-low"></span> Lower</li>
-          </ul>
-          <p class="sheds-legend-state muted" id="sheds-legend-state"></p>
-        </section>
+        <div class="sheds-pane is-active" id="sheds-pane-today" role="tabpanel" aria-labelledby="sheds-tab-today">
+          <section class="sheds-panel-section" aria-labelledby="sheds-read-heading">
+            <h2 id="sheds-read-heading" class="sheds-panel-h">Today’s read</h2>
+            <dl class="sheds-read">
+              <div>
+                <dt>Conditions</dt>
+                <dd id="sheds-panel-condition">Fair</dd>
+              </div>
+              <div>
+                <dt>Opportunity</dt>
+                <dd id="sheds-panel-opportunity">South benches — demo</dd>
+              </div>
+              <div>
+                <dt>Season</dt>
+                <dd id="sheds-panel-season">—</dd>
+              </div>
+            </dl>
+            <p class="sheds-panel-why" id="sheds-panel-why">Warm aspect holds sun longer after cold nights.</p>
+            <p class="sheds-panel-note" id="sheds-panel-note">Illustrative demo only. Patterns are patterned — not guarantees.</p>
+          </section>
 
-        <section class="sheds-panel-section" aria-labelledby="sheds-ethics-heading">
-          <h2 id="sheds-ethics-heading" class="sheds-panel-h">Ethics</h2>
-          <p class="sheds-panel-copy">
-            During closed seasons, turn on Education mode. Hotspot-style guidance stays off.
-            Learn the land without adding pressure.
-          </p>
-        </section>
+          <section class="sheds-panel-section" aria-labelledby="sheds-take-heading">
+            <div class="aurora-take sheds-take" id="sheds-take">
+              <h2 id="sheds-take-heading">Waypoint’s Take</h2>
+              <p id="sheds-take-body">Loading seasonal guidance…</p>
+              <footer id="sheds-take-footer">Why it matters today</footer>
+            </div>
+          </section>
+
+          <section class="sheds-panel-section" aria-labelledby="sheds-season-heading">
+            <h2 id="sheds-season-heading" class="sheds-panel-h">Seasonality</h2>
+            <ol class="sheds-season" id="sheds-season" aria-label="Demo shed season calendar"></ol>
+            <p class="sheds-legend-state muted" id="sheds-season-hint"></p>
+          </section>
+
+          <section class="sheds-panel-section" aria-labelledby="sheds-layers-heading">
+            <h2 id="sheds-layers-heading" class="sheds-panel-h">Layers</h2>
+            <ul class="sheds-layer-list">
+              <li>
+                <label class="sheds-check">
+                  <input type="checkbox" id="sheds-layer-zones" checked>
+                  <span>Demo zones</span>
+                </label>
+              </li>
+              <li>
+                <label class="sheds-check">
+                  <input type="checkbox" id="sheds-layer-predict">
+                  <span>Prediction teaching tint</span>
+                </label>
+              </li>
+              <li>
+                <label class="sheds-check">
+                  <input type="checkbox" id="sheds-layer-obs" checked>
+                  <span>Private observations</span>
+                </label>
+              </li>
+              <li>
+                <label class="sheds-check">
+                  <input type="checkbox" id="sheds-layer-regs" checked>
+                  <span>Regulation reminders</span>
+                </label>
+              </li>
+            </ul>
+            <p class="sheds-legend-state muted" id="sheds-layer-copy"></p>
+          </section>
+
+          <section class="sheds-panel-section" aria-labelledby="sheds-legend-heading">
+            <h2 id="sheds-legend-heading" class="sheds-panel-h">Legend</h2>
+            <ul class="sheds-legend" id="sheds-legend">
+              <li><span class="sheds-swatch sheds-swatch-high"></span> Higher relative interest</li>
+              <li><span class="sheds-swatch sheds-swatch-med"></span> Moderate</li>
+              <li><span class="sheds-swatch sheds-swatch-low"></span> Lower</li>
+              <li><span class="sheds-swatch sheds-swatch-predict"></span> Prediction tint (teaching)</li>
+              <li><span class="sheds-swatch sheds-swatch-obs"></span> Your observation (private)</li>
+            </ul>
+            <p class="sheds-legend-state muted" id="sheds-legend-state"></p>
+          </section>
+
+          <section class="sheds-panel-section" aria-labelledby="sheds-regs-heading">
+            <h2 id="sheds-regs-heading" class="sheds-panel-h">Regulations</h2>
+            <p class="sheds-panel-copy" id="sheds-regs-headline"></p>
+            <ul class="sheds-regs" id="sheds-regs-list"></ul>
+            <p class="sheds-panel-note" id="sheds-regs-agency"></p>
+          </section>
+
+          <section class="sheds-panel-section" aria-labelledby="sheds-ethics-heading">
+            <h2 id="sheds-ethics-heading" class="sheds-panel-h">Ethics</h2>
+            <p class="sheds-panel-copy">
+              During closed seasons or high pressure, turn on Education mode. Hotspot-style guidance stays off.
+              Learn the land without adding pressure. Private notes never leave this device.
+            </p>
+          </section>
+        </div>
+
+        <div class="sheds-pane" id="sheds-pane-learn" role="tabpanel" aria-labelledby="sheds-tab-learn" hidden>
+          <section class="sheds-panel-section" aria-labelledby="sheds-edu-lib-heading">
+            <h2 id="sheds-edu-lib-heading" class="sheds-panel-h">Field library</h2>
+            <p class="sheds-panel-copy">Deer behavior, habitat, food, terrain, weather, and timing — calm lessons for the walk.</p>
+            <div class="sheds-edu-list" id="sheds-edu-list"></div>
+            <p class="muted sheds-edu-link">
+              More reading: <a href="../education/">Articles</a> ·
+              <a href="../education/topics/wildlife-biology/">Wildlife biology</a>
+            </p>
+          </section>
+        </div>
+
+        <div class="sheds-pane" id="sheds-pane-notes" role="tabpanel" aria-labelledby="sheds-tab-notes" hidden>
+          <section class="sheds-panel-section" aria-labelledby="sheds-obs-heading">
+            <h2 id="sheds-obs-heading" class="sheds-panel-h">Private observations</h2>
+            <p class="sheds-panel-copy">Saved only in this browser. No accounts, no sync, no fake property data.</p>
+            <label class="sheds-field">
+              <span class="sheds-field-label">Note (optional)</span>
+              <input type="text" id="sheds-obs-note" class="sheds-field-input" maxlength="120" placeholder="Tracks on south bench…">
+            </label>
+            <div class="sheds-obs-actions">
+              <button type="button" class="sheds-ctrl sheds-ctrl-inline" id="sheds-obs-add">Save at map center</button>
+              <button type="button" class="sheds-bar-btn" id="sheds-obs-clear">Clear all</button>
+            </div>
+            <ul class="sheds-obs-list" id="sheds-obs-list"></ul>
+            <p class="sheds-legend-state muted" id="sheds-obs-empty">No observations yet.</p>
+          </section>
+        </div>
       </div>
     </aside>
   </div>
 
-  <!-- About overlay -->
   <div class="sheds-about" id="sheds-about" hidden role="dialog" aria-modal="true" aria-labelledby="sheds-about-title">
     <div class="sheds-about-backdrop" id="sheds-about-backdrop" tabindex="-1"></div>
     <div class="sheds-about-card">
       <header class="sheds-about-head">
-        <h2 id="sheds-about-title">About Sheds</h2>
+        <h2 id="sheds-about-title">About Sheds 3.0</h2>
         <button type="button" class="sheds-about-close" id="sheds-about-close" aria-label="Close">Close</button>
       </header>
       <p>
-        Sheds is a map-first field prototype for terrain understanding and ethical shed hunting.
-        Demo zones are illustrative — not a prediction model.
+        Sheds is Waypoint’s flagship map-first field experience for terrain understanding and ethical shed hunting.
+        Demo zones, seasonality, and prediction tints are illustrative — not a prediction model or legal authority.
       </p>
       <p class="muted">
-        Deep product story:
-        <a href="../projects/sheds/">projects/sheds</a>
+        Docs: <a href="../docs/SHEDS-3.md">SHEDS-3.md</a> ·
+        Story: <a href="../projects/sheds/">projects/sheds</a>
       </p>
       <p>
         <a class="btn-primary" href="mailto:hello@waypointstudio.org?subject=Waitlist%20-%20Sheds">Join the waitlist</a>
@@ -161,6 +260,7 @@
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   <script src="../shared/a11y-dialog.js"></script>
+  <script src="sheds-data.js"></script>
   <script src="sheds.js" defer></script>
 </body>
 </html>

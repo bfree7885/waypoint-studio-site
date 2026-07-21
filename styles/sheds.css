@@ -1,17 +1,17 @@
-/* Sheds Field View — map-first chrome */
+/* Sheds 3.0 — map-first field chrome (Aurora theme-sheds / aspen / evergreen) */
 
 :root {
   --sheds-bar-h: 3.25rem;
-  --sheds-panel-w: min(22rem, 36vw);
-  --sheds-sheet-peek: 8.5rem;
+  --sheds-panel-w: min(24rem, 38vw);
+  --sheds-sheet-peek: 9rem;
   --sheds-ctrl: 2.85rem;
-  --sheds-glass: rgba(7, 11, 20, 0.82);
-  --sheds-glass-strong: rgba(7, 11, 20, 0.92);
-  --sheds-ok: #c6ff4d;
-  --sheds-fair: #e8c547;
+  --sheds-glass: color-mix(in srgb, var(--bg) 82%, transparent);
+  --sheds-glass-strong: color-mix(in srgb, var(--bg) 92%, transparent);
+  --sheds-ok: var(--sheds-aspen-gold, #d4c46a);
+  --sheds-fair: var(--sheds-burnt-orange, #c46a3a);
   --sheds-poor: #8b9bb8;
   --sheds-radius: 0.65rem;
-  --sheds-touch: 2.75rem;
+  --sheds-touch: 2.85rem;
 }
 
 html.sheds-lock,
@@ -21,12 +21,27 @@ body.sheds-app {
 }
 
 body.sheds-app {
-  background: #070b14;
+  background:
+    radial-gradient(ellipse 80% 50% at 10% 0%, rgba(47, 92, 71, 0.22), transparent 55%),
+    radial-gradient(ellipse 60% 40% at 90% 100%, rgba(212, 196, 106, 0.08), transparent 50%),
+    var(--bg, #070b14);
 }
 
 body.sheds-app::before,
 body.sheds-app::after {
   display: none;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .sheds-skip {
@@ -35,9 +50,9 @@ body.sheds-app::after {
   top: 0;
   z-index: 100;
   padding: 0.65rem 1rem;
-  background: #0e1524;
+  background: var(--surface, #0e1524);
   color: var(--text);
-  border: 1px solid rgba(198, 255, 77, 0.45);
+  border: 1px solid color-mix(in srgb, var(--sheds-aspen-gold, #d4c46a) 45%, transparent);
   border-radius: 0.35rem;
   font-size: 0.8rem;
 }
@@ -93,7 +108,7 @@ body.sheds-app::after {
   padding-left: max(0.85rem, env(safe-area-inset-left));
   padding-right: max(0.85rem, env(safe-area-inset-right));
   background: var(--sheds-glass-strong);
-  border-bottom: 1px solid rgba(36, 48, 71, 0.9);
+  border-bottom: 1px solid color-mix(in srgb, var(--sheds-evergreen, #2f5c47) 35%, var(--line, #243047));
   backdrop-filter: blur(10px);
   z-index: 20;
 }
@@ -101,7 +116,7 @@ body.sheds-app::after {
 .sheds-bar-left {
   display: flex;
   align-items: baseline;
-  gap: 0.65rem;
+  gap: 0.55rem;
   min-width: 0;
 }
 
@@ -125,6 +140,16 @@ body.sheds-app::after {
   color: var(--text);
 }
 
+.sheds-version {
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--sheds-aspen-gold, #d4c46a);
+  border: 1px solid color-mix(in srgb, var(--sheds-aspen-gold, #d4c46a) 40%, transparent);
+  border-radius: 999px;
+  padding: 0.15rem 0.45rem;
+}
+
 .sheds-bar-actions {
   display: flex;
   align-items: center;
@@ -143,7 +168,7 @@ body.sheds-app::after {
   border: 1px solid transparent;
   border-radius: 999px;
   padding: 0.55rem 0.85rem;
-  min-height: 2.4rem;
+  min-height: var(--sheds-touch);
   cursor: pointer;
   text-decoration: none;
 }
@@ -156,14 +181,14 @@ body.sheds-app::after {
 }
 
 .sheds-bar-btn-accent {
-  border-color: rgba(198, 255, 77, 0.35);
+  border-color: color-mix(in srgb, var(--sheds-aspen-gold, #d4c46a) 40%, transparent);
   color: var(--text);
-  background: var(--accent-dim);
+  background: var(--accent-dim, rgba(212, 196, 106, 0.14));
 }
 
 .sheds-bar-btn-accent:hover,
 .sheds-bar-btn-accent:focus-visible {
-  border-color: rgba(198, 255, 77, 0.55);
+  border-color: color-mix(in srgb, var(--sheds-aspen-gold, #d4c46a) 60%, transparent);
   color: var(--text);
 }
 
@@ -186,13 +211,13 @@ body.sheds-app::after {
 }
 
 .sheds-banner-offline {
-  background: rgba(232, 197, 71, 0.12);
-  color: #e8c547;
+  background: rgba(212, 196, 106, 0.12);
+  color: var(--sheds-aspen-gold, #d4c46a);
 }
 
 .sheds-banner-edu {
-  background: rgba(155, 126, 212, 0.14);
-  color: #c4b0e8;
+  background: rgba(47, 92, 71, 0.28);
+  color: #b8d4c4;
 }
 
 /* —— Map —— */
@@ -238,6 +263,15 @@ body.sheds-app::after {
   box-shadow: none;
 }
 
+.sheds-tip {
+  background: var(--surface, #0e1524) !important;
+  color: var(--text) !important;
+  border: 1px solid var(--line) !important;
+  border-radius: 0.35rem !important;
+  box-shadow: none !important;
+  font-size: 0.78rem !important;
+}
+
 /* —— HUD —— */
 .sheds-hud {
   position: absolute;
@@ -248,7 +282,7 @@ body.sheds-app::after {
   max-width: 22rem;
   padding: 0.85rem 1rem;
   background: var(--sheds-glass);
-  border: 1px solid rgba(36, 48, 71, 0.95);
+  border: 1px solid color-mix(in srgb, var(--sheds-evergreen, #2f5c47) 40%, var(--line));
   border-radius: var(--sheds-radius);
   backdrop-filter: blur(12px);
   box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
@@ -295,7 +329,7 @@ body.sheds-app::after {
   height: 0.55rem;
   border-radius: 50%;
   background: var(--sheds-fair);
-  box-shadow: 0 0 0 3px rgba(232, 197, 71, 0.2);
+  box-shadow: 0 0 0 3px rgba(196, 106, 58, 0.22);
 }
 
 .sheds-condition[data-level="favorable"] {
@@ -304,11 +338,11 @@ body.sheds-app::after {
 
 .sheds-condition[data-level="favorable"] .sheds-condition-dot {
   background: var(--sheds-ok);
-  box-shadow: 0 0 0 3px rgba(198, 255, 77, 0.22);
+  box-shadow: 0 0 0 3px rgba(212, 196, 106, 0.25);
 }
 
 .sheds-condition[data-level="fair"] {
-  color: var(--sheds-fair);
+  color: #e0a070;
 }
 
 .sheds-condition[data-level="poor"] {
@@ -335,7 +369,7 @@ body.sheds-app::after {
 }
 
 .sheds-hud-status.is-locating {
-  color: var(--accent-cyan);
+  color: var(--accent-cyan, #6ea8c9);
 }
 
 .sheds-hud-status.is-error {
@@ -346,7 +380,6 @@ body.sheds-app::after {
   color: var(--sheds-ok);
 }
 
-/* Minimal desktop location chip (replaces full HUD) */
 .sheds-map-location {
   display: none;
   position: absolute;
@@ -360,7 +393,7 @@ body.sheds-app::after {
   line-height: 1.35;
   color: var(--text);
   background: var(--sheds-glass);
-  border: 1px solid rgba(36, 48, 71, 0.95);
+  border: 1px solid color-mix(in srgb, var(--sheds-evergreen, #2f5c47) 40%, var(--line));
   border-radius: var(--sheds-radius);
   backdrop-filter: blur(12px);
   pointer-events: none;
@@ -387,7 +420,6 @@ body.sheds-app::after {
 }
 
 @media (min-width: 960px) {
-  /* Side panel carries today’s read — keep map free of duplicate HUD */
   .sheds-hud {
     display: none;
   }
@@ -401,6 +433,113 @@ body.sheds-app::after {
   }
 }
 
+/* —— Search —— */
+.sheds-search {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  z-index: 7;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 0.35rem;
+  width: min(17.5rem, calc(100% - 1.5rem));
+  pointer-events: auto;
+}
+
+.sheds-search-input {
+  flex: 1;
+  min-width: 0;
+  min-height: var(--sheds-touch);
+  padding: 0.55rem 0.75rem;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--text);
+  background: var(--sheds-glass-strong);
+  border: 1px solid color-mix(in srgb, var(--sheds-aspen-gold, #d4c46a) 30%, var(--line));
+  border-radius: var(--sheds-radius);
+  backdrop-filter: blur(10px);
+}
+
+.sheds-search-input::placeholder {
+  color: var(--muted);
+}
+
+.sheds-search-input:focus {
+  outline: none;
+  border-color: color-mix(in srgb, var(--sheds-aspen-gold, #d4c46a) 55%, var(--line));
+  box-shadow: var(--focus-ring, 0 0 0 2px #070b14, 0 0 0 4px #2f5c47);
+}
+
+.sheds-search-go {
+  appearance: none;
+  min-width: 3.25rem;
+  min-height: var(--sheds-touch);
+  padding: 0 0.85rem;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text);
+  background: color-mix(in srgb, var(--sheds-evergreen, #2f5c47) 55%, #070b14);
+  border: 1px solid color-mix(in srgb, var(--sheds-aspen-gold, #d4c46a) 40%, transparent);
+  border-radius: var(--sheds-radius);
+  cursor: pointer;
+}
+
+.sheds-search-results {
+  list-style: none;
+  margin: 0;
+  padding: 0.35rem;
+  width: 100%;
+  background: var(--sheds-glass-strong);
+  border: 1px solid var(--line);
+  border-radius: var(--sheds-radius);
+  max-height: 12rem;
+  overflow: auto;
+}
+
+.sheds-search-results[hidden] {
+  display: none !important;
+}
+
+.sheds-search-option {
+  appearance: none;
+  display: block;
+  width: 100%;
+  text-align: left;
+  min-height: var(--sheds-touch);
+  padding: 0.55rem 0.65rem;
+  font-family: var(--font-body);
+  font-size: 0.86rem;
+  color: var(--text);
+  background: transparent;
+  border: 0;
+  border-radius: 0.35rem;
+  cursor: pointer;
+}
+
+.sheds-search-option:hover,
+.sheds-search-option:focus-visible {
+  background: var(--accent-dim, rgba(212, 196, 106, 0.14));
+  outline: none;
+}
+
+@media (max-width: 959px) {
+  .sheds-search {
+    top: auto;
+    bottom: calc(var(--sheds-sheet-peek) + 0.65rem);
+    left: 0.75rem;
+    right: auto;
+    width: min(16rem, calc(100% - 6.5rem));
+  }
+
+  .sheds-hud {
+    right: 0.75rem;
+    max-width: none;
+  }
+}
+
 /* —— Controls —— */
 .sheds-controls {
   position: absolute;
@@ -410,7 +549,7 @@ body.sheds-app::after {
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  gap: 0.45rem;
+  gap: 0.4rem;
 }
 
 @media (min-width: 960px) {
@@ -421,6 +560,13 @@ body.sheds-app::after {
 
   .sheds-ctrl-sheet {
     display: none;
+  }
+
+  .sheds-search {
+    top: 0.75rem;
+    right: 0.75rem;
+    left: auto;
+    bottom: auto;
   }
 }
 
@@ -436,7 +582,7 @@ body.sheds-app::after {
   text-transform: uppercase;
   color: #e8edf5;
   background: rgba(7, 11, 20, 0.92);
-  border: 1px solid rgba(139, 155, 184, 0.45);
+  border: 1px solid color-mix(in srgb, var(--sheds-aspen-gold, #d4c46a) 28%, #8b9bb8);
   border-radius: var(--sheds-radius);
   cursor: pointer;
   backdrop-filter: blur(10px);
@@ -445,7 +591,7 @@ body.sheds-app::after {
 
 .sheds-ctrl:hover,
 .sheds-ctrl:focus-visible {
-  border-color: rgba(198, 255, 77, 0.55);
+  border-color: color-mix(in srgb, var(--sheds-aspen-gold, #d4c46a) 65%, transparent);
   color: #fff;
   outline: none;
 }
@@ -455,9 +601,9 @@ body.sheds-app::after {
 }
 
 .sheds-ctrl[aria-pressed="true"] {
-  border-color: rgba(198, 255, 77, 0.65);
+  border-color: color-mix(in srgb, var(--sheds-aspen-gold, #d4c46a) 70%, transparent);
   background: rgba(7, 11, 20, 0.96);
-  box-shadow: inset 0 0 0 1px rgba(198, 255, 77, 0.25);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--sheds-aspen-gold, #d4c46a) 30%, transparent);
 }
 
 .sheds-ctrl-primary {
@@ -465,7 +611,12 @@ body.sheds-app::after {
   align-items: center;
   justify-content: center;
   gap: 0.45rem;
-  border-color: rgba(198, 255, 77, 0.55);
+  border-color: color-mix(in srgb, var(--sheds-aspen-gold, #d4c46a) 55%, transparent);
+}
+
+.sheds-ctrl-inline {
+  width: 100%;
+  margin-top: 0.35rem;
 }
 
 .sheds-ctrl-primary.is-pulsing .sheds-ctrl-icon {
@@ -477,29 +628,28 @@ body.sheds-app::after {
   height: 0.65rem;
   border-radius: 50%;
   background: var(--sheds-ok);
-  box-shadow: 0 0 0 0 rgba(198, 255, 77, 0.45);
+  box-shadow: 0 0 0 0 rgba(212, 196, 106, 0.45);
 }
 
 @keyframes sheds-pulse {
   0% {
-    box-shadow: 0 0 0 0 rgba(198, 255, 77, 0.55);
+    box-shadow: 0 0 0 0 rgba(212, 196, 106, 0.55);
   }
   70% {
-    box-shadow: 0 0 0 10px rgba(198, 255, 77, 0);
+    box-shadow: 0 0 0 10px rgba(212, 196, 106, 0);
   }
   100% {
-    box-shadow: 0 0 0 0 rgba(198, 255, 77, 0);
+    box-shadow: 0 0 0 0 rgba(212, 196, 106, 0);
   }
 }
 
-/* —— User marker —— */
 .sheds-user-marker {
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  background: #6ec8e8;
+  background: #6ea8c9;
   border: 2px solid #fff;
-  box-shadow: 0 0 0 6px rgba(110, 200, 232, 0.28);
+  box-shadow: 0 0 0 6px rgba(110, 168, 201, 0.28);
 }
 
 .sheds-user-marker.is-pulse {
@@ -508,18 +658,45 @@ body.sheds-app::after {
 
 @keyframes sheds-marker-pulse {
   0% {
-    box-shadow: 0 0 0 0 rgba(110, 200, 232, 0.45);
+    box-shadow: 0 0 0 0 rgba(110, 168, 201, 0.45);
   }
   100% {
-    box-shadow: 0 0 0 16px rgba(110, 200, 232, 0);
+    box-shadow: 0 0 0 16px rgba(110, 168, 201, 0);
   }
+}
+
+.sheds-obs-marker {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--sheds-burnt-orange, #c46a3a);
+  border: 2px solid #f3efe6;
+  box-shadow: 0 0 0 3px rgba(196, 106, 58, 0.3);
+}
+
+.sheds-regs-marker {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.75rem;
+  min-height: 1.75rem;
+  padding: 0.2rem 0.45rem;
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #e8edf5;
+  background: color-mix(in srgb, var(--sheds-evergreen, #2f5c47) 85%, #000);
+  border: 1px solid color-mix(in srgb, var(--sheds-aspen-gold, #d4c46a) 45%, transparent);
+  border-radius: 0.35rem;
 }
 
 /* —— Panel / sheet —— */
 .sheds-panel {
   position: relative;
   z-index: 8;
-  background: var(--sheds-glass-strong);
+  background:
+    linear-gradient(180deg, rgba(47, 92, 71, 0.12), transparent 8rem),
+    var(--sheds-glass-strong);
   border-left: 1px solid var(--line);
   display: flex;
   flex-direction: column;
@@ -552,7 +729,7 @@ body.sheds-app::after {
 }
 
 .sheds-panel-tagline {
-  margin: 0 0 1.25rem;
+  margin: 0 0 1rem;
   color: #a8b6ce;
   font-size: 0.9rem;
   font-style: italic;
@@ -577,6 +754,40 @@ body.sheds-app::after {
   border-bottom: 0;
   margin-bottom: 0;
   padding-bottom: 0;
+}
+
+/* Tabs */
+.sheds-tabs {
+  display: flex;
+  gap: 0.35rem;
+  margin-bottom: 1.1rem;
+}
+
+.sheds-tab {
+  appearance: none;
+  flex: 1;
+  min-height: var(--sheds-touch);
+  padding: 0.45rem 0.5rem;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.sheds-tab.is-active,
+.sheds-tab[aria-selected="true"] {
+  color: var(--text);
+  border-color: color-mix(in srgb, var(--sheds-aspen-gold, #d4c46a) 50%, transparent);
+  background: var(--accent-dim, rgba(212, 196, 106, 0.14));
+}
+
+.sheds-pane[hidden] {
+  display: none !important;
 }
 
 .sheds-read {
@@ -609,6 +820,112 @@ body.sheds-app::after {
   line-height: 1.5;
 }
 
+.sheds-take {
+  margin: 0;
+}
+
+.sheds-take h2 {
+  margin: 0 0 0.55rem;
+  font-size: 0.72rem;
+  font-family: var(--font-body);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-style: normal;
+}
+
+.sheds-take p {
+  margin: 0 0 0.65rem;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-style: italic;
+  line-height: 1.55;
+  color: var(--text);
+}
+
+.sheds-take footer {
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* Season strip */
+.sheds-season {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0.3rem;
+}
+
+.sheds-season-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.1rem;
+  border-radius: 0.35rem;
+  border: 1px solid var(--line);
+  background: rgba(14, 21, 36, 0.6);
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+
+.sheds-season-cell.is-peak-window {
+  border-color: color-mix(in srgb, var(--sheds-aspen-gold, #d4c46a) 45%, transparent);
+  color: var(--sheds-aspen-gold, #d4c46a);
+}
+
+.sheds-season-cell.is-early-drop,
+.sheds-season-cell.is-late-window {
+  border-color: color-mix(in srgb, var(--sheds-burnt-orange, #c46a3a) 40%, transparent);
+  color: #e0a070;
+}
+
+.sheds-season-cell.is-current {
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--sheds-aspen-gold, #d4c46a) 55%, transparent);
+  background: var(--accent-dim, rgba(212, 196, 106, 0.14));
+  color: var(--text);
+}
+
+.sheds-layer-list,
+.sheds-regs,
+.sheds-obs-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.45rem;
+}
+
+.sheds-regs {
+  list-style: disc;
+  padding-left: 1.1rem;
+  margin: 0.55rem 0;
+  color: #a8b6ce;
+  font-size: 0.86rem;
+  line-height: 1.5;
+}
+
+.sheds-check {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  min-height: 2.5rem;
+  font-size: 0.9rem;
+  color: var(--text);
+  cursor: pointer;
+}
+
+.sheds-check input {
+  width: 1.15rem;
+  height: 1.15rem;
+  accent-color: var(--sheds-aspen-gold, #d4c46a);
+}
+
 .sheds-legend {
   list-style: none;
   margin: 0;
@@ -633,23 +950,157 @@ body.sheds-app::after {
 }
 
 .sheds-swatch-high {
-  background: rgba(198, 255, 77, 0.75);
-  border: 1px solid rgba(158, 200, 54, 0.9);
+  background: rgba(212, 196, 106, 0.75);
+  border: 1px solid rgba(138, 154, 58, 0.9);
 }
 
 .sheds-swatch-med {
-  background: rgba(155, 126, 212, 0.65);
-  border: 1px solid rgba(155, 126, 212, 0.9);
+  background: rgba(196, 106, 58, 0.65);
+  border: 1px solid rgba(196, 106, 58, 0.9);
 }
 
 .sheds-swatch-low {
-  background: rgba(110, 200, 232, 0.45);
-  border: 1px solid rgba(110, 200, 232, 0.8);
+  background: rgba(47, 92, 71, 0.55);
+  border: 1px solid rgba(47, 92, 71, 0.9);
+}
+
+.sheds-swatch-predict {
+  background: rgba(212, 196, 106, 0.2);
+  border: 1px dashed rgba(212, 196, 106, 0.7);
+}
+
+.sheds-swatch-obs {
+  background: rgba(196, 106, 58, 0.85);
+  border-radius: 50%;
+  border: 1px solid #f3efe6;
 }
 
 .sheds-legend-state {
   margin: 0.65rem 0 0;
   font-size: 0.8rem;
+}
+
+/* Education cards */
+.sheds-edu-list {
+  display: grid;
+  gap: 0.55rem;
+  margin-top: 0.75rem;
+}
+
+.sheds-edu-card {
+  border: 1px solid var(--line);
+  border-radius: var(--sheds-radius);
+  background: rgba(14, 21, 36, 0.55);
+  padding: 0.15rem 0.75rem 0.15rem;
+}
+
+.sheds-edu-card summary {
+  cursor: pointer;
+  list-style: none;
+  min-height: var(--sheds-touch);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.15rem;
+  padding: 0.45rem 0;
+}
+
+.sheds-edu-card summary::-webkit-details-marker {
+  display: none;
+}
+
+.sheds-edu-title {
+  font-size: 0.95rem;
+  color: var(--text);
+}
+
+.sheds-edu-summary {
+  font-size: 0.8rem;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+.sheds-edu-card p {
+  margin: 0 0 0.85rem;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: #a8b6ce;
+}
+
+.sheds-edu-link {
+  margin-top: 1rem;
+  font-size: 0.84rem;
+}
+
+/* Observations */
+.sheds-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin: 0.75rem 0 0.5rem;
+}
+
+.sheds-field-label {
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.sheds-field-input {
+  min-height: var(--sheds-touch);
+  padding: 0.55rem 0.75rem;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--text);
+  background: var(--surface-sunken, #080c14);
+  border: 1px solid var(--line);
+  border-radius: var(--sheds-radius);
+}
+
+.sheds-field-input:focus {
+  outline: none;
+  border-color: color-mix(in srgb, var(--sheds-aspen-gold, #d4c46a) 50%, var(--line));
+  box-shadow: var(--focus-ring);
+}
+
+.sheds-obs-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  align-items: center;
+  margin-bottom: 0.85rem;
+}
+
+.sheds-obs-item {
+  appearance: none;
+  width: 100%;
+  text-align: left;
+  padding: 0.65rem 0.75rem;
+  min-height: var(--sheds-touch);
+  background: rgba(14, 21, 36, 0.65);
+  border: 1px solid var(--line);
+  border-radius: var(--sheds-radius);
+  color: var(--text);
+  cursor: pointer;
+}
+
+.sheds-obs-item:hover,
+.sheds-obs-item:focus-visible {
+  border-color: color-mix(in srgb, var(--sheds-aspen-gold, #d4c46a) 45%, transparent);
+  outline: none;
+}
+
+.sheds-obs-item-note {
+  display: block;
+  font-size: 0.92rem;
+}
+
+.sheds-obs-item-meta {
+  display: block;
+  margin-top: 0.2rem;
+  font-size: 0.75rem;
+  color: var(--muted);
 }
 
 /* —— Mobile bottom sheet —— */
@@ -673,14 +1124,8 @@ body.sheds-app::after {
     bottom: 0;
   }
 
-  .sheds-banners:not(:empty) .sheds-banner:not([hidden]) ~ .sheds-map-wrap,
   .sheds-shell:has(.sheds-banner:not([hidden])) .sheds-map-wrap {
     top: calc(var(--sheds-bar-h) + 2rem);
-  }
-
-  .sheds-hud {
-    max-width: none;
-    right: 0.75rem;
   }
 
   .sheds-panel {
@@ -689,7 +1134,7 @@ body.sheds-app::after {
     right: 0;
     bottom: 0;
     height: auto;
-    max-height: min(72dvh, 32rem);
+    max-height: min(78dvh, 36rem);
     border-left: 0;
     border-top: 1px solid var(--line);
     border-radius: 1rem 1rem 0 0;
@@ -720,10 +1165,6 @@ body.sheds-app::after {
 
   .sheds-panel-inner {
     padding-top: 0.25rem;
-  }
-
-  body.sheds-app.sheds-sheet-open {
-    /* keep map interactive behind open sheet */
   }
 }
 
@@ -784,13 +1225,13 @@ body.sheds-app::after {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   cursor: pointer;
-  min-height: 2.4rem;
+  min-height: var(--sheds-touch);
 }
 
 .sheds-about-close:hover,
 .sheds-about-close:focus-visible {
   color: var(--text);
-  border-color: rgba(198, 255, 77, 0.4);
+  border-color: color-mix(in srgb, var(--sheds-aspen-gold, #d4c46a) 40%, transparent);
   outline: none;
 }
 
@@ -804,7 +1245,7 @@ body.sheds-app::after {
   .sheds-ctrl,
   .sheds-ctrl-primary.is-pulsing .sheds-ctrl-icon,
   .sheds-user-marker.is-pulse {
-    animation: none;
-    transition: none;
+    animation: none !important;
+    transition: none !important;
   }
 }

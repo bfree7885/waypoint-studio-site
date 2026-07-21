@@ -221,6 +221,68 @@ try {
   fail("dashboard 3.0 modules", err.message || err);
 }
 
+/* —— Sheds 3.0 —— */
+try {
+  assert(exists("sheds/sheds.js"), "sheds.js missing");
+  assert(exists("sheds/sheds-data.js"), "sheds-data.js missing");
+  assert(exists("styles/sheds.css"), "sheds.css missing");
+  assert(exists("docs/SHEDS-3.md"), "SHEDS-3.md missing");
+
+  var shedsCtx = { window: {}, console: console };
+  shedsCtx.window = shedsCtx;
+  vm.runInNewContext(
+    fs.readFileSync(path.join(root, "sheds/sheds-data.js"), "utf8"),
+    shedsCtx
+  );
+  var SD = shedsCtx.ShedsData || shedsCtx.window.ShedsData;
+  assert(SD, "ShedsData not exported");
+  assert(SD.EDUCATION.length >= 6, "education topics incomplete");
+  assert(SD.SEASON_MONTHS.length === 12, "season calendar incomplete");
+  assert(SD.DEMO_PLACES.length >= 3, "demo places incomplete");
+  assert(typeof SD.buildTake === "function", "buildTake missing");
+  assert(typeof SD.searchPlaces === "function", "searchPlaces missing");
+
+  var takeFav = SD.buildTake({ month: 1, level: "favorable", educationMode: false });
+  assert(takeFav.body && takeFav.body.length > 40, "favorable take too short");
+  assert(/Waypoint|today|bench|edge|patient|walk|condition/i.test(takeFav.body), "weak favorable take");
+  assert(!/guarantee|sure thing|100%|secret hotspot/i.test(takeFav.body), "take sounds clickbait");
+
+  var takeEdu = SD.buildTake({ month: 6, educationMode: true });
+  assert(/Education mode/i.test(takeEdu.body), "edu take missing mode note");
+
+  var levelFeb = SD.conditionLevel(1);
+  assert(levelFeb === "favorable", "Feb should be favorable demo window");
+  var levelJul = SD.conditionLevel(6);
+  assert(levelJul === "poor", "Jul should be quiet demo season");
+
+  var hits = SD.searchPlaces("foothills");
+  assert(hits.length >= 1, "search should find foothills demo");
+
+  var shedsHtml = fs.readFileSync(path.join(root, "sheds/index.html"), "utf8");
+  assert(
+    shedsHtml.indexOf("Waypoint’s Take") !== -1 ||
+      shedsHtml.indexOf("Waypoint's Take") !== -1,
+    "sheds missing Waypoint's Take"
+  );
+  assert(shedsHtml.indexOf("sheds-data.js") !== -1, "sheds missing data script");
+  assert(shedsHtml.indexOf("theme-sheds") !== -1, "sheds missing theme-sheds");
+  assert(shedsHtml.indexOf("sheds-search-input") !== -1, "sheds missing search");
+  assert(shedsHtml.indexOf("sheds-edu-list") !== -1, "sheds missing education list");
+  assert(shedsHtml.indexOf("sheds-obs-list") !== -1, "sheds missing observations");
+  assert(/ethical|Education mode|demo/i.test(shedsHtml), "sheds missing ethics/demo language");
+
+  var shedsCss = fs.readFileSync(path.join(root, "styles/sheds.css"), "utf8");
+  assert(
+    shedsCss.indexOf("aspen") !== -1 || shedsCss.indexOf("sheds-aspen-gold") !== -1,
+    "sheds.css should reference aspen palette"
+  );
+  assert(shedsCss.indexOf("prefers-reduced-motion") !== -1, "sheds.css missing reduced-motion");
+
+  ok("sheds 3.0 modules");
+} catch (err) {
+  fail("sheds 3.0 modules", err.message || err);
+}
+
 /* —— Internal link scan (sample) —— */
 var missingLinks = 0;
 var htmlFiles = [];

@@ -32,6 +32,8 @@ Public route today: `/waypoint-scenes/`. Nav label: **Scenes**.
 
 A dedicated shed hunting platform — equal in stature to Scenes. Map-first habitat intelligence, find logging, heat maps, analytics, and seasonal learning. Ethical field practice; demo zones only in the current prototype.
 
+**Sheds 3.0** (`/sheds/`): Field View with Waypoint’s Take, seasonality, education library, prediction teaching layer, regulation reminders, and private local observations. See [SHEDS-3.md](./SHEDS-3.md).
+
 ### Volunteer (Free)
 
 Discover meaningful outdoor stewardship: trail work, conservation, citizen science, animal care, and community help. Anchored by the question *What good can I do today?*
