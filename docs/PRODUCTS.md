@@ -20,6 +20,8 @@ Outdoor mission control for planning today.
 
 Helps visitors understand daily conditions and what they mean — weather, photography windows, sun & moon, AQI, rivers, alerts, nearby volunteer opportunities, and related articles — with **Waypoint’s Take** interpreting why it matters.
 
+**Dashboard 3.0** (`/dashboard/`): thirteen customizable category widgets, local layout preferences, kiosk mode, and Open-Meteo-backed conditions with demo fallback. See [DASHBOARD-3.md](./DASHBOARD-3.md).
+
 ### Scenes (Flagship)
 
 Outdoor photography as a serious craft: living landscape experiences, Photo Coach, portfolio building, AI-assisted culling, collections, Hidden Landscapes, and outdoor discovery.

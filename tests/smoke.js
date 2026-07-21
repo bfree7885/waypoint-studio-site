@@ -62,6 +62,12 @@ var required = [
   "docs/PRODUCTS.md",
   "docs/NAVIGATION-PLAN.md",
   "docs/INCUBATOR.md",
+  "docs/DASHBOARD-3.md",
+  "styles/dashboard.css",
+  "dashboard/js/widgets.js",
+  "dashboard/js/engine.js",
+  "dashboard/js/layout.js",
+  "dashboard/js/app.js",
   "shared/a11y-dialog.js"
 ];
 
@@ -169,6 +175,50 @@ try {
   ok("volunteer discovery engine");
 } catch (err) {
   fail("volunteer discovery engine", err.message || err);
+}
+
+/* —— Dashboard 3.0 modules —— */
+try {
+  var dashCtx = {
+    window: {},
+    console: console,
+    sessionStorage: {
+      _d: {},
+      getItem: function (k) { return this._d[k] || null; },
+      setItem: function (k, v) { this._d[k] = String(v); }
+    },
+    localStorage: {
+      _d: {},
+      getItem: function (k) { return this._d[k] || null; },
+      setItem: function (k, v) { this._d[k] = String(v); }
+    }
+  };
+  dashCtx.window = dashCtx;
+  function loadDash(rel) {
+    vm.runInNewContext(fs.readFileSync(path.join(root, rel), "utf8"), dashCtx);
+  }
+  loadDash("dashboard/js/widgets.js");
+  loadDash("dashboard/js/engine.js");
+  loadDash("dashboard/js/layout.js");
+  assert(dashCtx.WaypointDashboardWidgets.catalog.length === 13, "expected 13 widgets");
+  var demo = dashCtx.WaypointDashboardEngine.demoContext();
+  dashCtx.WaypointDashboardWidgets.catalog.forEach(function (w) {
+    var built = w.build(demo);
+    assert(built.primary && built.take, "widget incomplete: " + w.id);
+    assert(/matter|today|favor|keep|verify|build|cool|front|smoke|river|wind|uv|moon|cloud|mile|bank|distance|layer|ease|awareness|short|clearer|patience|patient|overnight|golden|humidity|flexible|surface|official|night|front-load|conditions/i.test(built.take) || built.take.length > 20, "weak take: " + w.id);
+  });
+  var layout = dashCtx.WaypointDashboardLayout.load();
+  assert(layout.order.length === 13, "layout order incomplete");
+  assert(layout.enabled.weather === true, "weather should default on");
+  assert(layout.enabled.wildlife === false, "wildlife should default off");
+  layout.order = dashCtx.WaypointDashboardLayout.move(layout.order, "weather", 1);
+  assert(layout.order[1] === "weather" || layout.order[0] !== "weather", "reorder failed");
+  var dashHtml = fs.readFileSync(path.join(root, "dashboard/index.html"), "utf8");
+  assert(dashHtml.indexOf("Waypoint’s Take") !== -1 || dashHtml.indexOf("Waypoint's Take") !== -1, "dashboard missing Take chrome");
+  assert(dashHtml.indexOf("dash-kiosk") !== -1, "dashboard missing kiosk");
+  ok("dashboard 3.0 modules");
+} catch (err) {
+  fail("dashboard 3.0 modules", err.message || err);
 }
 
 /* —— Internal link scan (sample) —— */

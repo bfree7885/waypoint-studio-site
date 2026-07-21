@@ -1,17 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Dashboard — plan today’s outdoor adventure. Weather, photography conditions, sun & moon, AQI, rivers, alerts, volunteer ideas, and Waypoint’s Take.">
-  <title>Dashboard | Waypoint Studio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="Dashboard 3.0 — the free outdoor mission control. Customizable widgets with Waypoint’s Take for weather, photography, hiking, rivers, air, and more.">
+  <meta name="theme-color" content="#070b14">
+  <title>Dashboard 3.0 | Waypoint Studio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://api.open-meteo.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Source+Sans+3:wght@300;400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../styles/site.css">
+  <link rel="stylesheet" href="../styles/dashboard.css">
 </head>
-<body class="theme-dashboard aurora-atmosphere">
-  <a class="skip-link" href="#main">Skip to content</a>
+<body class="theme-dashboard dash-app">
+  <noscript>
+    <p class="noscript-banner">Dashboard 3.0 needs JavaScript for widgets and customization. You can still read the <a href="../docs/DASHBOARD-3.md">Dashboard documentation</a>.</p>
+  </noscript>
+  <a class="skip-link" href="#dash-grid">Skip to widgets</a>
+
   <header class="site-header">
     <div class="header-inner">
       <a class="brand" href="../">Waypoint Studio</a>
@@ -26,98 +33,68 @@
     </div>
   </header>
 
-  <main id="main">
-    <div class="wrap">
-      <section class="page-hero">
+  <div class="dash-shell" id="dash-shell">
+    <div class="dash-kiosk-bar" aria-label="Kiosk controls">
+      <div>
+        <p class="dash-meta" style="margin:0">Waypoint Dashboard</p>
+        <p class="dash-clock" id="dash-clock" aria-live="off">—</p>
+      </div>
+      <button type="button" class="btn-secondary" id="dash-exit-kiosk">Exit kiosk</button>
+    </div>
+
+    <div class="dash-top">
+      <div>
         <span class="badge badge-free">Free</span>
         <h1>Dashboard</h1>
-        <p class="tagline">Plan today’s outdoor adventure.</p>
-        <p class="lead">
-          Your outdoor mission control. Conditions first — then interpretation —
-          so you can decide where to go, what to photograph, and how to stay safe.
-        </p>
-      </section>
-
-      <section aria-labelledby="modules-heading">
-        <h2 id="modules-heading">What you’ll find</h2>
-        <div class="feature-grid">
-          <article class="feature-card">
-            <h3>Weather</h3>
-            <p>Temperature, wind, clouds, and precipitation in plain language for the day ahead.</p>
-          </article>
-          <article class="feature-card">
-            <h3>Photography conditions</h3>
-            <p>Light quality, haze, and windows that favor landscape and wildlife work.</p>
-          </article>
-          <article class="feature-card">
-            <h3>Sun &amp; Moon</h3>
-            <p>Rise, set, golden and blue hours, and moonlight for night planning.</p>
-          </article>
-          <article class="feature-card">
-            <h3>Air quality</h3>
-            <p>AQI context for comfort, smoke awareness, and outdoor effort.</p>
-          </article>
-          <article class="feature-card">
-            <h3>River levels</h3>
-            <p>Flow and stage context for bank safety, fishing, and riverside photography.</p>
-          </article>
-          <article class="feature-card">
-            <h3>Alerts</h3>
-            <p>Severe weather and relevant notices without alarmist noise.</p>
-          </article>
-          <article class="feature-card">
-            <h3>Volunteer opportunities</h3>
-            <p>Gentle prompts toward stewardship when the day (and place) allow.</p>
-          </article>
-          <article class="feature-card">
-            <h3>Articles</h3>
-            <p>Seasonal and skill reading that connects today’s conditions to deeper learning.</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="take-panel" aria-labelledby="dash-take-heading">
-        <h2 id="dash-take-heading">Waypoint’s Take</h2>
-        <blockquote class="take-example">
-          <p>
-            Midday UV will be high under clear skies. Favor earlier trail miles, pack shade
-            for midday photography, and expect excellent distant visibility until late afternoon haze.
-          </p>
-          <footer>Illustrative Take — live intelligence arrives in a later sprint</footer>
-        </blockquote>
-        <p class="muted">
-          Every Dashboard surface ends with interpretation: why the numbers matter for
-          hiking, photography, rivers, and stewardship — calm and educational.
-        </p>
-      </section>
-
-      <section class="note" aria-label="Current maturity">
-        <p>
-          This page establishes the Dashboard as a primary free product.
-          Live provider-backed widgets and personalized layouts continue in RC3 Sprint 2.
-          Meanwhile, explore <a href="../waypoint-scenes/">Scenes</a>,
-          <a href="../sheds/">Sheds</a>, and <a href="../volunteer/">Volunteer</a>.
-        </p>
-      </section>
-
-      <section class="waitlist-cta">
-        <h2>Stay close to Dashboard progress</h2>
-        <p>We’ll share updates as outdoor intelligence becomes interactive here.</p>
-        <a class="btn-primary" href="mailto:hello@waypointstudio.org?subject=Dashboard%20updates">Join updates</a>
-      </section>
+        <p class="dash-meta" id="dash-place">Loading place…</p>
+        <p class="dash-meta" id="dash-updated"></p>
+      </div>
+      <div class="dash-actions">
+        <button type="button" class="btn-primary" id="dash-refresh">Refresh</button>
+        <button type="button" class="btn-secondary" id="dash-locate">Use my location</button>
+        <button type="button" class="btn-secondary" id="dash-customize" aria-expanded="false" aria-controls="dash-customize-panel">Customize</button>
+        <button type="button" class="btn-ghost" id="dash-kiosk" aria-pressed="false">Kiosk</button>
+      </div>
     </div>
-  </main>
+
+    <p class="dash-status" id="dash-status" aria-live="polite"></p>
+
+    <section class="dash-brief" aria-labelledby="dash-brief-heading">
+      <h2 id="dash-brief-heading">Today’s brief</h2>
+      <ul id="dash-brief">
+        <li>Gathering conditions…</li>
+      </ul>
+    </section>
+
+    <main id="dash-grid" class="dash-grid" aria-label="Outdoor widgets"></main>
+
+    <section class="dash-customize" id="dash-customize-panel" hidden>
+      <h2>Customize widgets</h2>
+      <p class="muted">Enable, disable, and reorder categories. Preferences stay on this device.</p>
+      <ul class="dash-customize__list" id="dash-customize-list"></ul>
+    </section>
+
+    <p class="dash-footnote">
+      Weather and air quality via Open-Meteo when available. River values may be modeled for demo regions.
+      Fire and travel cards are awareness only — not emergency dispatch. Privacy: layout saves locally; location is used only when you ask.
+      <a href="../docs/DASHBOARD-3.md">Documentation</a>
+    </p>
+  </div>
 
   <footer class="site-footer">
     <div class="footer-inner footer-links">
       <span>Waypoint Studio · Observe. Discover. Understand.</span>
       <span>
-        <a href="../about/">About</a> ·
-        <a href="../incubator/">Incubator</a> ·
+        <a href="../design-system/">Aurora</a> ·
         <a href="../privacy/">Privacy</a> ·
         <a href="../contact/">Contact</a>
       </span>
     </div>
   </footer>
+
+  <script src="js/widgets.js" defer></script>
+  <script src="js/engine.js" defer></script>
+  <script src="js/layout.js" defer></script>
+  <script src="js/app.js" defer></script>
 </body>
 </html>
