@@ -106,57 +106,74 @@
 
   function renderRelated(context, currentCategory, slugs) {
     if (!slugs || !slugs.length) return "";
+    var cards = slugs
+      .map(function (slug) {
+        var lesson = registry.get(slug);
+        if (!lesson) return "";
+        var cat = registry.categories[lesson.category];
+        return (
+          '<a class="edu-related-card" href="' +
+          escapeHtml(lessonHref(context, currentCategory, slug)) +
+          '">' +
+          '<div class="edu-related-card-top">' +
+          '<span class="edu-level-badge edu-level-badge--' +
+          escapeHtml(lesson.level) +
+          '">' +
+          escapeHtml(lesson.level) +
+          "</span>" +
+          '<span class="edu-category-tag">' +
+          escapeHtml(cat ? cat.label : lesson.category) +
+          "</span>" +
+          "</div>" +
+          "<h3>" +
+          escapeHtml(lesson.title) +
+          "</h3>" +
+          "</a>"
+        );
+      })
+      .join("");
+
     return (
-      '<section class="edu-lesson-related">' +
+      '<section class="edu-related-section">' +
       "<h2>Related lessons</h2>" +
-      '<ul class="edu-related-links">' +
-      slugs
-        .map(function (slug) {
-          var lesson = registry.get(slug);
-          if (!lesson) return "";
-          return (
-            "<li><a href=\"" +
-            escapeHtml(lessonHref(context, currentCategory, slug)) +
-            '"><span class="edu-level-badge edu-level-badge--' +
-            escapeHtml(lesson.level) +
-            '">' +
-            escapeHtml(lesson.level) +
-            "</span> " +
-            escapeHtml(lesson.title) +
-            "</a></li>"
-          );
-        })
-        .join("") +
-      "</ul></section>"
+      '<div class="edu-related-grid">' +
+      cards +
+      "</div></section>"
     );
   }
 
   function renderLessonCard(lesson, context, currentCategory) {
     var cat = registry.categories[lesson.category];
     return (
-      '<article class="edu-lesson-card">' +
+      '<article class="edu-lesson-card edu-lesson-card--' +
+      escapeHtml(lesson.category) +
+      '">' +
+      '<div class="edu-lesson-card-accent" aria-hidden="true"></div>' +
       '<a class="edu-lesson-card-link" href="' +
       escapeHtml(lessonHref(context, currentCategory, lesson.slug)) +
       '">' +
-      '<div class="edu-lesson-card-head">' +
+      '<div class="edu-lesson-card-top">' +
       '<span class="edu-level-badge edu-level-badge--' +
       escapeHtml(lesson.level) +
-      '">' +
+      '">Level ' +
       escapeHtml(lesson.level) +
       "</span>" +
       '<span class="edu-category-tag">' +
       escapeHtml(cat ? cat.label : lesson.category) +
       "</span>" +
       "</div>" +
+      '<div class="edu-lesson-card-body">' +
       "<h2>" +
       escapeHtml(lesson.title) +
       "</h2>" +
-      "<p>" +
+      '<p class="edu-lesson-card-summary">' +
       escapeHtml(lesson.summary) +
       "</p>" +
-      '<p class="edu-lesson-meta muted">' +
+      "</div>" +
+      '<div class="edu-lesson-card-foot">' +
       escapeHtml(lesson.readingTime) +
-      " read</p>" +
+      " read" +
+      "</div>" +
       "</a></article>"
     );
   }
@@ -221,14 +238,14 @@
 
     container.innerHTML =
       '<article class="edu-lesson">' +
-      '<header class="edu-lesson-header">' +
+      '<header class="edu-lesson-hero">' +
       '<p class="edu-lesson-breadcrumb muted">' +
       '<a href="../">' +
       escapeHtml(cat ? cat.label : lesson.category) +
       "</a> · " +
       escapeHtml(lesson.title) +
       "</p>" +
-      '<div class="edu-lesson-badges">' +
+      '<div class="edu-lesson-meta-row">' +
       '<span class="edu-level-badge edu-level-badge--' +
       escapeHtml(lesson.level) +
       '">Level ' +
@@ -244,14 +261,15 @@
       "<h1>" +
       escapeHtml(lesson.title) +
       "</h1>" +
-      '<p class="edu-lesson-summary">' +
+      '<p class="edu-lesson-lead">' +
       escapeHtml(lesson.summary) +
       "</p>" +
       "</header>" +
-      '<div class="edu-lesson-body">' +
+      '<div class="edu-lesson-layout">' +
+      '<div class="edu-lesson-main">' +
       renderSections(lesson.sections) +
       "</div>" +
-      '<aside class="edu-lesson-aside">' +
+      '<aside class="edu-lesson-sidebar">' +
       '<section class="edu-aside-block edu-aside-block--tips">' +
       "<h2>Field tips</h2>" +
       renderList(lesson.fieldTips) +
@@ -260,13 +278,17 @@
       "<h2>Common mistakes</h2>" +
       renderList(lesson.commonMistakes) +
       "</section>" +
-      renderRelated("lesson", lesson.category, lesson.relatedLessons) +
       "</aside>" +
+      "</div>" +
+      renderRelated("lesson", lesson.category, lesson.relatedLessons) +
       '<footer class="edu-lesson-foot">' +
       '<p class="global-disclaimer muted">Educational content only — not a substitute for expert identification, legal advice, or land-access permission.</p>' +
+      '<div class="edu-lesson-foot-actions">' +
       '<a class="btn-secondary" href="../">All ' +
       escapeHtml(cat ? cat.label.toLowerCase() : "lessons") +
       " lessons</a>" +
+      '<a class="btn-secondary" href="../../">Education overview</a>' +
+      "</div>" +
       "</footer></article>";
   }
 

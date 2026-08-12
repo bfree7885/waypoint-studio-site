@@ -197,6 +197,13 @@
       document.getElementById("manual-ethical").textContent = read.ethicalNote;
       panel.classList.add("is-visible");
       panel.scrollIntoView({ behavior: "smooth", block: "nearest" });
+
+      if (window.ForageCastSpeciesLessons) {
+        window.ForageCastSpeciesLessons.render(
+          window.ForageCastSpeciesLessons.defaultSpecies,
+          "manual-learn-section"
+        );
+      }
     });
   }
 
@@ -228,6 +235,13 @@
 
     panel.classList.add("is-visible");
     panel.scrollIntoView({ behavior: "smooth", block: "nearest" });
+
+    if (window.ForageCastSpeciesLessons) {
+      window.ForageCastSpeciesLessons.render(
+        window.ForageCastSpeciesLessons.defaultSpecies,
+        "weather-learn-section"
+      );
+    }
   }
 
   function bindWeatherForm() {
