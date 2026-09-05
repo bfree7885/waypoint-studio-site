@@ -1,4 +1,2 @@
 User-agent: *
-Allow: /
-
-Sitemap: https://bfree7885.github.io/waypoint-studio-site/sitemap.xml
+Disallow: /

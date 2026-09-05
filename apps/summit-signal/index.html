@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en" data-product="signalterrain-sota">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="signalterrain-build" content="V0.9 4f0c0831b8bcfacc1d5d5c16398a9b721dd58bf2">
+  <meta name="description" content="SignalTerrain V0.9 — unlisted field-test SOTA summit map. Independent Waypoint application; not affiliated with Summits on the Air. Not the retired SignalTerrain Cyber product. Not a public product launch.">
+  <title>SignalTerrain — Waypoint</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="vendor/leaflet/leaflet.css">
+  <link rel="stylesheet" href="css/summit-signal.css">
+</head>
+<body>
+  <a class="ss-skip" href="#ss-map">Skip to map</a>
+
+  <div class="ss-app" id="ss-app">
+    <header class="ss-chrome">
+      <div class="ss-brand">
+        <span class="ss-mark" aria-hidden="true">▲</span>
+        <div class="ss-brand-text">
+          <p class="ss-product">SignalTerrain</p>
+          <p class="ss-kicker">V0.9 · unlisted field-test · Waypoint</p>
+        </div>
+      </div>
+      <div class="ss-chrome-actions">
+        <button type="button" class="ss-btn" id="ss-search-open" aria-expanded="false" aria-controls="ss-search-panel">
+          Search
+        </button>
+        <button type="button" class="ss-btn ss-btn--ghost" id="ss-locate">
+          My location
+        </button>
+      </div>
+    </header>
+
+    <p class="ss-banner" id="ss-banner" data-kind="info" hidden></p>
+    <p class="ss-live" id="ss-live" aria-live="polite"></p>
+
+    <div class="ss-search" id="ss-search-panel" hidden>
+      <div class="ss-search__head">
+        <h2 class="ss-search__title" id="ss-search-title">Find a summit</h2>
+        <button type="button" class="ss-icon-btn" id="ss-search-close" aria-label="Close search">Close</button>
+      </div>
+      <label class="ss-field">
+        <span>Name or SOTA reference</span>
+        <input id="ss-search-q" type="search" autocomplete="off" spellcheck="false" placeholder="Slide Mountain or W2/GC-001">
+      </label>
+      <label class="ss-field">
+        <span>Minimum SOTA points</span>
+        <select id="ss-min-points">
+          <option value="">Any</option>
+          <option value="1">1+</option>
+          <option value="2">2+</option>
+          <option value="4">4+</option>
+          <option value="6">6+</option>
+          <option value="8">8+</option>
+          <option value="10">10</option>
+        </select>
+      </label>
+      <ul class="ss-search-results" id="ss-search-results" aria-labelledby="ss-search-title"></ul>
+    </div>
+
+    <div id="ss-map" class="ss-map" role="application" aria-label="SOTA summit map"></div>
+    <div class="ss-layers" id="ss-layers" role="group" aria-label="Map layers">
+      <label class="ss-layer"><input type="checkbox" id="ss-layer-summits" data-layer="summits" checked> Summits</label>
+      <label class="ss-layer"><input type="checkbox" id="ss-layer-trails" data-layer="trails" checked> Trails</label>
+      <label class="ss-layer"><input type="checkbox" id="ss-layer-trailheads" data-layer="trailheads" checked> Trailheads</label>
+      <label class="ss-layer"><input type="checkbox" id="ss-layer-parking" data-layer="parking" checked> Parking</label>
+      <label class="ss-layer"><input type="checkbox" id="ss-layer-hike" data-layer="hike" checked> Hike</label>
+      <label class="ss-layer"><input type="checkbox" id="ss-layer-az" data-layer="az" checked> Activation zone</label>
+    </div>
+
+    <section class="ss-sheet" id="ss-sheet" hidden aria-hidden="true" aria-labelledby="ss-detail-name">
+      <div class="ss-sheet__handle" aria-hidden="true"></div>
+      <div class="ss-sheet__head">
+        <div>
+          <p class="ss-kicker" id="ss-detail-ref">—</p>
+          <h2 class="ss-sheet__title" id="ss-detail-name">Summit</h2>
+        </div>
+        <button type="button" class="ss-icon-btn" id="ss-sheet-close" aria-label="Hide summit detail">Close</button>
+      </div>
+
+      <div class="ss-sheet__body">
+        <section class="ss-block" aria-labelledby="ss-sec-summit">
+          <h3 id="ss-sec-summit">Summit</h3>
+          <dl class="ss-kv-list">
+            <div class="ss-kv"><dt>Elevation</dt><dd id="ss-field-elevation">Unavailable</dd></div>
+            <div class="ss-kv"><dt>SOTA points</dt><dd id="ss-field-points">Unavailable</dd></div>
+            <div class="ss-kv"><dt>Seasonal bonus</dt><dd id="ss-field-bonus" data-status="unavailable">Unavailable</dd></div>
+            <div class="ss-kv"><dt>Coordinates</dt><dd id="ss-field-coords">Unavailable</dd></div>
+            <div class="ss-kv"><dt>Maidenhead</dt><dd id="ss-field-grid" data-source="unavailable">Unavailable</dd></div>
+          </dl>
+        </section>
+
+        <section class="ss-block" aria-labelledby="ss-sec-activity">
+          <h3 id="ss-sec-activity">Activity</h3>
+          <dl class="ss-kv-list">
+            <div class="ss-kv"><dt>Activation count</dt><dd id="ss-field-activations">Unavailable</dd></div>
+            <div class="ss-kv"><dt>Last activation</dt><dd id="ss-field-last">Unavailable</dd></div>
+            <div class="ss-kv"><dt>Association</dt><dd id="ss-field-association">Unavailable</dd></div>
+            <div class="ss-kv"><dt>Region</dt><dd id="ss-field-region">Unavailable</dd></div>
+          </dl>
+        </section>
+
+        <section class="ss-block ss-block--planning" aria-labelledby="ss-sec-planning">
+          <h3 id="ss-sec-planning">Access</h3>
+          <p class="ss-note" id="ss-access-lede">Candidate mapped features from OpenStreetMap. Not a recommended route. Inspect a parking area or trailhead, then choose Start hike here to calculate a pedestrian route.</p>
+          <div id="ss-start-section" class="ss-start-section">
+            <h4 id="ss-start-heading">Start</h4>
+            <div id="ss-start-body" class="ss-start-body"></div>
+          </div>
+          <div id="ss-access-body" data-access-status="idle"></div>
+          <p class="ss-note ss-note--caveat" id="ss-access-caveat"></p>
+        </section>
+
+        <section class="ss-block ss-block--az" aria-labelledby="ss-sec-az">
+          <h3 id="ss-sec-az">Activation zone</h3>
+          <p class="ss-note" id="ss-az-lede">Terrain-derived closed contour from the SOTA Vertical Distance below the summit. Not a radius. Not a valid-activation claim.</p>
+          <div id="ss-az-body" data-az-status="idle"></div>
+          <p class="ss-note ss-note--caveat" id="ss-az-caveat"></p>
+        </section>
+
+        <section class="ss-block ss-block--hike" aria-labelledby="ss-sec-hike">
+          <h3 id="ss-sec-hike">Plan the hike</h3>
+          <p class="ss-note" id="ss-hike-lede">Select a mapped parking area or trailhead. SignalTerrain does not pick a best start.</p>
+          <div id="ss-hike-body" data-hike-status="idle"></div>
+          <p class="ss-note ss-note--caveat" id="ss-hike-caveat"></p>
+          <h3 class="ss-subhead" id="ss-sec-later">Not in V0.9</h3>
+          <p class="ss-note">Spots, alerts, logging, weather, and trail ratings are not calculated. Radio remains not integrated.</p>
+          <dl class="ss-kv-list" id="ss-planning-fields"></dl>
+        </section>
+
+        <section class="ss-block ss-block--plan" aria-labelledby="ss-sec-plan">
+          <h3 id="ss-sec-plan">Activation Plan</h3>
+          <p class="ss-note" id="ss-plan-lede">Field-oriented summary of SignalTerrain evidence for this summit. Not a recommendation and not a valid-activation claim.</p>
+          <div id="ss-plan-body" data-plan-status="idle"></div>
+          <h4 class="ss-subhead" id="ss-sec-ready">Activation readiness</h4>
+          <p class="ss-note">Information completeness, not a safety score.</p>
+          <div id="ss-ready-body"></div>
+        </section>
+
+        <section class="ss-block" aria-labelledby="ss-sec-nearby">
+          <h3 id="ss-sec-nearby">Nearby summits</h3>
+          <p class="ss-note">Straight-line distance from this summit, using loaded catalogue coordinates.</p>
+          <ul class="ss-nearby-list" id="ss-nearby-list"></ul>
+        </section>
+      </div>
+    </section>
+
+    <footer class="ss-legal">
+      <p class="ss-build" id="ss-field-test-build">SignalTerrain V0.9 · 4f0c083</p>
+      <p id="ss-source-note">SOTA summit catalogue</p>
+      <p>
+        SignalTerrain is an independent application and is not affiliated with or endorsed by Summits on the Air (SOTA).
+        Summit catalogue data originates from SOTA (<a href="https://www.sota.org.uk/" rel="noopener noreferrer">sota.org.uk</a>
+        / <a href="https://api2.sota.org.uk/" rel="noopener noreferrer">api2.sota.org.uk</a>).
+        Map tiles © Esri, USGS, NOAA, and the GIS User Community.
+        Access features © <a href="https://www.openstreetmap.org/copyright" rel="noopener noreferrer">OpenStreetMap contributors</a> (ODbL).
+        Pedestrian routes by <a href="https://github.com/valhalla/valhalla" rel="noopener noreferrer">Valhalla</a> on OSM (FOSSGIS demo is development-only).
+        Elevation from <a href="https://www.usgs.gov/3d-elevation-program" rel="noopener noreferrer">USGS 3DEP</a>.
+        Activation Zone uses SOTA General Rules v1.21 (closed contour, normally 25 m) with USGS 3DEP terrain.
+      </p>
+    </footer>
+    <button type="button" class="ss-show-plan" id="ss-show-plan" hidden>Show plan</button>
+  </div>
+
+  <script src="vendor/leaflet/leaflet.js"></script>
+  <script src="js/ss-maidenhead.js?v=0.9"></script>
+  <script src="js/ss-geo.js?v=0.9"></script>
+  <script src="js/ss-summit-model.js?v=0.9"></script>
+  <script src="js/ss-sota-rules.js?v=0.9"></script>
+  <script src="js/ss-planning-provider.js?v=0.9"></script>
+  <script src="js/ss-plan-model.js?v=0.9"></script>
+  <script src="js/ss-sota-provider.js?v=0.9"></script>
+  <script src="js/ss-access-model.js?v=0.9"></script>
+  <script src="js/ss-access-provider.js?v=0.9"></script>
+  <script src="js/ss-route-model.js?v=0.9"></script>
+  <script src="js/ss-route-provider.js?v=0.9"></script>
+  <script src="js/ss-terrain-model.js?v=0.9"></script>
+  <script src="js/ss-terrain-provider.js?v=0.9"></script>
+  <script src="js/ss-az-model.js?v=0.9"></script>
+  <script src="js/ss-az-provider.js?v=0.9"></script>
+  <script src="js/ss-az-route-model.js?v=0.9"></script>
+  <script src="js/ss-az-route-provider.js?v=0.9"></script>
+  <script src="js/ss-map-app.js?v=0.9"></script>
+</body>
+</html>

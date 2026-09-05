@@ -1,0 +1,1619 @@
+{
+  "source": {
+    "provider": "usgs-3dep",
+    "endpoint": "https://elevation.nationalmap.gov/arcgis/rest/services/3DEPElevation/ImageServer/getSamples",
+    "developmentFixture": true,
+    "units": "meters",
+    "interpolation": "bilinear",
+    "retrievedAt": "2026-09-04T20:48:48Z",
+    "summitId": "W2/GC-001",
+    "accessKind": "parking",
+    "accessOsmType": "way",
+    "accessOsmId": 816358667,
+    "accessName": "Slide Mountain Parking Area",
+    "profile": "pedestrian",
+    "start": {
+      "lat": 42.008684,
+      "lng": -74.427638
+    },
+    "destination": {
+      "lat": 41.9991,
+      "lng": -74.3862
+    }
+  },
+  "samples": [
+    {
+      "locationId": 160,
+      "value": "1205.041748047",
+      "resolution": 1,
+      "location": {
+        "x": -74.392612,
+        "y": 42.000403
+      }
+    },
+    {
+      "locationId": 161,
+      "value": "1207.048217773",
+      "resolution": 1,
+      "location": {
+        "x": -74.392348,
+        "y": 42.0004395
+      }
+    },
+    {
+      "locationId": 166,
+      "value": "1221.966064453",
+      "resolution": 1,
+      "location": {
+        "x": -74.39057650000001,
+        "y": 42.0004535
+      }
+    },
+    {
+      "locationId": 167,
+      "value": "1225.087036133",
+      "resolution": 1,
+      "location": {
+        "x": -74.390302,
+        "y": 42.000383
+      }
+    },
+    {
+      "locationId": 168,
+      "value": "1229.624511719",
+      "resolution": 1,
+      "location": {
+        "x": -74.389849,
+        "y": 42.000274
+      }
+    },
+    {
+      "locationId": 169,
+      "value": "1232.205810547",
+      "resolution": 1,
+      "location": {
+        "x": -74.389549,
+        "y": 42.0002745
+      }
+    },
+    {
+      "locationId": 170,
+      "value": "1234.753051758",
+      "resolution": 1,
+      "location": {
+        "x": -74.389249,
+        "y": 42.000275
+      }
+    },
+    {
+      "locationId": 171,
+      "value": "1238.028320312",
+      "resolution": 1,
+      "location": {
+        "x": -74.38897850000001,
+        "y": 42.000287
+      }
+    },
+    {
+      "locationId": 172,
+      "value": "1241.643798828",
+      "resolution": 1,
+      "location": {
+        "x": -74.388708,
+        "y": 42.000299
+      }
+    },
+    {
+      "locationId": 173,
+      "value": "1244.485961914",
+      "resolution": 1,
+      "location": {
+        "x": -74.388272,
+        "y": 42.000424
+      }
+    },
+    {
+      "locationId": 174,
+      "value": "1249.832275391",
+      "resolution": 1,
+      "location": {
+        "x": -74.387894,
+        "y": 42.000434
+      }
+    },
+    {
+      "locationId": 175,
+      "value": "1257.531250000",
+      "resolution": 1,
+      "location": {
+        "x": -74.387489,
+        "y": 42.000348
+      }
+    },
+    {
+      "locationId": 176,
+      "value": "1266.119995117",
+      "resolution": 1,
+      "location": {
+        "x": -74.387183,
+        "y": 41.999989
+      }
+    },
+    {
+      "locationId": 177,
+      "value": "1268.831909180",
+      "resolution": 1,
+      "location": {
+        "x": -74.38692,
+        "y": 41.99977
+      }
+    },
+    {
+      "locationId": 178,
+      "value": "1271.483886719",
+      "resolution": 1,
+      "location": {
+        "x": -74.386675,
+        "y": 41.999467
+      }
+    },
+    {
+      "locationId": 179,
+      "value": "1274.730224609",
+      "resolution": 1,
+      "location": {
+        "x": -74.386332,
+        "y": 41.99925
+      }
+    },
+    {
+      "locationId": 150,
+      "value": "1199.330810547",
+      "resolution": 1,
+      "location": {
+        "x": -74.396206,
+        "y": 42.00108
+      }
+    },
+    {
+      "locationId": 151,
+      "value": "1198.567871094",
+      "resolution": 1,
+      "location": {
+        "x": -74.395887,
+        "y": 42.001011500000004
+      }
+    },
+    {
+      "locationId": 152,
+      "value": "1199.137207031",
+      "resolution": 1,
+      "location": {
+        "x": -74.395568,
+        "y": 42.000943
+      }
+    },
+    {
+      "locationId": 153,
+      "value": "1198.257568359",
+      "resolution": 1,
+      "location": {
+        "x": -74.395127,
+        "y": 42.000831
+      }
+    },
+    {
+      "locationId": 154,
+      "value": "1197.805541992",
+      "resolution": 1,
+      "location": {
+        "x": -74.394731,
+        "y": 42.000728
+      }
+    },
+    {
+      "locationId": 155,
+      "value": "1197.542114258",
+      "resolution": 1,
+      "location": {
+        "x": -74.394409,
+        "y": 42.0006485
+      }
+    },
+    {
+      "locationId": 156,
+      "value": "1197.900634766",
+      "resolution": 1,
+      "location": {
+        "x": -74.394087,
+        "y": 42.000569
+      }
+    },
+    {
+      "locationId": 157,
+      "value": "1198.166992188",
+      "resolution": 1,
+      "location": {
+        "x": -74.3937865,
+        "y": 42.0005485
+      }
+    },
+    {
+      "locationId": 158,
+      "value": "1198.475097656",
+      "resolution": 1,
+      "location": {
+        "x": -74.393486,
+        "y": 42.000528
+      }
+    },
+    {
+      "locationId": 162,
+      "value": "1208.617675781",
+      "resolution": 1,
+      "location": {
+        "x": -74.392084,
+        "y": 42.000476
+      }
+    },
+    {
+      "locationId": 163,
+      "value": "1212.937133789",
+      "resolution": 1,
+      "location": {
+        "x": -74.391672,
+        "y": 42.000612
+      }
+    },
+    {
+      "locationId": 164,
+      "value": "1216.255493164",
+      "resolution": 1,
+      "location": {
+        "x": -74.391271,
+        "y": 42.000634
+      }
+    },
+    {
+      "locationId": 0,
+      "value": "738.247375488",
+      "resolution": 1,
+      "location": {
+        "x": -74.427656,
+        "y": 42.008648
+      }
+    },
+    {
+      "locationId": 1,
+      "value": "737.462219238",
+      "resolution": 1,
+      "location": {
+        "x": -74.428046,
+        "y": 42.008707
+      }
+    },
+    {
+      "locationId": 2,
+      "value": "738.662536621",
+      "resolution": 1,
+      "location": {
+        "x": -74.42776,
+        "y": 42.00902
+      }
+    },
+    {
+      "locationId": 3,
+      "value": "739.910766602",
+      "resolution": 1,
+      "location": {
+        "x": -74.42748950000001,
+        "y": 42.0091825
+      }
+    },
+    {
+      "locationId": 4,
+      "value": "741.320373535",
+      "resolution": 1,
+      "location": {
+        "x": -74.427219,
+        "y": 42.009345
+      }
+    },
+    {
+      "locationId": 5,
+      "value": "742.101928711",
+      "resolution": 1,
+      "location": {
+        "x": -74.426943,
+        "y": 42.009453
+      }
+    },
+    {
+      "locationId": 6,
+      "value": "743.532531738",
+      "resolution": 1,
+      "location": {
+        "x": -74.426667,
+        "y": 42.009561
+      }
+    },
+    {
+      "locationId": 7,
+      "value": "744.773986816",
+      "resolution": 1,
+      "location": {
+        "x": -74.426411,
+        "y": 42.009622
+      }
+    },
+    {
+      "locationId": 8,
+      "value": "745.961364746",
+      "resolution": 1,
+      "location": {
+        "x": -74.426155,
+        "y": 42.009683
+      }
+    },
+    {
+      "locationId": 9,
+      "value": "747.357727051",
+      "resolution": 1,
+      "location": {
+        "x": -74.425792,
+        "y": 42.009738999999996
+      }
+    },
+    {
+      "locationId": 10,
+      "value": "748.665039062",
+      "resolution": 1,
+      "location": {
+        "x": -74.425429,
+        "y": 42.009795
+      }
+    },
+    {
+      "locationId": 11,
+      "value": "749.809875488",
+      "resolution": 1,
+      "location": {
+        "x": -74.425084,
+        "y": 42.0098935
+      }
+    },
+    {
+      "locationId": 12,
+      "value": "751.381713867",
+      "resolution": 1,
+      "location": {
+        "x": -74.424739,
+        "y": 42.009992
+      }
+    },
+    {
+      "locationId": 13,
+      "value": "753.242065430",
+      "resolution": 1,
+      "location": {
+        "x": -74.42442266666667,
+        "y": 42.010152
+      }
+    },
+    {
+      "locationId": 14,
+      "value": "755.579528809",
+      "resolution": 1,
+      "location": {
+        "x": -74.42410633333333,
+        "y": 42.010312
+      }
+    },
+    {
+      "locationId": 15,
+      "value": "757.745727539",
+      "resolution": 1,
+      "location": {
+        "x": -74.42379,
+        "y": 42.010472
+      }
+    },
+    {
+      "locationId": 16,
+      "value": "759.315368652",
+      "resolution": 1,
+      "location": {
+        "x": -74.423475,
+        "y": 42.010608000000005
+      }
+    },
+    {
+      "locationId": 17,
+      "value": "760.974853516",
+      "resolution": 1,
+      "location": {
+        "x": -74.42316,
+        "y": 42.010744
+      }
+    },
+    {
+      "locationId": 18,
+      "value": "762.134765625",
+      "resolution": 1,
+      "location": {
+        "x": -74.422899,
+        "y": 42.01084
+      }
+    },
+    {
+      "locationId": 19,
+      "value": "763.737792969",
+      "resolution": 1,
+      "location": {
+        "x": -74.422638,
+        "y": 42.010936
+      }
+    },
+    {
+      "locationId": 20,
+      "value": "765.268615723",
+      "resolution": 1,
+      "location": {
+        "x": -74.42225166666667,
+        "y": 42.010967
+      }
+    },
+    {
+      "locationId": 21,
+      "value": "766.638366699",
+      "resolution": 1,
+      "location": {
+        "x": -74.42186533333334,
+        "y": 42.010998
+      }
+    },
+    {
+      "locationId": 22,
+      "value": "768.653076172",
+      "resolution": 1,
+      "location": {
+        "x": -74.421479,
+        "y": 42.011029
+      }
+    },
+    {
+      "locationId": 23,
+      "value": "770.156372070",
+      "resolution": 1,
+      "location": {
+        "x": -74.4212225,
+        "y": 42.011081000000004
+      }
+    },
+    {
+      "locationId": 24,
+      "value": "771.680419922",
+      "resolution": 1,
+      "location": {
+        "x": -74.420966,
+        "y": 42.011133
+      }
+    },
+    {
+      "locationId": 25,
+      "value": "773.409057617",
+      "resolution": 1,
+      "location": {
+        "x": -74.420695,
+        "y": 42.011227500000004
+      }
+    },
+    {
+      "locationId": 26,
+      "value": "774.914672852",
+      "resolution": 1,
+      "location": {
+        "x": -74.420424,
+        "y": 42.011322
+      }
+    },
+    {
+      "locationId": 27,
+      "value": "776.897705078",
+      "resolution": 1,
+      "location": {
+        "x": -74.420006,
+        "y": 42.011386
+      }
+    },
+    {
+      "locationId": 28,
+      "value": "779.647766113",
+      "resolution": 1,
+      "location": {
+        "x": -74.41958799999999,
+        "y": 42.011449999999996
+      }
+    },
+    {
+      "locationId": 29,
+      "value": "782.752685547",
+      "resolution": 1,
+      "location": {
+        "x": -74.41917,
+        "y": 42.011514
+      }
+    },
+    {
+      "locationId": 30,
+      "value": "785.336853027",
+      "resolution": 1,
+      "location": {
+        "x": -74.418678,
+        "y": 42.011618
+      }
+    },
+    {
+      "locationId": 31,
+      "value": "786.278076172",
+      "resolution": 1,
+      "location": {
+        "x": -74.418381,
+        "y": 42.011697
+      }
+    },
+    {
+      "locationId": 32,
+      "value": "787.621643066",
+      "resolution": 1,
+      "location": {
+        "x": -74.418084,
+        "y": 42.011776
+      }
+    },
+    {
+      "locationId": 33,
+      "value": "789.792968750",
+      "resolution": 1,
+      "location": {
+        "x": -74.4177305,
+        "y": 42.011842
+      }
+    },
+    {
+      "locationId": 34,
+      "value": "791.726989746",
+      "resolution": 1,
+      "location": {
+        "x": -74.417377,
+        "y": 42.011908
+      }
+    },
+    {
+      "locationId": 35,
+      "value": "793.724609375",
+      "resolution": 1,
+      "location": {
+        "x": -74.417007,
+        "y": 42.011945999999995
+      }
+    },
+    {
+      "locationId": 36,
+      "value": "796.215942383",
+      "resolution": 1,
+      "location": {
+        "x": -74.416637,
+        "y": 42.011984
+      }
+    },
+    {
+      "locationId": 37,
+      "value": "799.301818848",
+      "resolution": 1,
+      "location": {
+        "x": -74.416158,
+        "y": 42.012002
+      }
+    },
+    {
+      "locationId": 38,
+      "value": "801.499694824",
+      "resolution": 1,
+      "location": {
+        "x": -74.415815,
+        "y": 42.01197466666667
+      }
+    },
+    {
+      "locationId": 39,
+      "value": "804.801269531",
+      "resolution": 1,
+      "location": {
+        "x": -74.415472,
+        "y": 42.01194733333334
+      }
+    },
+    {
+      "locationId": 40,
+      "value": "808.284118652",
+      "resolution": 1,
+      "location": {
+        "x": -74.415129,
+        "y": 42.01192
+      }
+    },
+    {
+      "locationId": 41,
+      "value": "810.453979492",
+      "resolution": 1,
+      "location": {
+        "x": -74.414731,
+        "y": 42.012075
+      }
+    },
+    {
+      "locationId": 42,
+      "value": "811.252380371",
+      "resolution": 1,
+      "location": {
+        "x": -74.414569,
+        "y": 42.011801
+      }
+    },
+    {
+      "locationId": 43,
+      "value": "813.921447754",
+      "resolution": 1,
+      "location": {
+        "x": -74.414555,
+        "y": 42.011492
+      }
+    },
+    {
+      "locationId": 44,
+      "value": "813.155517578",
+      "resolution": 1,
+      "location": {
+        "x": -74.414286,
+        "y": 42.011132
+      }
+    },
+    {
+      "locationId": 45,
+      "value": "815.292907715",
+      "resolution": 1,
+      "location": {
+        "x": -74.4145695,
+        "y": 42.0110595
+      }
+    },
+    {
+      "locationId": 46,
+      "value": "818.225219727",
+      "resolution": 1,
+      "location": {
+        "x": -74.414853,
+        "y": 42.010987
+      }
+    },
+    {
+      "locationId": 47,
+      "value": "819.777160645",
+      "resolution": 1,
+      "location": {
+        "x": -74.415281,
+        "y": 42.010934
+      }
+    },
+    {
+      "locationId": 48,
+      "value": "819.235168457",
+      "resolution": 1,
+      "location": {
+        "x": -74.415566,
+        "y": 42.010889500000005
+      }
+    },
+    {
+      "locationId": 49,
+      "value": "819.965270996",
+      "resolution": 1,
+      "location": {
+        "x": -74.415851,
+        "y": 42.010845
+      }
+    },
+    {
+      "locationId": 50,
+      "value": "821.788940430",
+      "resolution": 1,
+      "location": {
+        "x": -74.4161815,
+        "y": 42.0108005
+      }
+    },
+    {
+      "locationId": 51,
+      "value": "822.257202148",
+      "resolution": 1,
+      "location": {
+        "x": -74.416512,
+        "y": 42.010756
+      }
+    },
+    {
+      "locationId": 52,
+      "value": "822.711181641",
+      "resolution": 1,
+      "location": {
+        "x": -74.41683499999999,
+        "y": 42.0106835
+      }
+    },
+    {
+      "locationId": 53,
+      "value": "822.563293457",
+      "resolution": 1,
+      "location": {
+        "x": -74.417158,
+        "y": 42.010611
+      }
+    },
+    {
+      "locationId": 54,
+      "value": "823.246459961",
+      "resolution": 1,
+      "location": {
+        "x": -74.4175275,
+        "y": 42.0105005
+      }
+    },
+    {
+      "locationId": 55,
+      "value": "822.702697754",
+      "resolution": 1,
+      "location": {
+        "x": -74.417897,
+        "y": 42.01039
+      }
+    },
+    {
+      "locationId": 56,
+      "value": "823.317199707",
+      "resolution": 1,
+      "location": {
+        "x": -74.418253,
+        "y": 42.010238
+      }
+    },
+    {
+      "locationId": 57,
+      "value": "823.811950684",
+      "resolution": 1,
+      "location": {
+        "x": -74.418585,
+        "y": 42.010123
+      }
+    },
+    {
+      "locationId": 58,
+      "value": "827.172485352",
+      "resolution": 1,
+      "location": {
+        "x": -74.419007,
+        "y": 42.009893
+      }
+    },
+    {
+      "locationId": 59,
+      "value": "827.950256348",
+      "resolution": 1,
+      "location": {
+        "x": -74.419367,
+        "y": 42.009657
+      }
+    },
+    {
+      "locationId": 60,
+      "value": "831.145507812",
+      "resolution": 1,
+      "location": {
+        "x": -74.419669,
+        "y": 42.009477
+      }
+    },
+    {
+      "locationId": 61,
+      "value": "834.343017578",
+      "resolution": 1,
+      "location": {
+        "x": -74.41997599999999,
+        "y": 42.009277499999996
+      }
+    },
+    {
+      "locationId": 62,
+      "value": "835.949035645",
+      "resolution": 1,
+      "location": {
+        "x": -74.420283,
+        "y": 42.009078
+      }
+    },
+    {
+      "locationId": 63,
+      "value": "837.645812988",
+      "resolution": 1,
+      "location": {
+        "x": -74.420492,
+        "y": 42.00892
+      }
+    },
+    {
+      "locationId": 64,
+      "value": "838.530700684",
+      "resolution": 1,
+      "location": {
+        "x": -74.420701,
+        "y": 42.008762
+      }
+    },
+    {
+      "locationId": 65,
+      "value": "839.481628418",
+      "resolution": 1,
+      "location": {
+        "x": -74.420972,
+        "y": 42.00847
+      }
+    },
+    {
+      "locationId": 66,
+      "value": "840.024169922",
+      "resolution": 1,
+      "location": {
+        "x": -74.421164,
+        "y": 42.008223
+      }
+    },
+    {
+      "locationId": 67,
+      "value": "839.887451172",
+      "resolution": 1,
+      "location": {
+        "x": -74.421265,
+        "y": 42.00796
+      }
+    },
+    {
+      "locationId": 68,
+      "value": "838.552978516",
+      "resolution": 1,
+      "location": {
+        "x": -74.421236,
+        "y": 42.007673
+      }
+    },
+    {
+      "locationId": 69,
+      "value": "839.777343750",
+      "resolution": 1,
+      "location": {
+        "x": -74.420943,
+        "y": 42.007409
+      }
+    },
+    {
+      "locationId": 70,
+      "value": "839.978454590",
+      "resolution": 1,
+      "location": {
+        "x": -74.420552,
+        "y": 42.007125
+      }
+    },
+    {
+      "locationId": 71,
+      "value": "840.628662109",
+      "resolution": 1,
+      "location": {
+        "x": -74.420417,
+        "y": 42.006799
+      }
+    },
+    {
+      "locationId": 72,
+      "value": "842.174316406",
+      "resolution": 1,
+      "location": {
+        "x": -74.420136,
+        "y": 42.006441
+      }
+    },
+    {
+      "locationId": 73,
+      "value": "844.269836426",
+      "resolution": 1,
+      "location": {
+        "x": -74.420007,
+        "y": 42.00603
+      }
+    },
+    {
+      "locationId": 74,
+      "value": "846.569519043",
+      "resolution": 1,
+      "location": {
+        "x": -74.420002,
+        "y": 42.005575
+      }
+    },
+    {
+      "locationId": 75,
+      "value": "849.346374512",
+      "resolution": 1,
+      "location": {
+        "x": -74.419618,
+        "y": 42.005347
+      }
+    },
+    {
+      "locationId": 76,
+      "value": "851.125976562",
+      "resolution": 1,
+      "location": {
+        "x": -74.41934,
+        "y": 42.005115
+      }
+    },
+    {
+      "locationId": 77,
+      "value": "856.180114746",
+      "resolution": 1,
+      "location": {
+        "x": -74.419152,
+        "y": 42.004872
+      }
+    },
+    {
+      "locationId": 78,
+      "value": "854.513793945",
+      "resolution": 1,
+      "location": {
+        "x": -74.419116,
+        "y": 42.004519
+      }
+    },
+    {
+      "locationId": 79,
+      "value": "855.511962891",
+      "resolution": 1,
+      "location": {
+        "x": -74.41896,
+        "y": 42.004169
+      }
+    },
+    {
+      "locationId": 80,
+      "value": "857.307250977",
+      "resolution": 1,
+      "location": {
+        "x": -74.418723,
+        "y": 42.003803
+      }
+    },
+    {
+      "locationId": 81,
+      "value": "862.601196289",
+      "resolution": 1,
+      "location": {
+        "x": -74.418357,
+        "y": 42.003625
+      }
+    },
+    {
+      "locationId": 82,
+      "value": "867.582275391",
+      "resolution": 1,
+      "location": {
+        "x": -74.417874,
+        "y": 42.003702
+      }
+    },
+    {
+      "locationId": 83,
+      "value": "871.626098633",
+      "resolution": 1,
+      "location": {
+        "x": -74.417503,
+        "y": 42.003689
+      }
+    },
+    {
+      "locationId": 84,
+      "value": "877.769592285",
+      "resolution": 1,
+      "location": {
+        "x": -74.41707,
+        "y": 42.003769
+      }
+    },
+    {
+      "locationId": 85,
+      "value": "880.824035645",
+      "resolution": 1,
+      "location": {
+        "x": -74.416766,
+        "y": 42.003817999999995
+      }
+    },
+    {
+      "locationId": 86,
+      "value": "882.882690430",
+      "resolution": 1,
+      "location": {
+        "x": -74.416462,
+        "y": 42.003867
+      }
+    },
+    {
+      "locationId": 87,
+      "value": "885.424194336",
+      "resolution": 1,
+      "location": {
+        "x": -74.4161435,
+        "y": 42.0038825
+      }
+    },
+    {
+      "locationId": 88,
+      "value": "888.242004395",
+      "resolution": 1,
+      "location": {
+        "x": -74.415825,
+        "y": 42.003898
+      }
+    },
+    {
+      "locationId": 89,
+      "value": "890.849243164",
+      "resolution": 1,
+      "location": {
+        "x": -74.415408,
+        "y": 42.003929
+      }
+    },
+    {
+      "locationId": 90,
+      "value": "896.081970215",
+      "resolution": 1,
+      "location": {
+        "x": -74.414929,
+        "y": 42.003848
+      }
+    },
+    {
+      "locationId": 91,
+      "value": "899.990112305",
+      "resolution": 1,
+      "location": {
+        "x": -74.414509,
+        "y": 42.00361
+      }
+    },
+    {
+      "locationId": 92,
+      "value": "905.660766602",
+      "resolution": 1,
+      "location": {
+        "x": -74.414132,
+        "y": 42.003462
+      }
+    },
+    {
+      "locationId": 93,
+      "value": "909.441650391",
+      "resolution": 1,
+      "location": {
+        "x": -74.413848,
+        "y": 42.0033435
+      }
+    },
+    {
+      "locationId": 94,
+      "value": "914.113830566",
+      "resolution": 1,
+      "location": {
+        "x": -74.413564,
+        "y": 42.003225
+      }
+    },
+    {
+      "locationId": 95,
+      "value": "918.771667480",
+      "resolution": 1,
+      "location": {
+        "x": -74.4133055,
+        "y": 42.0031685
+      }
+    },
+    {
+      "locationId": 96,
+      "value": "923.604309082",
+      "resolution": 1,
+      "location": {
+        "x": -74.413047,
+        "y": 42.003112
+      }
+    },
+    {
+      "locationId": 97,
+      "value": "927.205627441",
+      "resolution": 1,
+      "location": {
+        "x": -74.4127715,
+        "y": 42.0030425
+      }
+    },
+    {
+      "locationId": 98,
+      "value": "930.846679688",
+      "resolution": 1,
+      "location": {
+        "x": -74.412496,
+        "y": 42.002973
+      }
+    },
+    {
+      "locationId": 99,
+      "value": "934.850830078",
+      "resolution": 1,
+      "location": {
+        "x": -74.412243,
+        "y": 42.0029415
+      }
+    },
+    {
+      "locationId": 100,
+      "value": "938.237915039",
+      "resolution": 1,
+      "location": {
+        "x": -74.41199,
+        "y": 42.00291
+      }
+    },
+    {
+      "locationId": 101,
+      "value": "942.267822266",
+      "resolution": 1,
+      "location": {
+        "x": -74.4117435,
+        "y": 42.002853
+      }
+    },
+    {
+      "locationId": 102,
+      "value": "946.143188477",
+      "resolution": 1,
+      "location": {
+        "x": -74.411497,
+        "y": 42.002796
+      }
+    },
+    {
+      "locationId": 103,
+      "value": "950.778808594",
+      "resolution": 1,
+      "location": {
+        "x": -74.41121749999999,
+        "y": 42.002769
+      }
+    },
+    {
+      "locationId": 104,
+      "value": "954.986999512",
+      "resolution": 1,
+      "location": {
+        "x": -74.410938,
+        "y": 42.002742
+      }
+    },
+    {
+      "locationId": 105,
+      "value": "959.200927734",
+      "resolution": 1,
+      "location": {
+        "x": -74.410538,
+        "y": 42.002682
+      }
+    },
+    {
+      "locationId": 106,
+      "value": "963.137084961",
+      "resolution": 1,
+      "location": {
+        "x": -74.4102555,
+        "y": 42.002658
+      }
+    },
+    {
+      "locationId": 107,
+      "value": "967.868347168",
+      "resolution": 1,
+      "location": {
+        "x": -74.409973,
+        "y": 42.002634
+      }
+    },
+    {
+      "locationId": 108,
+      "value": "972.544006348",
+      "resolution": 1,
+      "location": {
+        "x": -74.409536,
+        "y": 42.00259
+      }
+    },
+    {
+      "locationId": 109,
+      "value": "978.272216797",
+      "resolution": 1,
+      "location": {
+        "x": -74.409096,
+        "y": 42.002567
+      }
+    },
+    {
+      "locationId": 110,
+      "value": "983.020812988",
+      "resolution": 1,
+      "location": {
+        "x": -74.40877449999999,
+        "y": 42.002590999999995
+      }
+    },
+    {
+      "locationId": 111,
+      "value": "990.567382812",
+      "resolution": 1,
+      "location": {
+        "x": -74.408453,
+        "y": 42.002615
+      }
+    },
+    {
+      "locationId": 112,
+      "value": "998.036437988",
+      "resolution": 1,
+      "location": {
+        "x": -74.4081055,
+        "y": 42.002592
+      }
+    },
+    {
+      "locationId": 113,
+      "value": "1005.973022461",
+      "resolution": 1,
+      "location": {
+        "x": -74.407758,
+        "y": 42.002569
+      }
+    },
+    {
+      "locationId": 114,
+      "value": "1016.122009277",
+      "resolution": 1,
+      "location": {
+        "x": -74.40732033333333,
+        "y": 42.00260033333333
+      }
+    },
+    {
+      "locationId": 115,
+      "value": "1025.305908203",
+      "resolution": 1,
+      "location": {
+        "x": -74.40688266666668,
+        "y": 42.002631666666666
+      }
+    },
+    {
+      "locationId": 116,
+      "value": "1035.323974609",
+      "resolution": 1,
+      "location": {
+        "x": -74.406445,
+        "y": 42.002663
+      }
+    },
+    {
+      "locationId": 117,
+      "value": "1045.746459961",
+      "resolution": 1,
+      "location": {
+        "x": -74.405964,
+        "y": 42.002625
+      }
+    },
+    {
+      "locationId": 118,
+      "value": "1052.720214844",
+      "resolution": 1,
+      "location": {
+        "x": -74.405558,
+        "y": 42.002562
+      }
+    },
+    {
+      "locationId": 119,
+      "value": "1058.407226562",
+      "resolution": 1,
+      "location": {
+        "x": -74.4052535,
+        "y": 42.0025395
+      }
+    },
+    {
+      "locationId": 120,
+      "value": "1062.905639648",
+      "resolution": 1,
+      "location": {
+        "x": -74.404949,
+        "y": 42.002517
+      }
+    },
+    {
+      "locationId": 121,
+      "value": "1071.062744141",
+      "resolution": 1,
+      "location": {
+        "x": -74.404521,
+        "y": 42.002552
+      }
+    },
+    {
+      "locationId": 122,
+      "value": "1078.262817383",
+      "resolution": 1,
+      "location": {
+        "x": -74.404072,
+        "y": 42.002511
+      }
+    },
+    {
+      "locationId": 123,
+      "value": "1081.797607422",
+      "resolution": 1,
+      "location": {
+        "x": -74.40381049999999,
+        "y": 42.002487
+      }
+    },
+    {
+      "locationId": 124,
+      "value": "1084.562622070",
+      "resolution": 1,
+      "location": {
+        "x": -74.403549,
+        "y": 42.002463
+      }
+    },
+    {
+      "locationId": 125,
+      "value": "1086.478271484",
+      "resolution": 1,
+      "location": {
+        "x": -74.40326999999999,
+        "y": 42.0023925
+      }
+    },
+    {
+      "locationId": 126,
+      "value": "1088.186889648",
+      "resolution": 1,
+      "location": {
+        "x": -74.402991,
+        "y": 42.002322
+      }
+    },
+    {
+      "locationId": 127,
+      "value": "1093.872192383",
+      "resolution": 1,
+      "location": {
+        "x": -74.402606,
+        "y": 42.002243
+      }
+    },
+    {
+      "locationId": 128,
+      "value": "1100.208251953",
+      "resolution": 1,
+      "location": {
+        "x": -74.40223,
+        "y": 42.002179
+      }
+    },
+    {
+      "locationId": 129,
+      "value": "1106.515991211",
+      "resolution": 1,
+      "location": {
+        "x": -74.401892,
+        "y": 42.001824
+      }
+    },
+    {
+      "locationId": 130,
+      "value": "1114.987792969",
+      "resolution": 1,
+      "location": {
+        "x": -74.40155,
+        "y": 42.001558
+      }
+    },
+    {
+      "locationId": 131,
+      "value": "1123.086547852",
+      "resolution": 1,
+      "location": {
+        "x": -74.401278,
+        "y": 42.001232
+      }
+    },
+    {
+      "locationId": 132,
+      "value": "1126.140869141",
+      "resolution": 1,
+      "location": {
+        "x": -74.401186,
+        "y": 42.000888
+      }
+    },
+    {
+      "locationId": 133,
+      "value": "1133.734863281",
+      "resolution": 1,
+      "location": {
+        "x": -74.400923,
+        "y": 42.000739
+      }
+    },
+    {
+      "locationId": 134,
+      "value": "1142.172485352",
+      "resolution": 1,
+      "location": {
+        "x": -74.400623,
+        "y": 42.001091
+      }
+    },
+    {
+      "locationId": 135,
+      "value": "1147.122802734",
+      "resolution": 1,
+      "location": {
+        "x": -74.400498,
+        "y": 42.001532
+      }
+    },
+    {
+      "locationId": 136,
+      "value": "1148.124145508",
+      "resolution": 1,
+      "location": {
+        "x": -74.400465,
+        "y": 42.001855
+      }
+    },
+    {
+      "locationId": 137,
+      "value": "1153.465820312",
+      "resolution": 1,
+      "location": {
+        "x": -74.400294,
+        "y": 42.002186
+      }
+    },
+    {
+      "locationId": 138,
+      "value": "1158.166748047",
+      "resolution": 1,
+      "location": {
+        "x": -74.400129,
+        "y": 42.002541
+      }
+    },
+    {
+      "locationId": 139,
+      "value": "1162.285888672",
+      "resolution": 1,
+      "location": {
+        "x": -74.39978,
+        "y": 42.002659
+      }
+    },
+    {
+      "locationId": 140,
+      "value": "1166.522705078",
+      "resolution": 1,
+      "location": {
+        "x": -74.399485,
+        "y": 42.002568
+      }
+    },
+    {
+      "locationId": 141,
+      "value": "1169.455810547",
+      "resolution": 1,
+      "location": {
+        "x": -74.39919,
+        "y": 42.002477
+      }
+    },
+    {
+      "locationId": 142,
+      "value": "1173.776611328",
+      "resolution": 1,
+      "location": {
+        "x": -74.398873,
+        "y": 42.002298
+      }
+    },
+    {
+      "locationId": 143,
+      "value": "1178.752441406",
+      "resolution": 1,
+      "location": {
+        "x": -74.3985565,
+        "y": 42.0021165
+      }
+    },
+    {
+      "locationId": 144,
+      "value": "1182.980712891",
+      "resolution": 1,
+      "location": {
+        "x": -74.39824,
+        "y": 42.001935
+      }
+    },
+    {
+      "locationId": 145,
+      "value": "1188.498413086",
+      "resolution": 1,
+      "location": {
+        "x": -74.397932,
+        "y": 42.001722
+      }
+    },
+    {
+      "locationId": 146,
+      "value": "1192.041381836",
+      "resolution": 1,
+      "location": {
+        "x": -74.397594,
+        "y": 42.001555
+      }
+    },
+    {
+      "locationId": 147,
+      "value": "1195.633178711",
+      "resolution": 1,
+      "location": {
+        "x": -74.397253,
+        "y": 42.001409
+      }
+    },
+    {
+      "locationId": 148,
+      "value": "1197.493286133",
+      "resolution": 1,
+      "location": {
+        "x": -74.39694750000001,
+        "y": 42.0012935
+      }
+    }
+  ]
+}

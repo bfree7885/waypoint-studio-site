@@ -1,0 +1,118 @@
+{
+  "source": {
+    "provider": "valhalla",
+    "endpoint": "https://valhalla1.openstreetmap.de/route",
+    "developmentFixture": true,
+    "licenseNote": "OSM ODbL. FOSSGIS Valhalla demo is development/testing only; production must self-host.",
+    "retrievedAt": "2026-09-04T20:48:48Z",
+    "summitId": "W2/GC-001",
+    "accessKind": "parking",
+    "accessOsmType": "way",
+    "accessOsmId": 816358667,
+    "accessName": "Slide Mountain Parking Area",
+    "profile": "pedestrian",
+    "start": {
+      "lat": 42.008684,
+      "lng": -74.427638
+    },
+    "destination": {
+      "lat": 41.9991,
+      "lng": -74.3862
+    }
+  },
+  "trip": {
+    "status": 0,
+    "status_message": "Found route between points",
+    "units": "kilometers",
+    "summary": {
+      "has_time_restrictions": false,
+      "has_toll": false,
+      "has_highway": false,
+      "has_ferry": false,
+      "min_lat": 41.99918,
+      "min_lon": -74.428046,
+      "max_lat": 42.012074,
+      "max_lon": -74.386111,
+      "time": 7066.294,
+      "length": 5.754,
+      "cost": 13721.133
+    },
+    "locations": [
+      {
+        "type": "break",
+        "lat": 42.008684,
+        "lon": -74.427638,
+        "original_index": 0
+      },
+      {
+        "type": "break",
+        "lat": 41.9991,
+        "lon": -74.3862,
+        "side_of_street": "right",
+        "original_index": 1
+      }
+    ],
+    "legs": [
+      {
+        "shape": "oc_coAnou}lCnAjAs@~CqC~OsGsEqDcDkDcEkCyD}N_[oLoa@sF__@_Fkl@kBiN}GyZoGoRoTyf@_Pkf@_Ks_@cAmLuB_z@eAeMiC{PyJ{`@aBgK}GcaAoEw]{Hcd@oCgSwB}VwCgm@c@}\\?}ObDkn@gAyJaCaGkB_DzAuBnAqBt@}BtCjCjDiBpDSzFDzDMrDc@dCkAtKiLpCn@HrBNlHtBzShBvYpDrb@pDhh@j@dDjC|NhBfRBPpB~ObIr[nHfUdFvSjMjYvMnUfJzQlI`PnMhTvRbYfQ|OlN~JlOhEnCDtEJvEkAnOiQvPmWhE_B`MmDhGsD`M}JzJuDxLkA~M`@lLk@vCkBzBgJrDkHdHuGhDuGjE_FxGwCrG{@lLKvIyBbJ}DzImE~JkGpM_JmB{Jo@kJiByQHqMNsGQoFmCqRaBkOaBsT`@}R_B{R}AiP^wGb@gK|BuP|BkInBwDlFcIrBwIrDyKxFgO~EgRpAgNnCaPpCwNbCuQjAuMp@}OxAuNhCcN`A{H\\eIJ{MvB_XfBuMFuDO}Mx@aJ\\gOBqMh@}K_Beg@zAmj@{DaqAz@wMNiNbA}Mx@mIjAgRLyQeAoL?gLQoMbBqLz@gOb@mO`CsMvCgStBuOf@kFNaF?uFnBwGvDuDjCqD`K{HjKiIfCaJfHwFbJgH`D{@lFK~GoB|EeChBmD]yE_KoL_IgDuFm@wE{BcLoAiNe@{C[yD{A{MyF{F{BiMmEeEmJe@kI~@cHjHwZdJyRtIwO~JyUhLgRlIcTbHiTlMee@vBwKjAoMjB}MdD}WnBsNnB}Jx@gIrCoMxDaSbCeSjA_RDqQpA}WdB{N`AyLk@eQeByMyBuKuCaLW_KSaLz@_M~CgKtDkQbB}NpCiOfA_KN}RQqPKgSc@qLqBwHcBgHc@gGWgIBkLfAeQbBcF`GsFjEwB~FwFpEoHxAoBhCmBhIkGrG}EdE{EvC}FrAsEr@mFfAqDNY",
+        "summary": {
+          "has_time_restrictions": false,
+          "has_toll": false,
+          "has_highway": false,
+          "has_ferry": false,
+          "min_lat": 41.99918,
+          "min_lon": -74.428046,
+          "max_lat": 42.012074,
+          "max_lon": -74.386111,
+          "time": 7066.294,
+          "length": 5.754,
+          "cost": 13721.133
+        },
+        "maneuvers": [
+          {
+            "instruction": "Walk west.",
+            "length": 0.037,
+            "time": 24.028,
+            "type": 1
+          },
+          {
+            "instruction": "Turn right onto Oliverea Road/CR 47.",
+            "length": 1.198,
+            "time": 1199.724,
+            "type": 10
+          },
+          {
+            "instruction": "Turn right onto Winnisook Club Road.",
+            "length": 0.02,
+            "time": 12.988,
+            "type": 10
+          },
+          {
+            "instruction": "Turn right.",
+            "length": 0.968,
+            "time": 800.611,
+            "type": 10
+          },
+          {
+            "instruction": "Bear left onto Phoenicia - East Branch Trail.",
+            "length": 0.408,
+            "time": 425.174,
+            "type": 16
+          },
+          {
+            "instruction": "Turn left onto Wittenberg - Cornell - Slide Trail.",
+            "length": 3.122,
+            "time": 4603.767,
+            "type": 15
+          },
+          {
+            "instruction": "Your destination is on the right.",
+            "length": 0.0,
+            "time": 0.0,
+            "type": 5
+          }
+        ]
+      }
+    ]
+  }
+}

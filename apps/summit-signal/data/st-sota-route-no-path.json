@@ -1,0 +1,12 @@
+{
+  "source": {
+    "provider": "valhalla",
+    "endpoint": "https://valhalla1.openstreetmap.de/route",
+    "developmentFixture": true,
+    "kind": "no-route",
+    "retrievedAt": "2026-09-04T20:48:50Z"
+  },
+  "error_code": 442,
+  "error": "No path could be found for input",
+  "status_code": 400
+}

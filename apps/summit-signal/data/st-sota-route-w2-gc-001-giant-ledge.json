@@ -1,0 +1,119 @@
+{
+  "source": {
+    "provider": "valhalla",
+    "endpoint": "https://valhalla1.openstreetmap.de/route",
+    "developmentFixture": true,
+    "licenseNote": "OSM ODbL. FOSSGIS Valhalla demo is development/testing only; production must self-host.",
+    "retrievedAt": "2026-09-04T20:48:50Z",
+    "summitId": "W2/GC-001",
+    "accessKind": "trailhead",
+    "accessOsmType": "way",
+    "accessOsmId": 816358666,
+    "accessName": "Giant Ledge Trailhead",
+    "profile": "pedestrian",
+    "start": {
+      "lat": 42.026693,
+      "lng": -74.403941
+    },
+    "destination": {
+      "lat": 41.9991,
+      "lng": -74.3862
+    }
+  },
+  "trip": {
+    "status": 0,
+    "status_message": "Found route between points",
+    "units": "kilometers",
+    "summary": {
+      "has_time_restrictions": false,
+      "has_toll": false,
+      "has_highway": false,
+      "has_ferry": false,
+      "min_lat": 41.99918,
+      "min_lon": -74.421274,
+      "max_lat": 42.026754,
+      "max_lon": -74.386111,
+      "time": 8161.192,
+      "length": 6.501,
+      "cost": 15187.834
+    },
+    "locations": [
+      {
+        "type": "break",
+        "lat": 42.026693,
+        "lon": -74.403941,
+        "side_of_street": "right",
+        "original_index": 0
+      },
+      {
+        "type": "break",
+        "lat": 41.9991,
+        "lon": -74.3862,
+        "side_of_street": "right",
+        "original_index": 1
+      }
+    ],
+    "legs": [
+      {
+        "shape": "eobdoA`dg|lCRmBbBqHxAiD`BuBvBgA`C]fAJ`CtAjDhJbUppAlG~RhLnQzV|[xVlV`OjJzOvDnL`AxFnA`ShI|I~E|d@p]zu@fg@pZrNr^|K|dAdSn`An]~}@vStLvD|IhFtKzLzIlQfOp_@`ItMdGtF`\\jRnBfBdHnH``@hf@bUzTteAn`AjG~D`FjB~PxB~e@dBhEx@vE~AzFnDlPjQzAuBnAqBt@}BtCjCjDiBpDSzFDzDMrDc@dCkAtKiLpCn@HrBNlHtBzShBvYpDrb@pDhh@j@dDjC|NhBfRBPpB~ObIr[nHfUdFvSjMjYvMnUfJzQlI`PnMhTvRbYfQ|OlN~JlOhEnCDtEJvEkAnOiQvPmWhE_B`MmDhGsD`M}JzJuDxLkA~M`@lLk@vCkBzBgJrDkHdHuGhDuGjE_FxGwCrG{@lLKvIyBbJ}DzImE~JkGpM_JmB{Jo@kJiByQHqMNsGQoFmCqRaBkOaBsT`@}R_B{R}AiP^wGb@gK|BuP|BkInBwDlFcIrBwIrDyKxFgO~EgRpAgNnCaPpCwNbCuQjAuMp@}OxAuNhCcN`A{H\\eIJ{MvB_XfBuMFuDO}Mx@aJ\\gOBqMh@}K_Beg@zAmj@{DaqAz@wMNiNbA}Mx@mIjAgRLyQeAoL?gLQoMbBqLz@gOb@mO`CsMvCgStBuOf@kFNaF?uFnBwGvDuDjCqD`K{HjKiIfCaJfHwFbJgH`D{@lFK~GoB|EeChBmD]yE_KoL_IgDuFm@wE{BcLoAiNe@{C[yD{A{MyF{F{BiMmEeEmJe@kI~@cHjHwZdJyRtIwO~JyUhLgRlIcTbHiTlMee@vBwKjAoMjB}MdD}WnBsNnB}Jx@gIrCoMxDaSbCeSjA_RDqQpA}WdB{N`AyLk@eQeByMyBuKuCaLW_KSaLz@_M~CgKtDkQbB}NpCiOfA_KN}RQqPKgSc@qLqBwHcBgHc@gGWgIBkLfAeQbBcF`GsFjEwB~FwFpEoHxAoBhCmBhIkGrG}EdE{EvC}FrAsEr@mFfAqDNY",
+        "summary": {
+          "has_time_restrictions": false,
+          "has_toll": false,
+          "has_highway": false,
+          "has_ferry": false,
+          "min_lat": 41.99918,
+          "min_lon": -74.421274,
+          "max_lat": 42.026754,
+          "max_lon": -74.386111,
+          "time": 8161.192,
+          "length": 6.501,
+          "cost": 15187.834
+        },
+        "maneuvers": [
+          {
+            "instruction": "Walk east on Oliverea Road/CR 47.",
+            "length": 0.053,
+            "time": 53.663,
+            "type": 2
+          },
+          {
+            "instruction": "Turn right to stay on Oliverea Road/CR 47.",
+            "length": 1.928,
+            "time": 2264.986,
+            "type": 10
+          },
+          {
+            "instruction": "Turn left onto Winnisook Club Road.",
+            "length": 0.02,
+            "time": 12.988,
+            "type": 15
+          },
+          {
+            "instruction": "Turn right.",
+            "length": 0.968,
+            "time": 800.612,
+            "type": 10
+          },
+          {
+            "instruction": "Bear left onto Phoenicia - East Branch Trail.",
+            "length": 0.408,
+            "time": 425.174,
+            "type": 16
+          },
+          {
+            "instruction": "Turn left onto Wittenberg - Cornell - Slide Trail.",
+            "length": 3.122,
+            "time": 4603.768,
+            "type": 15
+          },
+          {
+            "instruction": "Your destination is on the right.",
+            "length": 0.0,
+            "time": 0.0,
+            "type": 5
+          }
+        ]
+      }
+    ]
+  }
+}
