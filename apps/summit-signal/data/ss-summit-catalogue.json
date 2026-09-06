@@ -1,0 +1,18 @@
+{
+  "id": "signalterrain-sota-catalogue-v1.1",
+  "version": "1.1",
+  "label": "SignalTerrain development summit catalogue",
+  "retrievedAt": "2026-09-04T01:00:00Z",
+  "permissionNote": "Normal field-test and CI load only committed labeled fixtures. Do not call the SOTA API, scrape SOTA websites, or add live region fetches. Optional ?live=1 remains W2/GC-only and is not used in CI.",
+  "coverageNote": "Visible map area and loaded summit catalogue are not assumed to be the same thing. Neighboring SOTA regions around Milford, Pennsylvania and High Point, New Jersey are not loaded.",
+  "packs": [
+    {
+      "id": "W2-GC",
+      "url": "data/ss-summits-w2-gc.json",
+      "associationCode": "W2",
+      "regionCode": "GC",
+      "regionName": "Greater Catskills",
+      "liveReplaceable": true
+    }
+  ]
+}

@@ -1,8 +1,8 @@
 {
   "product": "SignalTerrain",
-  "version": "V0.9",
-  "sourceSha": "4f0c0831b8bcfacc1d5d5c16398a9b721dd58bf2",
-  "shortSha": "4f0c083",
+  "version": "V1.1",
+  "sourceSha": "b7e0fffa07125106c4e1c233c7e197caf89ef4db",
+  "shortSha": "b7e0fff",
   "unlisted": true,
   "authenticated": false,
   "fieldTestUrl": "https://bfree7885.github.io/waypoint-studio-site/apps/summit-signal/"

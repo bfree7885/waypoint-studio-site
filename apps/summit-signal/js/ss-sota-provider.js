@@ -1,16 +1,18 @@
 /**
  * SOTA summit data provider.
  *
- * Raw SOTA source → this module → SignalTerrainSotaModel → UI.
- * Default: labeled development fixture of real retrieved W2/GC records.
- * Optional live fetch: ?live=1 (falls back to the fixture if the request fails).
+ * Regional packs → merge/normalize → SignalTerrainSotaModel → UI.
+ * Default: labeled development catalogue of committed regional fixtures.
+ * Optional live fetch: ?live=1 replaces only the W2/GC pack (falls back to
+ * that pack's fixture if the request fails). CI must not use live mode.
  */
 (function (global) {
   "use strict";
 
+  var CATALOGUE_URL = "data/ss-summit-catalogue.json";
   var FIXTURE_URL = "data/ss-summits-w2-gc.json";
   var LIVE_URL = "https://api2.sota.org.uk/api/regions/W2/GC";
-  var CACHE_KEY = "signalterrain-sota-catalog-v0";
+  var CACHE_KEY = "signalterrain-sota-catalog-v1-1";
   var memoryCache = null;
 
   function wantsLive(search) {
@@ -51,6 +53,7 @@
         url: LIVE_URL,
         retrievedAt: now,
         developmentFixture: false,
+        packId: "W2-GC",
         label: "Live SOTA region W2/GC (Greater Catskills)"
       },
       region: {
@@ -95,27 +98,49 @@
     return catalog;
   }
 
+  function toMergedCatalog(payloads, catalogueMeta, meta) {
+    var Model = global.SignalTerrainSotaModel;
+    if (!Model) throw new Error("SignalTerrainSotaModel missing — load ss-summit-model.js first");
+    var catalog = Model.mergeCatalogs(payloads, catalogueMeta);
+    catalog.meta = meta || {};
+    return catalog;
+  }
+
+  function isW2GcPack(entry, payload) {
+    if (entry && (entry.liveReplaceable || entry.id === "W2-GC")) return true;
+    var region = payload && payload.region ? payload.region : {};
+    return region.associationCode === "W2" && region.regionCode === "GC";
+  }
+
   /**
-   * @param {{ live?: boolean, fixtureUrl?: string }} [options]
+   * @param {{ live?: boolean, fixtureUrl?: string, catalogueUrl?: string }} [options]
    * @returns {Promise<object>}
    */
   function loadCatalog(options) {
     var opts = options || {};
     var live = opts.live === true || (opts.live == null && wantsLive());
-    var fixtureUrl = opts.fixtureUrl || FIXTURE_URL;
+    var fixtureUrl = opts.fixtureUrl;
+    var catalogueUrl = opts.catalogueUrl || CATALOGUE_URL;
 
     if (memoryCache && !opts.force) {
       return Promise.resolve(memoryCache);
     }
 
     var cached = readSessionCache();
-    if (cached && cached.payload && !live && !opts.force) {
-      memoryCache = toCatalog(cached.payload, Object.assign({ cache: "session" }, cached.meta || {}));
+    if (cached && cached.catalog && !live && !opts.force) {
+      memoryCache = cached.catalog;
       return Promise.resolve(memoryCache);
     }
 
-    function fromFixture(extraMeta) {
-      return fetchJson(fixtureUrl).then(function (payload) {
+    function finish(catalog) {
+      memoryCache = catalog;
+      writeSessionCache({ catalog: catalog });
+      return catalog;
+    }
+
+    function fromSingleFixture(extraMeta) {
+      var url = fixtureUrl || FIXTURE_URL;
+      return fetchJson(url).then(function (payload) {
         var meta = Object.assign(
           {
             mode: "fixture",
@@ -125,31 +150,109 @@
           },
           extraMeta || {}
         );
-        var catalog = toCatalog(payload, meta);
-        memoryCache = catalog;
-        writeSessionCache({ payload: payload, meta: meta });
-        return catalog;
+        return finish(toCatalog(payload, meta));
       });
     }
 
-    if (!live) {
-      return fromFixture({ liveAttempted: false });
+    function loadPacks(manifest, extraMeta) {
+      var entries = (manifest && Array.isArray(manifest.packs) ? manifest.packs : []).slice();
+      if (!entries.length) {
+        return fromSingleFixture(extraMeta);
+      }
+      var fetches = entries.map(function (entry) {
+        return fetchJson(entry.url).then(function (payload) {
+          return { entry: entry, payload: payload };
+        });
+      });
+      return Promise.all(fetches).then(function (loaded) {
+        function mergeFrom(rows, mode, liveError) {
+          var payloads = rows.map(function (row) {
+            return row.payload;
+          });
+          var meta = Object.assign(
+            {
+              mode: mode,
+              liveAttempted: !!(extraMeta && extraMeta.liveAttempted),
+              liveError: liveError || (extraMeta && extraMeta.liveError) || null,
+              cache: "memory",
+              packCount: payloads.length
+            },
+            extraMeta || {}
+          );
+          var catalogueMeta = {
+            id: manifest.id,
+            version: manifest.version,
+            label: manifest.label,
+            coverageNote: manifest.coverageNote,
+            source: {
+              provider: "signalterrain-summit-catalogue",
+              developmentFixture: true,
+              retrievedAt: manifest.retrievedAt,
+              label: manifest.label,
+              packCount: payloads.length
+            }
+          };
+          return finish(toMergedCatalog(payloads, catalogueMeta, meta));
+        }
+
+        if (!live) {
+          return mergeFrom(loaded, "fixture", null);
+        }
+
+        return fetchJson(LIVE_URL)
+          .then(function (raw) {
+            var livePayload = wrapLivePayload(raw);
+            var rows = loaded.map(function (row) {
+              if (isW2GcPack(row.entry, row.payload)) {
+                return { entry: row.entry, payload: livePayload };
+              }
+              return row;
+            });
+            extraMeta = Object.assign({}, extraMeta || {}, { liveAttempted: true, liveError: null });
+            try {
+              return mergeFrom(rows, "live", null);
+            } catch (e) {
+              extraMeta = Object.assign({}, extraMeta || {}, {
+                liveAttempted: true,
+                liveError: String(e && e.message ? e.message : e)
+              });
+              return mergeFrom(loaded, "fixture", extraMeta.liveError);
+            }
+          })
+          .catch(function (err) {
+            extraMeta = Object.assign({}, extraMeta || {}, {
+              liveAttempted: true,
+              liveError: String(err && err.message ? err.message : err)
+            });
+            return mergeFrom(loaded, "fixture", extraMeta.liveError);
+          });
+      });
     }
 
-    return fetchJson(LIVE_URL)
-      .then(function (raw) {
-        var payload = wrapLivePayload(raw);
-        var meta = { mode: "live", liveAttempted: true, liveError: null, cache: "memory" };
-        var catalog = toCatalog(payload, meta);
-        memoryCache = catalog;
-        writeSessionCache({ payload: payload, meta: meta });
-        return catalog;
-      })
-      .catch(function (err) {
-        return fromFixture({
-          liveAttempted: true,
-          liveError: String(err && err.message ? err.message : err)
+    if (fixtureUrl) {
+      if (!live) {
+        return fromSingleFixture({ liveAttempted: false });
+      }
+      return fetchJson(LIVE_URL)
+        .then(function (raw) {
+          var payload = wrapLivePayload(raw);
+          var meta = { mode: "live", liveAttempted: true, liveError: null, cache: "memory" };
+          return finish(toCatalog(payload, meta));
+        })
+        .catch(function (err) {
+          return fromSingleFixture({
+            liveAttempted: true,
+            liveError: String(err && err.message ? err.message : err)
+          });
         });
+    }
+
+    return fetchJson(catalogueUrl)
+      .then(function (manifest) {
+        return loadPacks(manifest, { liveAttempted: !!live && live });
+      })
+      .catch(function () {
+        return fromSingleFixture({ liveAttempted: false, catalogueFallback: true });
       });
   }
 
@@ -163,6 +266,7 @@
   }
 
   var api = {
+    CATALOGUE_URL: CATALOGUE_URL,
     FIXTURE_URL: FIXTURE_URL,
     LIVE_URL: LIVE_URL,
     loadCatalog: loadCatalog,

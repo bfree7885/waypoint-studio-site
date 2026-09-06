@@ -31,6 +31,7 @@
     routeLayer: null,
     activationZoneLayer: null,
     locateMarker: null,
+    coverageLayer: null,
     searchOpen: false,
     geolocation: { status: "idle", message: null },
     access: null,
@@ -208,16 +209,21 @@
     if (!filtering) {
       var hint = global.document.createElement("li");
       hint.className = "ss-search-hint";
+      var packs = (state.catalog && state.catalog.packs) || [];
       hint.textContent =
         state.summits.length +
-        " summits loaded. Type a name or SOTA reference, or set a minimum points filter.";
+        " summits loaded" +
+        (packs.length ? " across " + packs.length + " regional pack" + (packs.length === 1 ? "" : "s") : "") +
+        ". Type a name, SOTA reference, or region. Misses mean not found in the current summit catalogue, not that the summit does not exist.";
       list.appendChild(hint);
       return;
     }
     if (!state.filtered.length) {
       var empty = global.document.createElement("li");
       empty.className = "ss-search-empty";
-      empty.textContent = "No matching summits in the loaded catalogue.";
+      empty.textContent =
+        (global.SignalTerrainSotaModel && global.SignalTerrainSotaModel.SEARCH_MISS) ||
+        "Not found in current summit catalogue";
       list.appendChild(empty);
       return;
     }
@@ -233,7 +239,7 @@
         '<span class="ss-search-item__name">' +
         escapeHtml(s.name || "Unnamed summit") +
         '</span><span class="ss-search-item__meta">' +
-        escapeHtml((s.reference || "") + (s.points != null ? " · " + s.points + " pts" : "")) +
+        escapeHtml((s.reference || "") + (s.points != null ? " · " + s.points + " pts" : "") + (s.regionCode ? " · " + (s.associationCode ? s.associationCode + "/" : "") + s.regionCode : "")) +
         "</span>";
       btn.addEventListener("click", function (ev) {
         selectSummit(ev.currentTarget.getAttribute("data-summit-id"), { pan: true, fromSearch: true });
@@ -1950,6 +1956,68 @@
     if (state.searchOpen && $("ss-search-q")) $("ss-search-q").focus();
   }
 
+  function mapBoundsLiteral() {
+    if (!state.map) return null;
+    var b = state.map.getBounds();
+    if (!b) return null;
+    return {
+      minLat: b.getSouth(),
+      minLng: b.getWest(),
+      maxLat: b.getNorth(),
+      maxLng: b.getEast()
+    };
+  }
+
+  function plotCoverage() {
+    var L = global.L;
+    if (!state.coverageLayer || !L) return;
+    state.coverageLayer.clearLayers();
+    var hull = state.catalog && state.catalog.coverage && state.catalog.coverage.hull;
+    if (!hull || hull.length < 3) return;
+    var latlngs = [];
+    for (var i = 0; i < hull.length; i += 1) {
+      latlngs.push([hull[i].lat, hull[i].lng]);
+    }
+    var poly = L.polygon(latlngs, {
+      className: "ss-coverage-poly",
+      color: "#8aa39a",
+      weight: 2,
+      dashArray: "7 6",
+      fillColor: "#2a3a32",
+      fillOpacity: 0.08,
+      interactive: false
+    });
+    poly.addTo(state.coverageLayer);
+  }
+
+  function updateCoverageUi() {
+    var Model = global.SignalTerrainSotaModel;
+    var badge = $("ss-coverage");
+    var label = $("ss-coverage-label");
+    if (!badge || !label || !Model || !state.catalog) return;
+    var bounds = mapBoundsLiteral();
+    var hull = state.catalog.coverage && state.catalog.coverage.hull;
+    var cov = Model.viewportCoverageState(bounds, state.summits, hull);
+    var loaded =
+      (Model.describeCatalogue ? Model.describeCatalogue(state.catalog) : state.summits.length + " summits loaded") +
+      (cov.visibleCount != null ? " · " + cov.visibleCount + " in view" : "");
+    badge.setAttribute("data-state", cov.state || "unknown");
+    if (cov.state === "outside") {
+      label.textContent = "Summit catalogue not loaded for this area. " + loaded;
+    } else if (cov.state === "partial") {
+      label.textContent =
+        (cov.message || "Visible map includes area outside the loaded summit catalogue.") + " " + loaded;
+    } else {
+      label.textContent = loaded + ". Visible map area and loaded summit catalogue are not assumed to be the same thing.";
+    }
+    var note = $("ss-source-note");
+    if (note && Model.describeCatalogue) {
+      var extra = cov.state === "outside" || cov.state === "partial" ? " " + (cov.message || "") : "";
+      var coverageNote = state.catalog.catalogue && state.catalog.catalogue.coverageNote;
+      note.textContent = Model.describeCatalogue(state.catalog) + extra + (coverageNote ? " " + coverageNote : "");
+    }
+  }
+
   function plotSummits() {
     var L = global.L;
     state.markersById = {};
@@ -1972,6 +2040,13 @@
   }
 
   function fitToRegion() {
+    var hull = state.catalog && state.catalog.coverage && state.catalog.coverage.hull;
+    if (hull && hull.length >= 2 && state.map) {
+      var latlngs = [];
+      for (var i = 0; i < hull.length; i += 1) latlngs.push([hull[i].lat, hull[i].lng]);
+      state.map.fitBounds(latlngs, { padding: [28, 28], maxZoom: 10 });
+      return;
+    }
     var region = state.catalog && state.catalog.region;
     if (region && region.bounds && state.map) {
       state.map.fitBounds(
@@ -2091,16 +2166,18 @@
   }
 
   function describeSource(catalog) {
+    var Model = global.SignalTerrainSotaModel;
     var src = catalog.source || {};
     var meta = catalog.meta || {};
-    var count = catalog.summits.length;
-    var label = src.label || "SOTA summit catalogue";
-    var parts = [count + " summits · " + label];
+    var parts = [Model && Model.describeCatalogue ? Model.describeCatalogue(catalog) : catalog.summits.length + " summits loaded"];
     if (meta.liveAttempted && meta.liveError) {
-      parts.push("Live SOTA request failed; using the labeled development fixture.");
+      parts.push("Live SOTA request failed; using the labeled development catalogue.");
     }
-    if (src.developmentFixture) {
-      parts.push("Development fixture of real retrieved records — not invented.");
+    if (src.developmentFixture || (catalog.packs && catalog.packs.some(function (p) { return p.developmentFixture; }))) {
+      parts.push("Development fixture of real retrieved records — not invented. Not all SOTA summits.");
+    }
+    if (catalog.catalogue && catalog.catalogue.coverageNote) {
+      parts.push(catalog.catalogue.coverageNote);
     }
     return parts.join(" ");
   }
@@ -2124,6 +2201,7 @@
     state.trailLayer = L.layerGroup().addTo(state.map);
     /* AZ is an AREA under trails/hike so the summit marker and cyan route stay obvious. */
     state.activationZoneLayer = L.layerGroup().addTo(state.map);
+    state.coverageLayer = L.layerGroup().addTo(state.map);
     state.trailheadLayer = L.layerGroup().addTo(state.map);
     state.parkingLayer = L.layerGroup().addTo(state.map);
     state.routeLayer = L.layerGroup().addTo(state.map);
@@ -2137,30 +2215,29 @@
   function start() {
     bindUi();
     bootMap();
+    if (state.map) {
+      state.map.on("moveend", updateCoverageUi);
+      state.map.on("zoomend", updateCoverageUi);
+    }
     setBanner("Loading SOTA summit catalogue…", "info");
     return global.SignalTerrainSotaProvider.loadCatalog()
       .then(function (catalog) {
         state.catalog = catalog;
         state.summits = catalog.summits.slice();
         state.filtered = state.summits.slice();
+        plotCoverage();
         plotSummits();
         fitToRegion();
         applyFilter();
+        updateCoverageUi();
         var srcNote = describeSource(catalog);
-        $("ss-source-note").textContent = srcNote;
+        if ($("ss-source-note")) $("ss-source-note").textContent = srcNote;
         var err = catalog.meta && catalog.meta.liveError;
         if (err) {
           setBanner(
             "Live SOTA data is unavailable (" +
               err +
-              "). Showing the labeled development fixture of real retrieved W2/GC records.",
-            "info"
-          );
-        } else if (catalog.source && catalog.source.developmentFixture) {
-          setBanner(
-            "Showing a labeled development fixture: " +
-              catalog.summits.length +
-              " real SOTA summits retrieved from api2.sota.org.uk (W2/GC Greater Catskills).",
+              "). Showing the labeled development catalogue of retrieved records.",
             "info"
           );
         } else {
@@ -2177,6 +2254,7 @@
           "error"
         );
         fitToRegion();
+        updateCoverageUi();
         return null;
       });
   }
@@ -2208,7 +2286,8 @@
     },
     getState: function () {
       return state;
-    }
+    },
+    updateCoverageUi: updateCoverageUi
   };
 
   global.SignalTerrainSotaMapApp = api;

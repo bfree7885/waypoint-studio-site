@@ -415,6 +415,50 @@ body {
   overflow-wrap: anywhere;
 }
 
+.ss-coverage {
+  position: absolute;
+  z-index: 1250;
+  left: 10px;
+  right: 10px;
+  top: 132px;
+  bottom: auto;
+  max-width: min(42rem, calc(100% - 20px));
+  pointer-events: none;
+}
+
+.ss-coverage p {
+  margin: 0;
+  padding: 6px 8px;
+  background: rgba(18, 26, 22, 0.92);
+  border: 1px solid var(--ss-line);
+  color: var(--ss-paper);
+  font-size: 11px;
+  line-height: 1.4;
+  font-family: var(--ss-mono);
+}
+
+.ss-coverage[data-state="outside"] p {
+  border-color: var(--ss-brass);
+  color: var(--ss-paper);
+}
+
+.ss-coverage[data-state="partial"] p {
+  border-color: var(--ss-ridge);
+}
+
+.ss-map .ss-coverage-poly {
+  pointer-events: none;
+}
+
+@media (min-width: 901px) {
+  .ss-coverage {
+    right: auto;
+    left: 52px;
+    top: 132px;
+    max-width: min(28rem, calc(100% - 420px));
+  }
+}
+
 .ss-layers {
   position: absolute;
   z-index: 1100;

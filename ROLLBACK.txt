@@ -1,2 +1,2 @@
-previous-host-sha c45abc7e39d21395f0b674227c3d5a675d737821
+previous-host-sha 04c45bd668ccfd1f35f49bfeb5735dcf70b0dd33
 legacy-tag legacy-waypoint-studio-site-pre-st-v09
